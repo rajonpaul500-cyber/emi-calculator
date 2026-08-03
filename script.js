@@ -97,10 +97,10 @@
     const downloadBtn = $('downloadCsv');
     if (!tbody) return;
 
-    const rows = result.schedule.rows;
+    const rows = result.sched.rows;
 
     if (!rows.length) {
-      tbody.innerHTML = '<tr><td colspan="7" class="empty-state">Enter valid loan details to see the amortization schedule.</td></tr>';
+      tbody.innerHTML = '<tr><td colspan="6" class="empty-state">Enter valid loan details to see the amortization schedule.</td></tr>';
       if (tfoot) tfoot.innerHTML = '';
       if (count) count.textContent = '';
       return;
@@ -130,7 +130,7 @@
     }
 
     if (count) {
-      count.textContent = rows.length + ' of ' + result.totalMonths + ' payments';
+      count.textContent = rows.length + ' of ' + result.n + ' payments';
     }
 
     if (downloadBtn) {
