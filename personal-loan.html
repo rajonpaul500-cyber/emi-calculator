@@ -1,28 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Personal Loan EMI Calculator – With Origination Fee | EMIMaster</title>
-  <meta name="description" content="Calculate your personal loan EMI, amount received after origination fees, and total interest with EMIMaster's free personal loan calculator. Includes extra payment options.">
-  <meta name="keywords" content="personal loan calculator, personal loan EMI, loan calculator, origination fee, monthly payment">
+  <title>Personal Loan EMI Calculator - With Origination Fee | EMI Master</title>
+  <meta name="description" content="Calculate your personal loan EMI, amount received after origination fees and total interest. Free personal loan calculator with extra payment options.">
+  <meta name="keywords" content="personal loan calculator, personal loan EMI, origination fee, loan calculator, monthly payment">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://emimaster.com/personal-loan.html">
-
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="EMIMaster">
-  <meta property="og:title" content="Personal Loan EMI Calculator | EMIMaster">
+  <meta property="og:title" content="Personal Loan EMI Calculator | EMI Master">
   <meta property="og:description" content="Personal loan EMI calculator with origination fees and extra payments.">
+  <meta property="og:type" content="website">
   <meta property="og:url" content="https://emimaster.com/personal-loan.html">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Personal Loan EMI Calculator | EMIMaster">
-  <meta name="twitter:description" content="Monthly payment calculator for personal loans.">
-
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "EMIMaster Personal Loan Calculator",
+    "name": "EMI Master Personal Loan Calculator",
     "url": "https://emimaster.com/personal-loan.html",
     "description": "Free personal loan EMI calculator including origination fees and extra payments.",
     "applicationCategory": "FinanceApplication",
@@ -40,7 +35,7 @@
         "name": "What is an origination fee on a personal loan?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "An origination fee is a one-time charge a lender deducts from your loan before you receive the money. For example, with a 3% fee on a ₹1,00,000 loan, you receive ₹97,000 but repay interest on the full ₹1,00,000."
+          "text": "An origination fee is a one-time charge a lender deducts from your loan before you receive the money. For example, with a 3% fee on a Rs 1,00,000 loan, you receive Rs 97,000 but repay interest on the full Rs 1,00,000."
         }
       },
       {
@@ -48,244 +43,162 @@
         "name": "How can I compare personal loan offers?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Compare the total cost of each offer — the total payment including fees and interest — not just the interest rate. A slightly higher rate with no fees can be cheaper than a lower rate with a large origination fee."
+          "text": "Compare the total cost of each offer &mdash; the total payment including fees and interest &mdash; not just the interest rate. A slightly higher rate with no fees can be cheaper than a lower rate with a large origination fee."
         }
       }
     ]
   }
   </script>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
 </head>
 <body>
 
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="index.html" class="logo" aria-label="EMIMaster home">
-        <span class="logo-mark">₹</span>
-        <span>EMI<em>Master</em></span>
-      </a>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
-      <nav class="site-nav" id="siteNav" aria-label="Main navigation">
-        <ul>
-          <li><a href="index.html">Loan Calculator</a></li>
-          <li><a href="home-loan.html">Home Loan</a></li>
-          <li><a href="car-loan.html">Car Loan</a></li>
-          <li><a href="personal-loan.html" class="active">Personal Loan</a></li>
-          <li><a href="loan-payoff.html">Loan Payoff</a></li>
-          <li><a href="dps.html">DPS</a></li>
-          <li><a href="fdr.html">FDR</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+<div id="siteHeader"></div>
 
-  <section class="hero">
-    <div class="container">
-      <h1>Personal Loan <span class="grad">EMI Calculator</span></h1>
-      <p>Know exactly how much you will receive after fees and what your personal loan will really cost you.</p>
-      <div class="hero-badges">
-        <span>✓ 100% Free</span>
-        <span>✓ Includes Fees</span>
-        <span>✓ Amortization Schedule</span>
-      </div>
-    </div>
-  </section>
+<section class="hero hero-compact">
+  <div class="container">
+    <h1>Personal Loan EMI Calculator</h1>
+    <p>Know exactly how much you receive after fees and what your loan really costs.</p>
+  </div>
+</section>
 
-  <main class="container">
+<div class="layout">
+  <div id="siteSidebar"></div>
 
-    <section class="calculator-grid">
-      <div class="card card-pad">
-        <h2>Personal Loan Details</h2>
-        <p class="card-sub">Adjust values to see your monthly payment instantly.</p>
+  <main class="main-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Personal Loan Calculator</div>
+    <h1 class="page-title">Personal Loan Calculator</h1>
+    <p class="page-subtitle">Adjust values to see your monthly payment and fee impact instantly.</p>
 
-        <div class="field">
+    <div class="card">
+      <h2>Personal Loan Details</h2>
+      <div class="form-grid">
+        <div class="form-group">
           <label for="amount">Loan Amount (₹)</label>
-          <input type="number" id="amount" value="300000" min="0" step="10000">
+          <div class="input-wrap">
+            <span class="prefix">₹</span>
+            <input type="number" id="amount" value="300000" min="0" step="10000">
+          </div>
           <input type="range" id="amountRange" min="10000" max="5000000" step="10000" value="300000">
         </div>
 
-        <div class="field-row">
-          <div class="field">
-            <label for="rate">Interest Rate (% per annum)</label>
+        <div class="form-group">
+          <label for="rate">Interest Rate (% per annum)</label>
+          <div class="input-wrap">
+            <span class="suffix">%</span>
             <input type="number" id="rate" value="11" min="0" max="30" step="0.1">
-            <input type="range" id="rateRange" min="0.5" max="30" step="0.1" value="11">
           </div>
-          <div class="field">
-            <label for="term">Tenure (years)</label>
-            <input type="number" id="term" value="3" min="1" max="10" step="1">
-            <input type="range" id="termRange" min="1" max="10" step="1" value="3">
-          </div>
+          <input type="range" id="rateRange" min="0.5" max="30" step="0.1" value="11">
         </div>
 
-        <div class="field-row">
-          <div class="field">
-            <label for="feePct">Origination Fee (%)</label>
+        <div class="form-group">
+          <label for="term">Tenure (years)</label>
+          <div class="input-wrap">
+            <span class="suffix">yrs</span>
+            <input type="number" id="term" value="3" min="1" max="10" step="1">
+          </div>
+          <input type="range" id="termRange" min="1" max="10" step="1" value="3">
+        </div>
+
+        <div class="form-group">
+          <label for="feePct">Origination Fee (%)</label>
+          <div class="input-wrap">
+            <span class="suffix">%</span>
             <input type="number" id="feePct" value="2" min="0" max="20" step="0.5">
           </div>
-          <div class="field">
-            <label for="compound">Compound</label>
-            <select id="compound">
-              <option value="monthly" selected>Monthly</option>
-              <option value="quarterly">Quarterly</option>
-              <option value="semi-annually">Semi-annually</option>
-              <option value="annually">Annually</option>
-              <option value="continuous">Continuous</option>
-            </select>
-          </div>
         </div>
 
-        <h2 style="margin-top: 22px;">Extra Payments (Optional)</h2>
-        <p class="card-sub">Pay extra each month to clear your loan faster.</p>
+        <div class="form-group">
+          <label for="compound">Compound</label>
+          <select id="compound">
+            <option value="monthly" selected>Monthly</option>
+            <option value="quarterly">Quarterly</option>
+            <option value="semi-annually">Semi-annually</option>
+            <option value="annually">Annually</option>
+            <option value="continuous">Continuous</option>
+          </select>
+        </div>
 
-        <div class="field">
+        <div class="form-group">
           <label for="monthlyExtra">Extra Monthly Payment (₹)</label>
-          <input type="number" id="monthlyExtra" value="0" min="0" step="500" placeholder="e.g. 1000">
-        </div>
-      </div>
-
-      <aside class="results" aria-live="polite">
-        <div class="label" id="paymentLabel">Monthly Payment</div>
-        <div class="big" id="paymentOut">—</div>
-
-        <div class="stats">
-          <div class="stat"><span class="k">Amount You Receive</span><span class="v" id="loanAmountOut">—</span></div>
-          <div class="stat"><span class="k">Origination Fee</span><span class="v" id="feeOut">—</span></div>
-          <div class="stat"><span class="k">Total Payment (incl. fee)</span><span class="v" id="totalPaymentOut">—</span></div>
-          <div class="stat"><span class="k">Total Interest</span><span class="v orange" id="totalInterestOut">—</span></div>
-        </div>
-
-        <div class="breakdown">
-          <div class="label">Principal vs Interest</div>
-          <div class="bar">
-            <div class="principal-bar" id="principalBar"></div>
-            <div class="interest-bar" id="interestBar"></div>
-          </div>
-          <div class="legend">
-            <span class="legend-item"><span class="dot principal"></span> Principal: <strong id="legendPrincipal">—</strong></span>
-            <span class="legend-item"><span class="dot interest"></span> Interest: <strong id="legendInterest">—</strong></span>
+          <div class="input-wrap">
+            <span class="prefix">₹</span>
+            <input type="number" id="monthlyExtra" value="0" min="0" step="500" placeholder="e.g. 1000">
           </div>
         </div>
-
-        <div class="payoff-note" id="payoffNote"></div>
-      </aside>
-    </section>
-
-    <div class="ad-slot" aria-hidden="true">Advertisement — replace this block with your Google AdSense code</div>
-
-    <section class="section">
-      <div class="section-head" style="display:flex; justify-content:space-between; align-items:flex-end; gap:16px; flex-wrap:wrap;">
-        <div>
-          <h2>Personal Loan Amortization Schedule</h2>
-          <p>Track every payment of your personal loan. <span id="scheduleCount" style="color:var(--primary); font-weight:600;"></span></p>
-        </div>
-        <button class="btn btn-primary" id="downloadCsv" type="button">⬇ Download CSV</button>
       </div>
+      <div class="form-actions">
+        <button class="btn btn-primary" id="calculateBtn" type="button">Calculate</button>
+        <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
+      </div>
+    </div>
+
+    <div class="result-panel" id="resultPanel">
+      <h3 id="resultLabel">Monthly Payment</h3>
+      <div class="result-main" id="resultMain">—</div>
+      <div class="result-grid">
+        <div class="result-item"><div class="label">Amount You Receive</div><div class="value" id="loanAmountOut">—</div></div>
+        <div class="result-item"><div class="label">Origination Fee</div><div class="value negative" id="feeOut">—</div></div>
+        <div class="result-item"><div class="label">Total Payment (incl. fee)</div><div class="value" id="totalPaymentOut">—</div></div>
+        <div class="result-item"><div class="label">Total Interest</div><div class="value negative" id="totalInterestOut">—</div></div>
+      </div>
+      <div class="payoff-note" id="payoffNote"></div>
+      <div class="result-actions">
+        <button id="downloadCsv" type="button">&#11015; Download CSV</button>
+      </div>
+    </div>
+
+    <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
+
+    <div class="card">
+      <h2>Personal Loan Amortization Schedule</h2>
+      <p>Track every payment of your personal loan. <span id="scheduleCount" style="font-weight:700;color:var(--primary);"></span></p>
       <div class="table-wrap">
-        <table class="schedule">
+        <table>
           <thead>
             <tr>
               <th>Month</th>
-              <th>Payment</th>
-              <th>Principal</th>
-              <th>Interest</th>
-              <th>Extra</th>
-              <th>Balance</th>
+              <th class="num">Payment</th>
+              <th class="num">Principal</th>
+              <th class="num">Interest</th>
+              <th class="num">Extra</th>
+              <th class="num">Balance</th>
             </tr>
           </thead>
           <tbody id="scheduleBody"></tbody>
           <tfoot id="scheduleFoot"></tfoot>
         </table>
       </div>
-    </section>
-
-    <div class="ad-slot" aria-hidden="true">Advertisement — replace this block with your Google AdSense code</div>
-
-    <section class="section">
-      <h2>Explore More Calculators</h2>
-      <p>Other free calculators to help you plan your finances.</p>
-      <div class="related-grid">
-        <a href="index.html" class="related-card">
-          <div class="icon">🧮</div>
-          <h3>EMI Calculator</h3>
-          <p>General loan EMI with extra payment options and full schedule.</p>
-        </a>
-        <a href="home-loan.html" class="related-card">
-          <div class="icon">🏠</div>
-          <h3>Home Loan Calculator</h3>
-          <p>Include property tax, insurance, PMI, and HOA fees.</p>
-        </a>
-        <a href="car-loan.html" class="related-card">
-          <div class="icon">🚗</div>
-          <h3>Car Loan Calculator</h3>
-          <p>Account for down payment, trade-in, sales tax, and fees.</p>
-        </a>
-        <a href="loan-payoff.html" class="related-card">
-          <div class="icon">⏱</div>
-          <h3>Loan Payoff Calculator</h3>
-          <p>How much time and money can extra payments save you?</p>
-        </a>
-      </div>
-    </section>
-
-    <section class="section faq">
-      <h2>Personal Loan Calculator FAQ</h2>
-      <details open>
-        <summary>What is an origination fee?</summary>
-        <div class="answer">An origination fee is a one-time charge lenders deduct upfront. If you borrow ₹1,00,000 with a 2% fee, you receive ₹98,000 but repay the loan on the full ₹1,00,000, so the fee adds to your total cost.</div>
-      </details>
-      <details>
-        <summary>Why is the amount I receive less than the loan amount?</summary>
-        <div class="answer">Because the origination fee is deducted before disbursement. Always check both the loan amount and the amount you actually receive when comparing lenders.</div>
-      </details>
-      <details>
-        <summary>Should I use extra payments for my personal loan?</summary>
-        <div class="answer">If you can afford it, extra payments reduce your balance faster, shorten the loan term, and save a significant amount of interest — especially on higher-rate personal loans.</div>
-      </details>
-    </section>
-
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          <h4>EMIMaster</h4>
-          <p>Free, accurate financial calculators to help you plan your loans and save money. Built for everyone.</p>
-        </div>
-        <div>
-          <h4>Calculators</h4>
-          <a href="index.html">Loan / EMI Calculator</a>
-          <a href="home-loan.html">Home Loan Calculator</a>
-          <a href="car-loan.html">Car Loan Calculator</a>
-          <a href="personal-loan.html">Personal Loan Calculator</a>
-          <a href="loan-payoff.html">Loan Payoff Calculator</a>
-          <a href="dps.html">DPS Calculator</a>
-          <a href="fdr.html">FDR Calculator</a>
-        </div>
-        <div>
-          <h4>Legal</h4>
-          <a href="privacy-policy.html">Privacy Policy</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <span>© 2026 EMIMaster. All rights reserved.</span>
-        <span>Made with ❤ for smarter borrowing</span>
-      </div>
-      <p class="disclaimer">Disclaimer: All calculators on EMIMaster are provided for informational and educational purposes only. Results are estimates and do not constitute financial, legal, or investment advice. Please consult a qualified financial professional before making any borrowing decisions.</p>
     </div>
-  </footer>
 
-  <script>
-    window.calcConfig = {
-      type: 'personal',
-      defaults: { amount: 300000, rate: 11, term: 3 }
-    };
-  </script>
-  <script src="script.js"></script>
+    <div class="content-section">
+      <h2>Personal Loan Calculator FAQ</h2>
+      <div class="faq-item">
+        <div class="faq-q">What is an origination fee?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">An origination fee is a one-time charge lenders deduct upfront. If you borrow Rs 1,00,000 with a 2% fee, you receive Rs 98,000 but repay the loan on the full Rs 1,00,000, so the fee adds to your total cost.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Why is the amount I receive less than the loan amount?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">Because the origination fee is deducted before disbursement. Always check both the loan amount and the amount you actually receive when comparing lenders.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Should I use extra payments for my personal loan?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">If you can afford it, extra payments reduce your balance faster, shorten the loan term and save a significant amount of interest &mdash; especially on higher-rate personal loans.</div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div id="siteFooter"></div>
+
+<script>
+  window.calcConfig = {
+    type: 'personal',
+    defaults: { amount: 300000, rate: 11, term: 3 }
+  };
+</script>
+<script src="js/common.js"></script>
+<script src="js/emi.js"></script>
 </body>
 </html>

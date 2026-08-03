@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rental Property Calculator - Cash Flow, Cap Rate &amp; ROI | EMI Master</title>
+  <meta name="description" content="Analyze a rental property with monthly cash flow, cap rate, cash-on-cash return and total profit. Free rental property calculator for investors.">
+  <meta name="keywords" content="rental property calculator, rental property ROI, cap rate calculator, investment property calculator">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://emimaster.com/rental-property.html">
+  <meta property="og:title" content="Rental Property Calculator | EMI Master">
+  <meta property="og:description" content="Analyze rental properties with cash flow, cap rate and ROI.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://emimaster.com/rental-property.html">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "EMI Master Rental Property Calculator",
+    "url": "https://emimaster.com/rental-property.html",
+    "description": "Free rental property calculator with cash flow, cap rate, cash-on-cash return and profit analysis.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is cap rate?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Cap rate is the net operating income (rent minus operating expenses) divided by the property price. It measures the return of a property before financing, so it works well for comparing different properties."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is a good rental property return?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Many investors look for 1% of purchase price in monthly rent, a cap rate of 6% or more, and positive cash flow after all costs. Results vary heavily by market."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+
+<div id="siteHeader"></div>
+
+<section class="hero hero-compact">
+  <div class="container">
+    <h1>Rental Property Calculator</h1>
+    <p>Full investment analysis for your rental property.</p>
+  </div>
+</section>
+
+<div class="layout">
+  <div id="siteSidebar"></div>
+
+  <main class="main-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Rental Property Calculator</div>
+    <h1 class="page-title">Rental Property Calculator</h1>
+    <p class="page-subtitle">Cash flow, cap rate, cash-on-cash return and profit at a glance.</p>
+
+    <div class="card">
+      <h2>Property Purchase</h2>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="price">Property Price (₹)</label>
+          <div class="input-wrap">
+            <span class="prefix">₹</span>
+            <input type="number" id="price" value="3500000" min="0" step="100000">
+          </div>
+          <input type="range" id="priceRange" min="500000" max="50000000" step="100000" value="3500000">
+        </div>
+
+        <div class="form-group">
+          <label for="downPct">Down Payment (%)</label>
+          <div class="input-wrap">
+            <span class="suffix">%</span>
+            <input type="number" id="downPct" value="20" min="0" max="100" step="1">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="closing">Closing Costs (₹)</label>
+          <div class="input-wrap">
+            <span class="prefix">₹</span>
+            <input type="number" id="closing" value="70000" min="0" step="5000">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="rate">Mortgage Rate (% p.a.)</label>
+          <div class="input-wrap">
+            <span class="suffix">%</span>
+            <input type="number" id="rate" value="8" min="0" max="30" step="0.1">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="years">Mortgage Term (years)</label>
+          <div class="input-wrap">
+            <span class="suffix">yrs</span>
+            <input type="number" id="years" value="20" min="1" max="30" step="1">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="rent">Monthly Rent (₹)</label>
+          <div class="input-wrap">
+            <span class="prefix">₹</span>
+            <input type="number" id="rent" value="25000" min="0" step="500">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="vacancy">Vacancy Rate (%)</label>
+          <div class="input-wrap">
+            <span class="suffix">%</span>
+            <input type="number" id="vacancy" value="5" min="0" max="50" step="1">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="taxPct">Property Tax (% of price / yr)</label>
+          <div class="input-wrap">
+            <span class="suffix">%</span>
+            <input type="number" id="taxPct" value="1" min="0" max="10" step="0.1">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="insPct">Insurance (% of price / yr)</label>
+          <div class="input-wrap">
+            <span class="suffix">%</span>
+            <input type="number" id="insPct" value="0.3" min="0" max="5" step="0.1">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="maintPct">Maintenance (% of price / yr)</label>
+          <div class="input-wrap">
+            <span class="suffix">%</span>
+            <input type="number" id="maintPct" value="1" min="0" max="10" step="0.1">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="mgmtPct">Property Management (% of rent)</label>
+          <div class="input-wrap">
+            <span class="suffix">%</span>
+            <input type="number" id="mgmtPct" value="8" min="0" max="20" step="1">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="appr">Annual Appreciation (%)</label>
+          <div class="input-wrap">
+            <span class="suffix">%</span>
+            <input type="number" id="appr" value="5" min="0" max="30" step="0.5">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="sellPct">Selling Costs (%)</label>
+          <div class="input-wrap">
+            <span class="suffix">%</span>
+            <input type="number" id="sellPct" value="3" min="0" max="15" step="0.5">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="holding">Holding Period (years)</label>
+          <div class="input-wrap">
+            <span class="suffix">yrs</span>
+            <input type="number" id="holding" value="5" min="1" max="30" step="1">
+          </div>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary" id="calculateBtn" type="button">Calculate</button>
+        <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
+      </div>
+    </div>
+
+    <div class="result-panel" id="resultPanel">
+      <h3 id="resultLabel">Monthly Cash Flow</h3>
+      <div class="result-main" id="resultMain">—</div>
+      <div class="result-grid">
+        <div class="result-item"><div class="label">Cap Rate</div><div class="value positive" id="rCap">—</div></div>
+        <div class="result-item"><div class="label">Cash-on-Cash Return</div><div class="value positive" id="rCoC">—</div></div>
+        <div class="result-item"><div class="label">Total Return</div><div class="value positive" id="rTotal">—</div></div>
+        <div class="result-item"><div class="label">Est. Profit</div><div class="value" id="rProfit">—</div></div>
+      </div>
+    </div>
+
+    <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
+
+    <div class="content-section">
+      <h2>Understanding the metrics</h2>
+      <ul>
+        <li><strong>Cash Flow</strong> &mdash; rent collected after vacancy, minus tax, insurance, maintenance, management and mortgage. Positive is the goal.</li>
+        <li><strong>Cap Rate</strong> &mdash; operating income before mortgage divided by price. Best for comparing properties without financing.</li>
+        <li><strong>Cash-on-Cash Return</strong> &mdash; annual cash flow divided by your cash investment (down payment + closing costs).</li>
+        <li><strong>Total Return / Profit</strong> &mdash; includes cash flow over the holding period plus the gain on sale after appreciation and selling costs.</li>
+      </ul>
+    </div>
+
+    <div class="content-section">
+      <h2>Rental Property FAQ</h2>
+      <div class="faq-item">
+        <div class="faq-q">What is the 1% rule?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">The 1% rule says monthly rent should be at least 1% of the purchase price. A property priced at ₹30,00,000 should rent for about ₹30,000 a month to be a solid investment.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Should I include vacancy in my analysis?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">Yes &mdash; properties are rarely rented 100% of the time. A 5&ndash;10% vacancy allowance gives a much more realistic cash flow estimate.</div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div id="siteFooter"></div>
+
+<script>
+  window.calcConfig = {
+    type: 'rental-property',
+    defaults: { price: 3500000, downPct: 20, closing: 70000, rate: 8, years: 20, rent: 25000, vacancy: 5, taxPct: 1, insPct: 0.3, maintPct: 1, mgmtPct: 8, appr: 5, sellPct: 3, holding: 5 }
+  };
+</script>
+<script src="js/common.js"></script>
+<script src="js/mortgage.js"></script>
+</body>
+</html>

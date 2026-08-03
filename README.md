@@ -10,9 +10,11 @@ Deploy on **Netlify** by connecting this GitHub repository (see [Netlify guide](
 
 ## Pages
 
+### Core Calculators
 | Page | Description |
 |------|-------------|
-| `index.html` | Main EMI / Loan calculator with amortization schedule, compound frequency, payback frequency, and extra payments |
+| `index.html` | Homepage with hero search and calculator card grid |
+| `emi-calculator.html` | Main EMI calculator with amortization schedule, compound frequency, payback frequency, and extra payments |
 | `home-loan.html` | Home loan calculator including property tax, home insurance, PMI, and HOA fees |
 | `car-loan.html` | Car loan calculator with down payment, trade-in, sales tax, and fees |
 | `personal-loan.html` | Personal loan calculator with origination fee and extra payments |
@@ -22,13 +24,35 @@ Deploy on **Netlify** by connecting this GitHub repository (see [Netlify guide](
 | `privacy-policy.html` | Privacy policy (required for Google AdSense approval) |
 | `404.html` | Custom 404 page |
 
+### Mortgage & Real Estate
+| Page | Description |
+|------|-------------|
+| `mortgage-calculator.html` | Mortgage payment including tax, insurance, PMI and HOA |
+| `amortization-calculator.html` | Full loan amortization schedule with extra payments |
+| `mortgage-payoff.html` | Mortgage payoff with extra payment comparison |
+| `house-affordability.html` | How much house you can afford (28/36 rule) |
+| `rent-calculator.html` | Rent affordability with the 30% rule |
+| `debt-to-income.html` | Front-end and back-end debt-to-income ratios |
+| `real-estate-calculator.html` | Property investment cash flow and returns |
+| `refinance-calculator.html` | Refinance savings and break-even analysis |
+| `rental-property.html` | Rental property cash flow, cap rate and ROI |
+| `apr-calculator.html` | True cost of a loan including fees |
+| `fha-loan.html` | FHA mortgage with upfront and annual MIP |
+| `va-loan.html` | VA mortgage with funding fee, no PMI |
+| `home-equity-loan.html` | Fixed-rate home equity loan payments |
+| `heloc-calculator.html` | HELOC draw and repayment payments |
+| `down-payment-calculator.html` | Down payment, loan amount and PMI planning |
+| `rent-vs-buy.html` | Rent vs buy net-worth comparison |
+
 ## Features
 
 - Live calculation — results update as you type or drag sliders
 - Full amortization schedule with CSV export
 - Extra monthly and one-time payment support
 - DPS and FDR savings calculators with monthly growth schedules
-- Principal vs interest visual breakdown
+- Mortgage & real estate suite (16 calculators)
+- Dark mode with theme persistence
+- Shared layout (header, sidebar, footer) injected by `js/common.js`
 - Compound frequency (monthly → continuous) and payback frequency (monthly → weekly)
 - Indian Rupee (₹) formatting
 - SEO: meta tags, Open Graph, JSON-LD structured data (WebApplication + FAQPage), sitemap.xml, robots.txt
@@ -55,9 +79,12 @@ Then open http://localhost:8080
 
 ## Files
 
-- `index.html`, `home-loan.html`, `car-loan.html`, `personal-loan.html`, `loan-payoff.html`, `dps.html`, `fdr.html`, `privacy-policy.html`, `404.html` — pages
-- `style.css` — shared styles
-- `script.js` — shared calculation engine (EMI, amortization, CSV)
+- `index.html`, `emi-calculator.html`, `home-loan.html`, `car-loan.html`, `personal-loan.html`, `loan-payoff.html`, `dps.html`, `fdr.html`, `privacy-policy.html`, `404.html` — core pages
+- `mortgage-calculator.html`, `amortization-calculator.html`, `mortgage-payoff.html`, `house-affordability.html`, `rent-calculator.html`, `debt-to-income.html`, `real-estate-calculator.html`, `refinance-calculator.html`, `rental-property.html`, `apr-calculator.html`, `fha-loan.html`, `va-loan.html`, `home-equity-loan.html`, `heloc-calculator.html`, `down-payment-calculator.html`, `rent-vs-buy.html` — mortgage & real estate pages
+- `css/style.css` — shared styles
+- `js/common.js` — shared layout (header, sidebar, footer), theme toggle, search
+- `js/emi.js` — loan / savings calculation engine (EMI, amortization, CSV)
+- `js/mortgage.js` — mortgage & real estate calculation engine
 - `favicon.svg` — site icon
 - `robots.txt`, `sitemap.xml` — SEO
 - `netlify.toml` — Netlify configuration (headers + 404 redirect)

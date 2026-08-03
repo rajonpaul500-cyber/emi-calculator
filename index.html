@@ -1,338 +1,268 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EMI Calculator – Free Loan EMI Calculator with Amortization Schedule | EMIMaster</title>
-  <meta name="description" content="Calculate your monthly loan EMI instantly with EMIMaster's free EMI calculator. Includes amortization schedule, extra payment options, and principal vs interest breakdown for personal, home, and car loans.">
-  <meta name="keywords" content="EMI calculator, loan calculator, monthly payment calculator, amortization schedule, home loan calculator, car loan calculator, personal loan calculator">
+  <title>EMI Master - Free Online EMI, Loan, DPS &amp; FDR Calculators</title>
+  <meta name="description" content="EMI Master offers 100% free online calculators for EMI, home loan, car loan, personal loan, loan payoff, DPS and FDR. Fast, accurate and mobile friendly with amortization schedules.">
+  <meta name="keywords" content="EMI calculator, loan calculator, home loan calculator, car loan calculator, DPS calculator, FDR calculator, free online calculators">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://emimaster.com/">
-
+  <link rel="canonical" href="https://emimaster.com/index.html">
+  <meta property="og:title" content="EMI Master - Free Online Calculators">
+  <meta property="og:description" content="Free online EMI, loan, DPS, FDR and more calculators. Fast, accurate and mobile friendly.">
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="EMIMaster">
-  <meta property="og:title" content="Free EMI Calculator with Amortization Schedule | EMIMaster">
-  <meta property="og:description" content="Calculate monthly loan EMI, total interest, and see a full amortization schedule. Free, instant, and no sign-up required.">
   <meta property="og:url" content="https://emimaster.com/">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Free EMI Calculator | EMIMaster">
-  <meta name="twitter:description" content="Calculate your loan EMI, total interest, and amortization schedule instantly.">
-
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "EMIMaster EMI Calculator",
+    "@type": "WebSite",
+    "name": "EMI Master",
     "url": "https://emimaster.com/",
-    "description": "Free EMI calculator with amortization schedule, extra payment options, and principal vs interest breakdown.",
-    "applicationCategory": "FinanceApplication",
-    "operatingSystem": "Any",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://emimaster.com/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
   }
   </script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "What is an EMI?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "EMI (Equated Monthly Installment) is the fixed monthly payment you make to a lender to repay a loan over a fixed term. Each payment covers both the principal amount and the interest charged."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How is EMI calculated?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "EMI is calculated using the formula: EMI = P x r x (1 + r)^n / ((1 + r)^n - 1), where P is the loan amount, r is the monthly interest rate, and n is the number of monthly payments."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What factors affect my EMI?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Your EMI depends on three main factors: the loan amount, the interest rate, and the loan tenure. Higher amounts and rates increase the EMI, while a longer tenure reduces it but increases total interest."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How can I reduce my EMI or total interest?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "You can reduce your EMI by choosing a longer tenure or negotiating a lower interest rate. To reduce total interest, make extra or prepayment payments to shorten the loan term."
-        }
-      }
-    ]
-  }
-  </script>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
 </head>
 <body>
 
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="index.html" class="logo" aria-label="EMIMaster home">
-        <span class="logo-mark">₹</span>
-        <span>EMI<em>Master</em></span>
-      </a>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
-      <nav class="site-nav" id="siteNav" aria-label="Main navigation">
-        <ul>
-          <li><a href="index.html" class="active">Loan Calculator</a></li>
-          <li><a href="home-loan.html">Home Loan</a></li>
-          <li><a href="car-loan.html">Car Loan</a></li>
-          <li><a href="personal-loan.html">Personal Loan</a></li>
-          <li><a href="loan-payoff.html">Loan Payoff</a></li>
-          <li><a href="dps.html">DPS</a></li>
-          <li><a href="fdr.html">FDR</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+<div id="siteHeader"></div>
 
-  <section class="hero">
-    <div class="container">
-      <h1>Free <span class="grad">EMI Calculator</span> for All Your Loans</h1>
-      <p>Calculate monthly EMIs, total interest, and get a complete amortization schedule for personal, home, and car loans in seconds.</p>
-      <div class="hero-badges">
-        <span>✓ 100% Free</span>
-        <span>✓ No Sign-up</span>
-        <span>✓ Instant Results</span>
-        <span>✓ Amortization Schedule</span>
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <h1>Free Online Calculators for Every Need</h1>
+    <p>Fast, accurate and 100% free tools for EMI, loans and savings. Plan smarter with EMI Master.</p>
+    <form class="hero-search" id="heroSearchForm">
+      <input type="text" id="heroSearchInput" placeholder="Search calculators e.g. EMI, Home Loan, DPS, FDR..." aria-label="Search calculators">
+      <button type="submit">Search</button>
+    </form>
+  </div>
+</section>
+
+<div class="layout">
+  <div id="siteSidebar"></div>
+
+  <main class="main-content">
+    <h2 class="page-title" style="margin-top:8px;">Popular Calculators</h2>
+    <p class="page-subtitle">Choose a calculator below to get started. All tools are free, private and work on any device.</p>
+
+    <div class="calc-grid">
+      <div class="calc-card">
+        <div class="icon">&#127968;</div>
+        <h3>EMI Calculator</h3>
+        <p>Calculate monthly EMI, total interest and total payment for home, car and personal loans with a full amortization schedule.</p>
+        <a href="emi-calculator.html">Calculate EMI &rarr;</a>
+      </div>
+
+      <div class="calc-card">
+        <div class="icon">&#127970;</div>
+        <h3>Home Loan Calculator</h3>
+        <p>Know your true monthly payment including property tax, home insurance, PMI and HOA fees.</p>
+        <a href="home-loan.html">Calculate Home Loan &rarr;</a>
+      </div>
+
+      <div class="calc-card">
+        <div class="icon">&#128663;</div>
+        <h3>Car Loan Calculator</h3>
+        <p>Plan your car purchase with down payment, trade-in value, sales tax and fees.</p>
+        <a href="car-loan.html">Calculate Car Loan &rarr;</a>
+      </div>
+
+      <div class="calc-card">
+        <div class="icon">&#128179;</div>
+        <h3>Personal Loan Calculator</h3>
+        <p>See the impact of origination fees and extra payments on your personal loan.</p>
+        <a href="personal-loan.html">Calculate Personal Loan &rarr;</a>
+      </div>
+
+      <div class="calc-card">
+        <div class="icon">&#9203;</div>
+        <h3>Loan Payoff Calculator</h3>
+        <p>See how extra monthly and one-time payments can pay off your loan early and save interest.</p>
+        <a href="loan-payoff.html">Calculate Payoff &rarr;</a>
+      </div>
+
+      <div class="calc-card">
+        <div class="icon">&#128188;</div>
+        <h3>DPS Calculator</h3>
+        <p>Find your Deposit Pension Scheme maturity amount with a month-by-month growth schedule.</p>
+        <a href="dps.html">Calculate DPS &rarr;</a>
+      </div>
+
+      <div class="calc-card">
+        <div class="icon">&#127974;</div>
+        <h3>FDR Calculator</h3>
+        <p>Know your Fixed Deposit maturity amount and interest earnings for any deposit and tenure.</p>
+        <a href="fdr.html">Calculate FDR &rarr;</a>
       </div>
     </div>
-  </section>
 
-  <main class="container">
+    <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
 
-    <section class="calculator-grid">
-      <div class="card card-pad">
-        <h2>Loan Details</h2>
-        <p class="card-sub">Adjust the sliders or type values directly — results update live.</p>
+    <h2 class="page-title" style="margin:8px 0 6px;">Mortgage &amp; Real Estate Calculators</h2>
+    <p class="page-subtitle">Everything you need to buy, refinance, rent or invest in property.</p>
 
-        <div class="field">
-          <label for="amount">Loan Amount <span class="hint" id="amountHint"></span></label>
-          <input type="number" id="amount" value="500000" min="0" step="10000">
-          <input type="range" id="amountRange" min="10000" max="10000000" step="10000" value="500000">
-        </div>
-
-        <div class="field">
-          <label for="rate">Interest Rate (% per annum) <span class="hint" id="rateHint"></span></label>
-          <input type="number" id="rate" value="8.5" min="0" max="30" step="0.1">
-          <input type="range" id="rateRange" min="0.5" max="30" step="0.1" value="8.5">
-        </div>
-
-        <div class="field">
-          <label for="term">Loan Tenure (years) <span class="hint" id="termHint"></span></label>
-          <input type="number" id="term" value="5" min="1" max="30" step="1">
-          <input type="range" id="termRange" min="1" max="30" step="1" value="5">
-        </div>
-
-        <div class="field-row">
-          <div class="field">
-            <label for="compound">Compound</label>
-            <select id="compound">
-              <option value="monthly" selected>Monthly</option>
-              <option value="quarterly">Quarterly</option>
-              <option value="semi-annually">Semi-annually</option>
-              <option value="annually">Annually</option>
-              <option value="continuous">Continuous</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="payback">Pay Back</label>
-            <select id="payback">
-              <option value="monthly" selected>Every Month</option>
-              <option value="semi-monthly">Semi-monthly</option>
-              <option value="biweekly">Bi-weekly</option>
-              <option value="weekly">Every Week</option>
-            </select>
-          </div>
-        </div>
-
-        <h2 style="margin-top: 22px;">Extra Payments (Optional)</h2>
-        <p class="card-sub">Making extra payments can shorten your loan term and save interest.</p>
-
-        <div class="field-row">
-          <div class="field">
-            <label for="monthlyExtra">Extra Monthly Payment (₹)</label>
-            <input type="number" id="monthlyExtra" value="0" min="0" step="500" placeholder="e.g. 2000">
-          </div>
-          <div class="field">
-            <label for="oneTimeExtra">One-time Payment (₹)</label>
-            <input type="number" id="oneTimeExtra" value="0" min="0" step="10000" placeholder="e.g. 50000">
-          </div>
-        </div>
-        <div class="field">
-          <label for="oneTimeMonth">Apply One-time Payment in Month</label>
-          <input type="number" id="oneTimeMonth" value="1" min="1" step="1">
-        </div>
+    <div class="calc-grid">
+      <div class="calc-card">
+        <div class="icon">&#127968;</div>
+        <h3>Mortgage Calculator</h3>
+        <p>True monthly mortgage payment including tax, insurance, PMI and HOA fees.</p>
+        <a href="mortgage-calculator.html">Calculate Mortgage &rarr;</a>
       </div>
 
-      <aside class="results" aria-live="polite">
-        <div class="label" id="paymentLabel">Monthly Payment (EMI)</div>
-        <div class="big" id="paymentOut">—</div>
-
-        <div class="stats">
-          <div class="stat"><span class="k">Loan Amount</span><span class="v" id="loanAmountOut">—</span></div>
-          <div class="stat"><span class="k">Total Payment</span><span class="v" id="totalPaymentOut">—</span></div>
-          <div class="stat"><span class="k">Total Interest</span><span class="v orange" id="totalInterestOut">—</span></div>
-        </div>
-
-        <div class="breakdown">
-          <div class="label">Principal vs Interest</div>
-          <div class="bar">
-            <div class="principal-bar" id="principalBar"></div>
-            <div class="interest-bar" id="interestBar"></div>
-          </div>
-          <div class="legend">
-            <span class="legend-item"><span class="dot principal"></span> Principal: <strong id="legendPrincipal">—</strong></span>
-            <span class="legend-item"><span class="dot interest"></span> Interest: <strong id="legendInterest">—</strong></span>
-          </div>
-        </div>
-
-        <div class="payoff-note" id="payoffNote"></div>
-      </aside>
-    </section>
-
-    <div class="ad-slot" aria-hidden="true">Advertisement — replace this block with your Google AdSense code</div>
-
-    <section class="section">
-      <div class="section-head" style="display:flex; justify-content:space-between; align-items:flex-end; gap:16px; flex-wrap:wrap;">
-        <div>
-          <h2>Amortization Schedule</h2>
-          <p>Month-by-month breakdown of your loan payments. <span id="scheduleCount" style="color:var(--primary); font-weight:600;"></span></p>
-        </div>
-        <button class="btn btn-primary" id="downloadCsv" type="button">⬇ Download CSV</button>
+      <div class="calc-card">
+        <div class="icon">&#128202;</div>
+        <h3>Amortization Calculator</h3>
+        <p>Full loan schedule with principal, interest and balance for every payment.</p>
+        <a href="amortization-calculator.html">Generate Schedule &rarr;</a>
       </div>
-      <div class="table-wrap">
-        <table class="schedule">
-          <thead>
-            <tr>
-              <th>Month</th>
-              <th>Payment</th>
-              <th>Principal</th>
-              <th>Interest</th>
-              <th>Extra</th>
-              <th>Balance</th>
-            </tr>
-          </thead>
-          <tbody id="scheduleBody"></tbody>
-          <tfoot id="scheduleFoot"></tfoot>
-        </table>
+
+      <div class="calc-card">
+        <div class="icon">&#9203;</div>
+        <h3>Mortgage Payoff Calculator</h3>
+        <p>See how extra payments pay off your mortgage years earlier.</p>
+        <a href="mortgage-payoff.html">Calculate Payoff &rarr;</a>
       </div>
-    </section>
 
-    <div class="ad-slot" aria-hidden="true">Advertisement — replace this block with your Google AdSense code</div>
-
-    <section class="section">
-      <h2>Explore More Calculators</h2>
-      <p>Loan-specific calculators with the details that matter for each loan type.</p>
-      <div class="related-grid">
-        <a href="home-loan.html" class="related-card">
-          <div class="icon">🏠</div>
-          <h3>Home Loan Calculator</h3>
-          <p>Include property tax, insurance, PMI, and HOA for your true monthly payment.</p>
-        </a>
-        <a href="car-loan.html" class="related-card">
-          <div class="icon">🚗</div>
-          <h3>Car Loan Calculator</h3>
-          <p>Account for down payment, trade-in, sales tax, and fees.</p>
-        </a>
-        <a href="personal-loan.html" class="related-card">
-          <div class="icon">💳</div>
-          <h3>Personal Loan Calculator</h3>
-          <p>See the effect of origination fees and extra payments on your loan.</p>
-        </a>
-        <a href="loan-payoff.html" class="related-card">
-          <div class="icon">⏱</div>
-          <h3>Loan Payoff Calculator</h3>
-          <p>Find out how much time and money extra payments can save you.</p>
-        </a>
-        <a href="dps.html" class="related-card">
-          <div class="icon">💼</div>
-          <h3>DPS Calculator</h3>
-          <p>Deposit Pension Scheme maturity amount with monthly deposits.</p>
-        </a>
-        <a href="fdr.html" class="related-card">
-          <div class="icon">🏦</div>
-          <h3>FDR Calculator</h3>
-          <p>Fixed Deposit maturity amount with compounding options.</p>
-        </a>
+      <div class="calc-card">
+        <div class="icon">&#127979;</div>
+        <h3>House Affordability Calculator</h3>
+        <p>How much house can you afford? Based on the 28/36 rule.</p>
+        <a href="house-affordability.html">Check Affordability &rarr;</a>
       </div>
-    </section>
 
-    <section class="section faq">
-      <h2>EMI Calculator FAQ</h2>
-      <p>Common questions about EMI and loan repayment.</p>
+      <div class="calc-card">
+        <div class="icon">&#127976;</div>
+        <h3>Rent Calculator</h3>
+        <p>Check your rent budget with the 30% rule and annual housing cost.</p>
+        <a href="rent-calculator.html">Calculate Rent &rarr;</a>
+      </div>
 
-      <details open>
-        <summary>What is an EMI?</summary>
-        <div class="answer">EMI (Equated Monthly Installment) is the fixed amount you pay your lender every month until the loan is fully repaid. It includes both the principal and the interest portion of your loan.</div>
-      </details>
-      <details>
-        <summary>How is EMI calculated?</summary>
-        <div class="answer">EMI is calculated with the formula EMI = P × r × (1 + r)ⁿ / ((1 + r)ⁿ − 1), where P is the loan amount, r is the monthly interest rate (annual rate ÷ 12 ÷ 100), and n is the number of monthly payments.</div>
-      </details>
-      <details>
-        <summary>Does the EMI amount stay the same every month?</summary>
-        <div class="answer">For a fixed-rate loan, yes. The total EMI stays constant, but within each payment the interest portion decreases over time while the principal portion increases. This is shown in the amortization schedule above.</div>
-      </details>
-      <details>
-        <summary>What is an amortization schedule?</summary>
-        <div class="answer">An amortization schedule is a table that lists every payment of your loan, showing how much goes toward interest, how much reduces the principal, and your remaining balance after each payment.</div>
-      </details>
-    </section>
+      <div class="calc-card">
+        <div class="icon">&#128181;</div>
+        <h3>Debt-to-Income Ratio Calculator</h3>
+        <p>See if your debt level is healthy before applying for a loan.</p>
+        <a href="debt-to-income.html">Check DTI &rarr;</a>
+      </div>
 
+      <div class="calc-card">
+        <div class="icon">&#127963;</div>
+        <h3>Real Estate Calculator</h3>
+        <p>Investment cash flow, cash-on-cash return and profit estimates.</p>
+        <a href="real-estate-calculator.html">Analyze Property &rarr;</a>
+      </div>
+
+      <div class="calc-card">
+        <div class="icon">&#128260;</div>
+        <h3>Refinance Calculator</h3>
+        <p>Is refinancing worth it? Compare payments and find your break-even.</p>
+        <a href="refinance-calculator.html">Compare Refinance &rarr;</a>
+      </div>
+
+      <div class="calc-card">
+        <div class="icon">&#127971;</div>
+        <h3>Rental Property Calculator</h3>
+        <p>Cash flow, cap rate, cash-on-cash return and total profit for investors.</p>
+        <a href="rental-property.html">Analyze Rental &rarr;</a>
+      </div>
+
+      <div class="calc-card">
+        <div class="icon">&#129297;</div>
+        <h3>APR Calculator</h3>
+        <p>Find the true cost of a loan including all fees.</p>
+        <a href="apr-calculator.html">Calculate APR &rarr;</a>
+      </div>
+
+      <div class="calc-card">
+        <div class="icon">&#127969;</div>
+        <h3>FHA Loan Calculator</h3>
+        <p>FHA mortgage payments with upfront and annual MIP insurance.</p>
+        <a href="fha-loan.html">Calculate FHA &rarr;</a>
+      </div>
+
+      <div class="calc-card">
+        <div class="icon">&#127973;</div>
+        <h3>VA Mortgage Calculator</h3>
+        <p>VA home loan payments with funding fee and no PMI.</p>
+        <a href="va-loan.html">Calculate VA Loan &rarr;</a>
+      </div>
+
+      <div class="calc-card">
+        <div class="icon">&#127970;</div>
+        <h3>Home Equity Loan Calculator</h3>
+        <p>Fixed-rate second mortgage payments and amortization.</p>
+        <a href="home-equity-loan.html">Calculate Equity Loan &rarr;</a>
+      </div>
+
+      <div class="calc-card">
+        <div class="icon">&#128217;</div>
+        <h3>HELOC Calculator</h3>
+        <p>Interest-only draw payments and repayment period payments.</p>
+        <a href="heloc-calculator.html">Calculate HELOC &rarr;</a>
+      </div>
+
+      <div class="calc-card">
+        <div class="icon">&#128178;</div>
+        <h3>Down Payment Calculator</h3>
+        <p>Plan your down payment, loan amount and PMI cost.</p>
+        <a href="down-payment-calculator.html">Plan Down Payment &rarr;</a>
+      </div>
+
+      <div class="calc-card">
+        <div class="icon">&#128247;</div>
+        <h3>Rent vs Buy Calculator</h3>
+        <p>Compare net worth to decide if renting or buying is smarter.</p>
+        <a href="rent-vs-buy.html">Compare Rent vs Buy &rarr;</a>
+      </div>
+    </div>
+
+    <div class="content-section">
+      <h2>Why Use EMI Master Calculators?</h2>
+      <p>EMI Master is built to make financial planning simple and accessible for everyone. Every calculator on this site is free, requires no signup, and runs entirely in your browser &mdash; your data never leaves your device.</p>
+      <ul>
+        <li><strong>100% Free:</strong> No hidden fees, no premium tiers, no downloads.</li>
+        <li><strong>Private &amp; Secure:</strong> Calculations run on your device. Nothing is stored or transmitted.</li>
+        <li><strong>Fast &amp; Accurate:</strong> Industry-standard formulas with precise results.</li>
+        <li><strong>Mobile Friendly:</strong> Works beautifully on phones, tablets and desktops.</li>
+      </ul>
+
+      <h3>Popular Searches</h3>
+      <p>
+        <a href="emi-calculator.html">EMI Calculator</a> &bull;
+        <a href="mortgage-calculator.html">Mortgage Calculator</a> &bull;
+        <a href="house-affordability.html">House Affordability</a> &bull;
+        <a href="refinance-calculator.html">Refinance Calculator</a> &bull;
+        <a href="rent-vs-buy.html">Rent vs Buy</a> &bull;
+        <a href="home-loan.html">Home Loan Calculator</a> &bull;
+        <a href="car-loan.html">Car Loan Calculator</a> &bull;
+        <a href="personal-loan.html">Personal Loan Calculator</a> &bull;
+        <a href="loan-payoff.html">Loan Payoff Calculator</a> &bull;
+        <a href="dps.html">DPS Calculator</a> &bull;
+        <a href="fdr.html">FDR Calculator</a>
+      </p>
+    </div>
+
+    <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
+
+    <div class="content-section">
+      <h2>How to Calculate Home Loan EMI</h2>
+      <p>EMI (Equated Monthly Installment) is the fixed amount you pay your lender every month. It is calculated with the formula:</p>
+      <div class="definition">
+        <p><strong>EMI = P &times; r &times; (1 + r)<sup>n</sup> / ((1 + r)<sup>n</sup> &minus; 1)</strong></p>
+      </div>
+      <p>Where <code>P</code> is the loan amount, <code>r</code> is the monthly interest rate (annual rate &divide; 12 &divide; 100), and <code>n</code> is the number of monthly payments. Try the <a href="emi-calculator.html">EMI Calculator</a> and see the full amortization schedule instantly.</p>
+    </div>
   </main>
+</div>
 
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          <h4>EMIMaster</h4>
-          <p>Free, accurate financial calculators to help you plan your loans and save money. Built for everyone.</p>
-        </div>
-        <div>
-          <h4>Calculators</h4>
-          <a href="index.html">Loan / EMI Calculator</a>
-          <a href="home-loan.html">Home Loan Calculator</a>
-          <a href="car-loan.html">Car Loan Calculator</a>
-          <a href="personal-loan.html">Personal Loan Calculator</a>
-          <a href="loan-payoff.html">Loan Payoff Calculator</a>
-          <a href="dps.html">DPS Calculator</a>
-          <a href="fdr.html">FDR Calculator</a>
-        </div>
-        <div>
-          <h4>Legal</h4>
-          <a href="privacy-policy.html">Privacy Policy</a>
-          <a href="404.html">Sitemap</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <span>© 2026 EMIMaster. All rights reserved.</span>
-        <span>Made with ❤ for smarter borrowing</span>
-      </div>
-      <p class="disclaimer">Disclaimer: All calculators on EMIMaster are provided for informational and educational purposes only. Results are estimates and do not constitute financial, legal, or investment advice. Please consult a qualified financial professional before making any borrowing decisions.</p>
-    </div>
-  </footer>
+<div id="siteFooter"></div>
 
-  <script>
-    window.calcConfig = {
-      type: 'loan',
-      defaults: { amount: 500000, rate: 8.5, term: 5 }
-    };
-  </script>
-  <script src="script.js"></script>
+<script src="js/common.js"></script>
 </body>
 </html>

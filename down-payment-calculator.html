@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Down Payment Calculator - Save for Your Home | EMI Master</title>
+  <meta name="description" content="Calculate how much down payment you need, your loan amount and monthly payment including PMI. Free down payment calculator with the 20% rule.">
+  <meta name="keywords" content="down payment calculator, home down payment, 20 percent down payment, PMI calculator">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://emimaster.com/down-payment-calculator.html">
+  <meta property="og:title" content="Down Payment Calculator | EMI Master">
+  <meta property="og:description" content="Plan your home down payment, loan amount and monthly payment.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://emimaster.com/down-payment-calculator.html">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "EMI Master Down Payment Calculator",
+    "url": "https://emimaster.com/down-payment-calculator.html",
+    "description": "Free down payment calculator with loan amount, monthly payment and PMI estimate.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How much down payment do I need?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "20% down avoids private mortgage insurance (PMI) and gives the best rates, but many programs allow as little as 3% to 10%. Below 20%, you will typically pay PMI."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is PMI and when is it required?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "PMI (Private Mortgage Insurance) protects the lender when your down payment is below 20%. It adds a monthly cost until you build 20% equity."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+
+<div id="siteHeader"></div>
+
+<section class="hero hero-compact">
+  <div class="container">
+    <h1>Down Payment Calculator</h1>
+    <p>Plan your down payment, loan amount and monthly cost.</p>
+  </div>
+</section>
+
+<div class="layout">
+  <div id="siteSidebar"></div>
+
+  <main class="main-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Down Payment Calculator</div>
+    <h1 class="page-title">Down Payment Calculator</h1>
+    <p class="page-subtitle">See the effect of your down payment on the loan and payment.</p>
+
+    <div class="card">
+      <h2>Home Purchase Details</h2>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="price">Home Price (₹)</label>
+          <div class="input-wrap">
+            <span class="prefix">₹</span>
+            <input type="number" id="price" value="3000000" min="0" step="100000">
+          </div>
+          <input type="range" id="priceRange" min="100000" max="10000000" step="100000" value="3000000">
+        </div>
+
+        <div class="form-group">
+          <label for="downPct">Down Payment (%)</label>
+          <div class="input-wrap">
+            <span class="suffix">%</span>
+            <input type="number" id="downPct" value="20" min="0" max="100" step="1">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="rate">Interest Rate (% p.a.)</label>
+          <div class="input-wrap">
+            <span class="suffix">%</span>
+            <input type="number" id="rate" value="6.5" min="0" max="30" step="0.1">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="term">Loan Term (years)</label>
+          <div class="input-wrap">
+            <span class="suffix">yrs</span>
+            <input type="number" id="term" value="20" min="1" max="30" step="1">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="pmiPct">PMI Rate (% of loan / yr)</label>
+          <div class="input-wrap">
+            <span class="suffix">%</span>
+            <input type="number" id="pmiPct" value="0.5" min="0" max="5" step="0.1">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="taxPct">Property Tax (% of price / yr)</label>
+          <div class="input-wrap">
+            <span class="suffix">%</span>
+            <input type="number" id="taxPct" value="1" min="0" max="10" step="0.1">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="insPct">Home Insurance (% of price / yr)</label>
+          <div class="input-wrap">
+            <span class="suffix">%</span>
+            <input type="number" id="insPct" value="0.3" min="0" max="5" step="0.1">
+          </div>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary" id="calculateBtn" type="button">Calculate</button>
+        <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
+      </div>
+    </div>
+
+    <div class="result-panel" id="resultPanel">
+      <h3 id="resultLabel">Total Monthly Payment</h3>
+      <div class="result-main" id="resultMain">—</div>
+      <div class="result-grid">
+        <div class="result-item"><div class="label">Down Payment</div><div class="value" id="rDown">—</div></div>
+        <div class="result-item"><div class="label">Loan Amount</div><div class="value" id="rLoan">—</div></div>
+        <div class="result-item"><div class="label">PMI (monthly)</div><div class="value negative" id="rPmi">—</div></div>
+        <div class="result-item"><div class="label">Total Interest</div><div class="value negative" id="rInt">—</div></div>
+      </div>
+    </div>
+
+    <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
+
+    <div class="content-section">
+      <h2>The 20% down payment rule</h2>
+      <p>Putting 20% down gives you the best rates and avoids PMI entirely. If you put down less, you will typically pay PMI until your equity reaches 20%. A larger down payment also means a smaller loan, so you pay far less interest over the life of the mortgage.</p>
+    </div>
+
+    <div class="content-section">
+      <h2>Down Payment FAQ</h2>
+      <div class="faq-item">
+        <div class="faq-q">Should I put 20% down or invest the money instead?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">If avoiding PMI and lower payments matter more than having cash available, 20% down is great. If you can earn more on investments than your mortgage costs, a smaller down payment can be smart &mdash; just factor in PMI.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Can I buy a house with no down payment?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">Yes &mdash; VA loans allow 0% down for eligible borrowers, and some programs allow low or zero down payments. You will usually pay PMI or higher rates in exchange.</div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div id="siteFooter"></div>
+
+<script>
+  window.calcConfig = {
+    type: 'down-payment',
+    defaults: { price: 3000000, downPct: 20, rate: 6.5, term: 20, pmiPct: 0.5, taxPct: 1, insPct: 0.3 }
+  };
+</script>
+<script src="js/common.js"></script>
+<script src="js/mortgage.js"></script>
+</body>
+</html>

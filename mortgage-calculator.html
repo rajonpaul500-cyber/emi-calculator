@@ -4,22 +4,22 @@
 <script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home Loan EMI Calculator - With Property Tax, Insurance &amp; PMI | EMI Master</title>
-  <meta name="description" content="Calculate your true home loan monthly payment including principal, interest, property tax, home insurance, PMI and HOA fees. Free home loan calculator with amortization schedule.">
-  <meta name="keywords" content="home loan calculator, mortgage calculator, home loan EMI, PMI calculator, housing loan calculator">
+  <title>Mortgage Calculator - Monthly Payment with Tax, Insurance &amp; PMI | EMI Master</title>
+  <meta name="description" content="Calculate your mortgage monthly payment including principal, interest, property tax, home insurance and PMI. Free mortgage calculator with full amortization schedule.">
+  <meta name="keywords" content="mortgage calculator, mortgage payment calculator, house payment calculator, PITI calculator">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://emimaster.com/home-loan.html">
-  <meta property="og:title" content="Home Loan EMI Calculator | EMI Master">
-  <meta property="og:description" content="Calculate your true monthly home loan payment including tax, insurance, PMI and HOA.">
+  <link rel="canonical" href="https://emimaster.com/mortgage-calculator.html">
+  <meta property="og:title" content="Mortgage Calculator | EMI Master">
+  <meta property="og:description" content="Calculate your true monthly mortgage payment with tax, insurance and PMI.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://emimaster.com/home-loan.html">
+  <meta property="og:url" content="https://emimaster.com/mortgage-calculator.html">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "EMI Master Home Loan Calculator",
-    "url": "https://emimaster.com/home-loan.html",
-    "description": "Free home loan EMI calculator including property tax, home insurance, PMI and HOA fees.",
+    "name": "EMI Master Mortgage Calculator",
+    "url": "https://emimaster.com/mortgage-calculator.html",
+    "description": "Free mortgage payment calculator including property tax, home insurance, PMI and HOA fees with amortization schedule.",
     "applicationCategory": "FinanceApplication",
     "operatingSystem": "Any",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
@@ -32,18 +32,18 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "What is included in a home loan monthly payment?",
+        "name": "What is a PITI mortgage payment?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Besides the principal and interest EMI, home loan payments often include property tax, home insurance, private mortgage insurance (PMI) if your down payment is below 20%, and HOA fees."
+          "text": "PITI stands for Principal, Interest, Taxes and Insurance. Your total mortgage payment typically includes all four, and PMI (Private Mortgage Insurance) when your down payment is below 20%."
         }
       },
       {
         "@type": "Question",
-        "name": "What is PMI?",
+        "name": "How much mortgage can I afford?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "PMI (Private Mortgage Insurance) protects the lender when your down payment is less than 20% of the property value. It is typically paid monthly until you build 20% equity."
+          "text": "A common guideline is that your total monthly housing payment should not exceed 28% of your gross monthly income, and your total debts including housing should stay below 36%."
         }
       }
     ]
@@ -58,8 +58,8 @@
 
 <section class="hero hero-compact">
   <div class="container">
-    <h1>Home Loan EMI Calculator</h1>
-    <p>Know your true monthly payment &mdash; principal, interest, tax, insurance, PMI and HOA.</p>
+    <h1>Mortgage Calculator</h1>
+    <p>Know your true monthly payment &mdash; principal, interest, taxes, insurance and PMI.</p>
   </div>
 </section>
 
@@ -67,33 +67,33 @@
   <div id="siteSidebar"></div>
 
   <main class="main-content">
-    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Home Loan Calculator</div>
-    <h1 class="page-title">Home Loan Calculator</h1>
-    <p class="page-subtitle">Include all property costs to see your real monthly payment.</p>
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Mortgage Calculator</div>
+    <h1 class="page-title">Mortgage Calculator</h1>
+    <p class="page-subtitle">See your complete monthly house payment including all property costs.</p>
 
     <div class="card">
-      <h2>Home Loan Details</h2>
+      <h2>Mortgage Details</h2>
       <div class="form-grid">
         <div class="form-group">
-          <label for="amount">Loan Amount (₹)</label>
+          <label for="amount">Mortgage Amount (₹)</label>
           <div class="input-wrap">
             <span class="prefix">₹</span>
-            <input type="number" id="amount" value="4000000" min="0" step="100000">
+            <input type="number" id="amount" value="3000000" min="0" step="100000">
           </div>
-          <input type="range" id="amountRange" min="100000" max="100000000" step="100000" value="4000000">
+          <input type="range" id="amountRange" min="100000" max="100000000" step="100000" value="3000000">
         </div>
 
         <div class="form-group">
           <label for="rate">Interest Rate (% per annum)</label>
           <div class="input-wrap">
             <span class="suffix">%</span>
-            <input type="number" id="rate" value="7.5" min="0" max="30" step="0.1">
+            <input type="number" id="rate" value="6.5" min="0" max="30" step="0.1">
           </div>
-          <input type="range" id="rateRange" min="0.5" max="30" step="0.1" value="7.5">
+          <input type="range" id="rateRange" min="0.5" max="30" step="0.1" value="6.5">
         </div>
 
         <div class="form-group">
-          <label for="term">Loan Tenure (years)</label>
+          <label for="term">Mortgage Term (years)</label>
           <div class="input-wrap">
             <span class="suffix">yrs</span>
             <input type="number" id="term" value="20" min="1" max="30" step="1">
@@ -102,21 +102,10 @@
         </div>
 
         <div class="form-group">
-          <label for="compound">Compound</label>
-          <select id="compound">
-            <option value="monthly" selected>Monthly</option>
-            <option value="quarterly">Quarterly</option>
-            <option value="semi-annually">Semi-annually</option>
-            <option value="annually">Annually</option>
-            <option value="continuous">Continuous</option>
-          </select>
-        </div>
-
-        <div class="form-group">
           <label for="propertyTax">Property Tax (₹/year)</label>
           <div class="input-wrap">
             <span class="prefix">₹</span>
-            <input type="number" id="propertyTax" value="12000" min="0" step="1000">
+            <input type="number" id="propertyTax" value="9000" min="0" step="1000">
           </div>
         </div>
 
@@ -124,7 +113,7 @@
           <label for="insurance">Home Insurance (₹/year)</label>
           <div class="input-wrap">
             <span class="prefix">₹</span>
-            <input type="number" id="insurance" value="8000" min="0" step="1000">
+            <input type="number" id="insurance" value="6000" min="0" step="1000">
           </div>
         </div>
 
@@ -168,8 +157,8 @@
     <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
 
     <div class="card">
-      <h2>Home Loan Amortization Schedule</h2>
-      <p>Principal and interest breakdown for every month. <span id="scheduleCount" style="font-weight:700;color:var(--primary);"></span></p>
+      <h2>Mortgage Amortization Schedule</h2>
+      <p>See how each payment builds your home equity. <span id="scheduleCount" style="font-weight:700;color:var(--primary);"></span></p>
       <div class="table-wrap">
         <table>
           <thead>
@@ -189,30 +178,18 @@
     </div>
 
     <div class="content-section">
-      <h2>What makes up your total home loan payment?</h2>
-      <p>Your total monthly payment is more than just the EMI. It typically includes:</p>
-      <ul>
-        <li><strong>Principal &amp; Interest (EMI)</strong> &mdash; the loan repayment itself.</li>
-        <li><strong>Property Tax</strong> &mdash; annual tax divided into monthly payments.</li>
-        <li><strong>Home Insurance</strong> &mdash; protects your property against damage.</li>
-        <li><strong>PMI</strong> &mdash; required when your down payment is below 20%.</li>
-        <li><strong>HOA Fees</strong> &mdash; for communities with shared amenities.</li>
-      </ul>
-    </div>
-
-    <div class="content-section">
-      <h2>Home Loan Calculator FAQ</h2>
+      <h2>Mortgage Calculator FAQ</h2>
       <div class="faq-item">
-        <div class="faq-q">What is PMI and when do I have to pay it?<span class="arrow">&#9654;</span></div>
-        <div class="faq-a">PMI (Private Mortgage Insurance) is required when your down payment is less than 20% of the home price. It is usually paid monthly until you reach 20% home equity.</div>
+        <div class="faq-q">What is included in my monthly mortgage payment?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">Your total payment includes the EMI (principal and interest), property tax, home insurance, private mortgage insurance (PMI) when required, and any HOA fees &mdash; sometimes called PITI.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">How does loan tenure affect my home loan EMI?<span class="arrow">&#9654;</span></div>
-        <div class="faq-a">A longer tenure lowers your monthly EMI but increases the total interest paid. A shorter tenure raises the EMI but saves a significant amount of interest over the life of the loan.</div>
+        <div class="faq-q">Should I choose a 15-year or 30-year mortgage?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">A 30-year term has a lower monthly payment but much higher total interest. A 15-year term costs more per month but saves a large amount of interest and builds equity faster.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">Should I include tax and insurance in my budget?<span class="arrow">&#9654;</span></div>
-        <div class="faq-a">Yes. Lenders often require escrow accounts for tax and insurance, and even if not, you will need to pay them separately. Including them gives you the true cost of homeownership.</div>
+        <div class="faq-q">When does PMI go away?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">PMI is generally removed automatically once you reach 22% equity and can be cancelled at 20% equity by requesting it from your lender.</div>
       </div>
     </div>
   </main>
@@ -223,7 +200,7 @@
 <script>
   window.calcConfig = {
     type: 'home',
-    defaults: { amount: 4000000, rate: 7.5, term: 20 }
+    defaults: { amount: 3000000, rate: 6.5, term: 20 }
   };
 </script>
 <script src="js/common.js"></script>

@@ -1,28 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DPS Calculator – Deposit Pension Scheme Maturity Calculator | EMIMaster</title>
-  <meta name="description" content="Calculate your DPS (Deposit Pension Scheme) maturity amount with EMIMaster's free DPS calculator. Enter monthly deposit, interest rate, and tenure to see maturity value and total interest.">
+  <title>DPS Calculator - Deposit Pension Scheme Maturity Calculator | EMI Master</title>
+  <meta name="description" content="Calculate your DPS (Deposit Pension Scheme) maturity amount with a month-by-month growth schedule. Free DPS calculator with monthly deposit, interest rate and tenure.">
   <meta name="keywords" content="DPS calculator, Deposit Pension Scheme calculator, DPS maturity calculator, savings calculator, monthly deposit calculator">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://emimaster.com/dps.html">
-
+  <meta property="og:title" content="DPS Calculator - Deposit Pension Scheme | EMI Master">
+  <meta property="og:description" content="Calculate your DPS maturity amount, total deposits and interest earned instantly.">
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="EMIMaster">
-  <meta property="og:title" content="DPS Calculator – Deposit Pension Scheme | EMIMaster">
-  <meta property="og:description" content="Calculate your DPS maturity amount, total deposits, and interest earned instantly.">
   <meta property="og:url" content="https://emimaster.com/dps.html">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="DPS Calculator | EMIMaster">
-  <meta name="twitter:description" content="Deposit Pension Scheme maturity calculator.">
-
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "EMIMaster DPS Calculator",
+    "name": "EMI Master DPS Calculator",
     "url": "https://emimaster.com/dps.html",
     "description": "Free DPS (Deposit Pension Scheme) maturity calculator with monthly growth schedule.",
     "applicationCategory": "FinanceApplication",
@@ -50,86 +45,63 @@
           "@type": "Answer",
           "text": "The maturity amount is the future value of your monthly deposits. Interest is typically compounded monthly, so each month's deposit grows with monthly interest until maturity."
         }
-      },
-      {
-        "@type": "Question",
-        "name": "What happens if I miss a monthly DPS installment?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Most banks charge a penalty for missed installments and some may close the scheme if too many installments are missed. Check your bank's DPS rules for penalties and grace periods."
-        }
       }
     ]
   }
   </script>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
 </head>
 <body>
 
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="index.html" class="logo" aria-label="EMIMaster home">
-        <span class="logo-mark">₹</span>
-        <span>EMI<em>Master</em></span>
-      </a>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
-      <nav class="site-nav" id="siteNav" aria-label="Main navigation">
-        <ul>
-          <li><a href="index.html">Loan Calculator</a></li>
-          <li><a href="home-loan.html">Home Loan</a></li>
-          <li><a href="car-loan.html">Car Loan</a></li>
-          <li><a href="personal-loan.html">Personal Loan</a></li>
-          <li><a href="loan-payoff.html">Loan Payoff</a></li>
-          <li><a href="dps.html" class="active">DPS</a></li>
-          <li><a href="fdr.html">FDR</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+<div id="siteHeader"></div>
 
-  <section class="hero">
-    <div class="container">
-      <h1>DPS <span class="grad">Calculator</span></h1>
-      <p>Find out how much your Deposit Pension Scheme will be worth at maturity — monthly deposits, interest, and full growth schedule included.</p>
-      <div class="hero-badges">
-        <span>✓ 100% Free</span>
-        <span>✓ Monthly Growth Schedule</span>
-        <span>✓ Maturity Amount</span>
-      </div>
-    </div>
-  </section>
+<section class="hero hero-compact">
+  <div class="container">
+    <h1>DPS Calculator</h1>
+    <p>Find out how much your Deposit Pension Scheme will be worth at maturity.</p>
+  </div>
+</section>
 
-  <main class="container">
+<div class="layout">
+  <div id="siteSidebar"></div>
 
-    <section class="calculator-grid">
-      <div class="card card-pad">
-        <h2>DPS Details</h2>
-        <p class="card-sub">Adjust values to see your maturity amount instantly.</p>
+  <main class="main-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; DPS Calculator</div>
+    <h1 class="page-title">DPS (Deposit Pension Scheme) Calculator</h1>
+    <p class="page-subtitle">See your maturity amount, total deposits and interest earned.</p>
 
-        <div class="field">
+    <div class="card">
+      <h2>DPS Details</h2>
+      <div class="form-grid">
+        <div class="form-group">
           <label for="amount">Monthly Deposit (₹)</label>
-          <input type="number" id="amount" value="5000" min="0" step="100">
+          <div class="input-wrap">
+            <span class="prefix">₹</span>
+            <input type="number" id="amount" value="5000" min="0" step="100">
+          </div>
           <input type="range" id="amountRange" min="100" max="100000" step="100" value="5000">
         </div>
 
-        <div class="field">
+        <div class="form-group">
           <label for="rate">Interest Rate (% per annum)</label>
-          <input type="number" id="rate" value="6" min="0" max="20" step="0.1">
+          <div class="input-wrap">
+            <span class="suffix">%</span>
+            <input type="number" id="rate" value="6" min="0" max="20" step="0.1">
+          </div>
           <input type="range" id="rateRange" min="0.5" max="20" step="0.1" value="6">
         </div>
 
-        <div class="field">
+        <div class="form-group">
           <label for="term">Tenure (years)</label>
-          <input type="number" id="term" value="10" min="1" max="20" step="1">
+          <div class="input-wrap">
+            <span class="suffix">yrs</span>
+            <input type="number" id="term" value="10" min="1" max="20" step="1">
+          </div>
           <input type="range" id="termRange" min="1" max="20" step="1" value="10">
         </div>
 
-        <div class="field">
+        <div class="form-group">
           <label for="compound">Compound</label>
           <select id="compound">
             <option value="monthly" selected>Monthly</option>
@@ -140,144 +112,74 @@
           </select>
         </div>
       </div>
-
-      <aside class="results" aria-live="polite">
-        <div class="label" id="paymentLabel">Maturity Amount</div>
-        <div class="big" id="paymentOut">—</div>
-
-        <div class="stats">
-          <div class="stat"><span class="k">Total Deposited</span><span class="v" id="loanAmountOut">—</span></div>
-          <div class="stat"><span class="k">Total Interest</span><span class="v" id="totalInterestOut">—</span></div>
-          <div class="stat"><span class="k">Return (Interest %)</span><span class="v green" id="totalPaymentOut">—</span></div>
-        </div>
-
-        <div class="breakdown">
-          <div class="label">Deposits vs Interest</div>
-          <div class="bar">
-            <div class="principal-bar" id="principalBar"></div>
-            <div class="interest-bar" id="interestBar"></div>
-          </div>
-          <div class="legend">
-            <span class="legend-item"><span class="dot principal"></span> Deposits: <strong id="legendPrincipal">—</strong></span>
-            <span class="legend-item"><span class="dot interest"></span> Interest: <strong id="legendInterest">—</strong></span>
-          </div>
-        </div>
-      </aside>
-    </section>
-
-    <div class="ad-slot" aria-hidden="true">Advertisement — replace this block with your Google AdSense code</div>
-
-    <section class="section">
-      <div class="section-head" style="display:flex; justify-content:space-between; align-items:flex-end; gap:16px; flex-wrap:wrap;">
-        <div>
-          <h2>DPS Growth Schedule</h2>
-          <p>See how your savings grow month by month. <span id="scheduleCount" style="color:var(--primary); font-weight:600;"></span></p>
-        </div>
-        <button class="btn btn-primary" id="downloadCsv" type="button">⬇ Download CSV</button>
+      <div class="form-actions">
+        <button class="btn btn-primary" id="calculateBtn" type="button">Calculate</button>
+        <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
       </div>
+    </div>
+
+    <div class="result-panel" id="resultPanel">
+      <h3 id="resultLabel">Maturity Amount</h3>
+      <div class="result-main" id="resultMain">—</div>
+      <div class="result-grid">
+        <div class="result-item"><div class="label">Total Deposited</div><div class="value" id="loanAmountOut">—</div></div>
+        <div class="result-item"><div class="label">Total Interest</div><div class="value positive" id="totalInterestOut">—</div></div>
+        <div class="result-item"><div class="label">Return (Interest %)</div><div class="value positive" id="totalPaymentOut">—</div></div>
+      </div>
+      <div class="result-actions">
+        <button id="downloadCsv" type="button">&#11015; Download CSV</button>
+      </div>
+    </div>
+
+    <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
+
+    <div class="card">
+      <h2>DPS Growth Schedule</h2>
+      <p>See how your savings grow month by month. <span id="scheduleCount" style="font-weight:700;color:var(--primary);"></span></p>
       <div class="table-wrap">
-        <table class="schedule">
+        <table>
           <thead>
             <tr>
               <th>Month</th>
-              <th>Deposit</th>
-              <th>Interest</th>
-              <th>Balance</th>
+              <th class="num">Deposit</th>
+              <th class="num">Interest</th>
+              <th class="num">Balance</th>
             </tr>
           </thead>
           <tbody id="savingsBody"></tbody>
           <tfoot id="savingsFoot"></tfoot>
         </table>
       </div>
-    </section>
-
-    <div class="ad-slot" aria-hidden="true">Advertisement — replace this block with your Google AdSense code</div>
-
-    <section class="section">
-      <h2>Explore More Calculators</h2>
-      <p>Other free calculators to help you plan your finances.</p>
-      <div class="related-grid">
-        <a href="fdr.html" class="related-card">
-          <div class="icon">🏦</div>
-          <h3>FDR Calculator</h3>
-          <p>Fixed Deposit maturity amount with compounding options.</p>
-        </a>
-        <a href="index.html" class="related-card">
-          <div class="icon">🧮</div>
-          <h3>EMI Calculator</h3>
-          <p>General loan EMI with extra payment options and full schedule.</p>
-        </a>
-        <a href="home-loan.html" class="related-card">
-          <div class="icon">🏠</div>
-          <h3>Home Loan Calculator</h3>
-          <p>Include property tax, insurance, PMI, and HOA fees.</p>
-        </a>
-        <a href="personal-loan.html" class="related-card">
-          <div class="icon">💳</div>
-          <h3>Personal Loan Calculator</h3>
-          <p>See the effect of origination fees and extra payments.</p>
-        </a>
-      </div>
-    </section>
-
-    <section class="section faq">
-      <h2>DPS Calculator FAQ</h2>
-      <details open>
-        <summary>What is DPS (Deposit Pension Scheme)?</summary>
-        <div class="answer">DPS is a long-term savings scheme offered by banks where you deposit a fixed amount every month for a fixed tenure (typically 5 or 10 years). At maturity you receive a lump sum including interest.</div>
-      </details>
-      <details>
-        <summary>How does the DPS maturity amount grow?</summary>
-        <div class="answer">Your monthly deposit earns interest every month, and that interest is added to your balance and starts earning interest too. This compounding effect is what makes DPS grow faster than simply adding up deposits.</div>
-      </details>
-      <details>
-        <summary>Can I withdraw from DPS before maturity?</summary>
-        <div class="answer">Most banks allow premature closure but pay a reduced interest rate and may charge a penalty. Some allow loans against the DPS balance. Check your bank's terms before withdrawing early.</div>
-      </details>
-      <details>
-        <summary>What DPS interest rate should I expect?</summary>
-        <div class="answer">DPS interest rates are set by each bank and change periodically. Rates are typically slightly higher than savings accounts and often higher than FDR rates for similar tenures.</div>
-      </details>
-    </section>
-
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          <h4>EMIMaster</h4>
-          <p>Free, accurate financial calculators to help you plan your loans and savings. Built for everyone.</p>
-        </div>
-        <div>
-          <h4>Calculators</h4>
-          <a href="index.html">Loan / EMI Calculator</a>
-          <a href="home-loan.html">Home Loan Calculator</a>
-          <a href="car-loan.html">Car Loan Calculator</a>
-          <a href="personal-loan.html">Personal Loan Calculator</a>
-          <a href="loan-payoff.html">Loan Payoff Calculator</a>
-          <a href="dps.html">DPS Calculator</a>
-          <a href="fdr.html">FDR Calculator</a>
-        </div>
-        <div>
-          <h4>Legal</h4>
-          <a href="privacy-policy.html">Privacy Policy</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <span>© 2026 EMIMaster. All rights reserved.</span>
-        <span>Made with ❤ for smarter saving</span>
-      </div>
-      <p class="disclaimer">Disclaimer: All calculators on EMIMaster are provided for informational and educational purposes only. Results are estimates and do not constitute financial, legal, or investment advice. Please consult a qualified financial professional before making any investment decisions.</p>
     </div>
-  </footer>
 
-  <script>
-    window.calcConfig = {
-      type: 'dps',
-      defaults: { amount: 5000, rate: 6, term: 10 }
-    };
-  </script>
-  <script src="script.js"></script>
+    <div class="content-section">
+      <h2>How does the DPS maturity amount grow?</h2>
+      <p>Your monthly deposit earns interest every month, and that interest is added to your balance and starts earning interest too. This compounding effect is what makes DPS grow faster than simply adding up deposits.</p>
+    </div>
+
+    <div class="content-section">
+      <h2>DPS Calculator FAQ</h2>
+      <div class="faq-item">
+        <div class="faq-q">What is DPS (Deposit Pension Scheme)?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">DPS is a long-term savings scheme offered by banks where you deposit a fixed amount every month for a fixed tenure (typically 5 or 10 years). At maturity you receive a lump sum including interest.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Can I withdraw from DPS before maturity?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">Most banks allow premature closure but pay a reduced interest rate and may charge a penalty. Some allow loans against the DPS balance. Check your bank's terms before withdrawing early.</div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div id="siteFooter"></div>
+
+<script>
+  window.calcConfig = {
+    type: 'dps',
+    defaults: { amount: 5000, rate: 6, term: 10 }
+  };
+</script>
+<script src="js/common.js"></script>
+<script src="js/emi.js"></script>
 </body>
 </html>

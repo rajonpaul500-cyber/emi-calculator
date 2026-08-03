@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rent Calculator - How Much Rent Can I Afford? | EMI Master</title>
+  <meta name="description" content="Calculate how much rent you can afford with the 30% rule, and see your annual rent cost. Free rent affordability calculator.">
+  <meta name="keywords" content="rent calculator, rent affordability calculator, how much rent can I afford, 30 percent rule rent">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://emimaster.com/rent-calculator.html">
+  <meta property="og:title" content="Rent Calculator | EMI Master">
+  <meta property="og:description" content="How much rent can you afford? Check with the 30% rule.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://emimaster.com/rent-calculator.html">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "EMI Master Rent Calculator",
+    "url": "https://emimaster.com/rent-calculator.html",
+    "description": "Free rent affordability calculator using the 30% rule, with annual rent cost breakdown.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the 30% rent rule?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The 30% rule suggests you should not spend more than 30% of your gross monthly income on rent. Staying within this limit helps keep room in your budget for other expenses and savings."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much rent can I afford?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Multiply your gross monthly income by 0.30. For example, with a monthly income of Rs 80,000, your affordable rent is up to Rs 24,000 per month."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+
+<div id="siteHeader"></div>
+
+<section class="hero hero-compact">
+  <div class="container">
+    <h1>Rent Calculator</h1>
+    <p>Check your rent budget and annual housing cost in seconds.</p>
+  </div>
+</section>
+
+<div class="layout">
+  <div id="siteSidebar"></div>
+
+  <main class="main-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Rent Calculator</div>
+    <h1 class="page-title">Rent Affordability Calculator</h1>
+    <p class="page-subtitle">See if your rent fits within the recommended 30% budget.</p>
+
+    <div class="card">
+      <h2>Your Rent Details</h2>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="rent">Monthly Rent (₹)</label>
+          <div class="input-wrap">
+            <span class="prefix">₹</span>
+            <input type="number" id="rent" value="20000" min="0" step="500">
+          </div>
+          <input type="range" id="rentRange" min="1000" max="200000" step="500" value="20000">
+        </div>
+
+        <div class="form-group">
+          <label for="income">Monthly Income (₹)</label>
+          <div class="input-wrap">
+            <span class="prefix">₹</span>
+            <input type="number" id="income" value="80000" min="0" step="5000">
+          </div>
+          <input type="range" id="incomeRange" min="10000" max="1000000" step="5000" value="80000">
+        </div>
+
+        <div class="form-group">
+          <label for="utilities">Monthly Utilities (₹)</label>
+          <div class="input-wrap">
+            <span class="prefix">₹</span>
+            <input type="number" id="utilities" value="3000" min="0" step="500">
+          </div>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary" id="calculateBtn" type="button">Calculate</button>
+        <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
+      </div>
+    </div>
+
+    <div class="result-panel" id="resultPanel">
+      <h3 id="resultLabel">Affordable Max Rent (30% rule)</h3>
+      <div class="result-main" id="resultMain">—</div>
+      <div class="result-grid">
+        <div class="result-item"><div class="label">Your Rent + Utilities</div><div class="value" id="rRent">—</div></div>
+        <div class="result-item"><div class="label">Annual Housing Cost</div><div class="value" id="rAnnual">—</div></div>
+        <div class="result-item"><div class="label">% of Monthly Income</div><div class="value" id="rPct">—</div></div>
+        <div class="result-item"><div class="label">Budget Check</div><div class="value positive" id="rVerdict">—</div></div>
+      </div>
+    </div>
+
+    <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
+
+    <div class="content-section">
+      <h2>What is the 30% rent rule?</h2>
+      <p>The 30% rule is a widely used budgeting guideline: keep your housing costs at or below 30% of your gross monthly income. It leaves room for food, transport, savings and unexpected expenses. In expensive cities you may need to go higher, but the smaller the percentage, the more comfortable your budget.</p>
+    </div>
+
+    <div class="content-section">
+      <h2>Rent Calculator FAQ</h2>
+      <div class="faq-item">
+        <div class="faq-q">Should I include utilities in my rent budget?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">Yes. Electricity, water, gas and internet add up quickly. This calculator adds utilities to your rent so you see your true housing cost each month.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Is the 30% rule always accurate?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">It is a guideline, not a law. High-income earners can often afford a higher percentage, while lower-income households may need to keep it well below 30% to make ends meet.</div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div id="siteFooter"></div>
+
+<script>
+  window.calcConfig = {
+    type: 'rent',
+    defaults: { rent: 20000, income: 80000, utilities: 3000 }
+  };
+</script>
+<script src="js/common.js"></script>
+<script src="js/mortgage.js"></script>
+</body>
+</html>

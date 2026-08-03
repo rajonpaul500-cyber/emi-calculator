@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VA Mortgage Calculator - No PMI, Funding Fee Included | EMI Master</title>
+  <meta name="description" content="Calculate your VA mortgage payment with the VA funding fee, no PMI. Free VA loan calculator for eligible veterans and service members.">
+  <meta name="keywords" content="VA loan calculator, VA mortgage calculator, VA funding fee, VA home loan, veterans home loan">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://emimaster.com/va-loan.html">
+  <meta property="og:title" content="VA Mortgage Calculator | EMI Master">
+  <meta property="og:description" content="VA mortgage payment calculator with funding fee and no PMI.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://emimaster.com/va-loan.html">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "EMI Master VA Mortgage Calculator",
+    "url": "https://emimaster.com/va-loan.html",
+    "description": "Free VA loan calculator including the VA funding fee, with no private mortgage insurance.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the VA funding fee?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The VA funding fee is a one-time charge on VA loans, typically 1.4% to 3.3% of the loan depending on your down payment and whether it is your first use. It can be financed into the loan."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do VA loans require PMI?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. VA loans do not require private mortgage insurance, which is one of their biggest advantages. There is no monthly insurance premium either."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+
+<div id="siteHeader"></div>
+
+<section class="hero hero-compact">
+  <div class="container">
+    <h1>VA Mortgage Calculator</h1>
+    <p>Plan your VA home loan &mdash; no PMI, just the funding fee.</p>
+  </div>
+</section>
+
+<div class="layout">
+  <div id="siteSidebar"></div>
+
+  <main class="main-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; VA Mortgage Calculator</div>
+    <h1 class="page-title">VA Mortgage Calculator</h1>
+    <p class="page-subtitle">For eligible veterans, service members and surviving spouses.</p>
+
+    <div class="card">
+      <h2>VA Loan Details</h2>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="price">Home Price (₹)</label>
+          <div class="input-wrap">
+            <span class="prefix">₹</span>
+            <input type="number" id="price" value="3000000" min="0" step="100000">
+          </div>
+          <input type="range" id="priceRange" min="100000" max="20000000" step="100000" value="3000000">
+        </div>
+
+        <div class="form-group">
+          <label for="downPct">Down Payment (%)</label>
+          <div class="input-wrap">
+            <span class="suffix">%</span>
+            <input type="number" id="downPct" value="0" min="0" max="100" step="1">
+          </div>
+          <p style="font-size:0.8rem;color:var(--text-muted);">VA loans allow 0% down</p>
+        </div>
+
+        <div class="form-group">
+          <label for="rate">Interest Rate (% p.a.)</label>
+          <div class="input-wrap">
+            <span class="suffix">%</span>
+            <input type="number" id="rate" value="6.25" min="0" max="30" step="0.1">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="term">Loan Term (years)</label>
+          <div class="input-wrap">
+            <span class="suffix">yrs</span>
+            <input type="number" id="term" value="30" min="1" max="30" step="1">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="fundPct">Funding Fee (%)</label>
+          <div class="input-wrap">
+            <span class="suffix">%</span>
+            <input type="number" id="fundPct" value="2.3" min="0" max="10" step="0.1">
+          </div>
+          <p style="font-size:0.8rem;color:var(--text-muted);">First use, 0% down = 2.3%</p>
+        </div>
+
+        <div class="form-group">
+          <label for="taxPct">Property Tax (% of price / yr)</label>
+          <div class="input-wrap">
+            <span class="suffix">%</span>
+            <input type="number" id="taxPct" value="1" min="0" max="10" step="0.1">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="insPct">Home Insurance (% of price / yr)</label>
+          <div class="input-wrap">
+            <span class="suffix">%</span>
+            <input type="number" id="insPct" value="0.3" min="0" max="5" step="0.1">
+          </div>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary" id="calculateBtn" type="button">Calculate</button>
+        <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
+      </div>
+    </div>
+
+    <div class="result-panel" id="resultPanel">
+      <h3 id="resultLabel">Total Monthly Payment</h3>
+      <div class="result-main" id="resultMain">—</div>
+      <div class="result-grid">
+        <div class="result-item"><div class="label">Total Loan Amount</div><div class="value" id="rLoan">—</div></div>
+        <div class="result-item"><div class="label">Funding Fee</div><div class="value negative" id="rFund">—</div></div>
+        <div class="result-item"><div class="label">Total Interest</div><div class="value negative" id="rInt">—</div></div>
+      </div>
+    </div>
+
+    <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
+
+    <div class="content-section">
+      <h2>VA loan advantages</h2>
+      <ul>
+        <li><strong>No down payment</strong> &mdash; most VA loans require 0% down.</li>
+        <li><strong>No PMI</strong> &mdash; VA loans never carry private mortgage insurance.</li>
+        <li><strong>Funding fee</strong> &mdash; a one-time fee (1.4%&ndash;3.3%) that can be financed into the loan; it is waived for disabled veterans.</li>
+      </ul>
+    </div>
+
+    <div class="content-section">
+      <h2>VA Mortgage FAQ</h2>
+      <div class="faq-item">
+        <div class="faq-q">Who can get a VA loan?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">Active duty service members, veterans, National Guard and Reserve members, and some surviving spouses who meet service requirements are eligible for VA-backed home loans.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Can the VA funding fee be waived?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">Yes &mdash; the funding fee is waived for veterans receiving VA disability compensation and for surviving spouses of veterans who died in service or from a service-connected disability.</div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div id="siteFooter"></div>
+
+<script>
+  window.calcConfig = {
+    type: 'va',
+    defaults: { price: 3000000, downPct: 0, rate: 6.25, term: 30, fundPct: 2.3, taxPct: 1, insPct: 0.3 }
+  };
+</script>
+<script src="js/common.js"></script>
+<script src="js/mortgage.js"></script>
+</body>
+</html>

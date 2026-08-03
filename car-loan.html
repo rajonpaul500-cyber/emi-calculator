@@ -1,30 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Car Loan EMI Calculator – Down Payment, Trade-in &amp; Tax | EMIMaster</title>
-  <meta name="description" content="Calculate your car loan EMI including down payment, trade-in value, sales tax, and fees with EMIMaster's free car loan calculator. Instant monthly payment and amortization schedule.">
+  <title>Car Loan EMI Calculator - Down Payment, Trade-in &amp; Tax | EMI Master</title>
+  <meta name="description" content="Calculate your car loan EMI including down payment, trade-in value, sales tax and fees. Free car loan calculator with monthly payment and amortization schedule.">
   <meta name="keywords" content="car loan calculator, auto loan calculator, car EMI calculator, vehicle loan, monthly car payment">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://emimaster.com/car-loan.html">
-
+  <meta property="og:title" content="Car Loan EMI Calculator | EMI Master">
+  <meta property="og:description" content="Car loan EMI calculator with down payment, trade-in, sales tax and fees.">
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="EMIMaster">
-  <meta property="og:title" content="Car Loan EMI Calculator | EMIMaster">
-  <meta property="og:description" content="Car loan EMI calculator with down payment, trade-in, sales tax, and fees.">
   <meta property="og:url" content="https://emimaster.com/car-loan.html">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Car Loan EMI Calculator | EMIMaster">
-  <meta name="twitter:description" content="Monthly car payment calculator with trade-in and tax.">
-
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "EMIMaster Car Loan Calculator",
+    "name": "EMI Master Car Loan Calculator",
     "url": "https://emimaster.com/car-loan.html",
-    "description": "Free car loan EMI calculator including down payment, trade-in, sales tax, and fees.",
+    "description": "Free car loan EMI calculator including down payment, trade-in, sales tax and fees.",
     "applicationCategory": "FinanceApplication",
     "operatingSystem": "Any",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
@@ -40,7 +35,7 @@
         "name": "How is a car loan EMI calculated?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "First, the loan amount is calculated: car price minus down payment and trade-in value, plus sales tax and fees. Then the standard EMI formula is applied using the loan amount, interest rate, and tenure."
+          "text": "First, the loan amount is calculated: car price minus down payment and trade-in value, plus sales tax and fees. Then the standard EMI formula is applied using the loan amount, interest rate and tenure."
         }
       },
       {
@@ -48,103 +43,97 @@
         "name": "How can I lower my car loan payment?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "You can lower your monthly payment by increasing your down payment, negotiating a lower interest rate, choosing a longer tenure, or trading in a vehicle with higher value."
+          "text": "Increase your down payment, negotiate a lower interest rate, choose a longer tenure, or trade in a vehicle with higher value."
         }
       }
     ]
   }
   </script>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
 </head>
 <body>
 
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="index.html" class="logo" aria-label="EMIMaster home">
-        <span class="logo-mark">₹</span>
-        <span>EMI<em>Master</em></span>
-      </a>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
-      <nav class="site-nav" id="siteNav" aria-label="Main navigation">
-        <ul>
-          <li><a href="index.html">Loan Calculator</a></li>
-          <li><a href="home-loan.html">Home Loan</a></li>
-          <li><a href="car-loan.html" class="active">Car Loan</a></li>
-          <li><a href="personal-loan.html">Personal Loan</a></li>
-          <li><a href="loan-payoff.html">Loan Payoff</a></li>
-          <li><a href="dps.html">DPS</a></li>
-          <li><a href="fdr.html">FDR</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+<div id="siteHeader"></div>
 
-  <section class="hero">
-    <div class="container">
-      <h1>Car Loan <span class="grad">EMI Calculator</span></h1>
-      <p>See exactly what your new car will cost per month — down payment, trade-in, sales tax, and fees all included.</p>
-      <div class="hero-badges">
-        <span>✓ 100% Free</span>
-        <span>✓ Trade-in Support</span>
-        <span>✓ Amortization Schedule</span>
-      </div>
-    </div>
-  </section>
+<section class="hero hero-compact">
+  <div class="container">
+    <h1>Car Loan EMI Calculator</h1>
+    <p>See exactly what your new car will cost per month &mdash; trade-in and tax included.</p>
+  </div>
+</section>
 
-  <main class="container">
+<div class="layout">
+  <div id="siteSidebar"></div>
 
-    <section class="calculator-grid">
-      <div class="card card-pad">
-        <h2>Car Loan Details</h2>
-        <p class="card-sub">Enter the price and any amount you pay upfront.</p>
+  <main class="main-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Car Loan Calculator</div>
+    <h1 class="page-title">Car Loan Calculator</h1>
+    <p class="page-subtitle">Enter the price and any amount you pay upfront.</p>
 
-        <div class="field">
+    <div class="card">
+      <h2>Car Loan Details</h2>
+      <div class="form-grid">
+        <div class="form-group">
           <label for="amount">Car Price (₹)</label>
-          <input type="number" id="amount" value="1000000" min="0" step="10000">
+          <div class="input-wrap">
+            <span class="prefix">₹</span>
+            <input type="number" id="amount" value="1000000" min="0" step="10000">
+          </div>
           <input type="range" id="amountRange" min="50000" max="5000000" step="10000" value="1000000">
         </div>
 
-        <div class="field-row">
-          <div class="field">
-            <label for="downPayment">Down Payment (₹)</label>
+        <div class="form-group">
+          <label for="downPayment">Down Payment (₹)</label>
+          <div class="input-wrap">
+            <span class="prefix">₹</span>
             <input type="number" id="downPayment" value="200000" min="0" step="10000">
           </div>
-          <div class="field">
-            <label for="tradeIn">Trade-in Value (₹)</label>
+        </div>
+
+        <div class="form-group">
+          <label for="tradeIn">Trade-in Value (₹)</label>
+          <div class="input-wrap">
+            <span class="prefix">₹</span>
             <input type="number" id="tradeIn" value="0" min="0" step="10000">
           </div>
         </div>
-        <div class="field-row">
-          <div class="field">
-            <label for="salesTax">Sales Tax (%)</label>
+
+        <div class="form-group">
+          <label for="salesTax">Sales Tax (%)</label>
+          <div class="input-wrap">
+            <span class="suffix">%</span>
             <input type="number" id="salesTax" value="10" min="0" max="50" step="0.5">
           </div>
-          <div class="field">
-            <label for="fees">Other Fees (₹)</label>
+        </div>
+
+        <div class="form-group">
+          <label for="fees">Other Fees (₹)</label>
+          <div class="input-wrap">
+            <span class="prefix">₹</span>
             <input type="number" id="fees" value="10000" min="0" step="1000">
           </div>
         </div>
 
-        <h2 style="margin-top: 22px;">Loan Terms</h2>
-
-        <div class="field">
+        <div class="form-group">
           <label for="rate">Interest Rate (% per annum)</label>
-          <input type="number" id="rate" value="9" min="0" max="30" step="0.1">
+          <div class="input-wrap">
+            <span class="suffix">%</span>
+            <input type="number" id="rate" value="9" min="0" max="30" step="0.1">
+          </div>
           <input type="range" id="rateRange" min="0.5" max="30" step="0.1" value="9">
         </div>
 
-        <div class="field">
+        <div class="form-group">
           <label for="term">Loan Tenure (years)</label>
-          <input type="number" id="term" value="5" min="1" max="10" step="1">
+          <div class="input-wrap">
+            <span class="suffix">yrs</span>
+            <input type="number" id="term" value="5" min="1" max="10" step="1">
+          </div>
           <input type="range" id="termRange" min="1" max="10" step="1" value="5">
         </div>
 
-        <div class="field">
+        <div class="form-group">
           <label for="compound">Compound</label>
           <select id="compound">
             <option value="monthly" selected>Monthly</option>
@@ -155,149 +144,85 @@
           </select>
         </div>
 
-        <div class="field">
+        <div class="form-group">
           <label for="monthlyExtra">Extra Monthly Payment (₹)</label>
-          <input type="number" id="monthlyExtra" value="0" min="0" step="500" placeholder="e.g. 1000">
-        </div>
-      </div>
-
-      <aside class="results" aria-live="polite">
-        <div class="label" id="paymentLabel">Monthly Payment</div>
-        <div class="big" id="paymentOut">—</div>
-
-        <div class="stats">
-          <div class="stat"><span class="k">Loan Amount</span><span class="v" id="loanAmountOut">—</span></div>
-          <div class="stat"><span class="k">Total Payment</span><span class="v" id="totalPaymentOut">—</span></div>
-          <div class="stat"><span class="k">Total Interest</span><span class="v orange" id="totalInterestOut">—</span></div>
-        </div>
-
-        <div class="breakdown">
-          <div class="label">Principal vs Interest</div>
-          <div class="bar">
-            <div class="principal-bar" id="principalBar"></div>
-            <div class="interest-bar" id="interestBar"></div>
-          </div>
-          <div class="legend">
-            <span class="legend-item"><span class="dot principal"></span> Principal: <strong id="legendPrincipal">—</strong></span>
-            <span class="legend-item"><span class="dot interest"></span> Interest: <strong id="legendInterest">—</strong></span>
+          <div class="input-wrap">
+            <span class="prefix">₹</span>
+            <input type="number" id="monthlyExtra" value="0" min="0" step="500" placeholder="e.g. 1000">
           </div>
         </div>
-
-        <div class="payoff-note" id="payoffNote"></div>
-      </aside>
-    </section>
-
-    <div class="ad-slot" aria-hidden="true">Advertisement — replace this block with your Google AdSense code</div>
-
-    <section class="section">
-      <div class="section-head" style="display:flex; justify-content:space-between; align-items:flex-end; gap:16px; flex-wrap:wrap;">
-        <div>
-          <h2>Car Loan Amortization Schedule</h2>
-          <p>See how each payment reduces your car loan balance. <span id="scheduleCount" style="color:var(--primary); font-weight:600;"></span></p>
-        </div>
-        <button class="btn btn-primary" id="downloadCsv" type="button">⬇ Download CSV</button>
       </div>
+      <div class="form-actions">
+        <button class="btn btn-primary" id="calculateBtn" type="button">Calculate</button>
+        <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
+      </div>
+    </div>
+
+    <div class="result-panel" id="resultPanel">
+      <h3 id="resultLabel">Monthly Payment</h3>
+      <div class="result-main" id="resultMain">—</div>
+      <div class="result-grid">
+        <div class="result-item"><div class="label">Loan Amount</div><div class="value" id="loanAmountOut">—</div></div>
+        <div class="result-item"><div class="label">Total Payment</div><div class="value" id="totalPaymentOut">—</div></div>
+        <div class="result-item"><div class="label">Total Interest</div><div class="value negative" id="totalInterestOut">—</div></div>
+      </div>
+      <div class="payoff-note" id="payoffNote"></div>
+      <div class="result-actions">
+        <button id="downloadCsv" type="button">&#11015; Download CSV</button>
+      </div>
+    </div>
+
+    <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
+
+    <div class="card">
+      <h2>Car Loan Amortization Schedule</h2>
+      <p>See how each payment reduces your car loan balance. <span id="scheduleCount" style="font-weight:700;color:var(--primary);"></span></p>
       <div class="table-wrap">
-        <table class="schedule">
+        <table>
           <thead>
             <tr>
               <th>Month</th>
-              <th>Payment</th>
-              <th>Principal</th>
-              <th>Interest</th>
-              <th>Extra</th>
-              <th>Balance</th>
+              <th class="num">Payment</th>
+              <th class="num">Principal</th>
+              <th class="num">Interest</th>
+              <th class="num">Extra</th>
+              <th class="num">Balance</th>
             </tr>
           </thead>
           <tbody id="scheduleBody"></tbody>
           <tfoot id="scheduleFoot"></tfoot>
         </table>
       </div>
-    </section>
-
-    <div class="ad-slot" aria-hidden="true">Advertisement — replace this block with your Google AdSense code</div>
-
-    <section class="section">
-      <h2>Explore More Calculators</h2>
-      <p>Other free calculators to help you plan your finances.</p>
-      <div class="related-grid">
-        <a href="index.html" class="related-card">
-          <div class="icon">🧮</div>
-          <h3>EMI Calculator</h3>
-          <p>General loan EMI with extra payment options and full schedule.</p>
-        </a>
-        <a href="home-loan.html" class="related-card">
-          <div class="icon">🏠</div>
-          <h3>Home Loan Calculator</h3>
-          <p>Include property tax, insurance, PMI, and HOA fees.</p>
-        </a>
-        <a href="personal-loan.html" class="related-card">
-          <div class="icon">💳</div>
-          <h3>Personal Loan Calculator</h3>
-          <p>See the effect of origination fees and extra payments.</p>
-        </a>
-        <a href="loan-payoff.html" class="related-card">
-          <div class="icon">⏱</div>
-          <h3>Loan Payoff Calculator</h3>
-          <p>How much time and money can extra payments save you?</p>
-        </a>
-      </div>
-    </section>
-
-    <section class="section faq">
-      <h2>Car Loan Calculator FAQ</h2>
-      <details open>
-        <summary>How is my car loan amount calculated?</summary>
-        <div class="answer">Your loan amount equals the car price minus your down payment and trade-in value, plus sales tax and any fees. Entering these values gives you the most accurate monthly payment.</div>
-      </details>
-      <details>
-        <summary>Should I make a larger down payment?</summary>
-        <div class="answer">A larger down payment reduces the loan amount, lowers your monthly EMI, and reduces total interest — but only if you have the cash available without straining your emergency savings.</div>
-      </details>
-      <details>
-        <summary>What is a good car loan tenure?</summary>
-        <div class="answer">A tenure of 3 to 5 years is typical. Longer tenures lower the EMI but cost significantly more in interest over time.</div>
-      </details>
-    </section>
-
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          <h4>EMIMaster</h4>
-          <p>Free, accurate financial calculators to help you plan your loans and save money. Built for everyone.</p>
-        </div>
-        <div>
-          <h4>Calculators</h4>
-          <a href="index.html">Loan / EMI Calculator</a>
-          <a href="home-loan.html">Home Loan Calculator</a>
-          <a href="car-loan.html">Car Loan Calculator</a>
-          <a href="personal-loan.html">Personal Loan Calculator</a>
-          <a href="loan-payoff.html">Loan Payoff Calculator</a>
-          <a href="dps.html">DPS Calculator</a>
-          <a href="fdr.html">FDR Calculator</a>
-        </div>
-        <div>
-          <h4>Legal</h4>
-          <a href="privacy-policy.html">Privacy Policy</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <span>© 2026 EMIMaster. All rights reserved.</span>
-        <span>Made with ❤ for smarter borrowing</span>
-      </div>
-      <p class="disclaimer">Disclaimer: All calculators on EMIMaster are provided for informational and educational purposes only. Results are estimates and do not constitute financial, legal, or investment advice. Please consult a qualified financial professional before making any borrowing decisions.</p>
     </div>
-  </footer>
 
-  <script>
-    window.calcConfig = {
-      type: 'car',
-      defaults: { amount: 1000000, rate: 9, term: 5 }
-    };
-  </script>
-  <script src="script.js"></script>
+    <div class="content-section">
+      <h2>How is my car loan amount calculated?</h2>
+      <p>Your loan amount equals the car price minus your down payment and trade-in value, plus sales tax and any fees. Entering these values gives you the most accurate monthly payment.</p>
+    </div>
+
+    <div class="content-section">
+      <h2>Car Loan Calculator FAQ</h2>
+      <div class="faq-item">
+        <div class="faq-q">Should I make a larger down payment?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">A larger down payment reduces the loan amount, lowers your monthly EMI and reduces total interest &mdash; but only if you have the cash available without straining your emergency savings.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What is a good car loan tenure?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">A tenure of 3 to 5 years is typical. Longer tenures lower the EMI but cost significantly more in interest over time.</div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div id="siteFooter"></div>
+
+<script>
+  window.calcConfig = {
+    type: 'car',
+    defaults: { amount: 1000000, rate: 9, term: 5 }
+  };
+</script>
+<script src="js/common.js"></script>
+<script src="js/emi.js"></script>
 </body>
 </html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Equity Loan Calculator - Fixed-Rate Second Mortgage | EMI Master</title>
+  <meta name="description" content="Calculate your home equity loan monthly payment and total interest. Free fixed-rate home equity loan calculator with full amortization schedule.">
+  <meta name="keywords" content="home equity loan calculator, second mortgage calculator, home equity line calculator, fixed rate equity loan">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://emimaster.com/home-equity-loan.html">
+  <meta property="og:title" content="Home Equity Loan Calculator | EMI Master">
+  <meta property="og:description" content="Home equity loan monthly payment and amortization calculator.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://emimaster.com/home-equity-loan.html">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "EMI Master Home Equity Loan Calculator",
+    "url": "https://emimaster.com/home-equity-loan.html",
+    "description": "Free home equity loan calculator with amortization schedule and extra payment options.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a home equity loan?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A home equity loan is a second mortgage that lets you borrow a lump sum against the equity in your home, typically at a fixed interest rate with a fixed repayment term."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between a home equity loan and a HELOC?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A home equity loan gives you a one-time lump sum at a fixed rate. A HELOC is a revolving line of credit with a variable rate that you can draw from as needed."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+
+<div id="siteHeader"></div>
+
+<section class="hero hero-compact">
+  <div class="container">
+    <h1>Home Equity Loan Calculator</h1>
+    <p>Know your fixed monthly payment before you borrow against your home.</p>
+  </div>
+</section>
+
+<div class="layout">
+  <div id="siteSidebar"></div>
+
+  <main class="main-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Home Equity Loan Calculator</div>
+    <h1 class="page-title">Home Equity Loan Calculator</h1>
+    <p class="page-subtitle">Calculate payments for a fixed-rate second mortgage.</p>
+
+    <div class="card">
+      <h2>Home Equity Loan Details</h2>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="amount">Loan Amount (₹)</label>
+          <div class="input-wrap">
+            <span class="prefix">₹</span>
+            <input type="number" id="amount" value="1000000" min="0" step="50000">
+          </div>
+          <input type="range" id="amountRange" min="50000" max="10000000" step="50000" value="1000000">
+        </div>
+
+        <div class="form-group">
+          <label for="rate">Interest Rate (% per annum)</label>
+          <div class="input-wrap">
+            <span class="suffix">%</span>
+            <input type="number" id="rate" value="9" min="0" max="30" step="0.1">
+          </div>
+          <input type="range" id="rateRange" min="0.5" max="30" step="0.1" value="9">
+        </div>
+
+        <div class="form-group">
+          <label for="term">Repayment Term (years)</label>
+          <div class="input-wrap">
+            <span class="suffix">yrs</span>
+            <input type="number" id="term" value="10" min="1" max="30" step="1">
+          </div>
+          <input type="range" id="termRange" min="1" max="30" step="1" value="10">
+        </div>
+
+        <div class="form-group">
+          <label for="compound">Compound</label>
+          <select id="compound">
+            <option value="monthly" selected>Monthly</option>
+            <option value="quarterly">Quarterly</option>
+            <option value="semi-annually">Semi-annually</option>
+            <option value="annually">Annually</option>
+            <option value="continuous">Continuous</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="monthlyExtra">Extra Monthly Payment (₹)</label>
+          <div class="input-wrap">
+            <span class="prefix">₹</span>
+            <input type="number" id="monthlyExtra" value="0" min="0" step="500" placeholder="e.g. 2000">
+          </div>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary" id="calculateBtn" type="button">Calculate</button>
+        <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
+      </div>
+    </div>
+
+    <div class="result-panel" id="resultPanel">
+      <h3 id="resultLabel">Monthly Payment</h3>
+      <div class="result-main" id="resultMain">—</div>
+      <div class="result-grid">
+        <div class="result-item"><div class="label">Loan Amount</div><div class="value" id="loanAmountOut">—</div></div>
+        <div class="result-item"><div class="label">Total Payment</div><div class="value" id="totalPaymentOut">—</div></div>
+        <div class="result-item"><div class="label">Total Interest</div><div class="value negative" id="totalInterestOut">—</div></div>
+      </div>
+      <div class="payoff-note" id="payoffNote"></div>
+      <div class="result-actions">
+        <button id="downloadCsv" type="button">&#11015; Download CSV</button>
+      </div>
+    </div>
+
+    <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
+
+    <div class="card">
+      <h2>Home Equity Loan Amortization Schedule</h2>
+      <p>Track every payment of your home equity loan. <span id="scheduleCount" style="font-weight:700;color:var(--primary);"></span></p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Month</th>
+              <th class="num">Payment</th>
+              <th class="num">Principal</th>
+              <th class="num">Interest</th>
+              <th class="num">Extra</th>
+              <th class="num">Balance</th>
+            </tr>
+          </thead>
+          <tbody id="scheduleBody"></tbody>
+          <tfoot id="scheduleFoot"></tfoot>
+        </table>
+      </div>
+    </div>
+
+    <div class="content-section">
+      <h2>Home Equity Loan Calculator FAQ</h2>
+      <div class="faq-item">
+        <div class="faq-q">How much home equity can I borrow?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">Lenders typically allow you to borrow up to 80% of your home's value, minus your existing mortgage balance. Your remaining equity backs the loan, which is why rates are usually lower than personal loans.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What happens if I can't repay my home equity loan?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">Your home is the collateral, so failure to repay can lead to foreclosure. Only borrow what you can comfortably afford, and use the extra payment feature here to plan a faster payoff.</div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div id="siteFooter"></div>
+
+<script>
+  window.calcConfig = {
+    type: 'loan',
+    defaults: { amount: 1000000, rate: 9, term: 10 }
+  };
+</script>
+<script src="js/common.js"></script>
+<script src="js/emi.js"></script>
+</body>
+</html>
