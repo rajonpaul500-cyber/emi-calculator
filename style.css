@@ -43,9 +43,10 @@ img {
 }
 
 .container {
-  max-width: 1100px;
+  width: 100%;
+  max-width: 1500px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 24px;
 }
 
 /* ---------- Header ---------- */
@@ -139,17 +140,17 @@ img {
     radial-gradient(700px 400px at 10% 0%, rgba(37, 99, 235, 0.4), transparent 60%),
     linear-gradient(180deg, var(--navy), var(--navy-2));
   color: #fff;
-  padding: 64px 0 56px;
+  padding: 88px 0 76px;
   text-align: center;
 }
 
 .hero h1 {
-  font-size: clamp(1.9rem, 4.5vw, 3rem);
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
   font-weight: 800;
   letter-spacing: -0.03em;
-  line-height: 1.15;
-  max-width: 800px;
-  margin: 0 auto 16px;
+  line-height: 1.12;
+  max-width: 900px;
+  margin: 0 auto 18px;
 }
 
 .hero h1 .grad {
@@ -189,14 +190,21 @@ img {
 /* ---------- Calculator layout ---------- */
 
 main {
-  padding: 40px 0 64px;
+  padding: 48px 0 72px;
 }
 
 .calculator-grid {
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 28px;
-  align-items: start;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 32px;
+  align-items: stretch;
+}
+
+@media (min-width: 1400px) {
+  .calculator-grid {
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: 40px;
+  }
 }
 
 .card {
@@ -207,11 +215,11 @@ main {
 }
 
 .card-pad {
-  padding: 28px;
+  padding: 34px;
 }
 
 .card h2 {
-  font-size: 1.15rem;
+  font-size: 1.25rem;
   font-weight: 700;
   color: var(--navy);
   margin-bottom: 4px;
@@ -237,7 +245,7 @@ main {
   justify-content: space-between;
   align-items: center;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: #1e293b;
   margin-bottom: 8px;
 }
@@ -245,16 +253,16 @@ main {
 .field label .hint {
   font-weight: 400;
   color: var(--muted);
-  font-size: 0.8rem;
+  font-size: 0.82rem;
 }
 
 .field input[type="number"],
 .field select {
   width: 100%;
-  padding: 11px 14px;
+  padding: 13px 16px;
   border: 2px solid var(--border);
   border-radius: 10px;
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-family: inherit;
   color: var(--text);
   background: #fff;
@@ -270,7 +278,8 @@ main {
 
 .field input[type="range"] {
   width: 100%;
-  margin-top: 10px;
+  height: 6px;
+  margin-top: 12px;
   accent-color: var(--primary);
   cursor: pointer;
 }
@@ -278,7 +287,7 @@ main {
 .field-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 14px;
+  gap: 16px;
 }
 
 .field-row .field {
@@ -291,14 +300,17 @@ main {
   background: linear-gradient(160deg, var(--navy), var(--navy-2));
   color: #fff;
   border-radius: var(--radius);
-  padding: 28px;
+  padding: 34px;
   position: sticky;
   top: 84px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   box-shadow: var(--shadow-lg);
 }
 
 .results .label {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: #94a3b8;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -306,10 +318,10 @@ main {
 }
 
 .results .big {
-  font-size: clamp(2rem, 4vw, 2.6rem);
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
   font-weight: 800;
   letter-spacing: -0.02em;
-  margin: 6px 0 4px;
+  margin: 8px 0 6px;
 }
 
 .results .big small {
@@ -472,7 +484,7 @@ main {
 }
 
 .section h2 {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-weight: 800;
   color: var(--navy);
   margin-bottom: 6px;

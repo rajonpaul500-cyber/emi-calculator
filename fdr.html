@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FDR Calculator – Fixed Deposit Maturity Calculator | EMIMaster</title>
+  <meta name="description" content="Calculate your FDR (Fixed Deposit Receipt) maturity amount with EMIMaster's free FDR calculator. Enter deposit amount, interest rate, and tenure to see maturity value and total interest.">
+  <meta name="keywords" content="FDR calculator, fixed deposit calculator, FD calculator, maturity calculator, deposit interest calculator">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://emimaster.com/fdr.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="EMIMaster">
+  <meta property="og:title" content="FDR Calculator – Fixed Deposit | EMIMaster">
+  <meta property="og:description" content="Calculate your FDR maturity amount, total interest, and compounding growth instantly.">
+  <meta property="og:url" content="https://emimaster.com/fdr.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FDR Calculator | EMIMaster">
+  <meta name="twitter:description" content="Fixed deposit maturity calculator.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "EMIMaster FDR Calculator",
+    "url": "https://emimaster.com/fdr.html",
+    "description": "Free FDR (Fixed Deposit Receipt) maturity calculator with compounding growth schedule.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is FDR (Fixed Deposit Receipt)?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "FDR (Fixed Deposit Receipt) is a savings instrument where you deposit a lump sum for a fixed tenure at a fixed interest rate. At maturity you receive your principal plus the accumulated interest."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How is FDR maturity amount calculated?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The maturity amount is calculated using compound interest: A = P x (1 + r/n)^(n x t), where P is the principal, r is the annual rate, n is the compounding frequency, and t is the tenure in years."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between FDR and DPS?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "FDR is a single lump-sum deposit, while DPS is built with fixed monthly deposits. Both earn compound interest, but DPS is suited for building savings gradually, while FDR suits a single amount you do not need immediately."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo" aria-label="EMIMaster home">
+        <span class="logo-mark">₹</span>
+        <span>EMI<em>Master</em></span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+      <nav class="site-nav" id="siteNav" aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html">Loan Calculator</a></li>
+          <li><a href="home-loan.html">Home Loan</a></li>
+          <li><a href="car-loan.html">Car Loan</a></li>
+          <li><a href="personal-loan.html">Personal Loan</a></li>
+          <li><a href="loan-payoff.html">Loan Payoff</a></li>
+          <li><a href="dps.html">DPS</a></li>
+          <li><a href="fdr.html" class="active">FDR</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h1>FDR <span class="grad">Calculator</span></h1>
+      <p>See exactly what your Fixed Deposit will be worth at maturity — principal, compounded interest, and full growth schedule.</p>
+      <div class="hero-badges">
+        <span>✓ 100% Free</span>
+        <span>✓ Compounding Options</span>
+        <span>✓ Maturity Amount</span>
+      </div>
+    </div>
+  </section>
+
+  <main class="container">
+
+    <section class="calculator-grid">
+      <div class="card card-pad">
+        <h2>FDR Details</h2>
+        <p class="card-sub">Adjust values to see your maturity amount instantly.</p>
+
+        <div class="field">
+          <label for="amount">Deposit Amount (₹)</label>
+          <input type="number" id="amount" value="500000" min="0" step="10000">
+          <input type="range" id="amountRange" min="10000" max="10000000" step="10000" value="500000">
+        </div>
+
+        <div class="field">
+          <label for="rate">Interest Rate (% per annum)</label>
+          <input type="number" id="rate" value="7" min="0" max="20" step="0.1">
+          <input type="range" id="rateRange" min="0.5" max="20" step="0.1" value="7">
+        </div>
+
+        <div class="field">
+          <label for="term">Tenure (years)</label>
+          <input type="number" id="term" value="3" min="1" max="20" step="1">
+          <input type="range" id="termRange" min="1" max="20" step="1" value="3">
+        </div>
+
+        <div class="field">
+          <label for="compound">Compound</label>
+          <select id="compound">
+            <option value="monthly" selected>Monthly</option>
+            <option value="quarterly">Quarterly</option>
+            <option value="semi-annually">Semi-annually</option>
+            <option value="annually">Annually</option>
+            <option value="continuous">Continuous</option>
+          </select>
+        </div>
+      </div>
+
+      <aside class="results" aria-live="polite">
+        <div class="label" id="paymentLabel">Maturity Amount</div>
+        <div class="big" id="paymentOut">—</div>
+
+        <div class="stats">
+          <div class="stat"><span class="k">Principal Deposit</span><span class="v" id="loanAmountOut">—</span></div>
+          <div class="stat"><span class="k">Total Interest</span><span class="v" id="totalInterestOut">—</span></div>
+          <div class="stat"><span class="k">Return (Interest %)</span><span class="v green" id="totalPaymentOut">—</span></div>
+        </div>
+
+        <div class="breakdown">
+          <div class="label">Principal vs Interest</div>
+          <div class="bar">
+            <div class="principal-bar" id="principalBar"></div>
+            <div class="interest-bar" id="interestBar"></div>
+          </div>
+          <div class="legend">
+            <span class="legend-item"><span class="dot principal"></span> Principal: <strong id="legendPrincipal">—</strong></span>
+            <span class="legend-item"><span class="dot interest"></span> Interest: <strong id="legendInterest">—</strong></span>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <div class="ad-slot" aria-hidden="true">Advertisement — replace this block with your Google AdSense code</div>
+
+    <section class="section">
+      <div class="section-head" style="display:flex; justify-content:space-between; align-items:flex-end; gap:16px; flex-wrap:wrap;">
+        <div>
+          <h2>FDR Growth Schedule</h2>
+          <p>See how your deposit grows with compounding interest. <span id="scheduleCount" style="color:var(--primary); font-weight:600;"></span></p>
+        </div>
+        <button class="btn btn-primary" id="downloadCsv" type="button">⬇ Download CSV</button>
+      </div>
+      <div class="table-wrap">
+        <table class="schedule">
+          <thead>
+            <tr>
+              <th>Month</th>
+              <th>Deposit</th>
+              <th>Interest</th>
+              <th>Balance</th>
+            </tr>
+          </thead>
+          <tbody id="savingsBody"></tbody>
+          <tfoot id="savingsFoot"></tfoot>
+        </table>
+      </div>
+    </section>
+
+    <div class="ad-slot" aria-hidden="true">Advertisement — replace this block with your Google AdSense code</div>
+
+    <section class="section">
+      <h2>Explore More Calculators</h2>
+      <p>Other free calculators to help you plan your finances.</p>
+      <div class="related-grid">
+        <a href="dps.html" class="related-card">
+          <div class="icon">💼</div>
+          <h3>DPS Calculator</h3>
+          <p>Deposit Pension Scheme maturity with monthly deposits.</p>
+        </a>
+        <a href="index.html" class="related-card">
+          <div class="icon">🧮</div>
+          <h3>EMI Calculator</h3>
+          <p>General loan EMI with extra payment options and full schedule.</p>
+        </a>
+        <a href="car-loan.html" class="related-card">
+          <div class="icon">🚗</div>
+          <h3>Car Loan Calculator</h3>
+          <p>Account for down payment, trade-in, sales tax, and fees.</p>
+        </a>
+        <a href="loan-payoff.html" class="related-card">
+          <div class="icon">⏱</div>
+          <h3>Loan Payoff Calculator</h3>
+          <p>How much time and money can extra payments save you?</p>
+        </a>
+      </div>
+    </section>
+
+    <section class="section faq">
+      <h2>FDR Calculator FAQ</h2>
+      <details open>
+        <summary>What is FDR (Fixed Deposit Receipt)?</summary>
+        <div class="answer">FDR is a bank savings instrument where you invest a lump sum for a fixed tenure at a fixed interest rate. The bank pays you the principal plus interest at maturity.</div>
+      </details>
+      <details>
+        <summary>How does compounding frequency affect my FDR?</summary>
+        <div class="answer">The more frequently interest is compounded, the more you earn. For the same rate and tenure, monthly compounding gives a higher maturity amount than annual compounding because interest starts earning interest sooner.</div>
+      </details>
+      <details>
+        <summary>Can I break my FDR before maturity?</summary>
+        <div class="answer">Yes, most banks allow premature withdrawal but at a reduced interest rate and possibly a penalty. Avoid breaking early unless necessary, as you lose most of the compounding benefit.</div>
+      </details>
+      <details>
+        <summary>Should I choose FDR or DPS?</summary>
+        <div class="answer">If you have a lump sum, FDR is a good fit. If you want to build savings from your monthly income, DPS is designed for that. Many savers use both for different goals.</div>
+      </details>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>EMIMaster</h4>
+          <p>Free, accurate financial calculators to help you plan your loans and savings. Built for everyone.</p>
+        </div>
+        <div>
+          <h4>Calculators</h4>
+          <a href="index.html">Loan / EMI Calculator</a>
+          <a href="home-loan.html">Home Loan Calculator</a>
+          <a href="car-loan.html">Car Loan Calculator</a>
+          <a href="personal-loan.html">Personal Loan Calculator</a>
+          <a href="loan-payoff.html">Loan Payoff Calculator</a>
+          <a href="dps.html">DPS Calculator</a>
+          <a href="fdr.html">FDR Calculator</a>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <a href="privacy-policy.html">Privacy Policy</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 EMIMaster. All rights reserved.</span>
+        <span>Made with ❤ for smarter saving</span>
+      </div>
+      <p class="disclaimer">Disclaimer: All calculators on EMIMaster are provided for informational and educational purposes only. Results are estimates and do not constitute financial, legal, or investment advice. Please consult a qualified financial professional before making any investment decisions.</p>
+    </div>
+  </footer>
+
+  <script>
+    window.calcConfig = {
+      type: 'fdr',
+      defaults: { amount: 500000, rate: 7, term: 3 }
+    };
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>

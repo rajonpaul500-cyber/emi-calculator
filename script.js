@@ -70,10 +70,12 @@
     return y + ' year' + (y === 1 ? '' : 's') + ' ' + mm + ' months';
   }
 
-  function bindRange(id, rangeId, min, max) {
+  function bindRange(id, rangeId) {
     const input = $(id);
     const range = $(rangeId);
     if (!input || !range) return;
+    const min = parseFloat(range.min) || 0;
+    const max = parseFloat(range.max) || 10000000;
     input.addEventListener('input', () => {
       let v = parseFloat(input.value);
       if (!isNaN(v)) range.value = Math.min(max, Math.max(min, v));
@@ -151,9 +153,145 @@
     }
   }
 
+  function renderSavings(result) {
+    const tbody = $('savingsBody');
+    const tfoot = $('savingsFoot');
+    const count = $('scheduleCount');
+    const downloadBtn = $('downloadCsv');
+    if (!tbody) return;
+
+    const rows = result.sched.rows;
+
+    if (!rows.length) {
+      tbody.innerHTML = '<tr><td colspan="4" class="empty-state">Enter valid deposit details to see the growth schedule.</td></tr>';
+      if (tfoot) tfoot.innerHTML = '';
+      if (count) count.textContent = '';
+      return;
+    }
+
+    tbody.innerHTML = rows.map((row) =>
+      '<tr>' +
+      '<td>' + row.month + '</td>' +
+      '<td>' + (row.deposit > 0 ? fmt(row.deposit) : '—') + '</td>' +
+      '<td>' + fmt(row.interest) + '</td>' +
+      '<td>' + fmt(row.balance) + '</td>' +
+      '</tr>'
+    ).join('');
+
+    if (tfoot) {
+      const totalDeposit = rows.reduce((s, r) => s + r.deposit, 0);
+      const totalInterest = rows.reduce((s, r) => s + r.interest, 0);
+      tfoot.innerHTML =
+        '<tr><td>Total</td>' +
+        '<td>' + fmt(totalDeposit) + '</td>' +
+        '<td>' + fmt(totalInterest) + '</td>' +
+        '<td>' + fmt(rows[rows.length - 1].balance) + '</td></tr>';
+    }
+
+    if (count) {
+      count.textContent = rows.length + ' months';
+    }
+
+    if (downloadBtn) {
+      downloadBtn.onclick = function () {
+        const header = ['Month', 'Deposit', 'Interest', 'Balance'];
+        const csv = [header.join(',')]
+          .concat(rows.map((r) =>
+            [r.month, r.deposit.toFixed(2), r.interest.toFixed(2), r.balance.toFixed(2)].join(',')
+          ))
+          .join('\n');
+        const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'emi-master-savings-schedule.csv';
+        a.click();
+        URL.revokeObjectURL(a.href);
+      };
+    }
+  }
+
+  function updateSavings() {
+    const config = window.calcConfig || { type: 'dps' };
+    const type = config.type || 'dps';
+    const compoundEl = $('compound');
+    const compound = compoundEl ? compoundEl.value : 'monthly';
+
+    const deposit = num('amount');
+    const rate = num('rate');
+    const years = num('term');
+    const n = Math.round(years * 12);
+    const i = periodRate(rate / 100, compound, 'monthly');
+
+    const invalid = !(deposit > 0 && rate >= 0 && years > 0);
+
+    let maturity;
+    let totalDeposited;
+    const rows = [];
+
+    if (type === 'dps') {
+      totalDeposited = deposit * n;
+      if (i === 0) {
+        maturity = totalDeposited;
+      } else {
+        maturity = deposit * ((Math.pow(1 + i, n) - 1) / i) * (1 + i);
+      }
+      let balance = 0;
+      for (let m = 1; m <= n; m++) {
+        balance += deposit;
+        const interest = balance * i;
+        balance += interest;
+        rows.push({ month: m, deposit, interest, balance });
+      }
+    } else {
+      totalDeposited = deposit;
+      if (i === 0) {
+        maturity = deposit;
+      } else {
+        maturity = deposit * Math.pow(1 + i, n);
+      }
+      let balance = deposit;
+      for (let m = 1; m <= n; m++) {
+        const interest = balance * i;
+        balance += interest;
+        rows.push({ month: m, deposit: 0, interest, balance });
+      }
+    }
+
+    const totalInterest = maturity - totalDeposited;
+    const interestPct = totalDeposited > 0 ? (totalInterest / totalDeposited) * 100 : 0;
+
+    const result = { type, maturity, totalDeposited, totalInterest, interestPct, n, sched: { rows } };
+
+    const bigEl = $('paymentOut');
+    const labelEl = $('paymentLabel');
+    if (bigEl) bigEl.textContent = invalid ? '—' : fmt(maturity);
+    if (labelEl) labelEl.textContent = 'Maturity Amount';
+
+    setText('loanAmountOut', invalid ? '—' : fmt(totalDeposited));
+    setText('totalInterestOut', invalid ? '—' : fmt(totalInterest));
+    setText('totalPaymentOut', invalid ? '—' : interestPct.toFixed(2) + '%');
+
+    const pBar = $('principalBar');
+    const iBar = $('interestBar');
+    if (pBar && iBar) {
+      const pct = maturity > 0 ? (totalDeposited / maturity) * 100 : 0;
+      pBar.style.width = pct + '%';
+      iBar.style.width = (100 - pct) + '%';
+      setText('legendPrincipal', invalid ? '—' : fmt(totalDeposited));
+      setText('legendInterest', invalid ? '—' : fmt(totalInterest));
+    }
+
+    renderSavings(result);
+  }
+
   function update() {
     const config = window.calcConfig || { type: 'loan' };
     const type = config.type || 'loan';
+
+    if (type === 'dps' || type === 'fdr') {
+      updateSavings();
+      return;
+    }
 
     const base = num('amount');
     const rate = num('rate');

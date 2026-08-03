@@ -17,6 +17,8 @@ Deploy on **Netlify** by connecting this GitHub repository (see [Netlify guide](
 | `car-loan.html` | Car loan calculator with down payment, trade-in, sales tax, and fees |
 | `personal-loan.html` | Personal loan calculator with origination fee and extra payments |
 | `loan-payoff.html` | Loan payoff comparison — extra payments vs standard payments |
+| `dps.html` | DPS (Deposit Pension Scheme) maturity calculator with monthly growth schedule |
+| `fdr.html` | FDR (Fixed Deposit) maturity calculator with compounding options |
 | `privacy-policy.html` | Privacy policy (required for Google AdSense approval) |
 | `404.html` | Custom 404 page |
 
@@ -25,6 +27,7 @@ Deploy on **Netlify** by connecting this GitHub repository (see [Netlify guide](
 - Live calculation — results update as you type or drag sliders
 - Full amortization schedule with CSV export
 - Extra monthly and one-time payment support
+- DPS and FDR savings calculators with monthly growth schedules
 - Principal vs interest visual breakdown
 - Compound frequency (monthly → continuous) and payback frequency (monthly → weekly)
 - Indian Rupee (₹) formatting
@@ -52,7 +55,7 @@ Then open http://localhost:8080
 
 ## Files
 
-- `index.html`, `home-loan.html`, `car-loan.html`, `personal-loan.html`, `loan-payoff.html`, `privacy-policy.html`, `404.html` — pages
+- `index.html`, `home-loan.html`, `car-loan.html`, `personal-loan.html`, `loan-payoff.html`, `dps.html`, `fdr.html`, `privacy-policy.html`, `404.html` — pages
 - `style.css` — shared styles
 - `script.js` — shared calculation engine (EMI, amortization, CSV)
 - `favicon.svg` — site icon
