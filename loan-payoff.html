@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loan Payoff Calculator – How Much Can Extra Payments Save You? | EMIMaster</title>
+  <meta name="description" content="See how extra monthly or one-time payments shorten your loan term and save interest with EMIMaster's free loan payoff calculator. Compare side by side instantly.">
+  <meta name="keywords" content="loan payoff calculator, extra payment calculator, early payoff, prepayment calculator, interest savings">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://emimaster.com/loan-payoff.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="EMIMaster">
+  <meta property="og:title" content="Loan Payoff Calculator | EMIMaster">
+  <meta property="og:description" content="Compare your loan with and without extra payments. See time and interest saved.">
+  <meta property="og:url" content="https://emimaster.com/loan-payoff.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Loan Payoff Calculator | EMIMaster">
+  <meta name="twitter:description" content="Extra payment savings calculator.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "EMIMaster Loan Payoff Calculator",
+    "url": "https://emimaster.com/loan-payoff.html",
+    "description": "Free loan payoff calculator that shows how extra payments shorten your loan term and save interest.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do extra payments help pay off a loan faster?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Extra payments go directly toward reducing your principal balance. A lower balance means less interest accrues each month, so a larger share of your regular payment also goes toward principal, paying the loan off earlier."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is it better to make extra monthly payments or one-time payments?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Both help. Extra monthly payments provide consistent principal reduction, while large one-time payments (like a bonus) make a big immediate dent. Combining both usually gives the best interest savings."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo" aria-label="EMIMaster home">
+        <span class="logo-mark">₹</span>
+        <span>EMI<em>Master</em></span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+      <nav class="site-nav" id="siteNav" aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html">Loan Calculator</a></li>
+          <li><a href="home-loan.html">Home Loan</a></li>
+          <li><a href="car-loan.html">Car Loan</a></li>
+          <li><a href="personal-loan.html">Personal Loan</a></li>
+          <li><a href="loan-payoff.html" class="active">Loan Payoff</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h1>Loan <span class="grad">Payoff Calculator</span></h1>
+      <p>Find out how much time and money you can save by making extra payments on your loan.</p>
+      <div class="hero-badges">
+        <span>✓ 100% Free</span>
+        <span>✓ Side-by-side Compare</span>
+        <span>✓ Interest Savings</span>
+      </div>
+    </div>
+  </section>
+
+  <main class="container">
+
+    <section class="calculator-grid">
+      <div class="card card-pad">
+        <h2>Your Loan Details</h2>
+        <p class="card-sub">Enter your loan and the extra payments you plan to make.</p>
+
+        <div class="field">
+          <label for="amount">Loan Amount (₹)</label>
+          <input type="number" id="amount" value="500000" min="0" step="10000">
+          <input type="range" id="amountRange" min="10000" max="10000000" step="10000" value="500000">
+        </div>
+
+        <div class="field">
+          <label for="rate">Interest Rate (% per annum)</label>
+          <input type="number" id="rate" value="8.5" min="0" max="30" step="0.1">
+          <input type="range" id="rateRange" min="0.5" max="30" step="0.1" value="8.5">
+        </div>
+
+        <div class="field">
+          <label for="term">Loan Tenure (years)</label>
+          <input type="number" id="term" value="5" min="1" max="30" step="1">
+          <input type="range" id="termRange" min="1" max="30" step="1" value="5">
+        </div>
+
+        <h2 style="margin-top: 22px;">Extra Payments</h2>
+        <p class="card-sub">These are the payments that speed up your payoff.</p>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="monthlyExtra">Extra Monthly Payment (₹)</label>
+            <input type="number" id="monthlyExtra" value="2000" min="0" step="500" placeholder="e.g. 2000">
+          </div>
+          <div class="field">
+            <label for="oneTimeExtra">One-time Payment (₹)</label>
+            <input type="number" id="oneTimeExtra" value="0" min="0" step="10000" placeholder="e.g. 50000">
+          </div>
+        </div>
+        <div class="field">
+          <label for="oneTimeMonth">Apply One-time Payment in Month</label>
+          <input type="number" id="oneTimeMonth" value="1" min="1" step="1">
+        </div>
+      </div>
+
+      <aside class="results" aria-live="polite">
+        <div class="label" id="paymentLabel">Monthly Payment</div>
+        <div class="big" id="paymentOut">—</div>
+
+        <div class="stats">
+          <div class="stat"><span class="k">Loan Amount</span><span class="v" id="loanAmountOut">—</span></div>
+          <div class="stat"><span class="k">Total Payment</span><span class="v" id="totalPaymentOut">—</span></div>
+          <div class="stat"><span class="k">Total Interest</span><span class="v orange" id="totalInterestOut">—</span></div>
+        </div>
+
+        <div class="breakdown">
+          <div class="label">Principal vs Interest</div>
+          <div class="bar">
+            <div class="principal-bar" id="principalBar"></div>
+            <div class="interest-bar" id="interestBar"></div>
+          </div>
+          <div class="legend">
+            <span class="legend-item"><span class="dot principal"></span> Principal: <strong id="legendPrincipal">—</strong></span>
+            <span class="legend-item"><span class="dot interest"></span> Interest: <strong id="legendInterest">—</strong></span>
+          </div>
+        </div>
+
+        <div class="payoff-note" id="payoffNote"></div>
+      </aside>
+    </section>
+
+    <section class="section">
+      <h2>Compare: With vs Without Extra Payments</h2>
+      <p>See exactly what extra payments do for your loan.</p>
+
+      <div class="compare-grid">
+        <div class="compare-card without">
+          <h3>Without Extra Payments</h3>
+          <div class="amount" id="cmpWithoutPayment">—</div>
+          <ul>
+            <li>Payoff time: <strong id="cmpWithoutMonths">—</strong></li>
+            <li>Total interest: <strong id="cmpWithoutInterest">—</strong></li>
+            <li>Total paid: <strong id="cmpWithoutTotal">—</strong></li>
+          </ul>
+        </div>
+        <div class="compare-card with">
+          <h3>With Extra Payments</h3>
+          <div class="amount" id="cmpWithPayment">—</div>
+          <ul>
+            <li>Payoff time: <strong id="cmpWithMonths">—</strong></li>
+            <li>Total interest: <strong id="cmpWithInterest">—</strong></li>
+            <li>Total paid: <strong id="cmpWithTotal">—</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="save-banner" id="saveBanner" style="display:none;">
+        <span id="saveBannerText"></span>
+      </div>
+    </section>
+
+    <div class="ad-slot" aria-hidden="true">Advertisement — replace this block with your Google AdSense code</div>
+
+    <section class="section">
+      <div class="section-head" style="display:flex; justify-content:space-between; align-items:flex-end; gap:16px; flex-wrap:wrap;">
+        <div>
+          <h2>Amortization Schedule</h2>
+          <p>Your payment plan with extra payments applied. <span id="scheduleCount" style="color:var(--primary); font-weight:600;"></span></p>
+        </div>
+        <button class="btn btn-primary" id="downloadCsv" type="button">⬇ Download CSV</button>
+      </div>
+      <div class="table-wrap">
+        <table class="schedule">
+          <thead>
+            <tr>
+              <th>Month</th>
+              <th>Payment</th>
+              <th>Principal</th>
+              <th>Interest</th>
+              <th>Extra</th>
+              <th>Balance</th>
+            </tr>
+          </thead>
+          <tbody id="scheduleBody"></tbody>
+          <tfoot id="scheduleFoot"></tfoot>
+        </table>
+      </div>
+    </section>
+
+    <section class="section faq">
+      <h2>Loan Payoff Calculator FAQ</h2>
+      <details open>
+        <summary>How do extra payments reduce my loan term?</summary>
+        <div class="answer">Every extra rupee you pay reduces your principal directly. With a smaller principal, less interest accrues each month, so more of your regular payment goes to principal — creating a snowball effect that clears the loan sooner.</div>
+      </details>
+      <details>
+        <summary>Are extra payments always worth it?</summary>
+        <div class="answer">Usually yes, because you save interest. But if you have higher-interest debts or a small emergency fund, pay those off or build savings first. Some loans also charge prepayment penalties, so check your loan agreement.</div>
+      </details>
+      <details>
+        <summary>What is the best time to make a one-time payment?</summary>
+        <div class="answer">Earlier is better — the sooner you reduce the principal, the more future interest you avoid. Making it in the first few months of the loan has the biggest impact.</div>
+      </details>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>EMIMaster</h4>
+          <p>Free, accurate financial calculators to help you plan your loans and save money. Built for everyone.</p>
+        </div>
+        <div>
+          <h4>Calculators</h4>
+          <a href="index.html">Loan / EMI Calculator</a>
+          <a href="home-loan.html">Home Loan Calculator</a>
+          <a href="car-loan.html">Car Loan Calculator</a>
+          <a href="personal-loan.html">Personal Loan Calculator</a>
+          <a href="loan-payoff.html">Loan Payoff Calculator</a>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <a href="privacy-policy.html">Privacy Policy</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 EMIMaster. All rights reserved.</span>
+        <span>Made with ❤ for smarter borrowing</span>
+      </div>
+      <p class="disclaimer">Disclaimer: All calculators on EMIMaster are provided for informational and educational purposes only. Results are estimates and do not constitute financial, legal, or investment advice. Please consult a qualified financial professional before making any borrowing decisions.</p>
+    </div>
+  </footer>
+
+  <script>
+    window.calcConfig = {
+      type: 'loan',
+      defaults: { amount: 500000, rate: 8.5, term: 5 }
+    };
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>
