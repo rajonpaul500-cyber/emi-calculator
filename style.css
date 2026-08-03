@@ -1,0 +1,172 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.container {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  padding: 40px;
+  max-width: 720px;
+  width: 100%;
+}
+
+h1 {
+  text-align: center;
+  color: #1e3c72;
+  font-size: 2.2rem;
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  text-align: center;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.calculator {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.inputs {
+  flex: 1;
+  min-width: 260px;
+}
+
+.input-group {
+  margin-bottom: 22px;
+}
+
+.input-group label {
+  display: block;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.input-group input[type="number"] {
+  width: 100%;
+  padding: 10px 12px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-bottom: 10px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input-group input[type="number"]:focus {
+  border-color: #2a5298;
+}
+
+.input-group input[type="range"] {
+  width: 100%;
+  accent-color: #2a5298;
+  cursor: pointer;
+}
+
+.result {
+  flex: 1;
+  min-width: 220px;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.result h2 {
+  font-size: 1rem;
+  font-weight: 400;
+  opacity: 0.85;
+  margin-bottom: 10px;
+}
+
+.emi {
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.total {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  margin-bottom: 4px;
+}
+
+.breakdown {
+  margin-top: 30px;
+}
+
+.breakdown h2 {
+  color: #1e3c72;
+  font-size: 1.1rem;
+  margin-bottom: 14px;
+}
+
+.bar {
+  display: flex;
+  height: 22px;
+  border-radius: 11px;
+  overflow: hidden;
+  background: #eee;
+  margin-bottom: 12px;
+}
+
+.principal-bar {
+  background: #2a5298;
+  width: 50%;
+  transition: width 0.3s;
+}
+
+.interest-bar {
+  background: #e67e22;
+  width: 50%;
+  transition: width 0.3s;
+}
+
+.legend {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.legend-item.principal .dot {
+  background: #2a5298;
+}
+
+.legend-item.interest .dot {
+  background: #e67e22;
+}
