@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pension Calculator - Future Value of Pension | EMI Master</title>
+  <meta name="description" content="Calculate the total pension you will receive over retirement including COLA increases and inflation-adjusted value. Free pension calculator.">
+  <meta name="keywords" content="pension calculator, pension plan calculator, COLA pension, retirement pension value">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://emimaster.com/pension-calculator.html">
+  <meta property="og:title" content="Pension Calculator | EMI Master">
+  <meta property="og:description" content="Total pension received with COLA and inflation.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://emimaster.com/pension-calculator.html">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "EMI Master Pension Calculator",
+    "url": "https://emimaster.com/pension-calculator.html",
+    "description": "Free pension calculator with COLA growth and inflation-adjusted value.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is COLA?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "COLA (Cost of Living Adjustment) is the annual percentage increase many pension plans apply to benefits to offset inflation. A 3-4% COLA is common."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why compare pension value in today's money?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Because future currency buys less, the nominal total overstates the real value. Discounting by inflation shows the true purchasing power of your pension."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+
+<div id="siteHeader"></div>
+
+<section class="hero hero-compact">
+  <div class="container">
+    <h1>Pension Calculator</h1>
+    <p>See the real value of your pension over retirement.</p>
+  </div>
+</section>
+
+<div class="layout">
+  <div id="siteSidebar"></div>
+
+  <main class="main-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Pension Calculator</div>
+    <h1 class="page-title">Pension Calculator</h1>
+    <p class="page-subtitle">Project total pension received with COLA growth and its value in today's money.</p>
+
+    <div class="card">
+      <h2>Pension Details</h2>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="monthlyPension">Monthly Pension (today's money)</label>
+          <div class="input-wrap">
+            <span class="prefix">$</span>
+            <input type="number" id="monthlyPension" value="30000" min="0" step="1000">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="cola">Annual COLA Increase</label>
+          <div class="input-wrap">
+            <span class="suffix">%</span>
+            <input type="number" id="cola" value="3" min="0" max="20" step="0.5">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="inflation">Inflation Rate</label>
+          <div class="input-wrap">
+            <span class="suffix">%</span>
+            <input type="number" id="inflation" value="5" min="0" max="20" step="0.5">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="yearsRetired">Years in Retirement</label>
+          <div class="input-wrap">
+            <span class="suffix">yrs</span>
+            <input type="number" id="yearsRetired" value="25" min="1" max="50" step="1">
+          </div>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary" id="calculateBtn" type="button">Calculate</button>
+        <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
+      </div>
+    </div>
+
+    <div class="result-panel" id="resultPanel">
+      <h3 id="resultLabel">Total Pension Received</h3>
+      <div class="result-main" id="resultMain">—</div>
+      <div class="result-grid">
+        <div class="result-item"><div class="label">Value in Today's Money</div><div class="value" id="rValue">—</div></div>
+        <div class="result-item"><div class="label">Final Monthly Pension</div><div class="value positive" id="rMonthly">—</div></div>
+        <div class="result-item"><div class="label">Years of Payments</div><div class="value" id="rYears">—</div></div>
+      </div>
+    </div>
+
+    <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
+
+    <div class="content-section">
+      <h2>How pensions are valued</h2>
+      <p>The calculator compounds your pension by COLA each month to find the <strong>nominal total</strong>, then discounts every payment by inflation to find its <strong>real value</strong>. A pension with 3% COLA in a 5% inflation world still loses purchasing power over time &mdash; the gap between the two totals shows exactly how much.</p>
+    </div>
+
+    <div class="content-section">
+      <h2>Pension Calculator FAQ</h2>
+      <div class="faq-item">
+        <div class="faq-q">Why does my pension need COLA?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">Without COLA, a fixed pension buys less every year. Over 25 years at 5% inflation, its purchasing power drops by roughly two-thirds.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How do I value a pension vs a lump sum?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">Compare the pension's value in today's money with the lump sum offered. If the lump sum is higher, you can often reproduce the income yourself with an annuity.</div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div id="siteFooter"></div>
+
+<script>
+  window.calcConfig = {
+    type: 'pension',
+    defaults: { monthlyPension: 30000, cola: 3, inflation: 5, yearsRetired: 25 }
+  };
+</script>
+<script src="js/currency.js"></script>
+<script src="js/seo-content.js"></script>
+<script src="js/common.js"></script>
+<script src="js/retirement.js"></script>
+</body>
+</html>

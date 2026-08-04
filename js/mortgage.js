@@ -33,6 +33,22 @@
     if (p) p.classList.add('show');
   }
 
+  function renderPropertyChart(years, annualCf, price, appr) {
+    var canvas = $('resultChart');
+    if (!canvas || !window.EMIChart) return;
+    var labels = [];
+    var data = [];
+    var n = Math.max(1, Math.round(years));
+    for (var k = 1; k <= n; k++) {
+      labels.push('Y' + k);
+      data.push(Math.round(annualCf * k + price * (Math.pow(1 + appr / 100, k) - 1)));
+    }
+    window.EMIChart.render(canvas, {
+      labels: labels,
+      series: [{ name: 'Cumulative Profit', data: data, color: '#10b981' }]
+    });
+  }
+
   function payment(P, r, n) {
     if (P <= 0 || n <= 0) return 0;
     if (r === 0) return P / n;
@@ -163,6 +179,7 @@
     setText('rProfit', fmt(profit));
     setText('rValue', fmt(saleNet));
     showPanel();
+    renderPropertyChart(years, annualNoi, price, appr);
   }
 
   function calcRefinance() {
@@ -234,6 +251,7 @@
     setText('rTotal', totalReturn.toFixed(1) + '%');
     setText('rProfit', fmt(profit));
     showPanel();
+    renderPropertyChart(holding, annualCF, price, appr);
   }
 
   function calcApr() {
@@ -474,6 +492,7 @@
     if (resetBtn) resetBtn.addEventListener('click', applyDefaults);
 
     applyDefaults();
+    window.addEventListener('localechange', update);
     update();
   }
 

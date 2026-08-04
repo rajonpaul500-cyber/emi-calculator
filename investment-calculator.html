@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Investment Calculator - Growth with Monthly Contributions | EMI Master</title>
+  <meta name="description" content="Calculate the future value of your investments with a lump sum, monthly contributions and inflation-adjusted value. Free investment growth calculator.">
+  <meta name="keywords" content="investment calculator, investment growth calculator, future value of investment, SIP calculator, inflation adjusted return">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://emimaster.com/investment-calculator.html">
+  <meta property="og:title" content="Investment Calculator | EMI Master">
+  <meta property="og:description" content="Project investment growth with contributions and inflation.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://emimaster.com/investment-calculator.html">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "EMI Master Investment Calculator",
+    "url": "https://emimaster.com/investment-calculator.html",
+    "description": "Free investment growth calculator with monthly contributions and inflation-adjusted value.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a good investment return to assume?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For planning purposes, fixed deposits offer around 5-7%, balanced funds 8-10%, and diversified equity funds 10-14% over the long term. Use conservative numbers and remember returns are not guaranteed."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does inflation matter for investing?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Inflation reduces purchasing power, so a crore today is worth less in 20 years. The inflation-adjusted value in this calculator shows what your future money can really buy in today's terms."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+
+<div id="siteHeader"></div>
+
+<section class="hero hero-compact">
+  <div class="container">
+    <h1>Investment Calculator</h1>
+    <p>Project your wealth with regular contributions and inflation.</p>
+  </div>
+</section>
+
+<div class="layout">
+  <div id="siteSidebar"></div>
+
+  <main class="main-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Investment Calculator</div>
+    <h1 class="page-title">Investment Calculator</h1>
+    <p class="page-subtitle">See the future value of your money and its real purchasing power.</p>
+
+    <div class="card">
+      <h2>Your Investment</h2>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="principal">Initial Investment (₹)</label>
+          <div class="input-wrap">
+            <span class="prefix">₹</span>
+            <input type="number" id="principal" value="500000" min="0" step="50000">
+          </div>
+          <input type="range" id="principalRange" min="0" max="10000000" step="50000" value="500000">
+        </div>
+
+        <div class="form-group">
+          <label for="contribution">Monthly Contribution (₹)</label>
+          <div class="input-wrap">
+            <span class="prefix">₹</span>
+            <input type="number" id="contribution" value="5000" min="0" step="500">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="rate">Expected Annual Return (%)</label>
+          <div class="input-wrap">
+            <span class="suffix">%</span>
+            <input type="number" id="rate" value="8" min="0" max="50" step="0.5">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="years">Investment Period (years)</label>
+          <div class="input-wrap">
+            <span class="suffix">yrs</span>
+            <input type="number" id="years" value="10" min="1" max="50" step="1">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="inflation">Expected Inflation (%)</label>
+          <div class="input-wrap">
+            <span class="suffix">%</span>
+            <input type="number" id="inflation" value="6" min="0" max="30" step="0.5">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="compound">Compounding</label>
+          <select id="compound">
+            <option value="monthly" selected>Monthly</option>
+            <option value="quarterly">Quarterly</option>
+            <option value="semi-annually">Semi-annually</option>
+            <option value="annually">Annually</option>
+            <option value="continuous">Continuous</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary" id="calculateBtn" type="button">Calculate</button>
+        <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
+      </div>
+    </div>
+
+    <div class="result-panel" id="resultPanel">
+      <h3 id="resultLabel">Future Value</h3>
+      <div class="result-main" id="resultMain">—</div>
+      <div class="result-grid">
+        <div class="result-item"><div class="label">Total Invested</div><div class="value" id="rInvested">—</div></div>
+        <div class="result-item"><div class="label">Growth / Earnings</div><div class="value positive" id="rGrowth">—</div></div>
+        <div class="result-item"><div class="label">Value in Today's Money</div><div class="value" id="rReal">—</div></div>
+      </div>
+    </div>
+
+    <div class="chart-box">
+      <div class="chart-title">Invested vs Value by Year</div>
+      <canvas id="resultChart" aria-label="Result chart"></canvas>
+    </div>
+    <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
+
+    <div class="content-section">
+      <h2>Nominal vs real returns</h2>
+      <p>The <strong>future value</strong> is what your account will show years from now. The <strong>value in today's money</strong> removes inflation, so you see the real purchasing power of your investment. If your return is close to inflation, your money is barely growing in real terms.</p>
+    </div>
+
+    <div class="content-section">
+      <h2>Investment Calculator FAQ</h2>
+      <div class="faq-item">
+        <div class="faq-q">How much should I invest monthly?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">A common guideline is 15&ndash;20% of your income for retirement, and a separate amount for short-term goals. Adjust based on your goals and how much you can comfortably save.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What is the rule of 72?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">Divide 72 by your annual return to estimate how many years it takes to double your money. At 9% return, money doubles roughly every 8 years.</div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div id="siteFooter"></div>
+
+<script>
+  window.calcConfig = {
+    type: 'investment',
+    defaults: { principal: 500000, contribution: 5000, rate: 8, years: 10, inflation: 6, compound: 'monthly' }
+  };
+</script>
+<script src="js/currency.js"></script>
+<script src="js/chart.js"></script>
+<script src="js/seo-content.js"></script>
+<script src="js/common.js"></script>
+<script src="js/investment.js"></script>
+</body>
+</html>

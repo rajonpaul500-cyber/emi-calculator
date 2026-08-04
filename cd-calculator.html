@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CD Calculator - Certificate of Deposit Maturity | EMI Master</title>
+  <meta name="description" content="Calculate the maturity amount of a certificate of deposit (CD) with the annual percentage yield (APY). Free CD calculator.">
+  <meta name="keywords" content="CD calculator, certificate of deposit, CD maturity calculator, APY calculator">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://emimaster.com/cd-calculator.html">
+  <meta property="og:title" content="CD Calculator | EMI Master">
+  <meta property="og:description" content="CD maturity and APY calculator for fixed deposits.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://emimaster.com/cd-calculator.html">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "EMI Master CD Calculator",
+    "url": "https://emimaster.com/cd-calculator.html",
+    "description": "Free certificate of deposit calculator with maturity amount, interest and APY.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a certificate of deposit (CD)?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A certificate of deposit is a time deposit that pays a fixed interest rate for a fixed period, in exchange for keeping the money locked until maturity. Early withdrawal usually costs a penalty."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is APY?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "APY (Annual Percentage Yield) is the effective yearly return including compounding. A CD with 6% interest compounded monthly has an APY of about 6.17%."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+
+<div id="siteHeader"></div>
+
+<section class="hero hero-compact">
+  <div class="container">
+    <h1>CD Calculator</h1>
+    <p>Know your exact maturity amount and true APY.</p>
+  </div>
+</section>
+
+<div class="layout">
+  <div id="siteSidebar"></div>
+
+  <main class="main-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; CD Calculator</div>
+    <h1 class="page-title">Certificate of Deposit Calculator</h1>
+    <p class="page-subtitle">Plan a fixed-deposit style investment.</p>
+
+    <div class="card">
+      <h2>CD Details</h2>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="deposit">Deposit Amount (₹)</label>
+          <div class="input-wrap">
+            <span class="prefix">₹</span>
+            <input type="number" id="deposit" value="500000" min="0" step="50000">
+          </div>
+          <input type="range" id="depositRange" min="10000" max="10000000" step="10000" value="500000">
+        </div>
+
+        <div class="form-group">
+          <label for="rate">Interest Rate (% p.a.)</label>
+          <div class="input-wrap">
+            <span class="suffix">%</span>
+            <input type="number" id="rate" value="6" min="0" max="50" step="0.1">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="years">CD Term (years)</label>
+          <div class="input-wrap">
+            <span class="suffix">yrs</span>
+            <input type="number" id="years" value="3" min="1" max="30" step="1">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="compound">Compounding</label>
+          <select id="compound">
+            <option value="monthly" selected>Monthly</option>
+            <option value="quarterly">Quarterly</option>
+            <option value="semi-annually">Semi-annually</option>
+            <option value="annually">Annually</option>
+            <option value="continuous">Continuous</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary" id="calculateBtn" type="button">Calculate</button>
+        <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
+      </div>
+    </div>
+
+    <div class="result-panel" id="resultPanel">
+      <h3 id="resultLabel">CD Maturity Amount</h3>
+      <div class="result-main" id="resultMain">—</div>
+      <div class="result-grid">
+        <div class="result-item"><div class="label">Interest Earned</div><div class="value positive" id="rInterest">—</div></div>
+        <div class="result-item"><div class="label">APY (Annual Percentage Yield)</div><div class="value positive" id="rApy">—</div></div>
+      </div>
+    </div>
+
+    <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
+
+    <div class="content-section">
+      <h2>Comparing CDs</h2>
+      <p>Always compare the <strong>APY</strong>, not just the interest rate. APY includes the effect of compounding, so it is the honest number for comparing different CDs with different compounding frequencies.</p>
+    </div>
+
+    <div class="content-section">
+      <h2>CD Calculator FAQ</h2>
+      <div class="faq-item">
+        <div class="faq-q">What happens if I withdraw my CD early?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">Most banks charge a penalty, typically a few months of interest. In some cases the penalty can exceed the interest earned, so it is usually better to keep a CD until maturity.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Are CDs risky?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">CDs are among the safest investments because the principal is protected (up to deposit insurance limits) and the rate is locked in. The trade-off is a lower return than stocks.</div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div id="siteFooter"></div>
+
+<script>
+  window.calcConfig = {
+    type: 'cd',
+    defaults: { deposit: 500000, rate: 6, years: 3, compound: 'monthly' }
+  };
+</script>
+<script src="js/currency.js"></script>
+<script src="js/seo-content.js"></script>
+<script src="js/common.js"></script>
+<script src="js/investment.js"></script>
+</body>
+</html>

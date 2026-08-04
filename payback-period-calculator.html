@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payback Period Calculator | EMI Master</title>
+  <meta name="description" content="Find out how many years and months an investment takes to pay back its cost. Free payback period calculator.">
+  <meta name="keywords" content="payback period calculator, payback calculator, investment recovery period, break even calculator">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://emimaster.com/payback-period-calculator.html">
+  <meta property="og:title" content="Payback Period Calculator | EMI Master">
+  <meta property="og:description" content="Years and months to recover your investment.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://emimaster.com/payback-period-calculator.html">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "EMI Master Payback Period Calculator",
+    "url": "https://emimaster.com/payback-period-calculator.html",
+    "description": "Free payback period calculator showing years and months to recover an investment.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the payback period?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The payback period is how long it takes for an investment's cash flows to recover its initial cost. Shorter payback means you get your money back faster."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the limitations of the payback period?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It ignores cash flows after the payback point, the time value of money and total profitability. Use IRR or NPV alongside it for a complete picture."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+
+<div id="siteHeader"></div>
+
+<section class="hero hero-compact">
+  <div class="container">
+    <h1>Payback Period Calculator</h1>
+    <p>How fast will your investment pay for itself?</p>
+  </div>
+</section>
+
+<div class="layout">
+  <div id="siteSidebar"></div>
+
+  <main class="main-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Payback Period Calculator</div>
+    <h1 class="page-title">Payback Period Calculator</h1>
+    <p class="page-subtitle">Compare how quickly different investments recover their cost.</p>
+
+    <div class="card">
+      <h2>Investment Details</h2>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="investment">Initial Investment (₹)</label>
+          <div class="input-wrap">
+            <span class="prefix">₹</span>
+            <input type="number" id="investment" value="600000" min="0" step="10000">
+          </div>
+          <input type="range" id="investmentRange" min="10000" max="10000000" step="10000" value="600000">
+        </div>
+
+        <div class="form-group">
+          <label for="cashflow">Annual Cash Flow (₹)</label>
+          <div class="input-wrap">
+            <span class="prefix">₹</span>
+            <input type="number" id="cashflow" value="150000" min="0" step="10000">
+          </div>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary" id="calculateBtn" type="button">Calculate</button>
+        <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
+      </div>
+    </div>
+
+    <div class="result-panel" id="resultPanel">
+      <h3 id="resultLabel">Payback Period</h3>
+      <div class="result-main" id="resultMain">—</div>
+      <div class="result-grid">
+        <div class="result-item"><div class="label">Years</div><div class="value" id="rYears">—</div></div>
+        <div class="result-item"><div class="label">Months</div><div class="value" id="rMonths">—</div></div>
+        <div class="result-item"><div class="label">Cash Recovered</div><div class="value positive" id="rCash">—</div></div>
+      </div>
+    </div>
+
+    <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
+
+    <div class="content-section">
+      <h2>How the payback period works</h2>
+      <p>Divide the investment by the annual cash flow to find full years, then the leftover is expressed in months. This simple rule of thumb is great for quickly ranking projects &mdash; the shorter the payback, the lower the risk of the money being tied up.</p>
+    </div>
+
+    <div class="content-section">
+      <h2>Payback Period FAQ</h2>
+      <div class="faq-item">
+        <div class="faq-q">Should I prefer a shorter payback period?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">Usually yes, because recovering money faster reduces risk. But a longer-payback project with high returns after recovery can still be the better overall investment.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Does the calculator consider the time value of money?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">No. This is a simple payback calculation. For a discounted payback or return analysis, use the IRR or Finance calculators.</div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div id="siteFooter"></div>
+
+<script>
+  window.calcConfig = {
+    type: 'payback',
+    defaults: { investment: 600000, cashflow: 150000 }
+  };
+</script>
+<script src="js/currency.js"></script>
+<script src="js/seo-content.js"></script>
+<script src="js/common.js"></script>
+<script src="js/investment.js"></script>
+</body>
+</html>

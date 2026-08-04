@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Present Value Calculator - Discounted Today's Value | EMI Master</title>
+  <meta name="description" content="Calculate the present value of a future amount with monthly to continuous compounding. Free present value (PV) calculator.">
+  <meta name="keywords" content="present value calculator, PV calculator, discounted value, time value of money, discount rate">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://emimaster.com/present-value-calculator.html">
+  <meta property="og:title" content="Present Value Calculator | EMI Master">
+  <meta property="og:description" content="What is a future amount worth today?" >
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://emimaster.com/present-value-calculator.html">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "EMI Master Present Value Calculator",
+    "url": "https://emimaster.com/present-value-calculator.html",
+    "description": "Free present value calculator with multiple compounding frequencies.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is present value?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Present value (PV) is what a future amount is worth today after discounting by an interest rate. Because money can earn interest, the same amount received later is worth less today."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How is present value used?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It is used to price bonds, compare investment opportunities and evaluate whether future money is worth more or less than an amount available today."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+
+<div id="siteHeader"></div>
+
+<section class="hero hero-compact">
+  <div class="container">
+    <h1>Present Value Calculator</h1>
+    <p>Discover what a future amount is worth today.</p>
+  </div>
+</section>
+
+<div class="layout">
+  <div id="siteSidebar"></div>
+
+  <main class="main-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Present Value Calculator</div>
+    <h1 class="page-title">Present Value Calculator</h1>
+    <p class="page-subtitle">Discount a future amount back to today's money.</p>
+
+    <div class="card">
+      <h2>Future Amount</h2>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="future">Future Value (₹)</label>
+          <div class="input-wrap">
+            <span class="prefix">₹</span>
+            <input type="number" id="future" value="1000000" min="0" step="50000">
+          </div>
+          <input type="range" id="futureRange" min="10000" max="100000000" step="10000" value="1000000">
+        </div>
+
+        <div class="form-group">
+          <label for="rate">Annual Discount Rate (%)</label>
+          <div class="input-wrap">
+            <span class="suffix">%</span>
+            <input type="number" id="rate" value="6" min="0" max="50" step="0.1">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="years">Time Period (years)</label>
+          <div class="input-wrap">
+            <span class="suffix">yrs</span>
+            <input type="number" id="years" value="10" min="1" max="50" step="1">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="compound">Compounding</label>
+          <select id="compound">
+            <option value="monthly" selected>Monthly</option>
+            <option value="quarterly">Quarterly</option>
+            <option value="semi-annually">Semi-annually</option>
+            <option value="annually">Annually</option>
+            <option value="continuous">Continuous</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary" id="calculateBtn" type="button">Calculate</button>
+        <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
+      </div>
+    </div>
+
+    <div class="result-panel" id="resultPanel">
+      <h3 id="resultLabel">Present Value</h3>
+      <div class="result-main" id="resultMain">—</div>
+      <div class="result-grid">
+        <div class="result-item"><div class="label">Total Discount</div><div class="value negative" id="rDiscount">—</div></div>
+        <div class="result-item"><div class="label">Effective Annual Rate</div><div class="value" id="rEff">—</div></div>
+      </div>
+    </div>
+
+    <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
+
+    <div class="content-section">
+      <h2>Why discounting matters</h2>
+      <p>₹10,00,000 received 10 years from now is worth only about ₹5,50,000 today at a 6% discount rate. The higher the rate or the longer the wait, the less a future amount is worth now.</p>
+    </div>
+
+    <div class="content-section">
+      <h2>Present Value FAQ</h2>
+      <div class="faq-item">
+        <div class="faq-q">What discount rate should I use?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">Use the return you could earn elsewhere (opportunity cost) or your cost of borrowing. For safe cash flows, a 5-8% rate is common in India.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What is the difference between present value and future value?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">Future value grows a current amount forward with compounding. Present value discounts a future amount backward. They are two sides of the same coin.</div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div id="siteFooter"></div>
+
+<script>
+  window.calcConfig = {
+    type: 'pv',
+    defaults: { future: 1000000, rate: 6, years: 10, compound: 'monthly' }
+  };
+</script>
+<script src="js/currency.js"></script>
+<script src="js/seo-content.js"></script>
+<script src="js/common.js"></script>
+<script src="js/investment.js"></script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finance Calculator - Solve Payment, Amount, Rate or Term | EMI Master</title>
+  <meta name="description" content="A complete finance (TVM) calculator: solve for the monthly payment, loan amount, future value, loan term or interest rate from any other inputs.">
+  <meta name="keywords" content="finance calculator, TVM calculator, time value of money, loan payment calculator, financial calculator online">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://emimaster.com/finance-calculator.html">
+  <meta property="og:title" content="Finance Calculator | EMI Master">
+  <meta property="og:description" content="Solve any TVM variable: payment, amount, rate, term or future value.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://emimaster.com/finance-calculator.html">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "EMI Master Finance Calculator",
+    "url": "https://emimaster.com/finance-calculator.html",
+    "description": "Free finance / time value of money calculator that solves for payment, amount, rate, term or future value.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a finance (TVM) calculator?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A time-value-of-money (TVM) calculator lets you solve for any one variable - payment, amount, rate, term or future value - when you know the others, using the same math behind professional financial calculators."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I find the interest rate on a loan?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Enter the loan amount, your monthly payment and the term, then set 'Solve for' to Interest Rate. The calculator finds the rate that matches your payment."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+
+<div id="siteHeader"></div>
+
+<section class="hero hero-compact">
+  <div class="container">
+    <h1>Finance Calculator</h1>
+    <p>Solve any variable &mdash; payment, amount, rate, term or future value.</p>
+  </div>
+</section>
+
+<div class="layout">
+  <div id="siteSidebar"></div>
+
+  <main class="main-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Finance Calculator</div>
+    <h1 class="page-title">Finance (TVM) Calculator</h1>
+    <p class="page-subtitle">Pick the variable you want to solve for, then enter the rest.</p>
+
+    <div class="card">
+      <h2>Time Value of Money</h2>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="solveFor">Solve For</label>
+          <select id="solveFor">
+            <option value="payment" selected>Monthly Payment</option>
+            <option value="amount">Loan Amount</option>
+            <option value="future">Future Value</option>
+            <option value="term">Loan Term</option>
+            <option value="rate">Interest Rate</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="amount">Loan Amount (₹)</label>
+          <div class="input-wrap">
+            <span class="prefix">₹</span>
+            <input type="number" id="amount" value="500000" min="0" step="10000">
+          </div>
+          <input type="range" id="amountRange" min="10000" max="10000000" step="10000" value="500000">
+        </div>
+
+        <div class="form-group">
+          <label for="rate">Interest Rate (% p.a.)</label>
+          <div class="input-wrap">
+            <span class="suffix">%</span>
+            <input type="number" id="rate" value="8" min="0" max="50" step="0.1">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="years">Term (years)</label>
+          <div class="input-wrap">
+            <span class="suffix">yrs</span>
+            <input type="number" id="years" value="5" min="1" max="50" step="1">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="pmt">Monthly Payment (₹)</label>
+          <div class="input-wrap">
+            <span class="prefix">₹</span>
+            <input type="number" id="pmt" value="10000" min="0" step="500">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="fvtarget">Target Future Value (₹)</label>
+          <div class="input-wrap">
+            <span class="prefix">₹</span>
+            <input type="number" id="fvtarget" value="0" min="0" step="10000">
+          </div>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary" id="calculateBtn" type="button">Calculate</button>
+        <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
+      </div>
+    </div>
+
+    <div class="result-panel" id="resultPanel">
+      <h3 id="resultLabel">Monthly Payment</h3>
+      <div class="result-main" id="resultMain">—</div>
+      <div class="result-grid">
+        <div class="result-item"><div class="label">Total Payments</div><div class="value" id="rTotal">—</div></div>
+        <div class="result-item"><div class="label">Total Interest</div><div class="value negative" id="rInterest">—</div></div>
+      </div>
+    </div>
+
+    <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
+
+    <div class="content-section">
+      <h2>How the finance calculator works</h2>
+      <p>This is a time-value-of-money (TVM) engine. Choose what to solve for, fill in the other four values, and it computes the missing one using standard amortization math &mdash; the same logic used in professional financial calculators.</p>
+    </div>
+
+    <div class="content-section">
+      <h2>Finance Calculator FAQ</h2>
+      <div class="faq-item">
+        <div class="faq-q">How can I find how long a loan takes to pay off?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">Set 'Solve For' to Loan Term and enter the amount, rate and the payment you can afford. The result shows the number of years that payment will take.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What is the difference between amount and future value?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">Loan Amount is the principal today. Future Value is what a series of payments grows to at the given rate &mdash; useful for savings targets.</div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div id="siteFooter"></div>
+
+<script>
+  window.calcConfig = {
+    type: 'finance',
+    defaults: { solveFor: 'payment', amount: 500000, rate: 8, years: 5, pmt: 10000, fvtarget: 0 }
+  };
+</script>
+<script src="js/currency.js"></script>
+<script src="js/seo-content.js"></script>
+<script src="js/common.js"></script>
+<script src="js/investment.js"></script>
+</body>
+</html>

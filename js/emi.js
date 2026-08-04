@@ -10,7 +10,12 @@
   var $ = function (id) { return document.getElementById(id); };
 
   function fmt(v) {
+    if (window.I18N) return window.I18N.fmt(v);
     return '₹' + Math.round(v).toLocaleString('en-IN');
+  }
+
+  function ph(s) {
+    return window.I18N ? window.I18N.p(s) : s;
   }
 
   var PAYMENTS_PER_YEAR = { monthly: 12, 'semi-monthly': 24, biweekly: 26, weekly: 52 };
@@ -270,13 +275,76 @@
     var result = { type: type, maturity: maturity, totalDeposited: totalDeposited, totalInterest: totalInterest, interestPct: interestPct, n: n, sched: { rows: rows } };
 
     setText('resultMain', invalid ? '—' : fmt(maturity));
-    setText('resultLabel', 'Maturity Amount');
+    setText('resultLabel', ph('Maturity Amount'));
     setText('loanAmountOut', invalid ? '—' : fmt(totalDeposited));
     setText('totalInterestOut', invalid ? '—' : fmt(totalInterest));
     setText('totalPaymentOut', invalid ? '—' : interestPct.toFixed(2) + '%');
     showResultPanel();
 
     renderSavings(result);
+    renderChart(result);
+  }
+
+  function renderChart(result) {
+    var canvas = $('resultChart');
+    if (!canvas || !window.EMIChart) return;
+    var rows = (result.sched && result.sched.rows) || [];
+    if (!rows.length) return;
+
+    var isSavings = rows[0].principal === undefined;
+    var perYear = {};
+    rows.forEach(function (row) {
+      var y = Math.ceil(row.month / 12);
+      if (!perYear[y]) perYear[y] = { p: 0, i: 0, b: 0 };
+      perYear[y].p += row.principal || 0;
+      perYear[y].i += row.interest || 0;
+      perYear[y].b = row.balance || 0;
+    });
+    var keys = Object.keys(perYear);
+    var labels = keys.map(function (k) { return 'Y' + k; });
+
+    if (isSavings) {
+      window.EMIChart.render(canvas, {
+        labels: labels,
+        series: [
+          { name: 'Balance', data: keys.map(function (k) { return Math.round(perYear[k].b); }), color: '#10b981' }
+        ]
+      });
+      return;
+    }
+
+    if ($('cmpWithoutPayment')) {
+      var standard = buildSchedule(result.principal, result.r, result.n, result.reg, 0, 1, 0);
+      var stYears = {};
+      standard.rows.forEach(function (row) {
+        var y = Math.ceil(row.month / 12);
+        stYears[y] = (stYears[y] || 0) + row.interest;
+      });
+      var labels2 = [];
+      var std = [];
+      var ext = [];
+      Object.keys(stYears).forEach(function (y) {
+        labels2.push('Y' + y);
+        std.push(Math.round(stYears[y]));
+        ext.push(Math.round(perYear[y] ? perYear[y].i : 0));
+      });
+      window.EMIChart.render(canvas, {
+        labels: labels2,
+        series: [
+          { name: 'Standard', data: std, color: '#94a3b8' },
+          { name: 'With Extras', data: ext, color: '#6366f1' }
+        ]
+      });
+      return;
+    }
+
+    window.EMIChart.render(canvas, {
+      labels: labels,
+      series: [
+        { name: 'Principal', data: keys.map(function (k) { return Math.round(perYear[k].p); }), color: '#6366f1' },
+        { name: 'Interest', data: keys.map(function (k) { return Math.round(perYear[k].i); }), color: '#f59e0b' }
+      ]
+    });
   }
 
   function update() {
@@ -367,9 +435,9 @@
     setText('resultMain', invalid ? '—' : fmt(result.type === 'home' ? reg + nonEMI : reg));
     setText('resultLabel',
       invalid ? '' :
-      result.type === 'home' ? 'Total Monthly Payment' :
-      result.type === 'loan' ? 'Monthly Payment (EMI)' :
-      'Monthly Payment');
+        result.type === 'home' ? ph('Total Monthly Payment') :
+          result.type === 'loan' ? ph('Monthly Payment (EMI)') :
+            ph('Monthly Payment'));
 
     setText('loanAmountOut', invalid ? '—' : fmt(result.type === 'personal' ? disbursed : principal));
     if (homeExtras) {
@@ -403,6 +471,11 @@
     showResultPanel();
     renderCompare(result);
     renderSchedule(result);
+    renderChart(result);
+
+    if (window.EMIMaster && window.EMIMaster.renderLoanInsights && $('insightsPanel')) {
+      window.EMIMaster.renderLoanInsights(principal, rate, years);
+    }
   }
 
   function renderCompare(result) {
@@ -495,6 +568,7 @@
     var resetBtn = $('resetBtn');
     if (resetBtn) resetBtn.addEventListener('click', resetDefaults);
 
+    window.addEventListener('localechange', update);
     update();
   }
 

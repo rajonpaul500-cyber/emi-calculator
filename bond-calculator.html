@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bond Calculator - Current Yield &amp; Approx YTM | EMI Master</title>
+  <meta name="description" content="Calculate a bond's current yield, approximate yield to maturity, annual coupon and total coupon payments. Free bond calculator.">
+  <meta name="keywords" content="bond calculator, bond yield calculator, current yield, yield to maturity, coupon rate">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://emimaster.com/bond-calculator.html">
+  <meta property="og:title" content="Bond Calculator | EMI Master">
+  <meta property="og:description" content="Current yield and YTM for your bonds.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://emimaster.com/bond-calculator.html">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "EMI Master Bond Calculator",
+    "url": "https://emimaster.com/bond-calculator.html",
+    "description": "Free bond calculator for current yield, approximate YTM and coupon payments.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is current yield?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Current yield is the annual coupon payment divided by the bond's current market price. It shows the income return at today's price, ignoring price changes at maturity."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between coupon rate and YTM?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The coupon rate is fixed and based on the face value. Yield to maturity (YTM) is the total return if you hold the bond to maturity, including coupon income plus any gain or loss from buying below or above face value."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+
+<div id="siteHeader"></div>
+
+<section class="hero hero-compact">
+  <div class="container">
+    <h1>Bond Calculator</h1>
+    <p>Know your bond's current yield and return to maturity.</p>
+  </div>
+</section>
+
+<div class="layout">
+  <div id="siteSidebar"></div>
+
+  <main class="main-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Bond Calculator</div>
+    <h1 class="page-title">Bond Calculator</h1>
+    <p class="page-subtitle">Enter the bond basics and see the yields it offers.</p>
+
+    <div class="card">
+      <h2>Bond Details</h2>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="face">Face Value (₹)</label>
+          <div class="input-wrap">
+            <span class="prefix">₹</span>
+            <input type="number" id="face" value="100000" min="0" step="1000">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="coupon">Coupon Rate (% p.a.)</label>
+          <div class="input-wrap">
+            <span class="suffix">%</span>
+            <input type="number" id="coupon" value="7" min="0" max="50" step="0.1">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="years">Years to Maturity</label>
+          <div class="input-wrap">
+            <span class="suffix">yrs</span>
+            <input type="number" id="years" value="10" min="1" max="50" step="1">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="price">Current Market Price (₹)</label>
+          <div class="input-wrap">
+            <span class="prefix">₹</span>
+            <input type="number" id="price" value="95000" min="0" step="1000">
+          </div>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary" id="calculateBtn" type="button">Calculate</button>
+        <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
+      </div>
+    </div>
+
+    <div class="result-panel" id="resultPanel">
+      <h3 id="resultLabel">Current Yield</h3>
+      <div class="result-main" id="resultMain">—</div>
+      <div class="result-grid">
+        <div class="result-item"><div class="label">Annual Coupon Payment</div><div class="value positive" id="rCoupon">—</div></div>
+        <div class="result-item"><div class="label">Approximate Yield to Maturity</div><div class="value positive" id="rYtm">—</div></div>
+        <div class="result-item"><div class="label">Total Coupon Payments</div><div class="value positive" id="rTotal">—</div></div>
+      </div>
+    </div>
+
+    <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
+
+    <div class="content-section">
+      <h2>Reading bond yields</h2>
+      <p>A bond bought <strong>below face value</strong> (a discount) earns extra return at maturity, so its YTM is higher than its coupon rate. A bond bought <strong>above face value</strong> (a premium) loses money at maturity, lowering the YTM. Current yield only reflects income, not the price change.</p>
+    </div>
+
+    <div class="content-section">
+      <h2>Bond Calculator FAQ</h2>
+      <div class="faq-item">
+        <div class="faq-q">Is YTM the same as the bond's interest rate?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">No. The coupon rate is the interest paid on the face value. YTM is the total annualized return including price changes, so it is the better comparison between bonds.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Why does the price of my bond change?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">Bond prices move inversely to market interest rates. When rates rise, existing bonds with lower coupons fall in price; when rates fall, they rise.</div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div id="siteFooter"></div>
+
+<script>
+  window.calcConfig = {
+    type: 'bond',
+    defaults: { face: 100000, coupon: 7, years: 10, price: 95000 }
+  };
+</script>
+<script src="js/currency.js"></script>
+<script src="js/seo-content.js"></script>
+<script src="js/common.js"></script>
+<script src="js/investment.js"></script>
+</body>
+</html>

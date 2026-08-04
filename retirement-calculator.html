@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Retirement Calculator - Corpus &amp; Monthly Income Plan | EMI Master</title>
+  <meta name="description" content="Plan your retirement professionally: project your savings, the corpus you need after inflation, your shortfall or surplus and monthly retirement income. Free retirement calculator.">
+  <meta name="keywords" content="retirement calculator, retirement corpus calculator, retirement planning, pension plan, retirement income">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://emimaster.com/retirement-calculator.html">
+  <meta property="og:title" content="Retirement Calculator | EMI Master">
+  <meta property="og:description" content="Project your retirement corpus and income after inflation.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://emimaster.com/retirement-calculator.html">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "EMI Master Retirement Calculator",
+    "url": "https://emimaster.com/retirement-calculator.html",
+    "description": "Free retirement planning calculator with inflation-adjusted corpus, shortfall and monthly income.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How much money do I need to retire?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A common professional method is to grow today's expenses by inflation until retirement, then fund that future expense stream from a corpus using the real (inflation-adjusted) return as the annuity factor. This calculator does exactly that."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the real return?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Real return is your nominal investment return minus inflation. It tells you how much your money truly grows in purchasing power, which is the correct rate for retirement planning."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+
+<div id="siteHeader"></div>
+
+<section class="hero hero-compact">
+  <div class="container">
+    <h1>Retirement Calculator</h1>
+    <p>Build your retirement plan the professional way.</p>
+  </div>
+</section>
+
+<div class="layout">
+  <div id="siteSidebar"></div>
+
+  <main class="main-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Retirement Calculator</div>
+    <h1 class="page-title">Retirement Calculator</h1>
+    <p class="page-subtitle">Project your savings, the inflation-adjusted corpus you need, and your monthly retirement income.</p>
+
+    <div class="card">
+      <h2>Your Details</h2>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="curAge">Current Age</label>
+          <div class="input-wrap">
+            <span class="suffix">yrs</span>
+            <input type="number" id="curAge" value="30" min="18" max="90" step="1">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="retireAge">Retirement Age</label>
+          <div class="input-wrap">
+            <span class="suffix">yrs</span>
+            <input type="number" id="retireAge" value="60" min="40" max="90" step="1">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="lifeExpect">Life Expectancy</label>
+          <div class="input-wrap">
+            <span class="suffix">yrs</span>
+            <input type="number" id="lifeExpect" value="85" min="60" max="110" step="1">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="annualExpense">Current Annual Expenses</label>
+          <div class="input-wrap">
+            <span class="prefix" id="expensePrefix">$</span>
+            <input type="number" id="annualExpense" value="600000" min="0" step="10000">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="savings">Current Retirement Savings</label>
+          <div class="input-wrap">
+            <span class="prefix" id="savingsPrefix">$</span>
+            <input type="number" id="savings" value="500000" min="0" step="50000">
+          </div>
+          <input type="range" id="savingsRange" min="0" max="10000000" step="50000" value="500000">
+        </div>
+
+        <div class="form-group">
+          <label for="monthly">Monthly Contribution</label>
+          <div class="input-wrap">
+            <span class="prefix" id="monthlyPrefix">$</span>
+            <input type="number" id="monthly" value="15000" min="0" step="1000">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="rate">Expected Return (before tax)</label>
+          <div class="input-wrap">
+            <span class="suffix">%</span>
+            <input type="number" id="rate" value="8" min="0" max="30" step="0.5">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="inflation">Inflation Rate</label>
+          <div class="input-wrap">
+            <span class="suffix">%</span>
+            <input type="number" id="inflation" value="6" min="0" max="30" step="0.5">
+          </div>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary" id="calculateBtn" type="button">Calculate</button>
+        <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
+      </div>
+    </div>
+
+    <div class="result-panel" id="resultPanel">
+      <h3 id="resultLabel">Projected Savings at Retirement</h3>
+      <div class="result-main" id="resultMain">—</div>
+      <div class="result-grid">
+        <div class="result-item"><div class="label">Corpus Needed at Retirement</div><div class="value" id="rNeed">—</div></div>
+        <div class="result-item"><div class="label">Shortfall / Surplus</div><div class="value" id="rShortfall">—</div></div>
+        <div class="result-item"><div class="label">Monthly Retirement Income</div><div class="value positive" id="rIncome">—</div></div>
+        <div class="result-item"><div class="label">Monthly Expenses at Retirement</div><div class="value" id="rFuture">—</div></div>
+      </div>
+      <div class="chart-box">
+        <div class="chart-title">Projected Savings Growth by Year</div>
+        <canvas id="resultChart" aria-label="Projected retirement savings chart"></canvas>
+      </div>
+    </div>
+
+    <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
+
+    <div class="content-section">
+      <h2>How professional retirement planning works</h2>
+      <p>1) Grow today's expenses by inflation until retirement &mdash; that is the income you will actually need. 2) Calculate the corpus whose <strong>real return</strong> (return minus inflation) funds that income for your whole retirement. 3) Compare that corpus with the projected value of your current savings plus monthly contributions. The difference is your shortfall or surplus.</p>
+    </div>
+
+    <div class="content-section">
+      <h2>Retirement Calculator FAQ</h2>
+      <div class="faq-item">
+        <div class="faq-q">How much of my salary should I save for retirement?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">A widely used professional guideline is 15% of gross income, starting early. If you start late, you will need to save more to close the gap this calculator reveals.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Should I use 4% withdrawal as a shortcut?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">The 4% rule is a quick sanity check (corpus = 25x annual expenses). This calculator is more precise because it uses your actual retirement period and real return.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What return should I assume?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">A balanced portfolio (60% equity / 40% debt) has historically delivered 8-10% nominal in India. Use a conservative 7-8% to be safe, with 5-6% inflation.</div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div id="siteFooter"></div>
+
+<script>
+  window.calcConfig = {
+    type: 'retirement',
+    defaults: { curAge: 30, retireAge: 60, lifeExpect: 85, annualExpense: 600000, savings: 500000, monthly: 15000, rate: 8, inflation: 6 }
+  };
+</script>
+<script src="js/currency.js"></script>
+<script src="js/chart.js"></script>
+<script src="js/seo-content.js"></script>
+<script src="js/common.js"></script>
+<script src="js/retirement.js"></script>
+</body>
+</html>

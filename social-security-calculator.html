@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Social Security Calculator - Benefit at Claim Age | EMI Master</title>
+  <meta name="description" content="Estimate your Social Security benefit based on when you claim, with early retirement reductions and delayed retirement credits. Free social security calculator.">
+  <meta name="keywords" content="social security calculator, social security benefit, claiming age calculator, FRA, delayed retirement credits">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://emimaster.com/social-security-calculator.html">
+  <meta property="og:title" content="Social Security Calculator | EMI Master">
+  <meta property="og:description" content="Benefit at your claiming age, vs FRA.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://emimaster.com/social-security-calculator.html">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "EMI Master Social Security Calculator",
+    "url": "https://emimaster.com/social-security-calculator.html",
+    "description": "Free social security benefit estimator by claiming age.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is full retirement age (FRA)?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "FRA is the age at which you receive 100% of your primary insurance amount. For people born in 1960 or later it is 67; for earlier birth years it ranges from 66 to 67."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much is my benefit reduced for claiming early?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Claiming before FRA reduces benefits by about 5/9 of 1% per month for the first 36 months, and 5/12 of 1% per additional month. Delaying past FRA adds about 8% per year (2/3 of 1% per month)."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+
+<div id="siteHeader"></div>
+
+<section class="hero hero-compact">
+  <div class="container">
+    <h1>Social Security Calculator</h1>
+    <p>Choose the right time to claim your benefit.</p>
+  </div>
+</section>
+
+<div class="layout">
+  <div id="siteSidebar"></div>
+
+  <main class="main-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Social Security Calculator</div>
+    <h1 class="page-title">Social Security Calculator</h1>
+    <p class="page-subtitle">See how claiming early or late changes your monthly benefit and lifetime total.</p>
+
+    <div class="card">
+      <h2>Benefit Details</h2>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="claimAge">Claiming Age</label>
+          <div class="input-wrap">
+            <span class="suffix">yrs</span>
+            <input type="number" id="claimAge" value="62" min="62" max="70" step="1">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="fra">Full Retirement Age (FRA)</label>
+          <div class="input-wrap">
+            <span class="suffix">yrs</span>
+            <input type="number" id="fra" value="67" min="66" max="67" step="1">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="monthlyAtFra">Monthly Benefit at FRA</label>
+          <div class="input-wrap">
+            <span class="prefix">$</span>
+            <input type="number" id="monthlyAtFra" value="2000" min="0" step="50">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="lifeExpect">Life Expectancy</label>
+          <div class="input-wrap">
+            <span class="suffix">yrs</span>
+            <input type="number" id="lifeExpect" value="85" min="60" max="110" step="1">
+          </div>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary" id="calculateBtn" type="button">Calculate</button>
+        <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
+      </div>
+    </div>
+
+    <div class="result-panel" id="resultPanel">
+      <h3 id="resultLabel">Monthly Benefit at Claim Age</h3>
+      <div class="result-main" id="resultMain">—</div>
+      <div class="result-grid">
+        <div class="result-item"><div class="label">Total Lifetime Benefits</div><div class="value positive" id="rLifetime">—</div></div>
+        <div class="result-item"><div class="label">Difference vs FRA Claim</div><div class="value" id="rDiff">—</div></div>
+        <div class="result-item"><div class="label">Years Receiving Benefits</div><div class="value" id="rYears">—</div></div>
+      </div>
+    </div>
+
+    <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
+
+    <div class="content-section">
+      <h2>Early vs delayed claiming</h2>
+      <p>Claiming at 62 can reduce your benefit by about <strong>30%</strong> versus FRA, while delaying to 70 can raise it by about <strong>24%</strong> (8% per year). Delaying wins in lifetime terms only if you live long enough &mdash; the calculator shows both the monthly and lifetime impact of your choice.</p>
+    </div>
+
+    <div class="content-section">
+      <h2>Social Security FAQ</h2>
+      <div class="faq-item">
+        <div class="faq-q">What is the break-even age?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">It is the age where the cumulative benefits of claiming later finally overtake claiming early. It typically falls around age 78-80, after which delaying pays off.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Should I claim early if I need the money?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">If you have no other income, claiming early may be necessary. Otherwise, delaying a few years is often the highest-value financial move available.</div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div id="siteFooter"></div>
+
+<script>
+  window.calcConfig = {
+    type: 'social-security',
+    defaults: { claimAge: 62, fra: 67, monthlyAtFra: 2000, lifeExpect: 85 }
+  };
+</script>
+<script src="js/currency.js"></script>
+<script src="js/seo-content.js"></script>
+<script src="js/common.js"></script>
+<script src="js/retirement.js"></script>
+</body>
+</html>
