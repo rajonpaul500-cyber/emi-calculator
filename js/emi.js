@@ -11,7 +11,7 @@
 
   function fmt(v) {
     if (window.I18N) return window.I18N.fmt(v);
-    return '₹' + Math.round(v).toLocaleString('en-IN');
+    return '$' + Math.round(v).toLocaleString('en-IN');
   }
 
   function ph(s) {

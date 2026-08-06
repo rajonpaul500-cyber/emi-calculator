@@ -124,7 +124,7 @@
       '<header class="site-header">' +
       '<div class="header-inner">' +
       '<a href="index.html" class="brand">' +
-      '<span class="brand-logo">' + SITE_NAME.charAt(0) + '</span>' +
+      '<img src="logo.svg" class="brand-logo" alt="EMI Master logo" width="36" height="36">' +
       '<span>' + SITE_NAME + '</span>' +
       '</a>' +
       '<nav class="main-nav" id="mainNav">' + nav + '</nav>' +
@@ -864,6 +864,35 @@
       })(items[i]);
     }
   }
+
+  /* ----- PWA: register service worker + inject manifest link ----- */
+  function initPwa() {
+    if (!document.querySelector('link[rel="manifest"]')) {
+      var manifest = document.createElement("link");
+      manifest.rel = "manifest";
+      manifest.href = "manifest.json";
+      document.head.appendChild(manifest);
+    }
+    if (!document.querySelector('meta[name="theme-color"]')) {
+      var theme = document.createElement("meta");
+      theme.name = "theme-color";
+      theme.content = "#1d4ed8";
+      document.head.appendChild(theme);
+    }
+    if (document.readyState === "complete" || document.readyState === "interactive") {
+      registerSw();
+    } else {
+      window.addEventListener("load", registerSw);
+    }
+  }
+
+  function registerSw() {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("sw.js").catch(function () { /* SW unavailable */ });
+    }
+  }
+
+  initPwa();
 
   /* ----- export ----- */
   window.EMIMaster = {

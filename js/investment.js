@@ -12,7 +12,7 @@
   var $ = function (id) { return document.getElementById(id); };
 
   function fmt(v) {
-    return '₹' + Math.round(v).toLocaleString('en-IN');
+    return '$' + Math.round(v).toLocaleString('en-IN');
   }
 
   function fmt1(v) {

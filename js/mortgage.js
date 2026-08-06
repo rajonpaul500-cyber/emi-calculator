@@ -11,7 +11,7 @@
   var $ = function (id) { return document.getElementById(id); };
 
   function fmt(v) {
-    return '₹' + Math.round(v).toLocaleString('en-IN');
+    return '$' + Math.round(v).toLocaleString('en-IN');
   }
 
   function fmt1(v) {
@@ -417,7 +417,7 @@
     setText('resultLabel', 'Verdict after ' + years + ' years');
     setText('rBuy', fmt(buyNet));
     setText('rRent', fmt(rentNet));
-    setText('rDiff', (diff >= 0 ? '+₹' : '-₹') + Math.round(Math.abs(diff)).toLocaleString('en-IN'));
+    setText('rDiff', (diff >= 0 ? '+$' : '-$') + Math.round(Math.abs(diff)).toLocaleString('en-IN'));
     setText('rMonthly', fmt(buyMonthly));
     showPanel();
   }

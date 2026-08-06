@@ -23,14 +23,14 @@ window.SEO_CONTENT = {
                 title: "The EMI formula explained",
                 body: [
                     "EMI = P × r × (1+r)ⁿ ÷ ((1+r)ⁿ − 1), where P is the loan principal, r is the monthly interest rate (annual rate ÷ 12 ÷ 100), and n is the total number of monthly payments (tenure in years × 12).",
-                    "For example, a ₹20,00,000 loan at 8.5% for 20 years gives r = 0.7083% and n = 240. Plugging into the formula produces an EMI of about ₹17,350.",
+                    "For example, a $20,00,000 loan at 8.5% for 20 years gives r = 0.7083% and n = 240. Plugging into the formula produces an EMI of about $17,350.",
                     "Banks add processing fees and GST on top, so your effective cost is slightly higher than the pure EMI shown here."
                 ]
             },
             {
                 title: "Why the interest component is highest at the start",
                 body: [
-                    "Interest is charged on the outstanding balance, which is largest at the beginning. In month 1 of the example above, interest is about ₹14,167 and principal only ₹3,183.",
+                    "Interest is charged on the outstanding balance, which is largest at the beginning. In month 1 of the example above, interest is about $14,167 and principal only $3,183.",
                     "By year 15 the balance has shrunk so much that the principal share of each EMI exceeds the interest share. This is called an amortizing loan.",
                     "Because interest is front-loaded, paying extra in the early years reduces total interest dramatically — completing a few extra payments in year 1 can save years of payments later."
                 ]
@@ -104,7 +104,7 @@ window.SEO_CONTENT = {
             { k: "Purpose", v: "Buy / construct a home" },
             { k: "Typical rate", v: "8.4% – 10.5% p.a." },
             { k: "Max tenure", v: "30 years" },
-            { k: "Tax benefit", v: "Sec 24(b): ₹2L int. / Sec 80C: ₹1.5L principal" }
+            { k: "Tax benefit", v: "Sec 24(b): $2L int. / Sec 80C: $1.5L principal" }
         ],
         introTitle: "Home Loan Calculator — plan your dream home",
         intro: "A home loan is the largest financial commitment most people ever make. This calculator helps you understand exactly what your monthly EMI will be, how much interest you will pay over the full tenure, and how much of each payment builds your equity. Compare tenures, explore the effect of a slightly lower interest rate, and plan your home purchase with confidence.",
@@ -120,9 +120,9 @@ window.SEO_CONTENT = {
             {
                 title: "Tax benefits of a home loan",
                 body: [
-                    "Under Section 24(b), interest paid on a self-occupied home loan is deductible up to ₹2,00,000 per year. For a let-out property, there is no upper cap on the interest deduction.",
-                    "Under Section 80C, principal repayment qualifies for deduction up to ₹1,50,000, shared with other eligible investments like PPF and ELSS.",
-                    "First-time home buyers can claim an additional ₹50,000 interest deduction under Section 80EE (conditions apply)."
+                    "Under Section 24(b), interest paid on a self-occupied home loan is deductible up to $2,00,000 per year. For a let-out property, there is no upper cap on the interest deduction.",
+                    "Under Section 80C, principal repayment qualifies for deduction up to $1,50,000, shared with other eligible investments like PPF and ELSS.",
+                    "First-time home buyers can claim an additional $50,000 interest deduction under Section 80EE (conditions apply)."
                 ]
             },
             {
@@ -130,7 +130,7 @@ window.SEO_CONTENT = {
                 body: [
                     "The 28/36 rule: keep your housing payment below 28% of gross income, and total debts below 36%.",
                     "In India, lenders cap your total EMI at 40–50% of net take-home income and usually require a down payment of 15–25%.",
-                    "A common multiplier is 4–5× your annual income. For a ₹10 lakh annual income, expect eligibility around ₹40–50 lakh."
+                    "A common multiplier is 4–5× your annual income. For a $10 lakh annual income, expect eligibility around $40–50 lakh."
                 ]
             }
         ],
@@ -142,7 +142,7 @@ window.SEO_CONTENT = {
             "Adjust the tenure slider to see how much interest you can save with a shorter term."
         ],
         tips: [
-            "A 0.5% lower rate on a ₹40L, 20-year loan saves roughly ₹4–5 lakh in interest.",
+            "A 0.5% lower rate on a $40L, 20-year loan saves roughly $4–5 lakh in interest.",
             "Claim tax deductions under 80C and 24(b) to reduce your effective cost.",
             "If your income grows, use annual bonuses for part-prepayment — it cuts interest massively."
         ],
@@ -203,7 +203,7 @@ window.SEO_CONTENT = {
             {
                 title: "The true cost of car ownership",
                 body: [
-                    "For a ₹10 lakh car financed over 5 years, the interest alone can exceed ₹2 lakh. Adding fuel, insurance, maintenance and depreciation, the true cost is roughly 1.5–2× the sticker price.",
+                    "For a $10 lakh car financed over 5 years, the interest alone can exceed $2 lakh. Adding fuel, insurance, maintenance and depreciation, the true cost is roughly 1.5–2× the sticker price.",
                     "New cars lose 20–30% of their value in the first year. A 3-year used car often costs half of a new one with minimal additional risk.",
                     "Always insure comprehensive cover — lenders require it, and a single accident can erase years of savings."
                 ]
@@ -270,7 +270,7 @@ window.SEO_CONTENT = {
             }
         ],
         steps: [
-            "Enter the personal loan amount (e.g. ₹5,00,000).",
+            "Enter the personal loan amount (e.g. $5,00,000).",
             "Input the applicable interest rate from your bank.",
             "Choose the tenure — 1 to 5 years.",
             "Instantly see the EMI, total payment and total interest.",
@@ -609,14 +609,14 @@ window.SEO_CONTENT = {
                 title: "The compound interest formula",
                 body: [
                     "Maturity = P × (1 + r/m)^(m×t) + C × [((1 + r/m)^(m×t) − 1) ÷ (r/m)], where P is the initial amount, C the monthly contribution, r the annual rate, m the compounding frequency and t the term in years.",
-                    "A ₹1,00,000 lump sum plus ₹2,000/month at 7% for 10 years becomes roughly ₹5,50,000 — nearly double the ₹3,40,000 invested, thanks to compounding.",
+                    "A $1,00,000 lump sum plus $2,000/month at 7% for 10 years becomes roughly $5,50,000 — nearly double the $3,40,000 invested, thanks to compounding.",
                     "Continuous compounding (e^rt) is the theoretical maximum and is used by some modern digital savings products."
                 ]
             },
             {
                 title: "Why starting early beats investing more",
                 body: [
-                    "Investor A invests ₹5,000/month from age 25 to 35 (₹6 lakh total). Investor B invests ₹5,000/month from 35 to 60 (₹15 lakh total). At 10% p.a., A's money grows to about ₹1.06 crore vs B's ₹99 lakh — A ends with more despite investing 2.5× less!",
+                    "Investor A invests $5,000/month from age 25 to 35 ($6 lakh total). Investor B invests $5,000/month from 35 to 60 ($15 lakh total). At 10% p.a., A's money grows to about $1.06 crore vs B's $99 lakh — A ends with more despite investing 2.5× less!",
                     "The first decade of contributions does roughly 60% of the work over a 40-year horizon because every rupee compounds for decades.",
                     "This is why financial advisors repeat: start yesterday."
                 ]
@@ -624,8 +624,8 @@ window.SEO_CONTENT = {
             {
                 title: "Simple vs compound interest",
                 body: [
-                    "Simple interest is calculated only on the original principal: ₹1,00,000 at 10% for 20 years grows to ₹3,00,000.",
-                    "Compound interest at the same rate and term grows to ₹6,72,750 — more than double.",
+                    "Simple interest is calculated only on the original principal: $1,00,000 at 10% for 20 years grows to $3,00,000.",
+                    "Compound interest at the same rate and term grows to $6,72,750 — more than double.",
                     "For long-term goals (retirement, education), always use compound-interest products. For short-term debt, avoid compound-interest charges on credit cards."
                 ]
             }
@@ -690,15 +690,15 @@ window.SEO_CONTENT = {
                 title: "The math behind the monthly deposit",
                 body: [
                     "Monthly deposit = Goal × r ÷ [(1 + r)^n − 1], where r is the monthly rate and n the number of months.",
-                    "To save ₹10,00,000 in 5 years at 8%: the deposit is about ₹13,600/month, not the ₹16,667/month simple division would suggest — the gap is compounding working for you.",
+                    "To save $10,00,000 in 5 years at 8%: the deposit is about $13,600/month, not the $16,667/month simple division would suggest — the gap is compounding working for you.",
                     "A 6-month emergency fund (3–6× monthly expenses) is the first goal every planner recommends before investing."
                 ]
             },
             {
                 title: "Inflation-proofing the goal",
                 body: [
-                    "A ₹50,00,000 retirement goal today is worth far less in 20 years. Use a real rate (return − inflation) to automatically inflate the target.",
-                    "For education costs growing at 10% p.a., a ₹20,00,000 college cost in 15 years is ₹83,55,000 — plan with the inflated number.",
+                    "A $50,00,000 retirement goal today is worth far less in 20 years. Use a real rate (return − inflation) to automatically inflate the target.",
+                    "For education costs growing at 10% p.a., a $20,00,000 college cost in 15 years is $83,55,000 — plan with the inflated number.",
                     "Review the goal annually and adjust deposits for salary increases and actual inflation."
                 ]
             }
@@ -816,9 +816,9 @@ window.SEO_CONTENT = {
             {
                 title: "How much faster do you finish?",
                 body: [
-                    "A ₹5,00,000 loan at 12% for 5 years with a ₹1,000 extra payment finishes 6 months early and saves about ₹30,000 in interest.",
+                    "A $5,00,000 loan at 12% for 5 years with a $1,000 extra payment finishes 6 months early and saves about $30,000 in interest.",
                     "Doubling the minimum payment can cut the term roughly in half.",
-                    "Every ₹100 of extra payment in the first year is worth closer to ₹250 of savings over the loan life."
+                    "Every $100 of extra payment in the first year is worth closer to $250 of savings over the loan life."
                 ]
             }
         ],
@@ -869,7 +869,7 @@ window.SEO_CONTENT = {
                 body: [
                     "Housing costs (PITI) should not exceed 28% of gross monthly income.",
                     "Total monthly debt payments (housing + car + student loans + cards) should not exceed 36%.",
-                    "Example: ₹90,000/month income → housing budget ₹25,200; total debt ₹32,400. With a 6.5% rate and 20% down, that supports about ₹45,00,000 of home price."
+                    "Example: $90,000/month income → housing budget $25,200; total debt $32,400. With a 6.5% rate and 20% down, that supports about $45,00,000 of home price."
                 ]
             },
             {
@@ -899,8 +899,8 @@ window.SEO_CONTENT = {
                 a: "Reduce debts first (pay off cards), increase your down payment, or choose a cheaper home. Some lenders accept 43–45% DTI with compensating factors like high savings."
             },
             {
-                q: "How much house can I afford with ₹1 lakh/month income?",
-                a: "Housing budget ≈ ₹28,000/month. At 6.5% for 20 years with 20% down, that supports roughly a ₹50,00,000–55,00,000 home."
+                q: "How much house can I afford with $1 lakh/month income?",
+                a: "Housing budget ≈ $28,000/month. At 6.5% for 20 years with 20% down, that supports roughly a $50,00,000–55,00,000 home."
             }
         ],
         related: [
@@ -928,8 +928,8 @@ window.SEO_CONTENT = {
                 title: "Simple vs compound interest",
                 body: [
                     "Simple interest = P × R × T, where P is the principal, R the annual rate and T the time in years.",
-                    "₹1,00,000 at 8% simple for 5 years earns ₹40,000, maturing at ₹1,40,000.",
-                    "Compound interest at the same rate and term earns ₹46,933 — the difference grows with time, which is why long-term investments prefer compounding."
+                    "$1,00,000 at 8% simple for 5 years earns $40,000, maturing at $1,40,000.",
+                    "Compound interest at the same rate and term earns $46,933 — the difference grows with time, which is why long-term investments prefer compounding."
                 ]
             },
             {
@@ -995,7 +995,7 @@ window.SEO_CONTENT = {
                 title: "Why compounding frequency matters",
                 body: [
                     "Quarterly compounding (used by most Indian FDs) earns more than annual compounding on the same rate.",
-                    "₹1,00,000 at 7% over 5 years: annual compounding gives ₹1,40,255, quarterly gives ₹1,41,475 — about ₹1,200 more.",
+                    "$1,00,000 at 7% over 5 years: annual compounding gives $1,40,255, quarterly gives $1,41,475 — about $1,200 more.",
                     "Effective annual rate = (1 + r/n)^n − 1. A 7% rate compounded quarterly is effectively 7.19%."
                 ]
             }
@@ -1018,7 +1018,7 @@ window.SEO_CONTENT = {
             },
             {
                 q: "Is FD interest taxed?",
-                a: "Yes, as per your income slab. Banks deduct TDS if interest exceeds ₹40,000/year (₹50,000 for seniors), but you must still declare it in your return."
+                a: "Yes, as per your income slab. Banks deduct TDS if interest exceeds $40,000/year ($50,000 for seniors), but you must still declare it in your return."
             }
         ],
         related: [
@@ -1046,8 +1046,8 @@ window.SEO_CONTENT = {
                 title: "SIP: the disciplined investor's tool",
                 body: [
                     "SIP (Systematic Investment Plan) invests a fixed amount monthly, averaging the purchase price through market ups and downs (rupee-cost averaging).",
-                    "A ₹10,000/month SIP at 12% for 15 years grows to about ₹50 lakh — six times more than the ₹18 lakh invested.",
-                    "Even small delays matter: starting 3 years late on the same plan costs roughly ₹12 lakh of terminal value."
+                    "A $10,000/month SIP at 12% for 15 years grows to about $50 lakh — six times more than the $18 lakh invested.",
+                    "Even small delays matter: starting 3 years late on the same plan costs roughly $12 lakh of terminal value."
                 ]
             },
             {
@@ -1106,7 +1106,7 @@ window.SEO_CONTENT = {
                 title: "How SIP returns build up",
                 body: [
                     "Each monthly contribution buys units at that month's NAV (Net Asset Value), naturally averaging your entry price.",
-                    "₹5,000/month at 12% for 20 years becomes about ₹50 lakh against ₹12 lakh invested — ₹38 lakh of wealth from market returns.",
+                    "$5,000/month at 12% for 20 years becomes about $50 lakh against $12 lakh invested — $38 lakh of wealth from market returns.",
                     "CAGR (Compound Annual Growth Rate) is the annualized return: the single number that lets you compare funds fairly."
                 ]
             },
@@ -1166,7 +1166,7 @@ window.SEO_CONTENT = {
                 title: "The reverse compound formula",
                 body: [
                     "Rate = n × [(Maturity ÷ Principal)^(1/(n×years)) − 1] × 100, where n is the compounding frequency per year.",
-                    "To grow ₹5,00,000 to ₹10,00,000 in 8 years, you need about 9.05% annual compounding — a rate achievable with a balanced equity fund but not with an FD.",
+                    "To grow $5,00,000 to $10,00,000 in 8 years, you need about 9.05% annual compounding — a rate achievable with a balanced equity fund but not with an FD.",
                     "Compounding frequency slightly changes the required nominal rate: quarterly compounding needs a lower nominal rate than annual."
                 ]
             },
@@ -1285,7 +1285,7 @@ window.SEO_CONTENT = {
                 title: "The discounting concept",
                 body: [
                     "PV = FV ÷ (1 + r)^n, where r is the monthly equivalent of your discount rate and n the number of periods.",
-                    "If you need ₹50,00,000 in 12 years at 8%, today's value is about ₹19,60,000 — that's the lump sum to invest now.",
+                    "If you need $50,00,000 in 12 years at 8%, today's value is about $19,60,000 — that's the lump sum to invest now.",
                     "Higher discount rates shrink present values sharply; that's why high-risk investments are 'cheaper' in present-value terms."
                 ]
             },
@@ -1345,15 +1345,15 @@ window.SEO_CONTENT = {
                 title: "The growth formula",
                 body: [
                     "FV = PV × (1 + r/m)^(m×t), where PV is the present amount, r the annual rate, m compounding frequency and t the years.",
-                    "₹10,00,000 at 10% for 10 years compounded annually grows to ₹25,93,742; compounded monthly, slightly more.",
+                    "$10,00,000 at 10% for 10 years compounded annually grows to $25,93,742; compounded monthly, slightly more.",
                     "The 'rule of 72' reverse-checks your numbers: 72 ÷ rate ≈ years to double."
                 ]
             },
             {
                 title: "Planning goals accurately",
                 body: [
-                    "Education: a ₹20 lakh cost today at 10% inflation will be ₹52.9 lakh in 10 years — plan FV, not PV.",
-                    "Retirement: today's ₹40,000 monthly expense at 6% inflation becomes ₹1,28,000/month in 20 years.",
+                    "Education: a $20 lakh cost today at 10% inflation will be $52.9 lakh in 10 years — plan FV, not PV.",
+                    "Retirement: today's $40,000 monthly expense at 6% inflation becomes $1,28,000/month in 20 years.",
                     "The difference between assuming 8% vs 10% over 30 years is nearly double the terminal amount — choose your rate carefully."
                 ]
             }
@@ -1466,7 +1466,7 @@ window.SEO_CONTENT = {
             {
                 title: "ROI vs annualized return",
                 body: [
-                    "ROI = (Final value − Cost) ÷ Cost × 100. A ₹50,000 gain on ₹2,00,000 cost is 25% ROI.",
+                    "ROI = (Final value − Cost) ÷ Cost × 100. A $50,000 gain on $2,00,000 cost is 25% ROI.",
                     "But 25% over 5 years (5% p.a.) is very different from 25% in 1 year. CAGR fixes this: CAGR = (Final ÷ Cost)^(1/years) − 1.",
                     "Always compare annualized returns across different time horizons — a financial planner never compares raw ROI across periods."
                 ]
@@ -1586,14 +1586,14 @@ window.SEO_CONTENT = {
                 body: [
                     "IRR is the implied annual return of a series of cash flows: an initial outflow followed by inflows.",
                     "Decision rule: accept a project if IRR exceeds your cost of capital (e.g. 12%). Reject if IRR < hurdle rate.",
-                    "For the example of a ₹10,00,000 investment returning ₹2,50,000/year for 5 years plus a ₹2,00,000 residual, IRR ≈ 12.3%."
+                    "For the example of a $10,00,000 investment returning $2,50,000/year for 5 years plus a $2,00,000 residual, IRR ≈ 12.3%."
                 ]
             },
             {
                 title: "IRR vs NPV vs payback",
                 body: [
                     "NPV tells you the absolute value created (in money) at your discount rate; IRR tells you the percentage return.",
-                    "IRR alone can mislead when projects have different scales — a 50% IRR on ₹1 lakh is worth less than 20% IRR on ₹1 crore.",
+                    "IRR alone can mislead when projects have different scales — a 50% IRR on $1 lakh is worth less than 20% IRR on $1 crore.",
                     "Payback period is the simplest but ignores profitability after breakeven — use all three for big decisions."
                 ]
             }
@@ -1644,7 +1644,7 @@ window.SEO_CONTENT = {
             {
                 title: "Simple vs discounted payback",
                 body: [
-                    "Simple payback = Investment ÷ annual cash flow. A ₹10,00,000 machine generating ₹2,50,000/year pays back in 4 years.",
+                    "Simple payback = Investment ÷ annual cash flow. A $10,00,000 machine generating $2,50,000/year pays back in 4 years.",
                     "Discounted payback discounts each year's cash flow first — more conservative, and what this calculator's time-value-aware cousin (NPV/IRR) uses.",
                     "Short paybacks reduce risk: the faster capital returns, the sooner you can reinvest."
                 ]
@@ -1874,8 +1874,8 @@ window.SEO_CONTENT = {
                 title: "The payout formula",
                 body: [
                     "Monthly payout = P × r ÷ [1 − (1+r)^−n], where P is the lump sum, r the monthly rate and n the number of months.",
-                    "A ₹50,00,000 corpus at 6% for 20 years pays about ₹35,800/month.",
-                    "Extending to 30 years drops the payout to about ₹30,000/month — trade income for longevity."
+                    "A $50,00,000 corpus at 6% for 20 years pays about $35,800/month.",
+                    "Extending to 30 years drops the payout to about $30,000/month — trade income for longevity."
                 ]
             },
             {
@@ -1932,7 +1932,7 @@ window.SEO_CONTENT = {
             {
                 title: "Why pension math matters",
                 body: [
-                    "A ₹40,000/month pension with 3% annual COLA for 25 years totals about ₹1.74 crore — far more than the ₹1.2 crore without COLA.",
+                    "A $40,000/month pension with 3% annual COLA for 25 years totals about $1.74 crore — far more than the $1.2 crore without COLA.",
                     "Without COLA, inflation halves your purchasing power roughly every 12 years at 6% inflation.",
                     "Deciding to take a lump sum vs a pension? Compare the pension's present value against the lump sum offer — this calculator shows the lifetime picture."
                 ]
@@ -1965,7 +1965,7 @@ window.SEO_CONTENT = {
             },
             {
                 q: "How is a pension's present value calculated?",
-                a: "Sum each future monthly payment discounted to today's money at your discount rate. A ₹40,000 pension for 25 years at 7% has a present value near ₹55 lakh."
+                a: "Sum each future monthly payment discounted to today's money at your discount rate. A $40,000 pension for 25 years at 7% has a present value near $55 lakh."
             }
         ],
         related: [
@@ -2054,7 +2054,7 @@ window.SEO_CONTENT = {
                 body: [
                     "Front-end ratio: housing costs (mortgage, tax, insurance) ÷ gross income. Target ≤ 28%.",
                     "Back-end ratio: ALL debt payments ÷ gross income. Target ≤ 36%.",
-                    "Example: ₹30,000 housing + ₹18,000 other debts on ₹1,20,000 income → front 25%, back 40%. A second loan would push you over the 36% norm."
+                    "Example: $30,000 housing + $18,000 other debts on $1,20,000 income → front 25%, back 40%. A second loan would push you over the 36% norm."
                 ]
             },
             {
@@ -2111,7 +2111,7 @@ window.SEO_CONTENT = {
             {
                 title: "Down payment thresholds",
                 body: [
-                    "20% is the sweet spot — it avoids PMI and gives instant equity. For a ₹50,00,000 home, that's ₹10,00,000 cash.",
+                    "20% is the sweet spot — it avoids PMI and gives instant equity. For a $50,00,000 home, that's $10,00,000 cash.",
                     "FHA loans allow as little as 3.5%, but add mortgage insurance premiums for life of the loan in many cases.",
                     "VA (0%) and USDA (0%) loans exist for eligible buyers — no PMI either. Private lenders often offer 5–10% down with PMI."
                 ]
@@ -2119,7 +2119,7 @@ window.SEO_CONTENT = {
             {
                 title: "Saving for the down payment",
                 body: [
-                    "A ₹10,00,000 down payment in 3 years at 7% needs about ₹25,000/month saved — 10% of a ₹2.5 lakh monthly income.",
+                    "A $10,00,000 down payment in 3 years at 7% needs about $25,000/month saved — 10% of a $2.5 lakh monthly income.",
                     "Keep down-payment savings in FDs or liquid funds — never equity you may need at a market low.",
                     "Gift funds from family are allowed by most lenders but must be documented."
                 ]
@@ -2143,7 +2143,7 @@ window.SEO_CONTENT = {
             },
             {
                 q: "How much house can I afford with my down payment?",
-                a: "Divide your cash by your planned down payment percentage. With ₹10,00,000 at 20%, you can afford a ₹50,00,000 home. Use the house affordability calculator for the full picture."
+                a: "Divide your cash by your planned down payment percentage. With $10,00,000 at 20%, you can afford a $50,00,000 home. Use the house affordability calculator for the full picture."
             }
         ],
         related: [
@@ -2178,7 +2178,7 @@ window.SEO_CONTENT = {
             {
                 title: "The breakeven calculation",
                 body: [
-                    "Breakeven months = total closing costs ÷ monthly savings. If costs are ₹2,00,000 and you save ₹8,000/month, breakeven is 25 months.",
+                    "Breakeven months = total closing costs ÷ monthly savings. If costs are $2,00,000 and you save $8,000/month, breakeven is 25 months.",
                     "If you plan to move or refinance again before breakeven, the refi loses money.",
                     "Online 'no-cost' refinances embed costs in a higher rate — compare total cost over your planned stay."
                 ]
@@ -2229,9 +2229,9 @@ window.SEO_CONTENT = {
             {
                 title: "Strategies to pay off early",
                 body: [
-                    "Extra monthly payment: ₹5,000 extra/month on a ₹40 lakh mortgage saves lakhs and cuts years.",
+                    "Extra monthly payment: $5,000 extra/month on a $40 lakh mortgage saves lakhs and cuts years.",
                     "Biweekly payments: paying half the EMI every two weeks creates one extra full payment each year — a classic zero-pain accelerator.",
-                    "Annual lump sums from bonuses: a ₹1,00,000 yearly bonus applied to principal works like compounding in reverse."
+                    "Annual lump sums from bonuses: a $1,00,000 yearly bonus applied to principal works like compounding in reverse."
                 ]
             },
             {
@@ -2288,7 +2288,7 @@ window.SEO_CONTENT = {
             {
                 title: "The 30% rule and reality",
                 body: [
-                    "30% of gross income is the affordability benchmark: ₹40,000/month income → ₹12,000 rent.",
+                    "30% of gross income is the affordability benchmark: $40,000/month income → $12,000 rent.",
                     "In high-cost cities, many renters hit 40–50%; that's the reality of metro cities — compensate by cutting other variable costs.",
                     "The 3× income rule for annual rent is another check: annual rent should be ≤ 3× annual gross income."
                 ]
@@ -2297,7 +2297,7 @@ window.SEO_CONTENT = {
                 title: "Hidden costs renters forget",
                 body: [
                     "Security deposits (usually 1–3 months' rent), brokerage, utilities, internet and moving costs.",
-                    "Renter's insurance is cheap insurance against theft and liability — typically under ₹5,000/year.",
+                    "Renter's insurance is cheap insurance against theft and liability — typically under $5,000/year.",
                     "Use this calculator's budget view to keep total housing within your comfort zone."
                 ]
             }
@@ -2316,7 +2316,7 @@ window.SEO_CONTENT = {
         faqs: [
             {
                 q: "How much rent can I afford?",
-                a: "Most advisors cap rent at 30% of gross income. On ₹60,000/month income, that's ₹18,000. Factor utilities separately — they can add ₹2,000–5,000."
+                a: "Most advisors cap rent at 30% of gross income. On $60,000/month income, that's $18,000. Factor utilities separately — they can add $2,000–5,000."
             },
             {
                 q: "What is the rule of thumb for rent?",
@@ -2415,7 +2415,7 @@ window.SEO_CONTENT = {
             {
                 title: "Rental yield explained",
                 body: [
-                    "Gross yield = annual rent ÷ property price × 100. A ₹30,000/month rent on a ₹90 lakh property is a 4% gross yield.",
+                    "Gross yield = annual rent ÷ property price × 100. A $30,000/month rent on a $90 lakh property is a 4% gross yield.",
                     "Net yield subtracts maintenance (0.5–1% of value/year), property tax, insurance and vacancy (1 month/year typical).",
                     "In Indian metros, rental yields of 3–5% are common; the profit often comes from appreciation over 10+ years."
                 ]
@@ -2483,7 +2483,7 @@ window.SEO_CONTENT = {
             {
                 title: "The 1% and 50% rules",
                 body: [
-                    "1% rule: monthly rent should be at least 1% of purchase price (e.g. ₹90,000 rent on a ₹90 lakh property). Many Indian metros fall short — the rule is a filter, not a law.",
+                    "1% rule: monthly rent should be at least 1% of purchase price (e.g. $90,000 rent on a $90 lakh property). Many Indian metros fall short — the rule is a filter, not a law.",
                     "50% rule: roughly 50% of gross rent goes to vacancy, maintenance, taxes and insurance (before mortgage).",
                     "If cash flow is negative month one, it rarely self-corrects without appreciation — run the numbers cold."
                 ]
@@ -2536,7 +2536,7 @@ window.SEO_CONTENT = {
                 title: "APR vs interest rate",
                 body: [
                     "The interest rate is the cost of the principal; APR adds origination fees, points, mortgage insurance and some closing costs divided over the loan term.",
-                    "For a ₹10,00,000 loan at 10% with 2% fees, the APR is about 10.3–10.5% — the real cost.",
+                    "For a $10,00,000 loan at 10% with 2% fees, the APR is about 10.3–10.5% — the real cost.",
                     "Always compare APR across lenders. On a 30-year loan, 0.2% APR difference equals lakhs of rupees."
                 ]
             },
@@ -2655,7 +2655,7 @@ window.SEO_CONTENT = {
             {
                 title: "VA loan advantages",
                 body: [
-                    "0% down and no PMI — the only major loan with both. Compare: a ₹40 lakh conventional loan with 5% down carries ~₹19,000/year in PMI at the typical rate.",
+                    "0% down and no PMI — the only major loan with both. Compare: a $40 lakh conventional loan with 5% down carries ~$19,000/year in PMI at the typical rate.",
                     "Rates are typically 0.25–0.5% below conventional and there's no minimum credit score (lenders set their own, often 620).",
                     "The funding fee is 2.15% for first use with 0% down (regular military) — it can be financed into the loan or waived entirely for disabled veterans."
                 ]
@@ -2747,7 +2747,7 @@ window.SEO_CONTENT = {
             },
             {
                 q: "How much can I borrow?",
-                a: "Typically 80–85% of the home value minus the outstanding mortgage. On a ₹1 crore home with a ₹40 lakh mortgage, you may access ₹40–45 lakh."
+                a: "Typically 80–85% of the home value minus the outstanding mortgage. On a $1 crore home with a $40 lakh mortgage, you may access $40–45 lakh."
             }
         ],
         related: [
@@ -2783,7 +2783,7 @@ window.SEO_CONTENT = {
                 title: "The danger of interest-only payments",
                 body: [
                     "Interest-only draws feel cheap but the principal is deferred to the repayment phase — your payment can triple when it begins.",
-                    "A ₹20,00,000 draw at 9% costs ~₹15,000/month interest-only, then ~₹25,000/month once principal amortizes over 10 years.",
+                    "A $20,00,000 draw at 9% costs ~$15,000/month interest-only, then ~$25,000/month once principal amortizes over 10 years.",
                     "Plan the repayment-phase payment before drawing — this calculator makes it visible."
                 ]
             }
