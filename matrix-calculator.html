@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M8XM9611FL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-M8XM9611FL');
+</script>
+<script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matrix Calculator | EMI Master</title>
+<meta name="description" content="Free online Matrix Calculator. Fast, accurate and mobile friendly. No signup - calculations run 100% in your browser.">
+<meta name="keywords" content="matrix calculator, free online math calculator, matrix calculator online">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://emimaster.com/matrix-calculator.html">
+<meta property="og:title" content="Matrix Calculator | EMI Master">
+<meta property="og:description" content="Free, fast, private Matrix Calculator. Works on all devices.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://emimaster.com/matrix-calculator.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Matrix Calculator","url":"https://emimaster.com/matrix-calculator.html","description":"Matrix Calculator - 100% free, fast and accurate online calculator. Runs in your browser.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do you add matrices?","acceptedAnswer":{"@type":"Answer","text":"Add matching elements: A[i][j] + B[i][j]. Both matrices must have the same dimensions."}},{"@type":"Question","name":"How is matrix multiplication done?","acceptedAnswer":{"@type":"Answer","text":"Row of A multiplied with column of B. The result cell at (i,j) is the sum of products of corresponding elements."}}]}</script>
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+</head>
+<body>
+
+<div id="siteHeader"></div>
+
+<section class="hero hero-compact">
+<div class="container">
+<h1>Matrix Calculator</h1>
+<p>Fast, free, accurate and 100% private. Works on any device.</p>
+</div>
+</section>
+
+<div class="layout">
+<div id="siteSidebar"></div>
+
+<main class="main-content">
+<div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Matrix Calculator</div>
+<h1 class="page-title">Matrix Calculator</h1>
+<p class="page-subtitle">Enter your values below and click the button for instant results.</p>
+
+<div class="card">
+<h2>Matrix Operations (2x2 or 3x3)</h2>
+<div class="form-group"><label>Dimension</label>
+<select id="dim"><option value="2">2x2</option><option value="3">3x3</option></select>
+</div>
+<div class="matrix-grid">
+<div class="matrix-box"><h3>Matrix A</h3><div id="matrixA"></div></div>
+<div class="matrix-box"><h3>Matrix B</h3><div id="matrixB"></div></div>
+</div>
+<div class="form-group"><label>Operation</label>
+<select id="matOp"><option value="add">Add (A+B)</option><option value="sub">Subtract (A-B)</option><option value="mul">Multiply (A*B)</option><option value="detA">Determinant of A</option><option value="detB">Determinant of B</option></select>
+</div>
+<div class="form-actions"><button class="btn btn-primary" id="calcBtn" type="button">Calculate</button></div>
+</div>
+
+<div class="result-panel" id="resultPanel">
+<h3 id="resultLabel">Result</h3>
+<div class="result-main" id="resultMain">—</div>
+<div class="result-grid" id="resultGrid"></div>
+</div>
+
+<div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
+
+<div class="content-section">
+<h2>About Matrix Calculator</h2>
+<p>This Matrix Calculator is fast, accurate and 100% private. All calculations run locally in your browser, so your information never leaves your device. No sign-up, no downloads, works beautifully on mobile and desktop.</p>
+</div>
+
+<div class="content-section">
+<h2>FAQ</h2>
+<div class="faq-item">
+      <div class="faq-q">How do you add matrices?<span class="arrow">&#9654;</span></div>
+      <div class="faq-a">Add matching elements: A[i][j] + B[i][j]. Both matrices must have the same dimensions.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">How is matrix multiplication done?<span class="arrow">&#9654;</span></div>
+      <div class="faq-a">Row of A multiplied with column of B. The result cell at (i,j) is the sum of products of corresponding elements.</div>
+    </div>
+</div>
+</main>
+</div>
+
+<div id="siteFooter"></div>
+
+<script src="js/math.js"></script>
+<script>
+function buildMatrices(){var dim=parseInt(document.getElementById('dim').value);var a=document.getElementById('matrixA'),b=document.getElementById('matrixB');a.innerHTML='';b.innerHTML='';for(var i=0;i<dim;i++){var rowA=document.createElement('div');rowA.className='matrix-row';var rowB=document.createElement('div');rowB.className='matrix-row';for(var j=0;j<dim;j++){var iA=document.createElement('input');iA.type='number';iA.value=(i===j)?1:0;iA.id='a'+i+j;var iB=document.createElement('input');iB.type='number';iB.value=(i===j)?2:0;iB.id='b'+i+j;rowA.appendChild(iA);rowB.appendChild(iB);}a.appendChild(rowA);b.appendChild(rowB);}}
+function readMat(prefix){var dim=parseInt(document.getElementById('dim').value);var m=[];for(var i=0;i<dim;i++){m[i]=[];for(var j=0;j<dim;j++){var v=parseFloat(document.getElementById(prefix+i+j).value);if(isNaN(v))v=0;m[i][j]=v;}}return m;}
+document.getElementById('dim').onchange=buildMatrices;buildMatrices();
+document.getElementById('calcBtn').onclick=function(){
+var dim=parseInt(document.getElementById('dim').value),op=document.getElementById('matOp').value;
+var mA=readMat('a'),mB=readMat('b'),res;
+if(op==='add'){res=MathCalc.matrixAdd(mA,mB);}
+else if(op==='sub'){res=MathCalc.matrixSub(mA,mB);}
+else if(op==='mul'){res=MathCalc.matrixMul(mA,mB);}
+else if(op==='detA'){res=dim===2?MathCalc.matrixDet2(mA):MathCalc.matrixDet3(mA);document.getElementById('resultMain').textContent='Determinant: '+MathCalc.fmt(res,6);document.getElementById('resultGrid').innerHTML='';return;}
+else if(op==='detB'){res=dim===2?MathCalc.matrixDet2(mB):MathCalc.matrixDet3(mB);document.getElementById('resultMain').textContent='Determinant: '+MathCalc.fmt(res,6);document.getElementById('resultGrid').innerHTML='';return;}
+var rows=res.map(function(row){return '['+row.map(function(v){return MathCalc.fmt(v,4);}).join(', ')+']';}).join('&nbsp;&nbsp;');
+document.getElementById('resultMain').textContent=rows;
+document.getElementById('resultGrid').innerHTML='';
+};
+</script>
+<script src="js/currency.js"></script>
+<script src="js/seo-content.js"></script>
+<script src="js/common.js"></script>
+</body>
+</html>

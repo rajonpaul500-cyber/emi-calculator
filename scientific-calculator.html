@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M8XM9611FL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-M8XM9611FL');
+</script>
+<script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scientific Calculator | EMI Master</title>
+<meta name="description" content="Free online Scientific Calculator. Fast, accurate and mobile friendly. No signup - calculations run 100% in your browser.">
+<meta name="keywords" content="scientific calculator, free online math calculator, scientific calculator online">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://emimaster.com/scientific-calculator.html">
+<meta property="og:title" content="Scientific Calculator | EMI Master">
+<meta property="og:description" content="Free, fast, private Scientific Calculator. Works on all devices.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://emimaster.com/scientific-calculator.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Scientific Calculator","url":"https://emimaster.com/scientific-calculator.html","description":"Scientific Calculator - 100% free, fast and accurate online calculator. Runs in your browser.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What functions does the Scientific Calculator support?","acceptedAnswer":{"@type":"Answer","text":"It supports + - * / parentheses, exponents (^), square root, pi, e, sin, cos, tan, log (base 10) and ln (natural log)."}},{"@type":"Question","name":"Is the calculator accurate?","acceptedAnswer":{"@type":"Answer","text":"Yes. All calculations use full JavaScript double-precision floating point math and results are shown with up to 10 decimal places."}}]}</script>
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+</head>
+<body>
+
+<div id="siteHeader"></div>
+
+<section class="hero hero-compact">
+<div class="container">
+<h1>Scientific Calculator</h1>
+<p>Fast, free, accurate and 100% private. Works on any device.</p>
+</div>
+</section>
+
+<div class="layout">
+<div id="siteSidebar"></div>
+
+<main class="main-content">
+<div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Scientific Calculator</div>
+<h1 class="page-title">Scientific Calculator</h1>
+<p class="page-subtitle">Enter your values below and click the button for instant results.</p>
+
+<div class="card">
+<h2>Expression</h2>
+<div class="form-group">
+<label for="sciDisplay">Expression</label>
+<input type="text" id="sciDisplay" value="2+3*(4-1)" style="font-size:1.4em;text-align:right;font-family:monospace">
+<small>Use + - * / ( ) ^ &radic; &pi; sin cos tan log ln e. Example: sin(30*&pi;/180)+&radic;9</small>
+</div>
+<div class="calc-keypad">
+<button class="btn btn-outline" onclick="b('7')">7</button>
+<button class="btn btn-outline" onclick="b('8')">8</button>
+<button class="btn btn-outline" onclick="b('9')">9</button>
+<button class="btn btn-outline" onclick="b('/')">/</button>
+<button class="btn btn-outline" onclick="b('4')">4</button>
+<button class="btn btn-outline" onclick="b('5')">5</button>
+<button class="btn btn-outline" onclick="b('6')">6</button>
+<button class="btn btn-outline" onclick="b('*')">*</button>
+<button class="btn btn-outline" onclick="b('1')">1</button>
+<button class="btn btn-outline" onclick="b('2')">2</button>
+<button class="btn btn-outline" onclick="b('3')">3</button>
+<button class="btn btn-outline" onclick="b('-')">-</button>
+<button class="btn btn-outline" onclick="b('0')">0</button>
+<button class="btn btn-outline" onclick="b('.')">.</button>
+<button class="btn btn-outline" onclick="b('(')">(</button>
+<button class="btn btn-outline" onclick="b(')')">)</button>
+<button class="btn btn-outline" onclick="b('^')">^</button>
+<button class="btn btn-outline" onclick="b('Math.sqrt(')">&radic;</button>
+<button class="btn btn-outline" onclick="b('Math.PI')">&pi;</button>
+<button class="btn btn-outline" onclick="b('Math.sin(')">sin</button>
+<button class="btn btn-outline" onclick="b('Math.cos(')">cos</button>
+<button class="btn btn-outline" onclick="b('Math.tan(')">tan</button>
+<button class="btn btn-outline" onclick="b('Math.log10(')">log</button>
+<button class="btn btn-outline" onclick="b('Math.log(')">ln</button>
+<button class="btn btn-outline" onclick="b('Math.E')">e</button>
+<button class="btn btn-outline" onclick="b('+')">+</button>
+</div>
+<div class="form-actions">
+<button class="btn btn-outline" id="clearBtn" type="button">Clear</button>
+<button class="btn btn-primary" id="calcBtn" type="button">= Calculate</button>
+</div>
+</div>
+
+<div class="result-panel" id="resultPanel">
+<h3 id="resultLabel">Result</h3>
+<div class="result-main" id="resultMain">—</div>
+<div class="result-grid" id="resultGrid"></div>
+</div>
+
+<div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
+
+<div class="content-section">
+<h2>About Scientific Calculator</h2>
+<p>This Scientific Calculator is fast, accurate and 100% private. All calculations run locally in your browser, so your information never leaves your device. No sign-up, no downloads, works beautifully on mobile and desktop.</p>
+</div>
+
+<div class="content-section">
+<h2>FAQ</h2>
+<div class="faq-item">
+      <div class="faq-q">What functions does the Scientific Calculator support?<span class="arrow">&#9654;</span></div>
+      <div class="faq-a">It supports + - * / parentheses, exponents (^), square root, pi, e, sin, cos, tan, log (base 10) and ln (natural log).</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Is the calculator accurate?<span class="arrow">&#9654;</span></div>
+      <div class="faq-a">Yes. All calculations use full JavaScript double-precision floating point math and results are shown with up to 10 decimal places.</div>
+    </div>
+</div>
+</main>
+</div>
+
+<div id="siteFooter"></div>
+
+<script src="js/math.js"></script>
+<script>
+function b(v){var d=document.getElementById('sciDisplay');d.value+=v;d.focus();}
+document.getElementById('clearBtn').onclick=function(){document.getElementById('sciDisplay').value='';};
+document.getElementById('calcBtn').onclick=function(){
+var r=MathCalc.scientific(document.getElementById('sciDisplay').value);
+document.getElementById('resultMain').textContent=r.error||MathCalc.fmt(r.value,10);
+document.getElementById('resultGrid').innerHTML='';
+};
+</script>
+<script src="js/currency.js"></script>
+<script src="js/seo-content.js"></script>
+<script src="js/common.js"></script>
+</body>
+</html>

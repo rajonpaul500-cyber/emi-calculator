@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M8XM9611FL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-M8XM9611FL');
+</script>
+<script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quadratic Formula Calculator | EMI Master</title>
+<meta name="description" content="Free online Quadratic Formula Calculator. Fast, accurate and mobile friendly. No signup - calculations run 100% in your browser.">
+<meta name="keywords" content="quadratic formula calculator, free online math calculator, quadratic formula calculator online">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://emimaster.com/quadratic-formula-calculator.html">
+<meta property="og:title" content="Quadratic Formula Calculator | EMI Master">
+<meta property="og:description" content="Free, fast, private Quadratic Formula Calculator. Works on all devices.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://emimaster.com/quadratic-formula-calculator.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Quadratic Formula Calculator","url":"https://emimaster.com/quadratic-formula-calculator.html","description":"Quadratic Formula Calculator - 100% free, fast and accurate online calculator. Runs in your browser.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the quadratic formula?","acceptedAnswer":{"@type":"Answer","text":"x = (-b +/- sqrt(b^2 - 4ac)) / (2a). The discriminant (b^2 - 4ac) determines the nature of the roots."}},{"@type":"Question","name":"What does the discriminant tell us?","acceptedAnswer":{"@type":"Answer","text":"If the discriminant is positive, there are two real roots. If zero, one real root. If negative, two complex roots."}}]}</script>
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+</head>
+<body>
+
+<div id="siteHeader"></div>
+
+<section class="hero hero-compact">
+<div class="container">
+<h1>Quadratic Formula Calculator</h1>
+<p>Fast, free, accurate and 100% private. Works on any device.</p>
+</div>
+</section>
+
+<div class="layout">
+<div id="siteSidebar"></div>
+
+<main class="main-content">
+<div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Quadratic Formula Calculator</div>
+<h1 class="page-title">Quadratic Formula Calculator</h1>
+<p class="page-subtitle">Enter your values below and click the button for instant results.</p>
+
+<div class="card">
+<h2>Quadratic Equation ax^2 + bx + c = 0</h2>
+<div class="form-grid">
+<div class="form-group"><label>Coefficient a</label><input type="number" id="a" value="1" step="any"></div>
+<div class="form-group"><label>Coefficient b</label><input type="number" id="b" value="5" step="any"></div>
+<div class="form-group"><label>Coefficient c</label><input type="number" id="c" value="6" step="any"></div>
+</div>
+<div class="form-actions"><button class="btn btn-primary" id="calcBtn" type="button">Solve</button></div>
+</div>
+
+<div class="result-panel" id="resultPanel">
+<h3 id="resultLabel">Result</h3>
+<div class="result-main" id="resultMain">—</div>
+<div class="result-grid" id="resultGrid"></div>
+</div>
+
+<div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
+
+<div class="content-section">
+<h2>About Quadratic Formula Calculator</h2>
+<p>This Quadratic Formula Calculator is fast, accurate and 100% private. All calculations run locally in your browser, so your information never leaves your device. No sign-up, no downloads, works beautifully on mobile and desktop.</p>
+</div>
+
+<div class="content-section">
+<h2>FAQ</h2>
+<div class="faq-item">
+      <div class="faq-q">What is the quadratic formula?<span class="arrow">&#9654;</span></div>
+      <div class="faq-a">x = (-b +/- sqrt(b^2 - 4ac)) / (2a). The discriminant (b^2 - 4ac) determines the nature of the roots.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What does the discriminant tell us?<span class="arrow">&#9654;</span></div>
+      <div class="faq-a">If the discriminant is positive, there are two real roots. If zero, one real root. If negative, two complex roots.</div>
+    </div>
+</div>
+</main>
+</div>
+
+<div id="siteFooter"></div>
+
+<script src="js/math.js"></script>
+<script>
+document.getElementById('calcBtn').onclick=function(){
+var a=parseFloat(document.getElementById('a').value),b=parseFloat(document.getElementById('b').value),c=parseFloat(document.getElementById('c').value);
+if(isNaN(a)||isNaN(b)||isNaN(c)){document.getElementById('resultMain').textContent='Enter valid coefficients';return;}
+var r=MathCalc.quadratic(a,b,c);
+if(r.error){document.getElementById('resultMain').textContent=r.error;return;}
+if(r.complex){
+document.getElementById('resultMain').textContent='x = '+r.roots[0]+'  and  x = '+r.roots[1];
+document.getElementById('resultGrid').innerHTML='<div class="result-item"><div class="label">Type</div><div class="value">Complex roots</div></div><div class="result-item"><div class="label">Discriminant</div><div class="value">'+MathCalc.fmt(r.discriminant,6)+'</div></div>';
+}else{
+document.getElementById('resultMain').textContent='x = '+MathCalc.fmt(r.roots[0],6)+'  and  x = '+MathCalc.fmt(r.roots[1],6);
+document.getElementById('resultGrid').innerHTML='<div class="result-item"><div class="label">Root 1</div><div class="value">'+MathCalc.fmt(r.roots[0],6)+'</div></div><div class="result-item"><div class="label">Root 2</div><div class="value">'+MathCalc.fmt(r.roots[1],6)+'</div></div><div class="result-item"><div class="label">Discriminant</div><div class="value">'+MathCalc.fmt(r.discriminant,6)+'</div></div>';
+}
+};
+</script>
+<script src="js/currency.js"></script>
+<script src="js/seo-content.js"></script>
+<script src="js/common.js"></script>
+</body>
+</html>

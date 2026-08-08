@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M8XM9611FL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-M8XM9611FL');
+</script>
+<script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Random Number Generator | EMI Master</title>
+<meta name="description" content="Free online Random Number Generator. Fast, accurate and mobile friendly. No signup - calculations run 100% in your browser.">
+<meta name="keywords" content="random number generator, free online math calculator, random number generator online">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://emimaster.com/random-number-generator.html">
+<meta property="og:title" content="Random Number Generator | EMI Master">
+<meta property="og:description" content="Free, fast, private Random Number Generator. Works on all devices.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://emimaster.com/random-number-generator.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Random Number Generator","url":"https://emimaster.com/random-number-generator.html","description":"Random Number Generator - 100% free, fast and accurate online calculator. Runs in your browser.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a Random Number Generator?","acceptedAnswer":{"@type":"Answer","text":"It produces numbers that have no pattern, generating random integers or decimals between your chosen minimum and maximum values."}},{"@type":"Question","name":"Can I generate decimals?","acceptedAnswer":{"@type":"Answer","text":"Yes. Choose the Decimal option to get random numbers with up to 4 decimal places."}}]}</script>
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+</head>
+<body>
+
+<div id="siteHeader"></div>
+
+<section class="hero hero-compact">
+<div class="container">
+<h1>Random Number Generator</h1>
+<p>Fast, free, accurate and 100% private. Works on any device.</p>
+</div>
+</section>
+
+<div class="layout">
+<div id="siteSidebar"></div>
+
+<main class="main-content">
+<div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Random Number Generator</div>
+<h1 class="page-title">Random Number Generator</h1>
+<p class="page-subtitle">Enter your values below and click the button for instant results.</p>
+
+<div class="card">
+<h2>Random Numbers</h2>
+<div class="form-grid">
+<div class="form-group"><label>Minimum</label><input type="number" id="min" value="1"></div>
+<div class="form-group"><label>Maximum</label><input type="number" id="max" value="100"></div>
+<div class="form-group"><label>How many</label><input type="number" id="count" value="5" min="1" max="100"></div>
+<div class="form-group"><label>Type</label><select id="type"><option value="int">Integer</option><option value="float">Decimal</option></select></div>
+</div>
+<div class="form-actions"><button class="btn btn-primary" id="calcBtn" type="button">Generate</button></div>
+</div>
+
+<div class="result-panel" id="resultPanel">
+<h3 id="resultLabel">Result</h3>
+<div class="result-main" id="resultMain">—</div>
+<div class="result-grid" id="resultGrid"></div>
+</div>
+
+<div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
+
+<div class="content-section">
+<h2>About Random Number Generator</h2>
+<p>This Random Number Generator is fast, accurate and 100% private. All calculations run locally in your browser, so your information never leaves your device. No sign-up, no downloads, works beautifully on mobile and desktop.</p>
+</div>
+
+<div class="content-section">
+<h2>FAQ</h2>
+<div class="faq-item">
+      <div class="faq-q">What is a Random Number Generator?<span class="arrow">&#9654;</span></div>
+      <div class="faq-a">It produces numbers that have no pattern, generating random integers or decimals between your chosen minimum and maximum values.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Can I generate decimals?<span class="arrow">&#9654;</span></div>
+      <div class="faq-a">Yes. Choose the Decimal option to get random numbers with up to 4 decimal places.</div>
+    </div>
+</div>
+</main>
+</div>
+
+<div id="siteFooter"></div>
+
+<script src="js/math.js"></script>
+<script>
+document.getElementById('calcBtn').onclick=function(){
+var min=parseFloat(document.getElementById('min').value),max=parseFloat(document.getElementById('max').value),count=parseInt(document.getElementById('count').value),type=document.getElementById('type').value;
+if(isNaN(min)||isNaN(max)||isNaN(count)||count<1||count>100){document.getElementById('resultMain').textContent='Enter valid values';return;}
+var nums=type==='int'?MathCalc.randomInt(min,max,count):MathCalc.randomFloat(min,max,count,4);
+document.getElementById('resultMain').textContent=nums.join(', ');
+document.getElementById('resultGrid').innerHTML='<div class="result-item"><div class="label">Numbers ('+count+')</div><div class="value">'+nums.join(', ')+'</div></div>';
+};
+</script>
+<script src="js/currency.js"></script>
+<script src="js/seo-content.js"></script>
+<script src="js/common.js"></script>
+</body>
+</html>

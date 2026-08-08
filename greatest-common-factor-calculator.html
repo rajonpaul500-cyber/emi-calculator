@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M8XM9611FL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-M8XM9611FL');
+</script>
+<script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Greatest Common Factor Calculator | EMI Master</title>
+<meta name="description" content="Free online Greatest Common Factor Calculator. Fast, accurate and mobile friendly. No signup - calculations run 100% in your browser.">
+<meta name="keywords" content="greatest common factor calculator, free online math calculator, greatest common factor calculator online">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://emimaster.com/greatest-common-factor-calculator.html">
+<meta property="og:title" content="Greatest Common Factor Calculator | EMI Master">
+<meta property="og:description" content="Free, fast, private Greatest Common Factor Calculator. Works on all devices.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://emimaster.com/greatest-common-factor-calculator.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Greatest Common Factor Calculator","url":"https://emimaster.com/greatest-common-factor-calculator.html","description":"Greatest Common Factor Calculator - 100% free, fast and accurate online calculator. Runs in your browser.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the Greatest Common Factor?","acceptedAnswer":{"@type":"Answer","text":"The GCF is the largest positive integer that divides all given numbers. For example the GCF of 36 and 48 is 12."}},{"@type":"Question","name":"What are factors?","acceptedAnswer":{"@type":"Answer","text":"Factors are numbers that divide into a number exactly. The GCF gives the biggest common factor across numbers."}}]}</script>
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+</head>
+<body>
+
+<div id="siteHeader"></div>
+
+<section class="hero hero-compact">
+<div class="container">
+<h1>Greatest Common Factor Calculator</h1>
+<p>Fast, free, accurate and 100% private. Works on any device.</p>
+</div>
+</section>
+
+<div class="layout">
+<div id="siteSidebar"></div>
+
+<main class="main-content">
+<div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Greatest Common Factor Calculator</div>
+<h1 class="page-title">Greatest Common Factor Calculator</h1>
+<p class="page-subtitle">Enter your values below and click the button for instant results.</p>
+
+<div class="card">
+<h2>Greatest Common Factor (GCF)</h2>
+<div class="form-group"><label>Numbers (comma separated)</label><input type="text" id="nums" value="36, 48, 60" placeholder="e.g. 36, 48, 60"></div>
+<div class="form-actions"><button class="btn btn-primary" id="calcBtn" type="button">Calculate GCF</button></div>
+</div>
+
+<div class="result-panel" id="resultPanel">
+<h3 id="resultLabel">Result</h3>
+<div class="result-main" id="resultMain">—</div>
+<div class="result-grid" id="resultGrid"></div>
+</div>
+
+<div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
+
+<div class="content-section">
+<h2>About Greatest Common Factor Calculator</h2>
+<p>This Greatest Common Factor Calculator is fast, accurate and 100% private. All calculations run locally in your browser, so your information never leaves your device. No sign-up, no downloads, works beautifully on mobile and desktop.</p>
+</div>
+
+<div class="content-section">
+<h2>FAQ</h2>
+<div class="faq-item">
+      <div class="faq-q">What is the Greatest Common Factor?<span class="arrow">&#9654;</span></div>
+      <div class="faq-a">The GCF is the largest positive integer that divides all given numbers. For example the GCF of 36 and 48 is 12.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What are factors?<span class="arrow">&#9654;</span></div>
+      <div class="faq-a">Factors are numbers that divide into a number exactly. The GCF gives the biggest common factor across numbers.</div>
+    </div>
+</div>
+</main>
+</div>
+
+<div id="siteFooter"></div>
+
+<script src="js/math.js"></script>
+<script>
+document.getElementById('calcBtn').onclick=function(){
+var raw=document.getElementById('nums').value.split(',').map(function(s){return parseFloat(s.trim(),10);});
+var nums=raw.filter(function(n){return !isNaN(n);});
+if(nums.length<2){document.getElementById('resultMain').textContent='Enter at least two numbers';return;}
+var r=MathCalc.gcfMulti(nums);
+document.getElementById('resultMain').textContent=MathCalc.fmt(r.value,0);
+document.getElementById('resultGrid').innerHTML='<div class="result-item"><div class="label">GCF of '+nums.join(', ')+'</div><div class="value">'+MathCalc.fmt(r.value,0)+'</div></div>';
+};
+</script>
+<script src="js/currency.js"></script>
+<script src="js/seo-content.js"></script>
+<script src="js/common.js"></script>
+</body>
+</html>

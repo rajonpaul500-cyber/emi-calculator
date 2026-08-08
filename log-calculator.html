@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M8XM9611FL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-M8XM9611FL');
+</script>
+<script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Log Calculator | EMI Master</title>
+<meta name="description" content="Free online Log Calculator. Fast, accurate and mobile friendly. No signup - calculations run 100% in your browser.">
+<meta name="keywords" content="log calculator, free online math calculator, log calculator online">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://emimaster.com/log-calculator.html">
+<meta property="og:title" content="Log Calculator | EMI Master">
+<meta property="og:description" content="Free, fast, private Log Calculator. Works on all devices.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://emimaster.com/log-calculator.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Log Calculator","url":"https://emimaster.com/log-calculator.html","description":"Log Calculator - 100% free, fast and accurate online calculator. Runs in your browser.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a logarithm?","acceptedAnswer":{"@type":"Answer","text":"A logarithm answers \"to what exponent must the base be raised to produce this number?\" For example log(100) base 10 = 2 because 10^2 = 100."}},{"@type":"Question","name":"What is the natural log?","acceptedAnswer":{"@type":"Answer","text":"The natural logarithm (ln) uses base e (about 2.71828). It is widely used in science and finance."}}]}</script>
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+</head>
+<body>
+
+<div id="siteHeader"></div>
+
+<section class="hero hero-compact">
+<div class="container">
+<h1>Log Calculator</h1>
+<p>Fast, free, accurate and 100% private. Works on any device.</p>
+</div>
+</section>
+
+<div class="layout">
+<div id="siteSidebar"></div>
+
+<main class="main-content">
+<div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Log Calculator</div>
+<h1 class="page-title">Log Calculator</h1>
+<p class="page-subtitle">Enter your values below and click the button for instant results.</p>
+
+<div class="card">
+<h2>Logarithm</h2>
+<div class="form-grid">
+<div class="form-group"><label>Number</label><input type="number" id="num" value="1000" min="0.0001"></div>
+<div class="form-group"><label>Base</label><select id="baseSel"><option value="10">10 (common)</option><option value="e">e (natural)</option><option value="2">2</option></select></div>
+<div class="form-group"><label>Custom Base</label><input type="number" id="baseCustom" value="10" min="0.001"></div>
+</div>
+<div class="form-actions"><button class="btn btn-primary" id="calcBtn" type="button">Calculate</button></div>
+</div>
+
+<div class="result-panel" id="resultPanel">
+<h3 id="resultLabel">Result</h3>
+<div class="result-main" id="resultMain">—</div>
+<div class="result-grid" id="resultGrid"></div>
+</div>
+
+<div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
+
+<div class="content-section">
+<h2>About Log Calculator</h2>
+<p>This Log Calculator is fast, accurate and 100% private. All calculations run locally in your browser, so your information never leaves your device. No sign-up, no downloads, works beautifully on mobile and desktop.</p>
+</div>
+
+<div class="content-section">
+<h2>FAQ</h2>
+<div class="faq-item">
+      <div class="faq-q">What is a logarithm?<span class="arrow">&#9654;</span></div>
+      <div class="faq-a">A logarithm answers "to what exponent must the base be raised to produce this number?" For example log(100) base 10 = 2 because 10^2 = 100.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What is the natural log?<span class="arrow">&#9654;</span></div>
+      <div class="faq-a">The natural logarithm (ln) uses base e (about 2.71828). It is widely used in science and finance.</div>
+    </div>
+</div>
+</main>
+</div>
+
+<div id="siteFooter"></div>
+
+<script src="js/math.js"></script>
+<script>
+document.getElementById('calcBtn').onclick=function(){
+var n=parseFloat(document.getElementById('num').value);
+if(isNaN(n)||n<=0){document.getElementById('resultMain').textContent='Number must be positive';return;}
+var baseSel=document.getElementById('baseSel').value;
+var base=baseSel==='e'?Math.E:baseSel==='2'?2:parseFloat(document.getElementById('baseCustom').value)||10;
+var r=MathCalc.logarithm(n,base);
+document.getElementById('resultMain').textContent=MathCalc.fmt(r.value,8);
+var label=baseSel==='e'?'ln':'log base '+base;
+document.getElementById('resultGrid').innerHTML='<div class="result-item"><div class="label">'+label+'('+n+')</div><div class="value">'+MathCalc.fmt(r.value,8)+'</div></div>';
+};
+</script>
+<script src="js/currency.js"></script>
+<script src="js/seo-content.js"></script>
+<script src="js/common.js"></script>
+</body>
+</html>
