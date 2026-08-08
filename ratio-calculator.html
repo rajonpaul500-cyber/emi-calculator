@@ -12,17 +12,18 @@
 <script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ratio Calculator | EMI Master</title>
-<meta name="description" content="Free online Ratio Calculator. Fast, accurate and mobile friendly. No signup - calculations run 100% in your browser.">
-<meta name="keywords" content="ratio calculator, free online math calculator, ratio calculator online">
+<title>Ratio Calculator - Simplify Ratios &amp; Solve Missing Values</title>
+<meta name="description" content="Free ratio calculator. Simplify any ratio to lowest terms, solve missing values in a:b = c:d, and see each part as a percentage.">
+<meta name="keywords" content="ratio calculator, simplify ratio, ratio simplifier, ratio of two numbers">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://emimaster.com/ratio-calculator.html">
-<meta property="og:title" content="Ratio Calculator | EMI Master">
-<meta property="og:description" content="Free, fast, private Ratio Calculator. Works on all devices.">
+<meta property="og:title" content="Ratio Calculator - Simplify Ratios &amp; Solve Missing Values">
+<meta property="og:description" content="Free ratio calculator. Simplify any ratio to lowest terms, solve missing values in a:b = c:d, and see each part as a percentage.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://emimaster.com/ratio-calculator.html">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Ratio Calculator","url":"https://emimaster.com/ratio-calculator.html","description":"Ratio Calculator - 100% free, fast and accurate online calculator. Runs in your browser.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do you simplify a ratio?","acceptedAnswer":{"@type":"Answer","text":"Divide both parts by their greatest common factor (GCF). For example 12:18 simplifies to 2:3 because the GCF is 6."}},{"@type":"Question","name":"What is a ratio?","acceptedAnswer":{"@type":"Answer","text":"A ratio compares two quantities. 4:2 = 2:1 means both sides can be divided by the same number to create equal ratios."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Ratio Calculator","url":"https://emimaster.com/ratio-calculator.html","description":"Free ratio calculator. Simplify any ratio to lowest terms, solve missing values in a:b = c:d, and see each part as a percentage.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I simplify a ratio?","acceptedAnswer":{"@type":"Answer","text":"Divide both parts by their greatest common factor. For 12:18 the GCF is 6, so the simplified ratio is 2:3."}},{"@type":"Question","name":"How do I solve a:b = c:d?","acceptedAnswer":{"@type":"Answer","text":"Use cross multiplication: d = b × c / a. For 2:3 = 8:d, that gives d = 3 × 8 / 2 = 12."}},{"@type":"Question","name":"What is the difference between a ratio and a fraction?","acceptedAnswer":{"@type":"Answer","text":"A ratio a:b compares two separate quantities, while a fraction a/b expresses one quantity as a part of a whole. They often convert into each other."}},{"@type":"Question","name":"Can ratios have decimals?","acceptedAnswer":{"@type":"Answer","text":"Yes. Decimal ratios are common in engineering and recipes. The calculator handles them and simplifies to clean values when possible."}},{"@type":"Question","name":"How do I turn a ratio into a percentage?","acceptedAnswer":{"@type":"Answer","text":"Each part as a percentage of the total: a/(a+b) × 100 and b/(a+b) × 100. For 2:3, that is 40% and 60%."}}]}</script>
+<script type="application/json" id="relatedData">[{"href":"fraction-calculator.html","label":"Fraction Calculator","icon":"⅙"},{"href":"percentage-calculator.html","label":"Percentage Calculator","icon":"%"},{"href":"greatest-common-factor-calculator.html","label":"GCF Calculator","icon":"≈"}]</script>
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
@@ -32,67 +33,91 @@
 <div id="siteHeader"></div>
 
 <section class="hero hero-compact">
-<div class="container">
-<h1>Ratio Calculator</h1>
-<p>Fast, free, accurate and 100% private. Works on any device.</p>
-</div>
+  <div class="container">
+    <h1>Ratio Calculator</h1>
+    <p>Simplify ratios and solve missing terms in proportions.</p>
+  </div>
 </section>
 
 <div class="layout">
-<div id="siteSidebar"></div>
+  <div id="siteSidebar"></div>
 
-<main class="main-content">
-<div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Ratio Calculator</div>
-<h1 class="page-title">Ratio Calculator</h1>
-<p class="page-subtitle">Enter your values below and click the button for instant results.</p>
+  <main class="main-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="index.html#math">Math Calculators</a> &rsaquo; Ratio Calculator</div>
+    <h1 class="page-title">Ratio Calculator</h1>
+    <p class="page-subtitle">Simplify a ratio to its lowest terms, or solve a missing value in a proportion like a:b = c:d.</p>
 
 <div class="card">
-<h2>Ratio Simplifier</h2>
+<h2>Simplify a ratio</h2>
 <div class="form-grid">
-<div class="form-group"><label>Ratio A</label><input type="number" id="a" value="12"></div>
-<div class="form-group"><label>Ratio B</label><input type="number" id="b" value="18"></div>
+<div class="form-group"><label>Ratio A</label><input type="number" id="a" value="12" step="any"></div>
+<div class="form-group"><label>Ratio B</label><input type="number" id="b" value="18" step="any"></div>
 </div>
-<div class="form-actions"><button class="btn btn-primary" id="calcBtn" type="button">Simplify Ratio</button></div>
-</div>
-
-<div class="result-panel" id="resultPanel">
-<h3 id="resultLabel">Result</h3>
-<div class="result-main" id="resultMain">—</div>
-<div class="result-grid" id="resultGrid"></div>
+<div class="form-actions"><button class="btn btn-primary" id="simpBtn" type="button">Simplify</button></div>
 </div>
 
-<div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
-
-<div class="content-section">
-<h2>About Ratio Calculator</h2>
-<p>This Ratio Calculator is fast, accurate and 100% private. All calculations run locally in your browser, so your information never leaves your device. No sign-up, no downloads, works beautifully on mobile and desktop.</p>
+<div class="card">
+<h2>Solve a proportion: a : b = c : ?</h2>
+<div class="form-grid">
+<div class="form-group"><label>a</label><input type="number" id="pa" value="2" step="any"></div>
+<div class="form-group"><label>b</label><input type="number" id="pb" value="3" step="any"></div>
+<div class="form-group"><label>c</label><input type="number" id="pc" value="8" step="any"></div>
+</div>
+<div class="form-actions"><button class="btn btn-outline" id="solveBtn" type="button">Solve for missing value</button></div>
 </div>
 
-<div class="content-section">
-<h2>FAQ</h2>
-<div class="faq-item">
-      <div class="faq-q">How do you simplify a ratio?<span class="arrow">&#9654;</span></div>
-      <div class="faq-a">Divide both parts by their greatest common factor (GCF). For example 12:18 simplifies to 2:3 because the GCF is 6.</div>
+    <div class="result-panel" id="resultPanel">
+      <h3>Result</h3>
+      <div class="result-main" id="resultMain">&mdash;</div>
+      <div class="result-grid" id="resultGrid"></div>
     </div>
-    <div class="faq-item">
-      <div class="faq-q">What is a ratio?<span class="arrow">&#9654;</span></div>
-      <div class="faq-a">A ratio compares two quantities. 4:2 = 2:1 means both sides can be divided by the same number to create equal ratios.</div>
+
+    <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
+
+    <div class="quick-facts">
+    <div class="fact-chip"><strong>Definition:</strong> A ratio compares two quantities</div>
+    <div class="fact-chip"><strong>Simplification:</strong> Divide by the GCF</div>
+    <div class="fact-chip"><strong>Proportion:</strong> a : b = c : d solves cross products</div>
+    <div class="fact-chip"><strong>Use case:</strong> Recipes, maps, mixes, finance</div>
     </div>
-</div>
-</main>
+
+<div class="content-section"><h2 id="what-is-a-ratio">What is a ratio?</h2><p>A ratio compares two quantities of the same kind, written as a:b. The ratio 12:18 tells you that for every 12 units of the first quantity there are 18 of the second. Ratios keep the relationship even when the actual sizes change.</p>
+      <p>Simplifying a ratio means dividing both parts by their greatest common factor. Since the GCF of 12 and 18 is 6, the ratio 12:18 simplifies to 2:3 — the same relationship in its smallest whole-number form.</p></div>
+    <div class="content-section"><h2 id="solving-proportions">Solving proportions</h2><p>A proportion states that two ratios are equal: a:b = c:d. Because the cross products are equal (a × d = b × c), you can solve any missing term: d = b × c / a.</p>
+      <p>Ratios appear everywhere: doubling a recipe (2 cups flour : 1 cup sugar), scale maps (1 cm : 10 km), mixing ratios and financial analysis. Percentages are just ratios scaled to 100.</p></div>
+<div class="content-section"><h2 id="how-to-use">How to use this calculator</h2><ol><li>To simplify, enter the two parts of the ratio and press Simplify.</li><li>To solve a proportion, enter a, b and c of a:b = c:d.</li><li>Press the solve button to find the missing d.</li><li>Read the simplified ratio and percentage shares together.</li></ol></div>
+<div class="content-section tips-box"><h2>Pro tips</h2><ul><li>A ratio like 0.5:2 is valid; the calculator simplifies using exact math.</li><li>Percentages are ratios where the whole is 100.</li><li>Cross-multiply to check any proportion by hand.</li></ul></div>
+<div class="content-section"><h2>Advantages &amp; considerations</h2><div class="pros-cons"><div class="pros"><h3>&#9989; Advantages</h3><ul><li>Simplifies any ratio to lowest terms</li><li>Solves missing terms in proportions</li><li>Shows each part as a percentage of the whole</li></ul></div><div class="cons"><h3>&#9888;&#65039; Considerations</h3><ul><li>Both ratio parts must be non-zero</li><li>Proportion tool solves for the fourth term only</li></ul></div></div></div>
+<div class="content-section"><h2 id="faq">Frequently asked questions</h2><div class="faq-item"><div class="faq-q">How do I simplify a ratio?<span class="arrow">&#9654;</span></div><div class="faq-a">Divide both parts by their greatest common factor. For 12:18 the GCF is 6, so the simplified ratio is 2:3.</div></div>
+      <div class="faq-item"><div class="faq-q">How do I solve a:b = c:d?<span class="arrow">&#9654;</span></div><div class="faq-a">Use cross multiplication: d = b × c / a. For 2:3 = 8:d, that gives d = 3 × 8 / 2 = 12.</div></div>
+      <div class="faq-item"><div class="faq-q">What is the difference between a ratio and a fraction?<span class="arrow">&#9654;</span></div><div class="faq-a">A ratio a:b compares two separate quantities, while a fraction a/b expresses one quantity as a part of a whole. They often convert into each other.</div></div>
+      <div class="faq-item"><div class="faq-q">Can ratios have decimals?<span class="arrow">&#9654;</span></div><div class="faq-a">Yes. Decimal ratios are common in engineering and recipes. The calculator handles them and simplifies to clean values when possible.</div></div>
+      <div class="faq-item"><div class="faq-q">How do I turn a ratio into a percentage?<span class="arrow">&#9654;</span></div><div class="faq-a">Each part as a percentage of the total: a/(a+b) × 100 and b/(a+b) × 100. For 2:3, that is 40% and 60%.</div></div></div>
+  </main>
 </div>
 
 <div id="siteFooter"></div>
 
 <script src="js/math.js"></script>
 <script>
-document.getElementById('calcBtn').onclick=function(){
-var a=parseFloat(document.getElementById('a').value),b=parseFloat(document.getElementById('b').value);
-if(!a||!b){document.getElementById('resultMain').textContent='Both values must be non-zero';return;}
+function item(l,v){return '<div class="result-item"><div class="label">'+l+'</div><div class="value">'+v+'</div></div>';}
+document.getElementById("simpBtn").onclick=function(){
+var a=parseFloat(document.getElementById("a").value);
+var b=parseFloat(document.getElementById("b").value);
+if(isNaN(a)||isNaN(b)||a===0||b===0){document.getElementById("resultMain").textContent="Both values must be non-zero";document.getElementById("resultGrid").innerHTML="";return;}
 var r=MathCalc.ratioSimplify(a,b);
-document.getElementById('resultMain').textContent=r.value;
-document.getElementById('resultGrid').innerHTML='<div class="result-item"><div class="label">Original</div><div class="value">'+r.original+'</div></div><div class="result-item"><div class="label">Simplified</div><div class="value">'+r.value+'</div></div>';
-};
+var p1=MathCalc.ratioToPercent(a,b).value;
+var p2=100-p1;
+document.getElementById("resultMain").textContent=r.value;
+document.getElementById("resultGrid").innerHTML=item("Original",r.original)+item("Simplified",r.value)+item("A as % of total",MathCalc.fmt(p1,2)+"%")+item("B as % of total",MathCalc.fmt(p2,2)+"%");};
+document.getElementById("solveBtn").onclick=function(){
+var a=parseFloat(document.getElementById("pa").value);
+var b=parseFloat(document.getElementById("pb").value);
+var c=parseFloat(document.getElementById("pc").value);
+if(isNaN(a)||isNaN(b)||isNaN(c)||a===0){document.getElementById("resultMain").textContent="Enter valid values (a cannot be zero)";document.getElementById("resultGrid").innerHTML="";return;}
+var d=MathCalc.ratioSolve(a,b,c).value;
+document.getElementById("resultMain").textContent=MathCalc.fmt(d,4);
+document.getElementById("resultGrid").innerHTML=item("Proportion",a+" : "+b+" = "+c+" : "+MathCalc.fmt(d,4))+item("Check","("+a+" × "+MathCalc.fmt(d,4)+") = ("+b+" × "+c+")")+item("Verified","("+MathCalc.fmt(a*d,4)+" = "+MathCalc.fmt(b*c,4)+")");};
 </script>
 <script src="js/currency.js"></script>
 <script src="js/seo-content.js"></script>

@@ -12,17 +12,18 @@
 <script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rounding Calculator | EMI Master</title>
-<meta name="description" content="Free online Rounding Calculator. Fast, accurate and mobile friendly. No signup - calculations run 100% in your browser.">
-<meta name="keywords" content="rounding calculator, free online math calculator, rounding calculator online">
+<title>Rounding Calculator - Round to Decimal Places &amp; Significant Figures</title>
+<meta name="description" content="Free rounding calculator. Round any number to decimal places, nearest whole number, nearest 5/10/100/1000 or significant figures.">
+<meta name="keywords" content="rounding calculator, round to nearest, significant figures, round decimal places">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://emimaster.com/rounding-calculator.html">
-<meta property="og:title" content="Rounding Calculator | EMI Master">
-<meta property="og:description" content="Free, fast, private Rounding Calculator. Works on all devices.">
+<meta property="og:title" content="Rounding Calculator - Round to Decimal Places &amp; Significant Figures">
+<meta property="og:description" content="Free rounding calculator. Round any number to decimal places, nearest whole number, nearest 5/10/100/1000 or significant figures.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://emimaster.com/rounding-calculator.html">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Rounding Calculator","url":"https://emimaster.com/rounding-calculator.html","description":"Rounding Calculator - 100% free, fast and accurate online calculator. Runs in your browser.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I round to 2 decimal places?","acceptedAnswer":{"@type":"Answer","text":"Look at the third digit after the decimal. If it is 5 or above round up; otherwise leave it. For example 3.145 rounds to 3.15."}},{"@type":"Question","name":"What is rounding to the nearest 0.5?","acceptedAnswer":{"@type":"Answer","text":"It rounds a number to the closest multiple of 0.5."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Rounding Calculator","url":"https://emimaster.com/rounding-calculator.html","description":"Free rounding calculator. Round any number to decimal places, nearest whole number, nearest 5/10/100/1000 or significant figures.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I round to 2 decimal places?","acceptedAnswer":{"@type":"Answer","text":"Look at the third decimal digit. If it is 5 or more, increase the second decimal digit by 1; otherwise leave it. For example 3.14159 becomes 3.14."}},{"@type":"Question","name":"What are significant figures?","acceptedAnswer":{"@type":"Answer","text":"The digits that carry meaning in a measurement, starting from the first non-zero digit. 0.0045 has two; 12.30 has four."}},{"@type":"Question","name":"What does round half up mean?","acceptedAnswer":{"@type":"Answer","text":"When the dropped digit is exactly 5, the number rounds upward. For example 2.5 rounds to 3, and 3.15 to 2 decimal places rounds to 3.15's next value up."}},{"@type":"Question","name":"How do I round to the nearest ten?","acceptedAnswer":{"@type":"Answer","text":"Look at the ones digit: 5 or more rounds the tens digit up, otherwise it stays. 1234 rounds to 1230, and 1236 rounds to 1240."}},{"@type":"Question","name":"Is rounding the same as truncating?","acceptedAnswer":{"@type":"Answer","text":"No. Truncation always cuts digits off, while rounding adjusts the last kept digit based on the dropped part. 12.99 truncated is 12, but rounded is 13."}}]}</script>
+<script type="application/json" id="relatedData">[{"href":"percentage-calculator.html","label":"Percentage Calculator","icon":"%"},{"href":"scientific-notation-calculator.html","label":"Scientific Notation","icon":"×10"},{"href":"big-number-calculator.html","label":"Big Number Calculator","icon":"#"}]</script>
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
@@ -32,69 +33,80 @@
 <div id="siteHeader"></div>
 
 <section class="hero hero-compact">
-<div class="container">
-<h1>Rounding Calculator</h1>
-<p>Fast, free, accurate and 100% private. Works on any device.</p>
-</div>
+  <div class="container">
+    <h1>Rounding Calculator</h1>
+    <p>Round to decimal places, significant figures or any nearest value.</p>
+  </div>
 </section>
 
 <div class="layout">
-<div id="siteSidebar"></div>
+  <div id="siteSidebar"></div>
 
-<main class="main-content">
-<div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Rounding Calculator</div>
-<h1 class="page-title">Rounding Calculator</h1>
-<p class="page-subtitle">Enter your values below and click the button for instant results.</p>
+  <main class="main-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="index.html#math">Math Calculators</a> &rsaquo; Rounding Calculator</div>
+    <h1 class="page-title">Rounding Calculator</h1>
+    <p class="page-subtitle">Enter a number and the calculator rounds it to decimal places, significant figures and common nearest values all at once.</p>
 
 <div class="card">
-<h2>Rounding</h2>
+<h2>Round a number</h2>
 <div class="form-grid">
-<div class="form-group"><label>Number to Round</label><input type="number" id="num" value="3.14159" step="any"></div>
-<div class="form-group"><label>Decimal Places</label><input type="number" id="decimals" value="2" min="0" max="10"></div>
-<div class="form-group"><label>Nearest (optional)</label><input type="number" id="nearest" value="1" min="0.000001"></div>
+<div class="form-group"><label>Number</label><input type="number" id="num" value="1234.5678" step="any"></div>
+<div class="form-group"><label>Decimal places</label><input type="number" id="dp" value="2" min="0" max="10"></div>
+<div class="form-group"><label>Significant figures</label><input type="number" id="sig" value="4" min="1" max="10"></div>
 </div>
 <div class="form-actions"><button class="btn btn-primary" id="calcBtn" type="button">Round</button></div>
 </div>
 
-<div class="result-panel" id="resultPanel">
-<h3 id="resultLabel">Result</h3>
-<div class="result-main" id="resultMain">—</div>
-<div class="result-grid" id="resultGrid"></div>
-</div>
-
-<div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
-
-<div class="content-section">
-<h2>About Rounding Calculator</h2>
-<p>This Rounding Calculator is fast, accurate and 100% private. All calculations run locally in your browser, so your information never leaves your device. No sign-up, no downloads, works beautifully on mobile and desktop.</p>
-</div>
-
-<div class="content-section">
-<h2>FAQ</h2>
-<div class="faq-item">
-      <div class="faq-q">How do I round to 2 decimal places?<span class="arrow">&#9654;</span></div>
-      <div class="faq-a">Look at the third digit after the decimal. If it is 5 or above round up; otherwise leave it. For example 3.145 rounds to 3.15.</div>
+    <div class="result-panel" id="resultPanel">
+      <h3>Result</h3>
+      <div class="result-main" id="resultMain">&mdash;</div>
+      <div class="result-grid" id="resultGrid"></div>
     </div>
-    <div class="faq-item">
-      <div class="faq-q">What is rounding to the nearest 0.5?<span class="arrow">&#9654;</span></div>
-      <div class="faq-a">It rounds a number to the closest multiple of 0.5.</div>
+
+    <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
+
+    <div class="quick-facts">
+    <div class="fact-chip"><strong>Common rule:</strong> Round half up at 5 and above</div>
+    <div class="fact-chip"><strong>Decimal places:</strong> Round to 0.01, 0.1, 1, ...</div>
+    <div class="fact-chip"><strong>Significant figures:</strong> Keeps meaningful digits only</div>
+    <div class="fact-chip"><strong>Nearest values:</strong> 5, 10, 100, 1000, 0.5</div>
     </div>
-</div>
-</main>
+
+<div class="content-section"><h2 id="how-rounding-works">How rounding works</h2><p>Rounding replaces a number with a nearby value that is simpler but close in size. The usual rule is to look at the digit just after the rounding position: if it is 5 or more, round up; otherwise round down.</p>
+      <p>For example 1234.5678 rounded to 2 decimal places becomes 1234.57, and to the nearest ten it becomes 1230. The calculator applies this rule consistently to every rounding target.</p></div>
+    <div class="content-section"><h2 id="decimal-places-vs-significant-figures">Decimal places vs significant figures</h2><p>Decimal places count digits after the decimal point. Significant figures count all meaningful digits from the first non-zero digit. The number 0.0045 has two significant figures but four decimal places.</p>
+      <p>Significant figures matter in science and engineering because they reflect measurement precision: 12.30 implies more precision than 12.3. The calculator shows both styles side by side.</p></div>
+<div class="content-section"><h2 id="how-to-use">How to use this calculator</h2><ol><li>Enter the number you want to round.</li><li>Set the number of decimal places and significant figures.</li><li>Press Round to see both, plus common nearest-value results.</li><li>Use the result that fits your context (money, measurement, statistics).</li></ol></div>
+<div class="content-section tips-box"><h2>Pro tips</h2><ul><li>For money, round to 2 decimal places.</li><li>For statistics, report significant figures based on instrument precision.</li><li>Rounding to the nearest 0.5 is handy for half-point grades and measurements.</li></ul></div>
+<div class="content-section"><h2>Advantages &amp; considerations</h2><div class="pros-cons"><div class="pros"><h3>&#9989; Advantages</h3><ul><li>Shows many rounding targets at once</li><li>Supports significant figures</li><li>Round-half-up rule matches everyday expectations</li></ul></div><div class="cons"><h3>&#9888;&#65039; Considerations</h3><ul><li>Uses the standard half-up convention only</li><li>Rounding can accumulate error in long computations</li></ul></div></div></div>
+<div class="content-section"><h2 id="faq">Frequently asked questions</h2><div class="faq-item"><div class="faq-q">How do I round to 2 decimal places?<span class="arrow">&#9654;</span></div><div class="faq-a">Look at the third decimal digit. If it is 5 or more, increase the second decimal digit by 1; otherwise leave it. For example 3.14159 becomes 3.14.</div></div>
+      <div class="faq-item"><div class="faq-q">What are significant figures?<span class="arrow">&#9654;</span></div><div class="faq-a">The digits that carry meaning in a measurement, starting from the first non-zero digit. 0.0045 has two; 12.30 has four.</div></div>
+      <div class="faq-item"><div class="faq-q">What does round half up mean?<span class="arrow">&#9654;</span></div><div class="faq-a">When the dropped digit is exactly 5, the number rounds upward. For example 2.5 rounds to 3, and 3.15 to 2 decimal places rounds to 3.15's next value up.</div></div>
+      <div class="faq-item"><div class="faq-q">How do I round to the nearest ten?<span class="arrow">&#9654;</span></div><div class="faq-a">Look at the ones digit: 5 or more rounds the tens digit up, otherwise it stays. 1234 rounds to 1230, and 1236 rounds to 1240.</div></div>
+      <div class="faq-item"><div class="faq-q">Is rounding the same as truncating?<span class="arrow">&#9654;</span></div><div class="faq-a">No. Truncation always cuts digits off, while rounding adjusts the last kept digit based on the dropped part. 12.99 truncated is 12, but rounded is 13.</div></div></div>
+  </main>
 </div>
 
 <div id="siteFooter"></div>
 
 <script src="js/math.js"></script>
 <script>
-document.getElementById('calcBtn').onclick=function(){
-var v=parseFloat(document.getElementById('num').value),d=parseInt(document.getElementById('decimals').value),n=parseFloat(document.getElementById('nearest').value);
-if(isNaN(v)){document.getElementById('resultMain').textContent='Enter a number';return;}
-var r1=MathCalc.roundTo(v,d);
-var r2=MathCalc.roundToNearest(v,n);
-document.getElementById('resultMain').textContent=MathCalc.fmt(r1.value,d);
-document.getElementById('resultGrid').innerHTML='<div class="result-item"><div class="label">Rounded to '+d+' decimals</div><div class="value">'+MathCalc.fmt(r1.value,d)+'</div></div><div class="result-item"><div class="label">Rounded to nearest '+n+'</div><div class="value">'+MathCalc.fmt(r2.value,4)+'</div></div>';
-};
+function item(l,v){return '<div class="result-item"><div class="label">'+l+'</div><div class="value">'+v+'</div></div>';}
+document.getElementById("calcBtn").onclick=function(){
+var n=parseFloat(document.getElementById("num").value);
+var dp=parseInt(document.getElementById("dp").value,10);
+var sig=parseInt(document.getElementById("sig").value,10);
+if(isNaN(n)){document.getElementById("resultMain").textContent="Enter a valid number";document.getElementById("resultGrid").innerHTML="";return;}
+if(isNaN(dp)||dp<0||dp>10){dp=2;}
+if(isNaN(sig)||sig<1||sig>10){sig=4;}
+var rDp=MathCalc.roundTo(n,dp).value;
+var rSig=MathCalc.roundSig(n,sig).value;
+var grid=item("Original",n)+item("To "+dp+" decimal places",MathCalc.fmt(rDp,dp))+item("To "+sig+" significant figures",MathCalc.fmt(rSig,sig));
+[[0.01,"nearest hundredth"],[0.1,"nearest tenth"],[1,"nearest integer"],[5,"nearest 5"],[10,"nearest 10"],[100,"nearest 100"],[1000,"nearest 1000"],[0.5,"nearest 0.5"]].forEach(function(pair){
+grid+=item("To "+pair[1],MathCalc.fmt(MathCalc.roundToNearest(n,pair[0]).value,Math.max(2,dp)));
+});
+document.getElementById("resultMain").textContent=MathCalc.fmt(rDp,dp);
+document.getElementById("resultGrid").innerHTML=grid;};
 </script>
 <script src="js/currency.js"></script>
 <script src="js/seo-content.js"></script>

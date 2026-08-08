@@ -12,17 +12,18 @@
 <script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Percentage Calculator | EMI Master</title>
-<meta name="description" content="Free online Percentage Calculator. Fast, accurate and mobile friendly. No signup - calculations run 100% in your browser.">
-<meta name="keywords" content="percentage calculator, free online math calculator, percentage calculator online">
+<title>Percentage Calculator - Percent of a Value, Change &amp; More</title>
+<meta name="description" content="Free percentage calculator. Find X% of Y, what percent A is of B, percentage change, and add or subtract a percentage from any value.">
+<meta name="keywords" content="percentage calculator, percent calculator, percent change calculator, percentage increase calculator">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://emimaster.com/percentage-calculator.html">
-<meta property="og:title" content="Percentage Calculator | EMI Master">
-<meta property="og:description" content="Free, fast, private Percentage Calculator. Works on all devices.">
+<meta property="og:title" content="Percentage Calculator - Percent of a Value, Change &amp; More">
+<meta property="og:description" content="Free percentage calculator. Find X% of Y, what percent A is of B, percentage change, and add or subtract a percentage from any value.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://emimaster.com/percentage-calculator.html">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Percentage Calculator","url":"https://emimaster.com/percentage-calculator.html","description":"Percentage Calculator - 100% free, fast and accurate online calculator. Runs in your browser.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the formula for percentage change?","acceptedAnswer":{"@type":"Answer","text":"Percentage change = (B - A) / A * 100. A positive result means an increase, negative means a decrease."}},{"@type":"Question","name":"How do I find what percent A is of B?","acceptedAnswer":{"@type":"Answer","text":"Divide A by B and multiply by 100. For example 25 is 25% of 100."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Percentage Calculator","url":"https://emimaster.com/percentage-calculator.html","description":"Free percentage calculator. Find X% of Y, what percent A is of B, percentage change, and add or subtract a percentage from any value.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I calculate a percentage of a number?","acceptedAnswer":{"@type":"Answer","text":"Multiply the number by the percentage divided by 100. For example 20% of 250 = 250 × 20/100 = 50."}},{"@type":"Question","name":"How do I calculate percentage change?","acceptedAnswer":{"@type":"Answer","text":"Use the formula (new - old) / old × 100. From 50 to 60 that is (60-50)/50 × 100 = 20%, an increase."}},{"@type":"Question","name":"What percent is 25 of 200?","acceptedAnswer":{"@type":"Answer","text":"Divide 25 by 200 and multiply by 100: 25/200 × 100 = 12.5%."}},{"@type":"Question","name":"How do I add a percentage to a number?","acceptedAnswer":{"@type":"Answer","text":"Multiply the number by (1 + percentage/100). Adding 15% to 80 gives 80 × 1.15 = 92."}},{"@type":"Question","name":"Is the percentage calculator free?","acceptedAnswer":{"@type":"Answer","text":"Yes, it is completely free, runs in your browser, and requires no registration."}}]}</script>
+<script type="application/json" id="relatedData">[{"href":"fraction-calculator.html","label":"Fraction Calculator","icon":"⅙"},{"href":"ratio-calculator.html","label":"Ratio Calculator","icon":"∶"},{"href":"percent-error-calculator.html","label":"Percent Error Calculator","icon":"⚠"},{"href":"rounding-calculator.html","label":"Rounding Calculator","icon":"±"}]</script>
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
@@ -32,75 +33,86 @@
 <div id="siteHeader"></div>
 
 <section class="hero hero-compact">
-<div class="container">
-<h1>Percentage Calculator</h1>
-<p>Fast, free, accurate and 100% private. Works on any device.</p>
-</div>
+  <div class="container">
+    <h1>Percentage Calculator</h1>
+    <p>Percent of a value, percent change, and add/subtract percentages in one tool.</p>
+  </div>
 </section>
 
 <div class="layout">
-<div id="siteSidebar"></div>
+  <div id="siteSidebar"></div>
 
-<main class="main-content">
-<div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Percentage Calculator</div>
-<h1 class="page-title">Percentage Calculator</h1>
-<p class="page-subtitle">Enter your values below and click the button for instant results.</p>
+  <main class="main-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="index.html#math">Math Calculators</a> &rsaquo; Percentage Calculator</div>
+    <h1 class="page-title">Percentage Calculator</h1>
+    <p class="page-subtitle">Pick the calculation you need, enter the two numbers, and get the exact percentage result with a short explanation.</p>
 
 <div class="card">
-<h2>Percentage</h2>
+<h2>Percentage calculation</h2>
 <div class="form-grid">
-<div class="form-group"><label>Calculate</label>
+<div class="form-group"><label>Calculation type</label>
 <select id="type">
-<option value="pof">X % of a value</option>
-<option value="change">Percent change from A to B</option>
-<option value="ofwhat">A is what percent of B</option>
+<option value="pof">What is X% of Y?</option>
+<option value="what">X is what percent of Y?</option>
+<option value="change">Percentage change from X to Y</option>
+<option value="add">Increase Y by X%</option>
+<option value="sub">Decrease Y by X%</option>
 </select>
 </div>
-<div class="form-group"><label>Value A</label><input type="number" id="a" value="250" step="any"></div>
-<div class="form-group"><label>Value B / Percent</label><input type="number" id="b" value="20" step="any"></div>
+<div class="form-group"><label>Value X</label><input type="number" id="a" value="20" step="any"></div>
+<div class="form-group"><label>Value Y</label><input type="number" id="b" value="250" step="any"></div>
 </div>
 <div class="form-actions"><button class="btn btn-primary" id="calcBtn" type="button">Calculate</button></div>
 </div>
 
-<div class="result-panel" id="resultPanel">
-<h3 id="resultLabel">Result</h3>
-<div class="result-main" id="resultMain">—</div>
-<div class="result-grid" id="resultGrid"></div>
-</div>
-
-<div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
-
-<div class="content-section">
-<h2>About Percentage Calculator</h2>
-<p>This Percentage Calculator is fast, accurate and 100% private. All calculations run locally in your browser, so your information never leaves your device. No sign-up, no downloads, works beautifully on mobile and desktop.</p>
-</div>
-
-<div class="content-section">
-<h2>FAQ</h2>
-<div class="faq-item">
-      <div class="faq-q">What is the formula for percentage change?<span class="arrow">&#9654;</span></div>
-      <div class="faq-a">Percentage change = (B - A) / A * 100. A positive result means an increase, negative means a decrease.</div>
+    <div class="result-panel" id="resultPanel">
+      <h3>Result</h3>
+      <div class="result-main" id="resultMain">&mdash;</div>
+      <div class="result-grid" id="resultGrid"></div>
     </div>
-    <div class="faq-item">
-      <div class="faq-q">How do I find what percent A is of B?<span class="arrow">&#9654;</span></div>
-      <div class="faq-a">Divide A by B and multiply by 100. For example 25 is 25% of 100.</div>
+
+    <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
+
+    <div class="quick-facts">
+    <div class="fact-chip"><strong>Modes:</strong> Percent of, percent of Y, change, increase, decrease</div>
+    <div class="fact-chip"><strong>Percent change:</strong> (New - Old) / Old × 100</div>
+    <div class="fact-chip"><strong>Percent of:</strong> X/100 × Y</div>
+    <div class="fact-chip"><strong>Use case:</strong> Sales tax, discounts, grades, growth</div>
     </div>
-</div>
-</main>
+
+<div class="content-section"><h2 id="understanding-percentages">Understanding percentages</h2><p>A percentage is a fraction with a denominator of 100. Saying 20% of 250 means 20/100 of 250, which equals 50. Percentages make comparisons easy because they put every quantity on the same 100-point scale.</p>
+      <p>There are three classic percentage questions: finding a part of a whole (what is 15% of 80), finding a share (what percent of 80 is 12), and measuring change (from 50 to 60 is a 20% increase). This calculator answers all three, plus increase and decrease.</p></div>
+    <div class="content-section"><h2 id="percentage-change-explained">Percentage change explained</h2><p>Percentage change measures how much a value moved relative to its starting point: (new - old) / old × 100. A positive result is an increase, a negative result is a decrease.</p>
+      <p>For example, if a price rises from $50 to $65, the change is (65 - 50)/50 × 100 = 30%. If it falls from $65 back to $50, the change is (50 - 65)/65 × 100 = -23.1%. Notice the percentages differ because the starting points differ.</p></div>
+<div class="content-section"><h2 id="how-to-use">How to use this calculator</h2><ol><li>Choose the type of percentage calculation from the dropdown.</li><li>Enter the two values (X and Y).</li><li>Press Calculate and read the result plus the formula used.</li><li>Switch modes to compare different percentage questions on the same numbers.</li></ol></div>
+<div class="content-section tips-box"><h2>Pro tips</h2><ul><li>To add sales tax to a price, use the 'Increase by %' mode with the tax rate.</li><li>Remember that a 50% increase followed by a 50% decrease does not return to the original value.</li><li>For reverse calculations (the original before a percentage), subtract the percent instead.</li></ul></div>
+<div class="content-section"><h2>Advantages &amp; considerations</h2><div class="pros-cons"><div class="pros"><h3>&#9989; Advantages</h3><ul><li>Five common percentage modes in one page</li><li>Shows the formula for every result</li><li>Handles decimals precisely</li></ul></div><div class="cons"><h3>&#9888;&#65039; Considerations</h3><ul><li>Does not support reverse percentage lookups directly</li><li>Percentage change assumes the first value is the base</li></ul></div></div></div>
+<div class="content-section"><h2 id="faq">Frequently asked questions</h2><div class="faq-item"><div class="faq-q">How do I calculate a percentage of a number?<span class="arrow">&#9654;</span></div><div class="faq-a">Multiply the number by the percentage divided by 100. For example 20% of 250 = 250 × 20/100 = 50.</div></div>
+      <div class="faq-item"><div class="faq-q">How do I calculate percentage change?<span class="arrow">&#9654;</span></div><div class="faq-a">Use the formula (new - old) / old × 100. From 50 to 60 that is (60-50)/50 × 100 = 20%, an increase.</div></div>
+      <div class="faq-item"><div class="faq-q">What percent is 25 of 200?<span class="arrow">&#9654;</span></div><div class="faq-a">Divide 25 by 200 and multiply by 100: 25/200 × 100 = 12.5%.</div></div>
+      <div class="faq-item"><div class="faq-q">How do I add a percentage to a number?<span class="arrow">&#9654;</span></div><div class="faq-a">Multiply the number by (1 + percentage/100). Adding 15% to 80 gives 80 × 1.15 = 92.</div></div>
+      <div class="faq-item"><div class="faq-q">Is the percentage calculator free?<span class="arrow">&#9654;</span></div><div class="faq-a">Yes, it is completely free, runs in your browser, and requires no registration.</div></div></div>
+  </main>
 </div>
 
 <div id="siteFooter"></div>
 
 <script src="js/math.js"></script>
 <script>
-document.getElementById('calcBtn').onclick=function(){
-var type=document.getElementById('type').value,a=parseFloat(document.getElementById('a').value),b=parseFloat(document.getElementById('b').value);
-var out;
-if(isNaN(a)||isNaN(b)){document.getElementById('resultMain').textContent='Enter valid numbers';return;}
-if(type==='pof'){out=a*b/100;document.getElementById('resultMain').textContent=MathCalc.fmt(out,4);document.getElementById('resultGrid').innerHTML='<div class="result-item"><div class="label">'+b+'% of '+a+'</div><div class="value">'+MathCalc.fmt(out,4)+'</div></div>';}
-else if(type==='change'){if(a===0){document.getElementById('resultMain').textContent='A cannot be zero';return;}out=(b-a)/a*100;document.getElementById('resultMain').textContent=MathCalc.fmt(out,2)+'%';document.getElementById('resultGrid').innerHTML='<div class="result-item"><div class="label">Change</div><div class="value">'+MathCalc.fmt(out,2)+'%</div></div>';}
-else{if(b===0){document.getElementById('resultMain').textContent='B cannot be zero';return;}out=a/b*100;document.getElementById('resultMain').textContent=MathCalc.fmt(out,2)+'%';document.getElementById('resultGrid').innerHTML='<div class="result-item"><div class="label">A as % of B</div><div class="value">'+MathCalc.fmt(out,2)+'%</div></div>';}
-};
+function item(l,v){return '<div class="result-item"><div class="label">'+l+'</div><div class="value">'+v+'</div></div>';}
+document.getElementById("calcBtn").onclick=function(){
+var type=document.getElementById("type").value;
+var x=parseFloat(document.getElementById("a").value);
+var y=parseFloat(document.getElementById("b").value);
+var out,grid="",main;
+if(isNaN(x)||isNaN(y)){document.getElementById("resultMain").textContent="Enter valid numbers";document.getElementById("resultGrid").innerHTML="";return;}
+if(type==="pof"){out=MathCalc.percentOfPart(y,x).value;main=x+"% of "+MathCalc.fmt(y,4)+" = "+MathCalc.fmt(out,4);grid=item("Formula","("+x+"/100) × "+y)+item("Result",MathCalc.fmt(out,4));}
+else if(type==="what"){if(y===0){document.getElementById("resultMain").textContent="Y cannot be zero";return;}out=MathCalc.whatPercent(x,y).value;main=x+" is "+MathCalc.fmt(out,2)+"% of "+y;grid=item("Formula","("+x+"/"+y+") × 100")+item("Result",MathCalc.fmt(out,2)+"%");}
+else if(type==="change"){if(y===0){document.getElementById("resultMain").textContent="Starting value cannot be zero";return;}out=MathCalc.percentChange(x,y).value;var abs=y-x;main="Change from "+x+" to "+y+" = "+MathCalc.fmt(out,2)+"%";grid=item("Formula","(("+y+"-"+x+")/"+x+") × 100")+item("Absolute change",(abs>=0?"+":"")+MathCalc.fmt(abs,4))+item("Direction",out>=0?"Increase":"Decrease");}
+else if(type==="add"){out=MathCalc.addPercent(y,x).value;main=y+" increased by "+x+"% = "+MathCalc.fmt(out,4);grid=item("Formula",y+" × (1 + "+x+"/100)")+item("Result",MathCalc.fmt(out,4));}
+else{out=MathCalc.subtractPercent(y,x).value;main=y+" decreased by "+x+"% = "+MathCalc.fmt(out,4);grid=item("Formula",y+" × (1 - "+x+"/100)")+item("Result",MathCalc.fmt(out,4));}
+document.getElementById("resultMain").textContent=main;
+document.getElementById("resultGrid").innerHTML=grid;};
 </script>
 <script src="js/currency.js"></script>
 <script src="js/seo-content.js"></script>

@@ -12,17 +12,18 @@
 <script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Random Number Generator | EMI Master</title>
-<meta name="description" content="Free online Random Number Generator. Fast, accurate and mobile friendly. No signup - calculations run 100% in your browser.">
-<meta name="keywords" content="random number generator, free online math calculator, random number generator online">
+<title>Random Number Generator - Random Integers &amp; Decimals</title>
+<meta name="description" content="Free random number generator. Create random integers or decimals between any range, with unique values, sorting and instant statistics.">
+<meta name="keywords" content="random number generator, random number between, random integers, random decimals">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://emimaster.com/random-number-generator.html">
-<meta property="og:title" content="Random Number Generator | EMI Master">
-<meta property="og:description" content="Free, fast, private Random Number Generator. Works on all devices.">
+<meta property="og:title" content="Random Number Generator - Random Integers &amp; Decimals">
+<meta property="og:description" content="Free random number generator. Create random integers or decimals between any range, with unique values, sorting and instant statistics.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://emimaster.com/random-number-generator.html">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Random Number Generator","url":"https://emimaster.com/random-number-generator.html","description":"Random Number Generator - 100% free, fast and accurate online calculator. Runs in your browser.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a Random Number Generator?","acceptedAnswer":{"@type":"Answer","text":"It produces numbers that have no pattern, generating random integers or decimals between your chosen minimum and maximum values."}},{"@type":"Question","name":"Can I generate decimals?","acceptedAnswer":{"@type":"Answer","text":"Yes. Choose the Decimal option to get random numbers with up to 4 decimal places."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Random Number Generator","url":"https://emimaster.com/random-number-generator.html","description":"Free random number generator. Create random integers or decimals between any range, with unique values, sorting and instant statistics.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How does the random number generator work?","acceptedAnswer":{"@type":"Answer","text":"It uses the browser's random number source to draw values uniformly between your minimum and maximum. Each draw is independent of the previous one."}},{"@type":"Question","name":"Can I generate the same number twice?","acceptedAnswer":{"@type":"Answer","text":"Yes, unless you tick 'No repeats'. Without that option, any number in the range can appear more than once, just like rolling dice."}},{"@type":"Question","name":"What is the best range for a dice roll?","acceptedAnswer":{"@type":"Answer","text":"Set minimum 1 and maximum 6 in integer mode. For two dice, generate two numbers and add them."}},{"@type":"Question","name":"Can I generate decimal numbers?","acceptedAnswer":{"@type":"Answer","text":"Yes. Choose Decimal as the type and set how many decimal places you want, for example 2 places gives values like 37.42."}},{"@type":"Question","name":"Are the numbers stored or sent anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. Generation happens entirely in your browser and nothing is transmitted or stored."}}]}</script>
+<script type="application/json" id="relatedData">[{"href":"rounding-calculator.html","label":"Rounding Calculator","icon":"±"},{"href":"big-number-calculator.html","label":"Big Number Calculator","icon":"#"},{"href":"scientific-notation-calculator.html","label":"Scientific Notation","icon":"×10"}]</script>
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
@@ -32,69 +33,98 @@
 <div id="siteHeader"></div>
 
 <section class="hero hero-compact">
-<div class="container">
-<h1>Random Number Generator</h1>
-<p>Fast, free, accurate and 100% private. Works on any device.</p>
-</div>
+  <div class="container">
+    <h1>Random Number Generator</h1>
+    <p>Generate random integers or decimals between any two numbers.</p>
+  </div>
 </section>
 
 <div class="layout">
-<div id="siteSidebar"></div>
+  <div id="siteSidebar"></div>
 
-<main class="main-content">
-<div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Random Number Generator</div>
-<h1 class="page-title">Random Number Generator</h1>
-<p class="page-subtitle">Enter your values below and click the button for instant results.</p>
+  <main class="main-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="index.html#math">Math Calculators</a> &rsaquo; Random Number Generator</div>
+    <h1 class="page-title">Random Number Generator</h1>
+    <p class="page-subtitle">Set the range and quantity, choose integer or decimal output, and generate truly random numbers with instant statistics.</p>
 
 <div class="card">
-<h2>Random Numbers</h2>
+<h2>Generate random numbers</h2>
 <div class="form-grid">
 <div class="form-group"><label>Minimum</label><input type="number" id="min" value="1"></div>
 <div class="form-group"><label>Maximum</label><input type="number" id="max" value="100"></div>
-<div class="form-group"><label>How many</label><input type="number" id="count" value="5" min="1" max="100"></div>
+<div class="form-group"><label>How many</label><input type="number" id="count" value="5" min="1" max="200"></div>
 <div class="form-group"><label>Type</label><select id="type"><option value="int">Integer</option><option value="float">Decimal</option></select></div>
+<div class="form-group"><label>Decimal places (decimals)</label><input type="number" id="decimals" value="2" min="1" max="6"></div>
+<div class="form-group"><label>Options</label>
+<label class="checkbox-inline"><input type="checkbox" id="unique"> No repeats</label>
+<label class="checkbox-inline"><input type="checkbox" id="sort"> Sort ascending</label>
+</div>
 </div>
 <div class="form-actions"><button class="btn btn-primary" id="calcBtn" type="button">Generate</button></div>
 </div>
 
-<div class="result-panel" id="resultPanel">
-<h3 id="resultLabel">Result</h3>
-<div class="result-main" id="resultMain">—</div>
-<div class="result-grid" id="resultGrid"></div>
-</div>
-
-<div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
-
-<div class="content-section">
-<h2>About Random Number Generator</h2>
-<p>This Random Number Generator is fast, accurate and 100% private. All calculations run locally in your browser, so your information never leaves your device. No sign-up, no downloads, works beautifully on mobile and desktop.</p>
-</div>
-
-<div class="content-section">
-<h2>FAQ</h2>
-<div class="faq-item">
-      <div class="faq-q">What is a Random Number Generator?<span class="arrow">&#9654;</span></div>
-      <div class="faq-a">It produces numbers that have no pattern, generating random integers or decimals between your chosen minimum and maximum values.</div>
+    <div class="result-panel" id="resultPanel">
+      <h3>Result</h3>
+      <div class="result-main" id="resultMain">&mdash;</div>
+      <div class="result-grid" id="resultGrid"></div>
     </div>
-    <div class="faq-item">
-      <div class="faq-q">Can I generate decimals?<span class="arrow">&#9654;</span></div>
-      <div class="faq-a">Yes. Choose the Decimal option to get random numbers with up to 4 decimal places.</div>
+
+    <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
+
+    <div class="quick-facts">
+    <div class="fact-chip"><strong>Types:</strong> Integers or decimals</div>
+    <div class="fact-chip"><strong>Range:</strong> Any minimum and maximum</div>
+    <div class="fact-chip"><strong>Extras:</strong> No repeats, sorting, statistics</div>
+    <div class="fact-chip"><strong>Usage:</strong> Lotteries, samples, games, testing</div>
     </div>
-</div>
-</main>
+
+<div class="content-section"><h2 id="what-makes-a-number-random">What makes a number random?</h2><p>A random number has no predictable pattern. This generator uses the browser's random number source, which produces values that behave like independent, uniformly distributed draws across your chosen range.</p>
+      <p>Uniform distribution means every number in the range has an equal chance of appearing. Over many draws, the results spread evenly; a small sample can still look 'clustered' purely by chance.</p></div>
+    <div class="content-section"><h2 id="integers-vs-decimals">Integers vs decimals</h2><p>Integer mode returns whole numbers only, ideal for dice rolls, lottery numbers or picking an item from a list.</p>
+      <p>Decimal mode returns values with a chosen number of decimal places, useful for statistics, simulation and experiments where continuous values are needed.</p></div>
+<div class="content-section"><h2 id="how-to-use">How to use this calculator</h2><ol><li>Enter the minimum and maximum of the range.</li><li>Choose how many numbers to generate and the type (integer or decimal).</li><li>Optionally tick 'No repeats' and 'Sort ascending'.</li><li>Press Generate and read the list plus sum, mean, minimum and maximum.</li></ol></div>
+<div class="content-section tips-box"><h2>Pro tips</h2><ul><li>For a coin flip use integers 1-2; for dice use 1-6.</li><li>Tick 'No repeats' when drawing a sample without replacement.</li><li>Use decimal mode with 2 places for realistic money or measurement values.</li></ul></div>
+<div class="content-section"><h2>Advantages &amp; considerations</h2><div class="pros-cons"><div class="pros"><h3>&#9989; Advantages</h3><ul><li>Integers and decimals with adjustable precision</li><li>Unique and sorted output options</li><li>Instant statistics on every generation</li></ul></div><div class="cons"><h3>&#9888;&#65039; Considerations</h3><ul><li>Truly random means patterns can appear by chance</li><li>Unique decimals may run out if the range is tiny</li></ul></div></div></div>
+<div class="content-section"><h2 id="faq">Frequently asked questions</h2><div class="faq-item"><div class="faq-q">How does the random number generator work?<span class="arrow">&#9654;</span></div><div class="faq-a">It uses the browser's random number source to draw values uniformly between your minimum and maximum. Each draw is independent of the previous one.</div></div>
+      <div class="faq-item"><div class="faq-q">Can I generate the same number twice?<span class="arrow">&#9654;</span></div><div class="faq-a">Yes, unless you tick 'No repeats'. Without that option, any number in the range can appear more than once, just like rolling dice.</div></div>
+      <div class="faq-item"><div class="faq-q">What is the best range for a dice roll?<span class="arrow">&#9654;</span></div><div class="faq-a">Set minimum 1 and maximum 6 in integer mode. For two dice, generate two numbers and add them.</div></div>
+      <div class="faq-item"><div class="faq-q">Can I generate decimal numbers?<span class="arrow">&#9654;</span></div><div class="faq-a">Yes. Choose Decimal as the type and set how many decimal places you want, for example 2 places gives values like 37.42.</div></div>
+      <div class="faq-item"><div class="faq-q">Are the numbers stored or sent anywhere?<span class="arrow">&#9654;</span></div><div class="faq-a">No. Generation happens entirely in your browser and nothing is transmitted or stored.</div></div></div>
+  </main>
 </div>
 
 <div id="siteFooter"></div>
 
 <script src="js/math.js"></script>
 <script>
-document.getElementById('calcBtn').onclick=function(){
-var min=parseFloat(document.getElementById('min').value),max=parseFloat(document.getElementById('max').value),count=parseInt(document.getElementById('count').value),type=document.getElementById('type').value;
-if(isNaN(min)||isNaN(max)||isNaN(count)||count<1||count>100){document.getElementById('resultMain').textContent='Enter valid values';return;}
-var nums=type==='int'?MathCalc.randomInt(min,max,count):MathCalc.randomFloat(min,max,count,4);
-document.getElementById('resultMain').textContent=nums.join(', ');
-document.getElementById('resultGrid').innerHTML='<div class="result-item"><div class="label">Numbers ('+count+')</div><div class="value">'+nums.join(', ')+'</div></div>';
-};
+function item(l,v){return '<div class="result-item"><div class="label">'+l+'</div><div class="value">'+v+'</div></div>';}
+document.getElementById("calcBtn").onclick=function(){
+var min=parseFloat(document.getElementById("min").value);
+var max=parseFloat(document.getElementById("max").value);
+var count=parseInt(document.getElementById("count").value,10);
+var type=document.getElementById("type").value;
+var dec=parseInt(document.getElementById("decimals").value,10)||2;
+var uniq=document.getElementById("unique").checked;
+var sort=document.getElementById("sort").checked;
+if(isNaN(min)||isNaN(max)||isNaN(count)||count<1||count>200){document.getElementById("resultMain").textContent="Enter valid values";document.getElementById("resultGrid").innerHTML="";return;}
+if(min>max){var t=min;min=max;max=t;}
+if(uniq&&type==="int"&&max-min+1<count){document.getElementById("resultMain").textContent="Range too small for unique numbers";document.getElementById("resultGrid").innerHTML="";return;}
+var nums=[],seen={};
+while(nums.length<count){
+var v;
+if(type==="int"){v=Math.floor(Math.random()*(max-min+1))+min;}
+else{v=Math.round((Math.random()*(max-min)+min)*Math.pow(10,dec))/Math.pow(10,dec);}
+if(uniq){var key=type==="int"?String(v):v.toFixed(dec);if(seen[key])continue;seen[key]=1;}
+nums.push(v);
+if(uniq&&nums.length>10000){break;}
+}
+if(sort){nums.sort(function(a,b){return a-b;});}
+var sum=nums.reduce(function(a,b){return a+b;},0);
+var mean=sum/nums.length;
+var nmin=Math.min.apply(null,nums);
+var nmax=Math.max.apply(null,nums);
+document.getElementById("resultMain").textContent=nums.join(", ");
+document.getElementById("resultGrid").innerHTML=item("Numbers",nums.length)+item("Sum",MathCalc.fmt(sum,dec))+item("Mean",MathCalc.fmt(mean,dec))+item("Min",MathCalc.fmt(nmin,dec))+item("Max",MathCalc.fmt(nmax,dec));};
 </script>
 <script src="js/currency.js"></script>
 <script src="js/seo-content.js"></script>

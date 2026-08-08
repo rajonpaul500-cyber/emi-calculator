@@ -12,17 +12,18 @@
 <script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Half-Life Calculator | EMI Master</title>
-<meta name="description" content="Free online Half-Life Calculator. Fast, accurate and mobile friendly. No signup - calculations run 100% in your browser.">
-<meta name="keywords" content="half-life calculator, free online math calculator, half-life calculator online">
+<title>Half-Life Calculator - Solve for Time, Amount or Half-Life</title>
+<meta name="description" content="Free half-life calculator. Find half-life, initial amount, remaining amount or elapsed time, plus decay constant and remaining fraction.">
+<meta name="keywords" content="half life calculator, radioactive decay, decay constant, half life formula">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://emimaster.com/half-life-calculator.html">
-<meta property="og:title" content="Half-Life Calculator | EMI Master">
-<meta property="og:description" content="Free, fast, private Half-Life Calculator. Works on all devices.">
+<meta property="og:title" content="Half-Life Calculator - Solve for Time, Amount or Half-Life">
+<meta property="og:description" content="Free half-life calculator. Find half-life, initial amount, remaining amount or elapsed time, plus decay constant and remaining fraction.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://emimaster.com/half-life-calculator.html">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Half-Life Calculator","url":"https://emimaster.com/half-life-calculator.html","description":"Half-Life Calculator - 100% free, fast and accurate online calculator. Runs in your browser.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is half-life?","acceptedAnswer":{"@type":"Answer","text":"Half-life is the time taken for half of a radioactive substance (or any decaying quantity) to decay or disintegrate."}},{"@type":"Question","name":"How is half-life calculated from remaining amount?","acceptedAnswer":{"@type":"Answer","text":"Use the exponential decay formula: t(1/2) = (time * ln(2)) / ln(initial / remaining)."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Half-Life Calculator","url":"https://emimaster.com/half-life-calculator.html","description":"Free half-life calculator. Find half-life, initial amount, remaining amount or elapsed time, plus decay constant and remaining fraction.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the half-life formula?","acceptedAnswer":{"@type":"Answer","text":"Half-life is found with H = t × ln(2) / ln(I / R), where I is the initial amount, R the remaining amount and t the elapsed time."}},{"@type":"Question","name":"How much remains after 3 half-lives?","acceptedAnswer":{"@type":"Answer","text":"Each half-life halves the amount, so after 3 half-lives 0.5 × 0.5 × 0.5 = 12.5% remains."}},{"@type":"Question","name":"What is the decay constant?","acceptedAnswer":{"@type":"Answer","text":"The decay constant k = ln(2) / half-life measures how quickly a substance decays per unit time. A larger k means faster decay."}},{"@type":"Question","name":"Can half-life be used for non-radioactive things?","acceptedAnswer":{"@type":"Answer","text":"Yes. The same math models drug elimination from the body, chemical reaction rates and even depreciation of assets over time."}},{"@type":"Question","name":"What is mean lifetime?","acceptedAnswer":{"@type":"Answer","text":"Mean lifetime is the average time a single atom or particle survives before decaying. It equals 1/k, about 1.44 times the half-life."}}]}</script>
+<script type="application/json" id="relatedData">[{"href":"exponent-calculator.html","label":"Exponent Calculator","icon":"²"},{"href":"log-calculator.html","label":"Log Calculator","icon":"log"},{"href":"root-calculator.html","label":"Root Calculator","icon":"√"}]</script>
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
@@ -32,70 +33,77 @@
 <div id="siteHeader"></div>
 
 <section class="hero hero-compact">
-<div class="container">
-<h1>Half-Life Calculator</h1>
-<p>Fast, free, accurate and 100% private. Works on any device.</p>
-</div>
+  <div class="container">
+    <h1>Half-Life Calculator</h1>
+    <p>Solve any half-life problem by leaving one field empty.</p>
+  </div>
 </section>
 
 <div class="layout">
-<div id="siteSidebar"></div>
+  <div id="siteSidebar"></div>
 
-<main class="main-content">
-<div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Half-Life Calculator</div>
-<h1 class="page-title">Half-Life Calculator</h1>
-<p class="page-subtitle">Enter your values below and click the button for instant results.</p>
+  <main class="main-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="index.html#math">Math Calculators</a> &rsaquo; Half-Life Calculator</div>
+    <h1 class="page-title">Half-Life Calculator</h1>
+    <p class="page-subtitle">Enter any three of the four values (initial amount, remaining amount, elapsed time, half-life) and leave one empty — the calculator solves it.</p>
 
 <div class="card">
-<h2>Half-Life Calculations</h2>
+<h2>Half-life calculations</h2>
 <div class="form-grid">
-<div class="form-group"><label>Initial Amount</label><input type="number" id="initial" value="100"></div>
-<div class="form-group"><label>Remaining Amount</label><input type="number" id="remaining" value="50"></div>
-<div class="form-group"><label>Time Elapsed (any unit)</label><input type="number" id="time" value="5" min="0.0001"></div>
+<div class="form-group"><label>Initial amount</label><input type="number" id="initial" value="100" step="any"></div>
+<div class="form-group"><label>Remaining amount</label><input type="number" id="remaining" value="25" step="any"></div>
+<div class="form-group"><label>Elapsed time</label><input type="number" id="time" value="10" step="any"></div>
+<div class="form-group"><label>Half-life</label><input type="text" id="halfLife" placeholder="Leave empty to solve" value=""></div>
 </div>
-<div class="form-actions"><button class="btn btn-primary" id="calcBtn" type="button">Calculate Half-Life</button></div>
-</div>
-
-<div class="result-panel" id="resultPanel">
-<h3 id="resultLabel">Result</h3>
-<div class="result-main" id="resultMain">—</div>
-<div class="result-grid" id="resultGrid"></div>
+<div class="form-actions"><button class="btn btn-primary" id="calcBtn" type="button">Solve</button></div>
 </div>
 
-<div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
-
-<div class="content-section">
-<h2>About Half-Life Calculator</h2>
-<p>This Half-Life Calculator is fast, accurate and 100% private. All calculations run locally in your browser, so your information never leaves your device. No sign-up, no downloads, works beautifully on mobile and desktop.</p>
-</div>
-
-<div class="content-section">
-<h2>FAQ</h2>
-<div class="faq-item">
-      <div class="faq-q">What is half-life?<span class="arrow">&#9654;</span></div>
-      <div class="faq-a">Half-life is the time taken for half of a radioactive substance (or any decaying quantity) to decay or disintegrate.</div>
+    <div class="result-panel" id="resultPanel">
+      <h3>Result</h3>
+      <div class="result-main" id="resultMain">&mdash;</div>
+      <div class="result-grid" id="resultGrid"></div>
     </div>
-    <div class="faq-item">
-      <div class="faq-q">How is half-life calculated from remaining amount?<span class="arrow">&#9654;</span></div>
-      <div class="faq-a">Use the exponential decay formula: t(1/2) = (time * ln(2)) / ln(initial / remaining).</div>
+
+    <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
+
+    <div class="quick-facts">
+    <div class="fact-chip"><strong>Formula:</strong> H = t · ln(2) / ln(I / R)</div>
+    <div class="fact-chip"><strong>Decay law:</strong> R = I × 0.5^(t / H)</div>
+    <div class="fact-chip"><strong>Inputs:</strong> Any 3 of 4 values</div>
+    <div class="fact-chip"><strong>Use case:</strong> Radioactivity, medicine, chemistry</div>
     </div>
-</div>
-</main>
+
+<div class="content-section"><h2 id="what-is-half-life">What is half-life?</h2><p>Half-life is the time needed for half of a decaying quantity to disappear. After one half-life, 50% remains; after two, 25%; after three, 12.5%. It is a constant property of the material, independent of how much you start with.</p>
+      <p>Exponential decay follows the rule R = I × 0.5^(t/H), where I is the initial amount, R the remaining amount, t the elapsed time and H the half-life. Taking logarithms lets you solve for any one of these values.</p></div>
+    <div class="content-section"><h2 id="where-half-life-is-used">Where half-life is used</h2><p>Physicists use it for radioactive isotopes, doctors for drug clearance and imaging tracers, and archaeologists for carbon-14 dating.</p>
+      <p>The decay constant k = ln(2) / H describes how quickly decay happens per unit time. Its reciprocal, the mean lifetime, is the average time a single particle survives. The calculator reports all three.</p></div>
+<div class="content-section"><h2 id="how-to-use">How to use this calculator</h2><ol><li>Fill in three of the four fields with positive numbers.</li><li>Leave exactly one field empty — that is the value to solve for.</li><li>Press Solve to find the missing value.</li><li>Read the decay constant, mean lifetime and remaining percentage table.</li></ol></div>
+<div class="content-section tips-box"><h2>Pro tips</h2><ul><li>The remaining amount must be less than the initial amount when solving for half-life or time.</li><li>Use the same time unit for elapsed time and half-life (hours, days, years).</li><li>After 10 half-lives, only about 0.1% remains.</li></ul></div>
+<div class="content-section"><h2>Advantages &amp; considerations</h2><div class="pros-cons"><div class="pros"><h3>&#9989; Advantages</h3><ul><li>Solves any of the four unknowns</li><li>Shows decay constant and mean lifetime</li><li>Includes a remaining-percentage table</li></ul></div><div class="cons"><h3>&#9888;&#65039; Considerations</h3><ul><li>All filled values must be positive</li><li>Requires exactly one empty field</li></ul></div></div></div>
+<div class="content-section"><h2 id="faq">Frequently asked questions</h2><div class="faq-item"><div class="faq-q">What is the half-life formula?<span class="arrow">&#9654;</span></div><div class="faq-a">Half-life is found with H = t × ln(2) / ln(I / R), where I is the initial amount, R the remaining amount and t the elapsed time.</div></div>
+      <div class="faq-item"><div class="faq-q">How much remains after 3 half-lives?<span class="arrow">&#9654;</span></div><div class="faq-a">Each half-life halves the amount, so after 3 half-lives 0.5 × 0.5 × 0.5 = 12.5% remains.</div></div>
+      <div class="faq-item"><div class="faq-q">What is the decay constant?<span class="arrow">&#9654;</span></div><div class="faq-a">The decay constant k = ln(2) / half-life measures how quickly a substance decays per unit time. A larger k means faster decay.</div></div>
+      <div class="faq-item"><div class="faq-q">Can half-life be used for non-radioactive things?<span class="arrow">&#9654;</span></div><div class="faq-a">Yes. The same math models drug elimination from the body, chemical reaction rates and even depreciation of assets over time.</div></div>
+      <div class="faq-item"><div class="faq-q">What is mean lifetime?<span class="arrow">&#9654;</span></div><div class="faq-a">Mean lifetime is the average time a single atom or particle survives before decaying. It equals 1/k, about 1.44 times the half-life.</div></div></div>
+  </main>
 </div>
 
 <div id="siteFooter"></div>
 
 <script src="js/math.js"></script>
 <script>
-document.getElementById('calcBtn').onclick=function(){
-var i=parseFloat(document.getElementById('initial').value),r=parseFloat(document.getElementById('remaining').value),t=parseFloat(document.getElementById('time').value);
-if(isNaN(i)||isNaN(r)||isNaN(t)){document.getElementById('resultMain').textContent='Enter valid values';return;}
-if(r<=0||i<=0||t<=0){document.getElementById('resultMain').textContent='Values must be positive';return;}
-var hl=MathCalc.halfLife(i,r,t);
-var decay=Math.log(2)/hl.value;
-document.getElementById('resultMain').textContent=MathCalc.fmt(hl.value,4)+' units';
-document.getElementById('resultGrid').innerHTML='<div class="result-item"><div class="label">Half-Life</div><div class="value">'+MathCalc.fmt(hl.value,4)+' units</div></div><div class="result-item"><div class="label">Decay Constant (k)</div><div class="value">'+MathCalc.fmt(decay,6)+' per unit time</div></div>';
-};
+function item(l,v){return '<div class="result-item"><div class="label">'+l+'</div><div class="value">'+v+'</div></div>';}
+document.getElementById("calcBtn").onclick=function(){
+function val(id){var v=document.getElementById(id).value.trim();return v===""?null:parseFloat(v);}
+var r=MathCalc.halfLifeSolve(val("initial"),val("remaining"),val("time"),val("halfLife"));
+if(r.error){document.getElementById("resultMain").textContent=r.error;document.getElementById("resultGrid").innerHTML="";return;}
+var label={initial:"Initial amount",remaining:"Remaining amount",time:"Elapsed time",halfLife:"Half-life"}[r.missing];
+document.getElementById("resultMain").textContent=MathCalc.fmt(r.value,6);
+var grid=item(label,MathCalc.fmt(r.value,6))+item("Decay constant (k)",MathCalc.fmt(r.decayConstant,8)+" per time unit")+item("Mean lifetime",MathCalc.fmt(r.meanLife,6)+" time units")+item("Remaining fraction",MathCalc.fmt(r.remainingFraction*100,2)+"%");
+var rows="";
+for(var h=0;h<=5;h++){var pct=Math.pow(0.5,h)*100;rows+=item(h+" half-lives",MathCalc.fmt(pct,2)+"% remaining");}
+grid+=rows;
+document.getElementById("resultGrid").innerHTML=grid;};
 </script>
 <script src="js/currency.js"></script>
 <script src="js/seo-content.js"></script>

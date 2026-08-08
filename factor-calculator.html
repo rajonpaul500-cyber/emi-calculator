@@ -12,17 +12,18 @@
 <script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Factor Calculator | EMI Master</title>
-<meta name="description" content="Free online Factor Calculator. Fast, accurate and mobile friendly. No signup - calculations run 100% in your browser.">
-<meta name="keywords" content="factor calculator, free online math calculator, factor calculator online">
+<title>Factor Calculator - List Factors &amp; Prime Factorization</title>
+<meta name="description" content="Free factor calculator. List every factor and factor pair of any number, with prime factorization, factor count and sum.">
+<meta name="keywords" content="factor calculator, factorization, prime factorization, factor pairs, divisors">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://emimaster.com/factor-calculator.html">
-<meta property="og:title" content="Factor Calculator | EMI Master">
-<meta property="og:description" content="Free, fast, private Factor Calculator. Works on all devices.">
+<meta property="og:title" content="Factor Calculator - List Factors &amp; Prime Factorization">
+<meta property="og:description" content="Free factor calculator. List every factor and factor pair of any number, with prime factorization, factor count and sum.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://emimaster.com/factor-calculator.html">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Factor Calculator","url":"https://emimaster.com/factor-calculator.html","description":"Factor Calculator - 100% free, fast and accurate online calculator. Runs in your browser.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a factor?","acceptedAnswer":{"@type":"Answer","text":"A factor of a number is a whole number that divides exactly into that number with no remainder."}},{"@type":"Question","name":"What are prime factors?","acceptedAnswer":{"@type":"Answer","text":"Prime factors are the prime numbers that multiply together to give the original number. For example 72 = 2*2*2*3*3."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Factor Calculator","url":"https://emimaster.com/factor-calculator.html","description":"Free factor calculator. List every factor and factor pair of any number, with prime factorization, factor count and sum.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What are the factors of 12?","acceptedAnswer":{"@type":"Answer","text":"1, 2, 3, 4, 6 and 12. They pair as 1×12, 2×6 and 3×4."}},{"@type":"Question","name":"What is prime factorization?","acceptedAnswer":{"@type":"Answer","text":"Writing a number as a product of primes only. For example 120 = 2³ × 3 × 5. Every number has exactly one such form."}},{"@type":"Question","name":"Is 1 a prime number?","acceptedAnswer":{"@type":"Answer","text":"No. A prime has exactly two factors, but 1 has only one factor (itself), so it is neither prime nor composite."}},{"@type":"Question","name":"How do I know if a number is a perfect square? ","acceptedAnswer":{"@type":"Answer","text":"Its square root is a whole number. Perfect squares have an odd number of factors because the square root pairs with itself."}},{"@type":"Question","name":"Why is factoring useful?","acceptedAnswer":{"@type":"Answer","text":"It powers fraction simplification, radical simplification, algebra and number theory. Knowing the factors lets you divide, reduce and rearrange numbers confidently."}}]}</script>
+<script type="application/json" id="relatedData">[{"href":"greatest-common-factor-calculator.html","label":"GCF Calculator","icon":"≈"},{"href":"least-common-multiple-calculator.html","label":"LCM Calculator","icon":"×"},{"href":"root-calculator.html","label":"Root Calculator","icon":"√"},{"href":"quadratic-formula-calculator.html","label":"Quadratic Formula","icon":"²"}]</script>
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
@@ -32,65 +33,70 @@
 <div id="siteHeader"></div>
 
 <section class="hero hero-compact">
-<div class="container">
-<h1>Factor Calculator</h1>
-<p>Fast, free, accurate and 100% private. Works on any device.</p>
-</div>
+  <div class="container">
+    <h1>Factor Calculator</h1>
+    <p>Every factor, factor pair and the prime factorization of any number.</p>
+  </div>
 </section>
 
 <div class="layout">
-<div id="siteSidebar"></div>
+  <div id="siteSidebar"></div>
 
-<main class="main-content">
-<div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Factor Calculator</div>
-<h1 class="page-title">Factor Calculator</h1>
-<p class="page-subtitle">Enter your values below and click the button for instant results.</p>
+  <main class="main-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="index.html#math">Math Calculators</a> &rsaquo; Factor Calculator</div>
+    <h1 class="page-title">Factor Calculator</h1>
+    <p class="page-subtitle">Enter a positive whole number to see all of its factors, factor pairs, prime factorization, and whether it is prime.</p>
 
 <div class="card">
-<h2>Factor Finder</h2>
-<div class="form-group"><label>Number</label><input type="number" id="num" value="72"></div>
-<div class="form-actions"><button class="btn btn-primary" id="calcBtn" type="button">Find Factors</button></div>
+<h2>Factors of a number</h2>
+<div class="form-group"><label>Number</label><input type="number" id="num" value="120" min="1" max="9007199254740991"></div>
+<div class="form-actions"><button class="btn btn-primary" id="calcBtn" type="button">Find factors</button></div>
 </div>
 
-<div class="result-panel" id="resultPanel">
-<h3 id="resultLabel">Result</h3>
-<div class="result-main" id="resultMain">—</div>
-<div class="result-grid" id="resultGrid"></div>
-</div>
-
-<div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
-
-<div class="content-section">
-<h2>About Factor Calculator</h2>
-<p>This Factor Calculator is fast, accurate and 100% private. All calculations run locally in your browser, so your information never leaves your device. No sign-up, no downloads, works beautifully on mobile and desktop.</p>
-</div>
-
-<div class="content-section">
-<h2>FAQ</h2>
-<div class="faq-item">
-      <div class="faq-q">What is a factor?<span class="arrow">&#9654;</span></div>
-      <div class="faq-a">A factor of a number is a whole number that divides exactly into that number with no remainder.</div>
+    <div class="result-panel" id="resultPanel">
+      <h3>Result</h3>
+      <div class="result-main" id="resultMain">&mdash;</div>
+      <div class="result-grid" id="resultGrid"></div>
     </div>
-    <div class="faq-item">
-      <div class="faq-q">What are prime factors?<span class="arrow">&#9654;</span></div>
-      <div class="faq-a">Prime factors are the prime numbers that multiply together to give the original number. For example 72 = 2*2*2*3*3.</div>
+
+    <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
+
+    <div class="quick-facts">
+    <div class="fact-chip"><strong>Definition:</strong> Factors divide n with no remainder</div>
+    <div class="fact-chip"><strong>Prime:</strong> Exactly two factors: 1 and itself</div>
+    <div class="fact-chip"><strong>Outputs:</strong> Factors, pairs, prime factors</div>
+    <div class="fact-chip"><strong>Use case:</strong> Fractions, roots, algebra</div>
     </div>
-</div>
-</main>
+
+<div class="content-section"><h2 id="what-are-factors">What are factors?</h2><p>A factor of a number n is any whole number that divides n exactly, leaving no remainder. The number 12 has six factors: 1, 2, 3, 4, 6 and 12. Every factor can be paired with another so that the pair multiplies back to 12, like 3 × 4.</p>
+      <p>The prime factorization breaks a number into its prime building blocks. For example 120 = 2 × 2 × 2 × 3 × 5, often written 2³ × 3 × 5. Every whole number greater than 1 has a unique prime factorization, a result called the Fundamental Theorem of Arithmetic.</p></div>
+    <div class="content-section"><h2 id="why-factoring-matters">Why factoring matters</h2><p>Factoring is the foundation of simplifying fractions, finding square roots, solving quadratic equations and working with ratios. Knowing a number's factors tells you instantly what it divides by.</p>
+      <p>The calculator also reports the count and sum of the factors, and whether the number is prime (exactly two factors) or a perfect square (an odd count of factors, because the square root pairs with itself).</p></div>
+<div class="content-section"><h2 id="how-to-use">How to use this calculator</h2><ol><li>Enter a positive whole number.</li><li>Press Find factors.</li><li>Read the full factor list and factor pairs.</li><li>Check the prime factorization, factor count, sum and prime/perfect-square flags.</li></ol></div>
+<div class="content-section tips-box"><h2>Pro tips</h2><ul><li>A prime number has exactly two factors: 1 and itself.</li><li>Perfect squares always have an odd number of factors.</li><li>The sum of factors of 1 is 1; all other numbers' factor sums include at least 1 + n.</li></ul></div>
+<div class="content-section"><h2>Advantages &amp; considerations</h2><div class="pros-cons"><div class="pros"><h3>&#9989; Advantages</h3><ul><li>Lists factors, pairs and prime factorization</li><li>Reports count, sum, prime and square flags</li><li>Handles large numbers up to 9 quadrillion</li></ul></div><div class="cons"><h3>&#9888;&#65039; Considerations</h3><ul><li>Only accepts whole numbers</li><li>Very large primes take longer to verify</li></ul></div></div></div>
+<div class="content-section"><h2 id="faq">Frequently asked questions</h2><div class="faq-item"><div class="faq-q">What are the factors of 12?<span class="arrow">&#9654;</span></div><div class="faq-a">1, 2, 3, 4, 6 and 12. They pair as 1×12, 2×6 and 3×4.</div></div>
+      <div class="faq-item"><div class="faq-q">What is prime factorization?<span class="arrow">&#9654;</span></div><div class="faq-a">Writing a number as a product of primes only. For example 120 = 2³ × 3 × 5. Every number has exactly one such form.</div></div>
+      <div class="faq-item"><div class="faq-q">Is 1 a prime number?<span class="arrow">&#9654;</span></div><div class="faq-a">No. A prime has exactly two factors, but 1 has only one factor (itself), so it is neither prime nor composite.</div></div>
+      <div class="faq-item"><div class="faq-q">How do I know if a number is a perfect square? <span class="arrow">&#9654;</span></div><div class="faq-a">Its square root is a whole number. Perfect squares have an odd number of factors because the square root pairs with itself.</div></div>
+      <div class="faq-item"><div class="faq-q">Why is factoring useful?<span class="arrow">&#9654;</span></div><div class="faq-a">It powers fraction simplification, radical simplification, algebra and number theory. Knowing the factors lets you divide, reduce and rearrange numbers confidently.</div></div></div>
+  </main>
 </div>
 
 <div id="siteFooter"></div>
 
 <script src="js/math.js"></script>
 <script>
-document.getElementById('calcBtn').onclick=function(){
-var n=parseFloat(document.getElementById('num').value);
-if(isNaN(n)||n!==Math.floor(n)||n<=0){document.getElementById('resultMain').textContent='Enter a positive integer';return;}
-var r=MathCalc.factor(n);
-var primes=MathCalc.primeFactors(n);
-document.getElementById('resultMain').textContent=r.value.join(', ');
-document.getElementById('resultGrid').innerHTML='<div class="result-item"><div class="label">Factors ('+r.value.length+')</div><div class="value">'+r.value.join(', ')+'</div></div><div class="result-item"><div class="label">Prime Factors</div><div class="value">'+primes.join(' * ')+'</div></div>';
-};
+function item(l,v){return '<div class="result-item"><div class="label">'+l+'</div><div class="value">'+v+'</div></div>';}
+document.getElementById("calcBtn").onclick=function(){
+var n=parseInt(document.getElementById("num").value,10);
+if(isNaN(n)||n<1||n>9007199254740991){document.getElementById("resultMain").textContent="Enter a positive whole number";document.getElementById("resultGrid").innerHTML="";return;}
+var f=MathCalc.factor(n).value;
+document.getElementById("resultMain").textContent=f.join(", ");
+var grid=item("Factors ("+f.length+")",f.join(", "));
+var pairs=f.slice(0,Math.ceil(f.length/2)).map(function(x){return x+" × "+(n/x);});
+grid+=item("Factor pairs",pairs.join("; "))+item("Prime factorization",MathCalc.primeFactors(n).join(" × "))+item("Number of factors",f.length)+item("Sum of factors",MathCalc.fmt(f.reduce(function(a,b){return a+b;},0),0))+item("Is prime",f.length===2?"Yes":"No")+item("Perfect square",Number.isInteger(Math.sqrt(n))?"Yes":"No");
+document.getElementById("resultGrid").innerHTML=grid;};
 </script>
 <script src="js/currency.js"></script>
 <script src="js/seo-content.js"></script>

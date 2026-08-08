@@ -12,17 +12,18 @@
 <script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hex Calculator | EMI Master</title>
-<meta name="description" content="Free online Hex Calculator. Fast, accurate and mobile friendly. No signup - calculations run 100% in your browser.">
-<meta name="keywords" content="hex calculator, free online math calculator, hex calculator online">
+<title>Hex Calculator - Decimal, Hex, Binary &amp; Octal Converter</title>
+<meta name="description" content="Free hex calculator. Convert between decimal, hexadecimal, binary and octal, plus hex addition and subtraction with instant results.">
+<meta name="keywords" content="hex calculator, hexadecimal converter, decimal to hex, hex to decimal, octal converter">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://emimaster.com/hex-calculator.html">
-<meta property="og:title" content="Hex Calculator | EMI Master">
-<meta property="og:description" content="Free, fast, private Hex Calculator. Works on all devices.">
+<meta property="og:title" content="Hex Calculator - Decimal, Hex, Binary &amp; Octal Converter">
+<meta property="og:description" content="Free hex calculator. Convert between decimal, hexadecimal, binary and octal, plus hex addition and subtraction with instant results.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://emimaster.com/hex-calculator.html">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Hex Calculator","url":"https://emimaster.com/hex-calculator.html","description":"Hex Calculator - 100% free, fast and accurate online calculator. Runs in your browser.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is hexadecimal?","acceptedAnswer":{"@type":"Answer","text":"Hexadecimal (hex) is a base-16 number system using digits 0-9 and letters A-F. It is widely used in computing because two hex digits represent one byte."}},{"@type":"Question","name":"How do I convert decimal to hex?","acceptedAnswer":{"@type":"Answer","text":"Divide the decimal by 16 repeatedly and read the remainders from bottom to top. For example 255 = FF."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Hex Calculator","url":"https://emimaster.com/hex-calculator.html","description":"Free hex calculator. Convert between decimal, hexadecimal, binary and octal, plus hex addition and subtraction with instant results.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is hexadecimal used for?","acceptedAnswer":{"@type":"Answer","text":"Hexadecimal is a compact way to write binary data. It is used for memory addresses, machine code, color values and error codes because two hex digits represent one byte."}},{"@type":"Question","name":"How do I convert decimal to hex?","acceptedAnswer":{"@type":"Answer","text":"Divide the decimal number by 16 repeatedly, collecting remainders, then read them bottom to top. For example 255 becomes FF."}},{"@type":"Question","name":"How do I convert hex to binary?","acceptedAnswer":{"@type":"Answer","text":"Replace each hex digit with its four-bit binary equivalent: F becomes 1111, so FF becomes 11111111."}},{"@type":"Question","name":"What does FF mean in hex?","acceptedAnswer":{"@type":"Answer","text":"FF is the largest two-digit hex value, equal to 15×16 + 15 = 255 in decimal and 11111111 (one full byte) in binary."}},{"@type":"Question","name":"Can I add hex numbers?","acceptedAnswer":{"@type":"Answer","text":"Yes. The arithmetic tool adds and subtracts hex numbers and shows the decimal result as well."}}]}</script>
+<script type="application/json" id="relatedData">[{"href":"binary-calculator.html","label":"Binary Calculator","icon":"01"},{"href":"scientific-notation-calculator.html","label":"Scientific Notation","icon":"×10"},{"href":"big-number-calculator.html","label":"Big Number Calculator","icon":"#"}]</script>
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
@@ -32,77 +33,104 @@
 <div id="siteHeader"></div>
 
 <section class="hero hero-compact">
-<div class="container">
-<h1>Hex Calculator</h1>
-<p>Fast, free, accurate and 100% private. Works on any device.</p>
-</div>
+  <div class="container">
+    <h1>Hex Calculator</h1>
+    <p>Convert between decimal, hex, binary and octal, and do hex arithmetic.</p>
+  </div>
 </section>
 
 <div class="layout">
-<div id="siteSidebar"></div>
+  <div id="siteSidebar"></div>
 
-<main class="main-content">
-<div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Hex Calculator</div>
-<h1 class="page-title">Hex Calculator</h1>
-<p class="page-subtitle">Enter your values below and click the button for instant results.</p>
+  <main class="main-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="index.html#math">Math Calculators</a> &rsaquo; Hex Calculator</div>
+    <h1 class="page-title">Hex Calculator</h1>
+    <p class="page-subtitle">Fill in any one of the four fields (decimal, hex, binary or octal) and the others update instantly. A separate tool adds and subtracts hex numbers.</p>
 
 <div class="card">
-<h2>Hexadecimal Conversion</h2>
+<h2>Number base converter</h2>
 <div class="form-grid">
-<div class="form-group"><label>Decimal</label><input type="number" id="dec" value="255"></div>
-<div class="form-group"><label>Hex</label><input type="text" id="hex" value="FF"></div>
+<div class="form-group"><label>Decimal</label><input type="number" id="dec" value="255" placeholder="e.g. 255"></div>
+<div class="form-group"><label>Hex</label><input type="text" id="hex" value="FF" placeholder="e.g. FF"></div>
+<div class="form-group"><label>Binary</label><input type="text" id="bin" value="11111111" placeholder="e.g. 11111111"></div>
+<div class="form-group"><label>Octal</label><input type="text" id="oct" value="377" placeholder="e.g. 377"></div>
 </div>
-<div class="form-actions">
-<button class="btn btn-primary" id="decToHex" type="button">Decimal to Hex</button>
-<button class="btn btn-outline" id="hexToDec" type="button">Hex to Decimal</button>
-</div>
-</div>
-
-<div class="result-panel" id="resultPanel">
-<h3 id="resultLabel">Result</h3>
-<div class="result-main" id="resultMain">—</div>
-<div class="result-grid" id="resultGrid"></div>
+<div class="form-actions"><button class="btn btn-primary" id="convBtn" type="button">Convert</button> <button class="btn btn-outline" id="clearBtn" type="button">Clear</button></div>
 </div>
 
-<div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
-
-<div class="content-section">
-<h2>About Hex Calculator</h2>
-<p>This Hex Calculator is fast, accurate and 100% private. All calculations run locally in your browser, so your information never leaves your device. No sign-up, no downloads, works beautifully on mobile and desktop.</p>
+<div class="card">
+<h2>Hex arithmetic</h2>
+<div class="form-grid">
+<div class="form-group"><label>Hex A</label><input type="text" id="ha" value="FF"></div>
+<div class="form-group"><label>Hex B</label><input type="text" id="hb" value="0F"></div>
+<div class="form-group"><label>Operation</label><select id="hop"><option value="add">+ Add</option><option value="sub">- Subtract</option></select></div>
+</div>
+<div class="form-actions"><button class="btn btn-outline" id="hexOpBtn" type="button">Calculate</button></div>
 </div>
 
-<div class="content-section">
-<h2>FAQ</h2>
-<div class="faq-item">
-      <div class="faq-q">What is hexadecimal?<span class="arrow">&#9654;</span></div>
-      <div class="faq-a">Hexadecimal (hex) is a base-16 number system using digits 0-9 and letters A-F. It is widely used in computing because two hex digits represent one byte.</div>
+    <div class="result-panel" id="resultPanel">
+      <h3>Result</h3>
+      <div class="result-main" id="resultMain">&mdash;</div>
+      <div class="result-grid" id="resultGrid"></div>
     </div>
-    <div class="faq-item">
-      <div class="faq-q">How do I convert decimal to hex?<span class="arrow">&#9654;</span></div>
-      <div class="faq-a">Divide the decimal by 16 repeatedly and read the remainders from bottom to top. For example 255 = FF.</div>
+
+    <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
+
+    <div class="quick-facts">
+    <div class="fact-chip"><strong>Base 16:</strong> Digits 0-9 and letters A-F</div>
+    <div class="fact-chip"><strong>One byte:</strong> Two hex digits = 8 bits</div>
+    <div class="fact-chip"><strong>Conversions:</strong> Decimal, hex, binary, octal</div>
+    <div class="fact-chip"><strong>Use case:</strong> Colors, memory addresses, machine code</div>
     </div>
-</div>
-</main>
+
+<div class="content-section"><h2 id="why-hexadecimal-matters">Why hexadecimal matters</h2><p>Hexadecimal is a base-16 system using digits 0-9 and letters A-F. Each hex digit represents four binary bits, which makes it a compact shorthand for binary data. The value FF equals 255 in decimal and 11111111 in binary.</p>
+      <p>Programmers use hex for memory addresses, color codes (like #FF0000 for red), and debugging because two hex digits exactly represent one byte. Converting between hex and binary is a simple digit-to-nibble mapping.</p></div>
+    <div class="content-section"><h2 id="converting-between-bases">Converting between bases</h2><p>To convert decimal to hex, divide by 16 repeatedly and read the remainders from bottom to top. For example 255 ÷ 16 = 15 remainder 15, giving FF.</p>
+      <p>The converter above works in all directions: fill in decimal, hex, binary or octal and the other three fields fill in automatically, so you never have to convert by hand.</p></div>
+<div class="content-section"><h2 id="how-to-use">How to use this calculator</h2><ol><li>Fill in one of the four fields (decimal, hex, binary or octal).</li><li>Press Convert and the other three fields fill in automatically.</li><li>Use the second tool to add or subtract two hex numbers.</li><li>Read the hex and decimal results together.</li></ol></div>
+<div class="content-section tips-box"><h2>Pro tips</h2><ul><li>Color codes like #3498DB are hex: the first two digits are red, the next two green, the last two blue.</li><li>Use uppercase letters (A-F) for readability; lowercase is accepted too.</li><li>FF is 255 in decimal and 11111111 in binary — a full byte.</li></ul></div>
+<div class="content-section"><h2>Advantages &amp; considerations</h2><div class="pros-cons"><div class="pros"><h3>&#9989; Advantages</h3><ul><li>Four-way conversion in one view</li><li>Hex addition and subtraction included</li><li>Shows decimal values for every result</li></ul></div><div class="cons"><h3>&#9888;&#65039; Considerations</h3><ul><li>Negative hex results are shown with a minus sign</li><li>Very large values use standard 32-bit interpretation</li></ul></div></div></div>
+<div class="content-section"><h2 id="faq">Frequently asked questions</h2><div class="faq-item"><div class="faq-q">What is hexadecimal used for?<span class="arrow">&#9654;</span></div><div class="faq-a">Hexadecimal is a compact way to write binary data. It is used for memory addresses, machine code, color values and error codes because two hex digits represent one byte.</div></div>
+      <div class="faq-item"><div class="faq-q">How do I convert decimal to hex?<span class="arrow">&#9654;</span></div><div class="faq-a">Divide the decimal number by 16 repeatedly, collecting remainders, then read them bottom to top. For example 255 becomes FF.</div></div>
+      <div class="faq-item"><div class="faq-q">How do I convert hex to binary?<span class="arrow">&#9654;</span></div><div class="faq-a">Replace each hex digit with its four-bit binary equivalent: F becomes 1111, so FF becomes 11111111.</div></div>
+      <div class="faq-item"><div class="faq-q">What does FF mean in hex?<span class="arrow">&#9654;</span></div><div class="faq-a">FF is the largest two-digit hex value, equal to 15×16 + 15 = 255 in decimal and 11111111 (one full byte) in binary.</div></div>
+      <div class="faq-item"><div class="faq-q">Can I add hex numbers?<span class="arrow">&#9654;</span></div><div class="faq-a">Yes. The arithmetic tool adds and subtracts hex numbers and shows the decimal result as well.</div></div></div>
+  </main>
 </div>
 
 <div id="siteFooter"></div>
 
 <script src="js/math.js"></script>
 <script>
-document.getElementById('decToHex').onclick=function(){
-var d=parseInt(document.getElementById('dec').value);
-if(isNaN(d)){document.getElementById('resultMain').textContent='Enter a valid decimal';return;}
-var res=MathCalc.decimalToHex(d);
-document.getElementById('resultMain').textContent=res.value;
-document.getElementById('resultGrid').innerHTML='<div class="result-item"><div class="label">Hex</div><div class="value">'+res.value+'</div></div><div class="result-item"><div class="label">Binary</div><div class="value">'+d.toString(2)+'</div></div>';
-};
-document.getElementById('hexToDec').onclick=function(){
-var h=document.getElementById('hex').value.trim();
-var r=MathCalc.hexToDecimal(h);
-if(r.error){document.getElementById('resultMain').textContent=r.error;return;}
-document.getElementById('resultMain').textContent=r.value;
-document.getElementById('resultGrid').innerHTML='<div class="result-item"><div class="label">Decimal</div><div class="value">'+r.value+'</div></div><div class="result-item"><div class="label">Binary</div><div class="value">'+r.value.toString(2)+'</div></div>';
-};
+function item(l,v){return '<div class="result-item"><div class="label">'+l+'</div><div class="value">'+v+'</div></div>';}
+document.getElementById("clearBtn").onclick=function(){["dec","hex","bin","oct"].forEach(function(id){document.getElementById(id).value="";});document.getElementById("resultMain").textContent="—";document.getElementById("resultGrid").innerHTML="";};
+document.getElementById("convBtn").onclick=function(){
+var dec=document.getElementById("dec").value.trim();
+var hex=document.getElementById("hex").value.trim();
+var bin=document.getElementById("bin").value.trim();
+var oct=document.getElementById("oct").value.trim();
+var d;
+if(dec!==""){d=parseInt(dec,10);if(isNaN(d)){document.getElementById("resultMain").textContent="Invalid decimal";return;}}
+else if(hex!==""){if(!/^[0-9A-Fa-f]+$/.test(hex)){document.getElementById("resultMain").textContent="Invalid hexadecimal";return;}d=parseInt(hex,16);}
+else if(bin!==""){if(!/^[01]+$/.test(bin)){document.getElementById("resultMain").textContent="Invalid binary";return;}d=parseInt(bin,2);}
+else if(oct!==""){if(!/^[0-7]+$/.test(oct)){document.getElementById("resultMain").textContent="Invalid octal";return;}d=parseInt(oct,8);}
+else{document.getElementById("resultMain").textContent="Fill in at least one field";return;}
+document.getElementById("dec").value=d;
+document.getElementById("hex").value=d.toString(16).toUpperCase();
+document.getElementById("bin").value=(d>>>0).toString(2);
+document.getElementById("oct").value=(d>>>0).toString(8);
+document.getElementById("resultMain").textContent=d;
+document.getElementById("resultGrid").innerHTML=item("Decimal",d)+item("Hex",d.toString(16).toUpperCase())+item("Binary",(d>>>0).toString(2))+item("Octal",(d>>>0).toString(8));};
+document.getElementById("hexOpBtn").onclick=function(){
+var a=document.getElementById("ha").value.trim();
+var b=document.getElementById("hb").value.trim();
+if(!/^[0-9A-Fa-f]+$/.test(a)||!/^[0-9A-Fa-f]+$/.test(b)){document.getElementById("resultMain").textContent="Invalid hex input";return;}
+var A=parseInt(a,16),B=parseInt(b,16);
+var op=document.getElementById("hop").value;
+var r=op==="add"?A+B:A-B;
+var hr=r>=0?r.toString(16).toUpperCase():"-"+Math.abs(r).toString(16).toUpperCase();
+document.getElementById("resultMain").textContent=hr;
+document.getElementById("resultGrid").innerHTML=item("Hex result",hr)+item("Decimal result",r);};
 </script>
 <script src="js/currency.js"></script>
 <script src="js/seo-content.js"></script>

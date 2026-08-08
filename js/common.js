@@ -91,6 +91,32 @@
       items: [
         { href: "depreciation-calculator.html", label: "Depreciation Calculator", page: "depreciation-calculator.html" }
       ]
+    },
+    {
+      name: "Math",
+      icon: "\uD83E\uDDEE",
+      items: [
+        { href: "scientific-calculator.html", label: "Scientific Calculator", page: "scientific-calculator.html" },
+        { href: "fraction-calculator.html", label: "Fraction Calculator", page: "fraction-calculator.html" },
+        { href: "percentage-calculator.html", label: "Percentage Calculator", page: "percentage-calculator.html" },
+        { href: "random-number-generator.html", label: "Random Number Generator", page: "random-number-generator.html" },
+        { href: "percent-error-calculator.html", label: "Percent Error Calculator", page: "percent-error-calculator.html" },
+        { href: "exponent-calculator.html", label: "Exponent Calculator", page: "exponent-calculator.html" },
+        { href: "binary-calculator.html", label: "Binary Calculator", page: "binary-calculator.html" },
+        { href: "hex-calculator.html", label: "Hex Calculator", page: "hex-calculator.html" },
+        { href: "half-life-calculator.html", label: "Half-Life Calculator", page: "half-life-calculator.html" },
+        { href: "quadratic-formula-calculator.html", label: "Quadratic Formula Calculator", page: "quadratic-formula-calculator.html" },
+        { href: "log-calculator.html", label: "Log Calculator", page: "log-calculator.html" },
+        { href: "ratio-calculator.html", label: "Ratio Calculator", page: "ratio-calculator.html" },
+        { href: "root-calculator.html", label: "Root Calculator", page: "root-calculator.html" },
+        { href: "least-common-multiple-calculator.html", label: "Least Common Multiple Calculator", page: "least-common-multiple-calculator.html" },
+        { href: "greatest-common-factor-calculator.html", label: "Greatest Common Factor Calculator", page: "greatest-common-factor-calculator.html" },
+        { href: "factor-calculator.html", label: "Factor Calculator", page: "factor-calculator.html" },
+        { href: "rounding-calculator.html", label: "Rounding Calculator", page: "rounding-calculator.html" },
+        { href: "matrix-calculator.html", label: "Matrix Calculator", page: "matrix-calculator.html" },
+        { href: "scientific-notation-calculator.html", label: "Scientific Notation Calculator", page: "scientific-notation-calculator.html" },
+        { href: "big-number-calculator.html", label: "Big Number Calculator", page: "big-number-calculator.html" }
+      ]
     }
   ];
 
@@ -162,7 +188,7 @@
   function buildSidebar() {
     var current = currentPage();
     var html = '<aside class="sidebar">';
-    html += '<div class="sidebar-card"><h3>' + tr('sidebar.calculators') + '</h3><ul class="calc-nav">';
+    html += '<div class="sidebar-card"><h3>Math Calculator</h3><ul class="calc-nav">';
     html += '<li><a href="index.html"' + (current === "index.html" ? ' class="active"' : "") + '>' +
       '<span class="sidebar-icon">&#127968;</span>' + tr('sidebar.all') + '</a></li>';
 
@@ -597,7 +623,38 @@
         "car": "car-loan.html",
         "loan": "emi-calculator.html",
         "emi": "emi-calculator.html",
-        "deposit": "fdr.html"
+        "deposit": "fdr.html",
+        "scientific calculator": "scientific-calculator.html",
+        "scientific": "scientific-calculator.html",
+        "fraction": "fraction-calculator.html",
+        "percentage": "percentage-calculator.html",
+        "percent change": "percentage-calculator.html",
+        "random number": "random-number-generator.html",
+        "random": "random-number-generator.html",
+        "percent error": "percent-error-calculator.html",
+        "exponent": "exponent-calculator.html",
+        "power": "exponent-calculator.html",
+        "binary": "binary-calculator.html",
+        "hex": "hex-calculator.html",
+        "hexadecimal": "hex-calculator.html",
+        "half life": "half-life-calculator.html",
+        "half-life": "half-life-calculator.html",
+        "quadratic": "quadratic-formula-calculator.html",
+        "log": "log-calculator.html",
+        "logarithm": "log-calculator.html",
+        "ratio": "ratio-calculator.html",
+        "root": "root-calculator.html",
+        "square root": "root-calculator.html",
+        "lcm": "least-common-multiple-calculator.html",
+        "least common multiple": "least-common-multiple-calculator.html",
+        "gcf": "greatest-common-factor-calculator.html",
+        "greatest common factor": "greatest-common-factor-calculator.html",
+        "factor": "factor-calculator.html",
+        "rounding": "rounding-calculator.html",
+        "matrix": "matrix-calculator.html",
+        "scientific notation": "scientific-notation-calculator.html",
+        "big number": "big-number-calculator.html",
+        "math": "scientific-calculator.html"
       };
       var keys = Object.keys(map).sort(function (a, b) { return b.length - a.length; });
       var dest = null;

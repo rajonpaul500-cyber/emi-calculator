@@ -12,17 +12,18 @@
 <script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Root Calculator | EMI Master</title>
-<meta name="description" content="Free online Root Calculator. Fast, accurate and mobile friendly. No signup - calculations run 100% in your browser.">
-<meta name="keywords" content="root calculator, free online math calculator, root calculator online">
+<title>Root Calculator - Square, Cube &amp; nth Root with Radical Form</title>
+<meta name="description" content="Free root calculator. Compute square, cube and nth roots, with simplified radical form for clean exact answers.">
+<meta name="keywords" content="root calculator, nth root, square root calculator, cube root calculator, simplify radicals">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://emimaster.com/root-calculator.html">
-<meta property="og:title" content="Root Calculator | EMI Master">
-<meta property="og:description" content="Free, fast, private Root Calculator. Works on all devices.">
+<meta property="og:title" content="Root Calculator - Square, Cube &amp; nth Root with Radical Form">
+<meta property="og:description" content="Free root calculator. Compute square, cube and nth roots, with simplified radical form for clean exact answers.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://emimaster.com/root-calculator.html">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Root Calculator","url":"https://emimaster.com/root-calculator.html","description":"Root Calculator - 100% free, fast and accurate online calculator. Runs in your browser.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is an nth root?","acceptedAnswer":{"@type":"Answer","text":"The nth root of a number x is a value that, when multiplied by itself n times, gives x. For example the 4th root of 16 is 2 because 2^4 = 16."}},{"@type":"Question","name":"Can I calculate the square root?","acceptedAnswer":{"@type":"Answer","text":"Yes, enter the number and set the root to 2."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Root Calculator","url":"https://emimaster.com/root-calculator.html","description":"Free root calculator. Compute square, cube and nth roots, with simplified radical form for clean exact answers.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the nth root?","acceptedAnswer":{"@type":"Answer","text":"The nth root of x is the number y such that yⁿ = x. For example the 4th root of 16 is 2 because 2⁴ = 16."}},{"@type":"Question","name":"How do I find the square root?","acceptedAnswer":{"@type":"Answer","text":"Enter the number and set the root to 2. For example √144 = 12."}},{"@type":"Question","name":"What is √72 simplified?","acceptedAnswer":{"@type":"Answer","text":"Since 72 = 36 × 2 and √36 = 6, the simplified form is 6√2 ≈ 8.485."}},{"@type":"Question","name":"Can I take the cube root of a negative number?","acceptedAnswer":{"@type":"Answer","text":"Yes. Odd roots of negative numbers are real: ∛(-8) = -2 because (-2)³ = -8. Even roots of negatives are not real."}},{"@type":"Question","name":"What is the difference between a root and an exponent?","acceptedAnswer":{"@type":"Answer","text":"They are inverses. The nth root of x equals x^(1/n). Raising to the power n undoes taking the nth root."}}]}</script>
+<script type="application/json" id="relatedData">[{"href":"exponent-calculator.html","label":"Exponent Calculator","icon":"²"},{"href":"factor-calculator.html","label":"Factor Calculator","icon":"÷"},{"href":"quadratic-formula-calculator.html","label":"Quadratic Formula","icon":"²"}]</script>
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
@@ -32,69 +33,81 @@
 <div id="siteHeader"></div>
 
 <section class="hero hero-compact">
-<div class="container">
-<h1>Root Calculator</h1>
-<p>Fast, free, accurate and 100% private. Works on any device.</p>
-</div>
+  <div class="container">
+    <h1>Root Calculator</h1>
+    <p>Square, cube and nth roots with simplified radical form.</p>
+  </div>
 </section>
 
 <div class="layout">
-<div id="siteSidebar"></div>
+  <div id="siteSidebar"></div>
 
-<main class="main-content">
-<div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Root Calculator</div>
-<h1 class="page-title">Root Calculator</h1>
-<p class="page-subtitle">Enter your values below and click the button for instant results.</p>
+  <main class="main-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="index.html#math">Math Calculators</a> &rsaquo; Root Calculator</div>
+    <h1 class="page-title">Root Calculator</h1>
+    <p class="page-subtitle">Enter a number and the root you want (2 for square, 3 for cube, or any n). The calculator gives the exact decimal value and simplified radical form.</p>
 
 <div class="card">
-<h2>Root Calculator (nth Root)</h2>
+<h2>Nth root calculator</h2>
 <div class="form-grid">
-<div class="form-group"><label>Number</label><input type="number" id="num" value="16" step="any"></div>
-<div class="form-group"><label>Root (n)</label><input type="number" id="root" value="4" step="any" min="1"></div>
+<div class="form-group"><label>Number</label><input type="number" id="num" value="72" step="any"></div>
+<div class="form-group"><label>Root (n)</label><input type="number" id="root" value="2" min="1" step="any"></div>
 </div>
-<div class="form-actions"><button class="btn btn-primary" id="calcBtn" type="button">Calculate Root</button></div>
-</div>
-
-<div class="result-panel" id="resultPanel">
-<h3 id="resultLabel">Result</h3>
-<div class="result-main" id="resultMain">—</div>
-<div class="result-grid" id="resultGrid"></div>
+<div class="form-actions"><button class="btn btn-primary" id="calcBtn" type="button">Calculate</button></div>
 </div>
 
-<div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
-
-<div class="content-section">
-<h2>About Root Calculator</h2>
-<p>This Root Calculator is fast, accurate and 100% private. All calculations run locally in your browser, so your information never leaves your device. No sign-up, no downloads, works beautifully on mobile and desktop.</p>
-</div>
-
-<div class="content-section">
-<h2>FAQ</h2>
-<div class="faq-item">
-      <div class="faq-q">What is an nth root?<span class="arrow">&#9654;</span></div>
-      <div class="faq-a">The nth root of a number x is a value that, when multiplied by itself n times, gives x. For example the 4th root of 16 is 2 because 2^4 = 16.</div>
+    <div class="result-panel" id="resultPanel">
+      <h3>Result</h3>
+      <div class="result-main" id="resultMain">&mdash;</div>
+      <div class="result-grid" id="resultGrid"></div>
     </div>
-    <div class="faq-item">
-      <div class="faq-q">Can I calculate the square root?<span class="arrow">&#9654;</span></div>
-      <div class="faq-a">Yes, enter the number and set the root to 2.</div>
+
+    <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
+
+    <div class="quick-facts">
+    <div class="fact-chip"><strong>Square root:</strong> √x = x^(1/2)</div>
+    <div class="fact-chip"><strong>Cube root:</strong> ∛x = x^(1/3)</div>
+    <div class="fact-chip"><strong>nth root:</strong> √x = x^(1/n)</div>
+    <div class="fact-chip"><strong>Exact form:</strong> Radicals simplified automatically</div>
     </div>
-</div>
-</main>
+
+<div class="content-section"><h2 id="what-is-a-root">What is a root?</h2><p>The nth root of a number x is the value that, multiplied by itself n times, gives x. For example the 4th root of 16 is 2 because 2 × 2 × 2 × 2 = 16. The square root (n = 2) and cube root (n = 3) are the most common.</p>
+      <p>Roots and exponents are inverse operations: the nth root of x equals x^(1/n). A fractional exponent like 1/2 is another way of writing a square root.</p></div>
+    <div class="content-section"><h2 id="simplified-radical-form">Simplified radical form</h2><p>Many roots are not whole numbers, but they can still be written exactly. For example √72 = 6√2 because 72 = 36 × 2 and √36 = 6. This 'simplified radical form' keeps answers exact instead of rounding.</p>
+      <p>The calculator extracts the largest perfect power from under the radical. It also handles odd roots of negative numbers, which are defined for real numbers (for example ∛(-8) = -2).</p></div>
+<div class="content-section"><h2 id="how-to-use">How to use this calculator</h2><ol><li>Enter the number you want to take a root of.</li><li>Enter the root value (2 for square, 3 for cube, any n for nth root).</li><li>Press Calculate to see the decimal value.</li><li>Read the simplified radical form when one exists.</li></ol></div>
+<div class="content-section tips-box"><h2>Pro tips</h2><ul><li>Use root 2 for square roots and root 3 for cube roots.</li><li>To take a fourth root of 16, enter 16 with root 4.</li><li>Odd roots (3, 5, 7...) work with negative numbers; even roots do not.</li></ul></div>
+<div class="content-section"><h2>Advantages &amp; considerations</h2><div class="pros-cons"><div class="pros"><h3>&#9989; Advantages</h3><ul><li>Any root from square to nth</li><li>Simplified radical form for exact answers</li><li>Shows a verification check for every result</li></ul></div><div class="cons"><h3>&#9888;&#65039; Considerations</h3><ul><li>Even roots of negative numbers are not real</li><li>Non-integer roots are evaluated numerically</li></ul></div></div></div>
+<div class="content-section"><h2 id="faq">Frequently asked questions</h2><div class="faq-item"><div class="faq-q">What is the nth root?<span class="arrow">&#9654;</span></div><div class="faq-a">The nth root of x is the number y such that yⁿ = x. For example the 4th root of 16 is 2 because 2⁴ = 16.</div></div>
+      <div class="faq-item"><div class="faq-q">How do I find the square root?<span class="arrow">&#9654;</span></div><div class="faq-a">Enter the number and set the root to 2. For example √144 = 12.</div></div>
+      <div class="faq-item"><div class="faq-q">What is √72 simplified?<span class="arrow">&#9654;</span></div><div class="faq-a">Since 72 = 36 × 2 and √36 = 6, the simplified form is 6√2 ≈ 8.485.</div></div>
+      <div class="faq-item"><div class="faq-q">Can I take the cube root of a negative number?<span class="arrow">&#9654;</span></div><div class="faq-a">Yes. Odd roots of negative numbers are real: ∛(-8) = -2 because (-2)³ = -8. Even roots of negatives are not real.</div></div>
+      <div class="faq-item"><div class="faq-q">What is the difference between a root and an exponent?<span class="arrow">&#9654;</span></div><div class="faq-a">They are inverses. The nth root of x equals x^(1/n). Raising to the power n undoes taking the nth root.</div></div></div>
+  </main>
 </div>
 
 <div id="siteFooter"></div>
 
 <script src="js/math.js"></script>
 <script>
-document.getElementById('calcBtn').onclick=function(){
-var n=parseFloat(document.getElementById('num').value),r=parseFloat(document.getElementById('root').value);
-if(isNaN(n)||isNaN(r)){document.getElementById('resultMain').textContent='Enter valid numbers';return;}
+function item(l,v){return '<div class="result-item"><div class="label">'+l+'</div><div class="value">'+v+'</div></div>';}
+document.getElementById("calcBtn").onclick=function(){
+var n=parseFloat(document.getElementById("num").value);
+var r=parseFloat(document.getElementById("root").value);
+if(isNaN(n)||isNaN(r)||r<=0){document.getElementById("resultMain").textContent="Enter a valid number and root";document.getElementById("resultGrid").innerHTML="";return;}
 var res=MathCalc.rootCalc(n,r);
-if(res.error){document.getElementById('resultMain').textContent=res.error;return;}
-document.getElementById('resultMain').textContent=MathCalc.fmt(res.value,6);
-var displayWord=r===2?'square':r===3?'cube':r+'th';
-document.getElementById('resultGrid').innerHTML='<div class="result-item"><div class="label">'+displayWord+' root of '+n+'</div><div class="value">'+MathCalc.fmt(res.value,6)+'</div></div>';
-};
+if(res.error){document.getElementById("resultMain").textContent=res.error;document.getElementById("resultGrid").innerHTML="";return;}
+var grid="";
+document.getElementById("resultMain").textContent=MathCalc.fmt(res.value,8);
+var word=r===2?"square":r===3?"cube":r+"th";
+grid+=item(word.charAt(0).toUpperCase()+word.slice(1)+" root of "+n,MathCalc.fmt(res.value,8));
+var simp=MathCalc.simplifyNthRoot(n,Math.round(r));
+if(simp.radicand!==Math.abs(n)||Math.abs(simp.coeff)!==1){
+var rad=simp.radicand===1?String(simp.coeff):(Math.abs(simp.coeff)===1?"":(simp.coeff<0?"-":"")+Math.abs(simp.coeff))+"√("+simp.radicand+")";
+grid+=item("Simplified radical form",rad);
+}
+grid+=item("Check","("+MathCalc.fmt(res.value,4)+")^"+r+" ≈ "+n);
+document.getElementById("resultGrid").innerHTML=grid;};
 </script>
 <script src="js/currency.js"></script>
 <script src="js/seo-content.js"></script>

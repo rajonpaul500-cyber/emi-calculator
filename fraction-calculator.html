@@ -12,17 +12,18 @@
 <script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fraction Calculator | EMI Master</title>
-<meta name="description" content="Free online Fraction Calculator. Fast, accurate and mobile friendly. No signup - calculations run 100% in your browser.">
-<meta name="keywords" content="fraction calculator, free online math calculator, fraction calculator online">
+<title>Fraction Calculator - Add, Subtract, Multiply &amp; Divide Fractions</title>
+<meta name="description" content="Free fraction calculator with mixed numbers. Add, subtract, multiply, divide, simplify and convert fractions to decimals instantly.">
+<meta name="keywords" content="fraction calculator, mixed number calculator, simplify fractions, decimal to fraction, fraction to decimal">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://emimaster.com/fraction-calculator.html">
-<meta property="og:title" content="Fraction Calculator | EMI Master">
-<meta property="og:description" content="Free, fast, private Fraction Calculator. Works on all devices.">
+<meta property="og:title" content="Fraction Calculator - Add, Subtract, Multiply &amp; Divide Fractions">
+<meta property="og:description" content="Free fraction calculator with mixed numbers. Add, subtract, multiply, divide, simplify and convert fractions to decimals instantly.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://emimaster.com/fraction-calculator.html">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Fraction Calculator","url":"https://emimaster.com/fraction-calculator.html","description":"Fraction Calculator - 100% free, fast and accurate online calculator. Runs in your browser.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I add two fractions?","acceptedAnswer":{"@type":"Answer","text":"Multiply the numerator of each fraction by the other denominator, add them for the new numerator, and multiply the denominators for the new denominator. Then simplify using the greatest common factor."}},{"@type":"Question","name":"How do I divide fractions?","acceptedAnswer":{"@type":"Answer","text":"Flip the second fraction (reciprocal) and multiply. For example 1/2 / 3/4 = 1/2 * 4/3 = 4/6 = 2/3."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Fraction Calculator","url":"https://emimaster.com/fraction-calculator.html","description":"Free fraction calculator with mixed numbers. Add, subtract, multiply, divide, simplify and convert fractions to decimals instantly.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I add two fractions?","acceptedAnswer":{"@type":"Answer","text":"Give them a common denominator, then add the numerators. For example 1/4 + 1/6 becomes 3/12 + 2/12 = 5/12. The calculator does this automatically and simplifies the result."}},{"@type":"Question","name":"How do I divide fractions?","acceptedAnswer":{"@type":"Answer","text":"Multiply the first fraction by the reciprocal of the second. For example 3/4 ÷ 1/6 = 3/4 × 6/1 = 18/4 = 4 1/2."}},{"@type":"Question","name":"What is a mixed number?","acceptedAnswer":{"@type":"Answer","text":"A mixed number combines a whole number and a proper fraction, like 2 1/3. It equals 2 + 1/3, which is the improper fraction 7/3."}},{"@type":"Question","name":"How do I convert a decimal to a fraction?","acceptedAnswer":{"@type":"Answer","text":"The calculator finds the closest fraction with a denominator under your chosen limit. For example 0.375 converts to 3/8, and 0.75 converts to 3/4."}},{"@type":"Question","name":"Why can't a denominator be zero?","acceptedAnswer":{"@type":"Answer","text":"Division by zero is undefined in mathematics, so a fraction with a zero denominator has no value. The calculator warns you when this happens."}}]}</script>
+<script type="application/json" id="relatedData">[{"href":"percentage-calculator.html","label":"Percentage Calculator","icon":"%"},{"href":"ratio-calculator.html","label":"Ratio Calculator","icon":"∶"},{"href":"greatest-common-factor-calculator.html","label":"GCF Calculator","icon":"≈"},{"href":"least-common-multiple-calculator.html","label":"LCM Calculator","icon":"×"},{"href":"scientific-calculator.html","label":"Scientific Calculator","icon":"√"}]</script>
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
@@ -32,84 +33,137 @@
 <div id="siteHeader"></div>
 
 <section class="hero hero-compact">
-<div class="container">
-<h1>Fraction Calculator</h1>
-<p>Fast, free, accurate and 100% private. Works on any device.</p>
-</div>
+  <div class="container">
+    <h1>Fraction Calculator</h1>
+    <p>Add, subtract, multiply, divide, simplify and convert fractions with mixed numbers.</p>
+  </div>
 </section>
 
 <div class="layout">
-<div id="siteSidebar"></div>
+  <div id="siteSidebar"></div>
 
-<main class="main-content">
-<div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Fraction Calculator</div>
-<h1 class="page-title">Fraction Calculator</h1>
-<p class="page-subtitle">Enter your values below and click the button for instant results.</p>
+  <main class="main-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="index.html#math">Math Calculators</a> &rsaquo; Fraction Calculator</div>
+    <h1 class="page-title">Fraction Calculator</h1>
+    <p class="page-subtitle">Use the tools below to add, subtract, multiply or divide fractions (including mixed numbers), simplify a fraction, or convert between fractions and decimals.</p>
 
 <div class="card">
-<h2>Fraction Operations</h2>
+<h2>Fraction arithmetic</h2>
 <div class="form-grid">
-<div class="form-group"><label>Fraction 1 Numerator</label><input type="number" id="n1" value="1" step="0.01"></div>
-<div class="form-group"><label>Fraction 1 Denominator</label><input type="number" id="d1" value="3" step="0.01"></div>
+<div class="form-group"><label>Whole 1</label><input type="number" id="w1" value="1"></div>
+<div class="form-group"><label>Numerator 1</label><input type="number" id="n1" value="1"></div>
+<div class="form-group"><label>Denominator 1</label><input type="number" id="d1" value="3"></div>
 <div class="form-group"><label>Operation</label>
-<select id="op"><option value="add">+ Add</option><option value="sub">- Subtract</option><option value="mul">* Multiply</option><option value="div">/ Divide</option></select>
+<select id="op">
+<option value="add">+ Add</option>
+<option value="sub">- Subtract</option>
+<option value="mul">* Multiply</option>
+<option value="div">/ Divide</option>
+</select>
 </div>
-<div class="form-group"><label>Fraction 2 Numerator</label><input type="number" id="n2" value="1" step="0.01"></div>
-<div class="form-group"><label>Fraction 2 Denominator</label><input type="number" id="d2" value="4" step="0.01"></div>
+<div class="form-group"><label>Whole 2</label><input type="number" id="w2" value="0"></div>
+<div class="form-group"><label>Numerator 2</label><input type="number" id="n2" value="1"></div>
+<div class="form-group"><label>Denominator 2</label><input type="number" id="d2" value="4"></div>
 </div>
-<div class="form-actions"><button class="btn btn-primary" id="calcBtn" type="button">Calculate</button></div>
-</div>
-
-<div class="result-panel" id="resultPanel">
-<h3 id="resultLabel">Result</h3>
-<div class="result-main" id="resultMain">—</div>
-<div class="result-grid" id="resultGrid"></div>
-</div>
-
-<div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
-
-<div class="content-section">
-<h2>About Fraction Calculator</h2>
-<p>This Fraction Calculator is fast, accurate and 100% private. All calculations run locally in your browser, so your information never leaves your device. No sign-up, no downloads, works beautifully on mobile and desktop.</p>
+<div class="form-actions"><button class="btn btn-primary" id="fracBtn" type="button">Calculate</button></div>
 </div>
 
-<div class="content-section">
-<h2>FAQ</h2>
-<div class="faq-item">
-      <div class="faq-q">How do I add two fractions?<span class="arrow">&#9654;</span></div>
-      <div class="faq-a">Multiply the numerator of each fraction by the other denominator, add them for the new numerator, and multiply the denominators for the new denominator. Then simplify using the greatest common factor.</div>
+<div class="card">
+<h2>Simplify a fraction</h2>
+<div class="form-grid">
+<div class="form-group"><label>Numerator</label><input type="number" id="sn" value="18"></div>
+<div class="form-group"><label>Denominator</label><input type="number" id="sd" value="24"></div>
+</div>
+<div class="form-actions"><button class="btn btn-outline" id="simpBtn" type="button">Simplify</button></div>
+</div>
+
+<div class="card">
+<h2>Decimal to fraction</h2>
+<div class="form-grid">
+<div class="form-group"><label>Decimal</label><input type="number" id="dec" value="0.375" step="any"></div>
+<div class="form-group"><label>Max denominator</label>
+<select id="maxDen"><option value="16">16</option><option value="32">32</option><option value="64">64</option><option value="100">100</option><option value="1000">1000</option></select>
+</div>
+</div>
+<div class="form-actions"><button class="btn btn-outline" id="d2fBtn" type="button">Convert to fraction</button></div>
+</div>
+
+<div class="card">
+<h2>Fraction to decimal</h2>
+<div class="form-grid">
+<div class="form-group"><label>Numerator</label><input type="number" id="fn" value="3"></div>
+<div class="form-group"><label>Denominator</label><input type="number" id="fd" value="8"></div>
+</div>
+<div class="form-actions"><button class="btn btn-outline" id="f2dBtn" type="button">Convert to decimal</button></div>
+</div>
+
+    <div class="result-panel" id="resultPanel">
+      <h3>Result</h3>
+      <div class="result-main" id="resultMain">&mdash;</div>
+      <div class="result-grid" id="resultGrid"></div>
     </div>
-    <div class="faq-item">
-      <div class="faq-q">How do I divide fractions?<span class="arrow">&#9654;</span></div>
-      <div class="faq-a">Flip the second fraction (reciprocal) and multiply. For example 1/2 / 3/4 = 1/2 * 4/3 = 4/6 = 2/3.</div>
+
+    <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
+
+    <div class="quick-facts">
+    <div class="fact-chip"><strong>Operations:</strong> Add, subtract, multiply, divide</div>
+    <div class="fact-chip"><strong>Mixed numbers:</strong> Supported with whole parts</div>
+    <div class="fact-chip"><strong>Extra tools:</strong> Simplify, decimal &harr; fraction</div>
+    <div class="fact-chip"><strong>Always simplified:</strong> Uses the greatest common factor</div>
     </div>
-</div>
-</main>
+
+<div class="content-section"><h2 id="what-is-a-fraction">What is a fraction?</h2><p>A fraction represents a part of a whole. It has a numerator on top and a denominator below, for example 3/8 means 3 parts out of 8 equal parts. The denominator can never be zero because dividing by zero is undefined.</p>
+      <p>Fractions can be proper (3/8, less than 1), improper (8/3, greater than 1) or mixed numbers (2 1/3, a whole number plus a fraction). This calculator accepts all three forms and always reports simplified results.</p></div>
+    <div class="content-section"><h2 id="how-fraction-operations-work">How fraction operations work</h2><p>To add or subtract fractions, first give them a common denominator, then add or subtract the numerators. For example 1/4 + 1/6: the least common denominator is 12, giving 3/12 + 2/12 = 5/12.</p>
+      <p>Multiplication is simpler: multiply the numerators together and the denominators together, then simplify. Division is multiplication by the reciprocal: 3/4 &divide; 1/6 = 3/4 &times; 6/1 = 18/4 = 4 1/2.</p>
+      <p>After any operation the result is reduced to its lowest terms by dividing the numerator and denominator by their greatest common factor.</p></div>
+    <div class="content-section"><h2 id="converting-between-fractions-and-decimals">Converting between fractions and decimals</h2><p>To convert a fraction to a decimal, divide the numerator by the denominator. For example 3/8 = 0.375.</p>
+      <p>To convert a decimal to a fraction, the calculator finds the closest fraction whose denominator is below your chosen limit. For example 0.375 becomes 3/8 because 0.375 = 375/1000, which simplifies by 125.</p></div>
+<div class="content-section"><h2 id="how-to-use">How to use this calculator</h2><ol><li>For arithmetic, enter the whole parts, numerators and denominators of both fractions and pick an operation.</li><li>Press Calculate to see the simplified fraction, mixed number and decimal value.</li><li>Use the Simplify tool to reduce any fraction to lowest terms.</li><li>Use the Decimal-to-fraction tool to convert a decimal like 0.75 into 3/4.</li><li>Use the Fraction-to-decimal tool to see the exact decimal value of any fraction.</li></ol></div>
+<div class="content-section tips-box"><h2>Pro tips</h2><ul><li>Leave the whole part at 0 to work with simple fractions.</li><li>A negative whole part makes the whole fraction negative, matching standard mixed-number notation.</li><li>For division, the result is the same as multiplying by the flipped second fraction.</li></ul></div>
+<div class="content-section"><h2>Advantages &amp; considerations</h2><div class="pros-cons"><div class="pros"><h3>&#9989; Advantages</h3><ul><li>Handles mixed numbers, improper and proper fractions</li><li>Shows simplified, mixed and decimal results together</li><li>Includes decimal to fraction conversion with adjustable precision</li></ul></div><div class="cons"><h3>&#9888;&#65039; Considerations</h3><ul><li>Accepts one denominator limit for decimal conversion</li><li>Extremely large numerators are best handled by the Big Number calculator</li></ul></div></div></div>
+<div class="content-section"><h2 id="faq">Frequently asked questions</h2><div class="faq-item"><div class="faq-q">How do I add two fractions?<span class="arrow">&#9654;</span></div><div class="faq-a">Give them a common denominator, then add the numerators. For example 1/4 + 1/6 becomes 3/12 + 2/12 = 5/12. The calculator does this automatically and simplifies the result.</div></div>
+      <div class="faq-item"><div class="faq-q">How do I divide fractions?<span class="arrow">&#9654;</span></div><div class="faq-a">Multiply the first fraction by the reciprocal of the second. For example 3/4 ÷ 1/6 = 3/4 × 6/1 = 18/4 = 4 1/2.</div></div>
+      <div class="faq-item"><div class="faq-q">What is a mixed number?<span class="arrow">&#9654;</span></div><div class="faq-a">A mixed number combines a whole number and a proper fraction, like 2 1/3. It equals 2 + 1/3, which is the improper fraction 7/3.</div></div>
+      <div class="faq-item"><div class="faq-q">How do I convert a decimal to a fraction?<span class="arrow">&#9654;</span></div><div class="faq-a">The calculator finds the closest fraction with a denominator under your chosen limit. For example 0.375 converts to 3/8, and 0.75 converts to 3/4.</div></div>
+      <div class="faq-item"><div class="faq-q">Why can't a denominator be zero?<span class="arrow">&#9654;</span></div><div class="faq-a">Division by zero is undefined in mathematics, so a fraction with a zero denominator has no value. The calculator warns you when this happens.</div></div></div>
+  </main>
 </div>
 
 <div id="siteFooter"></div>
 
 <script src="js/math.js"></script>
 <script>
-document.getElementById('calcBtn').onclick=function(){
-var n1=parseFloat(document.getElementById('n1').value),d1=parseFloat(document.getElementById('d1').value);
-var n2=parseFloat(document.getElementById('n2').value),d2=parseFloat(document.getElementById('d2').value);
-var op=document.getElementById('op').value;
-if(!d1||!d2){document.getElementById('resultMain').textContent='Denominators cannot be zero';return;}
-var num,den;
+function item(l,v){return '<div class="result-item"><div class="label">'+l+'</div><div class="value">'+v+'</div></div>';}
+function fracHtml(num,den){return '<span class="frac-display"><span class="frac-top">'+num+'</span><span class="frac-bottom">'+den+'</span></span>';}
+function toF(w,n,d){var whole=parseFloat(w.value)||0;var num=parseFloat(n.value)||0;var den=parseFloat(d.value)||0;if(den===0){return null;}var res=MathCalc.fromMixed(whole,num,den);return {num:res.num,den:res.den};}
+function showFrac(num,den,label){if(den===0){document.getElementById("resultMain").textContent="Denominator cannot be zero";document.getElementById("resultGrid").innerHTML="";return;}
+var s=MathCalc.simplifyFraction(num,den);var mx=MathCalc.toMixed(s.num,s.den);var dec=s.num/s.den;
+var grid=item(label||"Fraction",fracHtml(num,den))+item("Simplified",fracHtml(s.num,s.den));
+if(mx.whole!==0){grid+=item("Mixed number",(mx.whole>0?"+":"")+mx.whole+' '+mx.num+'/'+mx.den);}else if(mx.num!==0){grid+=item("Mixed number",(s.num<0?"-":"")+mx.num+'/'+mx.den);}
+grid+=item("Decimal",MathCalc.fmt(dec,6));
+document.getElementById("resultMain").innerHTML=fracHtml(num,den)+" = "+fracHtml(s.num,s.den);
+document.getElementById("resultGrid").innerHTML=grid;}
+document.getElementById("fracBtn").onclick=function(){
+var A=toF(document.getElementById("w1"),document.getElementById("n1"),document.getElementById("d1"));
+var B=toF(document.getElementById("w2"),document.getElementById("n2"),document.getElementById("d2"));
+if(!A||!B){document.getElementById("resultMain").textContent="Denominators cannot be zero";return;}
+var op=document.getElementById("op").value,num,den;
 switch(op){
-case 'add': num=n1*d2+n2*d1; den=d1*d2; break;
-case 'sub': num=n1*d2-n2*d1; den=d1*d2; break;
-case 'mul': num=n1*n2; den=d1*d2; break;
-case 'div': num=n1*d2; den=d1*n2; break;
-}
-if(den===0){document.getElementById('resultMain').textContent='Division by zero';return;}
-var g=MathCalc.gcf(num,den).value;
-num/=g; den/=g;
-var dec=num/den;
-document.getElementById('resultMain').textContent=num+' / '+den+' = '+MathCalc.fmt(dec,6);
-document.getElementById('resultGrid').innerHTML='<div class="result-item"><div class="label">Decimal</div><div class="value">'+MathCalc.fmt(dec,6)+'</div></div>';
-};
+case "add":num=A.num*B.den+B.num*A.den;den=A.den*B.den;break;
+case "sub":num=A.num*B.den-B.num*A.den;den=A.den*B.den;break;
+case "mul":num=A.num*B.num;den=A.den*B.den;break;
+case "div":num=A.num*B.den;den=A.den*B.num;break;}
+if(den===0){document.getElementById("resultMain").textContent="Cannot divide by zero";return;}
+showFrac(num,den);};
+document.getElementById("simpBtn").onclick=function(){var n=parseFloat(document.getElementById("sn").value)||0,d=parseFloat(document.getElementById("sd").value)||0;showFrac(n,d,"Input");};
+document.getElementById("d2fBtn").onclick=function(){var v=parseFloat(document.getElementById("dec").value);if(isNaN(v)){document.getElementById("resultMain").textContent="Enter a decimal";return;}
+var r=MathCalc.decimalToFraction(v,parseInt(document.getElementById("maxDen").value,10));if(r.error){document.getElementById("resultMain").textContent=r.error;return;}
+showFrac(r.num,r.den);};
+document.getElementById("f2dBtn").onclick=function(){var n=parseFloat(document.getElementById("fn").value)||0,d=parseFloat(document.getElementById("fd").value)||0;
+if(d===0){document.getElementById("resultMain").textContent="Denominator cannot be zero";return;}
+var v=n/d;document.getElementById("resultMain").textContent=MathCalc.fmt(v,8);
+document.getElementById("resultGrid").innerHTML=item("Fraction",n+' / '+d)+item("Decimal",MathCalc.fmt(v,8));};
 </script>
 <script src="js/currency.js"></script>
 <script src="js/seo-content.js"></script>

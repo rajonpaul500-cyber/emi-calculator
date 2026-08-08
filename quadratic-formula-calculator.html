@@ -12,17 +12,18 @@
 <script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quadratic Formula Calculator | EMI Master</title>
-<meta name="description" content="Free online Quadratic Formula Calculator. Fast, accurate and mobile friendly. No signup - calculations run 100% in your browser.">
-<meta name="keywords" content="quadratic formula calculator, free online math calculator, quadratic formula calculator online">
+<title>Quadratic Formula Calculator - Solve ax² + bx + c = 0</title>
+<meta name="description" content="Free quadratic formula calculator. Solve ax²+bx+c=0 with real and complex roots, discriminant, vertex and axis of symmetry.">
+<meta name="keywords" content="quadratic formula calculator, quadratic equation solver, discriminant, roots of quadratic">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://emimaster.com/quadratic-formula-calculator.html">
-<meta property="og:title" content="Quadratic Formula Calculator | EMI Master">
-<meta property="og:description" content="Free, fast, private Quadratic Formula Calculator. Works on all devices.">
+<meta property="og:title" content="Quadratic Formula Calculator - Solve ax² + bx + c = 0">
+<meta property="og:description" content="Free quadratic formula calculator. Solve ax²+bx+c=0 with real and complex roots, discriminant, vertex and axis of symmetry.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://emimaster.com/quadratic-formula-calculator.html">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Quadratic Formula Calculator","url":"https://emimaster.com/quadratic-formula-calculator.html","description":"Quadratic Formula Calculator - 100% free, fast and accurate online calculator. Runs in your browser.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the quadratic formula?","acceptedAnswer":{"@type":"Answer","text":"x = (-b +/- sqrt(b^2 - 4ac)) / (2a). The discriminant (b^2 - 4ac) determines the nature of the roots."}},{"@type":"Question","name":"What does the discriminant tell us?","acceptedAnswer":{"@type":"Answer","text":"If the discriminant is positive, there are two real roots. If zero, one real root. If negative, two complex roots."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Quadratic Formula Calculator","url":"https://emimaster.com/quadratic-formula-calculator.html","description":"Free quadratic formula calculator. Solve ax²+bx+c=0 with real and complex roots, discriminant, vertex and axis of symmetry.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the quadratic formula?","acceptedAnswer":{"@type":"Answer","text":"For ax² + bx + c = 0, the roots are x = (-b ± √(b² - 4ac)) / 2a. It works for every quadratic, whether the roots are real or complex."}},{"@type":"Question","name":"What does the discriminant tell me?","acceptedAnswer":{"@type":"Answer","text":"If b² - 4ac is positive, two real roots; if zero, one repeated root; if negative, two complex roots. It tells you how the parabola crosses the x-axis."}},{"@type":"Question","name":"How do I find the vertex of a parabola?","acceptedAnswer":{"@type":"Answer","text":"The x-coordinate is -b / (2a). Plug it back into the equation to get the y-coordinate. The calculator reports both."}},{"@type":"Question","name":"Can I solve a quadratic with decimals?","acceptedAnswer":{"@type":"Answer","text":"Yes. Enter decimal coefficients such as a = 0.5, b = -2.25 and c = 3. The calculator solves exactly using floating-point math."}},{"@type":"Question","name":"What are complex roots?","acceptedAnswer":{"@type":"Answer","text":"When the discriminant is negative, the square root is imaginary. The solutions then come in pairs a ± bi, such as -2 + i and -2 - i."}}]}</script>
+<script type="application/json" id="relatedData">[{"href":"root-calculator.html","label":"Root Calculator","icon":"√"},{"href":"factor-calculator.html","label":"Factor Calculator","icon":"÷"},{"href":"exponent-calculator.html","label":"Exponent Calculator","icon":"²"},{"href":"log-calculator.html","label":"Log Calculator","icon":"log"}]</script>
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
@@ -32,22 +33,22 @@
 <div id="siteHeader"></div>
 
 <section class="hero hero-compact">
-<div class="container">
-<h1>Quadratic Formula Calculator</h1>
-<p>Fast, free, accurate and 100% private. Works on any device.</p>
-</div>
+  <div class="container">
+    <h1>Quadratic Formula Calculator</h1>
+    <p>Solve quadratic equations with real or complex roots and full details.</p>
+  </div>
 </section>
 
 <div class="layout">
-<div id="siteSidebar"></div>
+  <div id="siteSidebar"></div>
 
-<main class="main-content">
-<div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Quadratic Formula Calculator</div>
-<h1 class="page-title">Quadratic Formula Calculator</h1>
-<p class="page-subtitle">Enter your values below and click the button for instant results.</p>
+  <main class="main-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="index.html#math">Math Calculators</a> &rsaquo; Quadratic Formula Calculator</div>
+    <h1 class="page-title">Quadratic Formula Calculator</h1>
+    <p class="page-subtitle">Enter the coefficients a, b and c of ax² + bx + c = 0 and press Solve. The calculator returns both roots, the discriminant, vertex and axis of symmetry.</p>
 
 <div class="card">
-<h2>Quadratic Equation ax^2 + bx + c = 0</h2>
+<h2>Quadratic equation ax² + bx + c = 0</h2>
 <div class="form-grid">
 <div class="form-group"><label>Coefficient a</label><input type="number" id="a" value="1" step="any"></div>
 <div class="form-group"><label>Coefficient b</label><input type="number" id="b" value="5" step="any"></div>
@@ -56,50 +57,59 @@
 <div class="form-actions"><button class="btn btn-primary" id="calcBtn" type="button">Solve</button></div>
 </div>
 
-<div class="result-panel" id="resultPanel">
-<h3 id="resultLabel">Result</h3>
-<div class="result-main" id="resultMain">—</div>
-<div class="result-grid" id="resultGrid"></div>
-</div>
-
-<div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
-
-<div class="content-section">
-<h2>About Quadratic Formula Calculator</h2>
-<p>This Quadratic Formula Calculator is fast, accurate and 100% private. All calculations run locally in your browser, so your information never leaves your device. No sign-up, no downloads, works beautifully on mobile and desktop.</p>
-</div>
-
-<div class="content-section">
-<h2>FAQ</h2>
-<div class="faq-item">
-      <div class="faq-q">What is the quadratic formula?<span class="arrow">&#9654;</span></div>
-      <div class="faq-a">x = (-b +/- sqrt(b^2 - 4ac)) / (2a). The discriminant (b^2 - 4ac) determines the nature of the roots.</div>
+    <div class="result-panel" id="resultPanel">
+      <h3>Result</h3>
+      <div class="result-main" id="resultMain">&mdash;</div>
+      <div class="result-grid" id="resultGrid"></div>
     </div>
-    <div class="faq-item">
-      <div class="faq-q">What does the discriminant tell us?<span class="arrow">&#9654;</span></div>
-      <div class="faq-a">If the discriminant is positive, there are two real roots. If zero, one real root. If negative, two complex roots.</div>
+
+    <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
+
+    <div class="quick-facts">
+    <div class="fact-chip"><strong>Formula:</strong> x = (-b ± √(b² - 4ac)) / 2a</div>
+    <div class="fact-chip"><strong>Discriminant:</strong> D = b² - 4ac</div>
+    <div class="fact-chip"><strong>Roots:</strong> Two real, one repeated, or two complex</div>
+    <div class="fact-chip"><strong>Extras:</strong> Vertex and axis of symmetry</div>
     </div>
-</div>
-</main>
+
+<div class="content-section"><h2 id="the-quadratic-formula-explained">The quadratic formula explained</h2><p>A quadratic equation has the form ax² + bx + c = 0. Its solutions are given by x = (-b ± √(b² - 4ac)) / 2a. The expression under the square root, b² - 4ac, is called the discriminant.</p>
+      <p>The discriminant decides the nature of the roots: if it is positive there are two distinct real roots; if zero, exactly one repeated real root; if negative, two complex roots. The calculator handles all three cases automatically.</p></div>
+    <div class="content-section"><h2 id="the-vertex-and-axis-of-symmetry">The vertex and axis of symmetry</h2><p>The graph of a quadratic is a parabola. Its vertex, the highest or lowest point, sits at x = -b / (2a), and the vertical line through that point is the axis of symmetry.</p>
+      <p>The value of a tells you the direction: a positive a opens upward (vertex is a minimum), a negative a opens downward (vertex is a maximum). These details are included in the results.</p></div>
+<div class="content-section"><h2 id="how-to-use">How to use this calculator</h2><ol><li>Rewrite your equation in the form ax² + bx + c = 0.</li><li>Enter the coefficients a, b and c.</li><li>Press Solve to see the roots.</li><li>Read the discriminant, vertex and axis of symmetry for the graph.</li></ol></div>
+<div class="content-section tips-box"><h2>Pro tips</h2><ul><li>Move every term to one side before reading off the coefficients.</li><li>If a is 0 the equation is linear, not quadratic — this calculator requires a ≠ 0.</li><li>A perfect square discriminant gives rational roots that you can verify by factoring.</li></ul></div>
+<div class="content-section"><h2>Advantages &amp; considerations</h2><div class="pros-cons"><div class="pros"><h3>&#9989; Advantages</h3><ul><li>Handles real, repeated and complex roots</li><li>Shows discriminant, vertex and axis</li><li>Works with decimal coefficients</li></ul></div><div class="cons"><h3>&#9888;&#65039; Considerations</h3><ul><li>Complex roots are displayed as a ± bi pairs</li><li>Requires a non-zero leading coefficient</li></ul></div></div></div>
+<div class="content-section"><h2 id="faq">Frequently asked questions</h2><div class="faq-item"><div class="faq-q">What is the quadratic formula?<span class="arrow">&#9654;</span></div><div class="faq-a">For ax² + bx + c = 0, the roots are x = (-b ± √(b² - 4ac)) / 2a. It works for every quadratic, whether the roots are real or complex.</div></div>
+      <div class="faq-item"><div class="faq-q">What does the discriminant tell me?<span class="arrow">&#9654;</span></div><div class="faq-a">If b² - 4ac is positive, two real roots; if zero, one repeated root; if negative, two complex roots. It tells you how the parabola crosses the x-axis.</div></div>
+      <div class="faq-item"><div class="faq-q">How do I find the vertex of a parabola?<span class="arrow">&#9654;</span></div><div class="faq-a">The x-coordinate is -b / (2a). Plug it back into the equation to get the y-coordinate. The calculator reports both.</div></div>
+      <div class="faq-item"><div class="faq-q">Can I solve a quadratic with decimals?<span class="arrow">&#9654;</span></div><div class="faq-a">Yes. Enter decimal coefficients such as a = 0.5, b = -2.25 and c = 3. The calculator solves exactly using floating-point math.</div></div>
+      <div class="faq-item"><div class="faq-q">What are complex roots?<span class="arrow">&#9654;</span></div><div class="faq-a">When the discriminant is negative, the square root is imaginary. The solutions then come in pairs a ± bi, such as -2 + i and -2 - i.</div></div></div>
+  </main>
 </div>
 
 <div id="siteFooter"></div>
 
 <script src="js/math.js"></script>
 <script>
-document.getElementById('calcBtn').onclick=function(){
-var a=parseFloat(document.getElementById('a').value),b=parseFloat(document.getElementById('b').value),c=parseFloat(document.getElementById('c').value);
-if(isNaN(a)||isNaN(b)||isNaN(c)){document.getElementById('resultMain').textContent='Enter valid coefficients';return;}
-var r=MathCalc.quadratic(a,b,c);
-if(r.error){document.getElementById('resultMain').textContent=r.error;return;}
+function item(l,v){return '<div class="result-item"><div class="label">'+l+'</div><div class="value">'+v+'</div></div>';}
+document.getElementById("calcBtn").onclick=function(){
+var a=parseFloat(document.getElementById("a").value);
+var b=parseFloat(document.getElementById("b").value);
+var c=parseFloat(document.getElementById("c").value);
+if(isNaN(a)||isNaN(b)||isNaN(c)){document.getElementById("resultMain").textContent="Enter valid coefficients";document.getElementById("resultGrid").innerHTML="";return;}
+if(a===0){document.getElementById("resultMain").textContent="Coefficient a cannot be zero for a quadratic";document.getElementById("resultGrid").innerHTML="";return;}
+var r=MathCalc.quadraticInfo(a,b,c);
+var grid="";
 if(r.complex){
-document.getElementById('resultMain').textContent='x = '+r.roots[0]+'  and  x = '+r.roots[1];
-document.getElementById('resultGrid').innerHTML='<div class="result-item"><div class="label">Type</div><div class="value">Complex roots</div></div><div class="result-item"><div class="label">Discriminant</div><div class="value">'+MathCalc.fmt(r.discriminant,6)+'</div></div>';
+document.getElementById("resultMain").textContent="x = "+r.roots[0]+"  or  x = "+r.roots[1];
+grid=item("Type","Two complex roots")+item("Discriminant",MathCalc.fmt(r.discriminant,6)+" (< 0)");
 }else{
-document.getElementById('resultMain').textContent='x = '+MathCalc.fmt(r.roots[0],6)+'  and  x = '+MathCalc.fmt(r.roots[1],6);
-document.getElementById('resultGrid').innerHTML='<div class="result-item"><div class="label">Root 1</div><div class="value">'+MathCalc.fmt(r.roots[0],6)+'</div></div><div class="result-item"><div class="label">Root 2</div><div class="value">'+MathCalc.fmt(r.roots[1],6)+'</div></div><div class="result-item"><div class="label">Discriminant</div><div class="value">'+MathCalc.fmt(r.discriminant,6)+'</div></div>';
+var r1=r.roots[0],r2=r.roots[1];
+document.getElementById("resultMain").textContent="x = "+MathCalc.fmt(r1,6)+"  or  x = "+MathCalc.fmt(r2,6);
+grid=item("Root 1",MathCalc.fmt(r1,6))+item("Root 2",MathCalc.fmt(r2,6))+item("Discriminant",MathCalc.fmt(r.discriminant,6));
 }
-};
+grid+=item("Vertex","("+MathCalc.fmt(r.vertex.x,4)+", "+MathCalc.fmt(r.vertex.y,4)+")")+item("Axis of symmetry","x = "+MathCalc.fmt(r.axis,4))+item("Direction",a>0?"Opens upward (a > 0)":"Opens downward (a < 0)");
+document.getElementById("resultGrid").innerHTML=grid;};
 </script>
 <script src="js/currency.js"></script>
 <script src="js/seo-content.js"></script>

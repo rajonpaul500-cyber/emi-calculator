@@ -12,17 +12,18 @@
 <script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Log Calculator | EMI Master</title>
-<meta name="description" content="Free online Log Calculator. Fast, accurate and mobile friendly. No signup - calculations run 100% in your browser.">
-<meta name="keywords" content="log calculator, free online math calculator, log calculator online">
+<title>Log Calculator - Logarithms &amp; Antilogs in Any Base</title>
+<meta name="description" content="Free log calculator. Find logarithms in any base, natural log, log base 2, plus antilogarithms with instant results.">
+<meta name="keywords" content="log calculator, logarithm calculator, natural log, antilog, log base 2">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://emimaster.com/log-calculator.html">
-<meta property="og:title" content="Log Calculator | EMI Master">
-<meta property="og:description" content="Free, fast, private Log Calculator. Works on all devices.">
+<meta property="og:title" content="Log Calculator - Logarithms &amp; Antilogs in Any Base">
+<meta property="og:description" content="Free log calculator. Find logarithms in any base, natural log, log base 2, plus antilogarithms with instant results.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://emimaster.com/log-calculator.html">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Log Calculator","url":"https://emimaster.com/log-calculator.html","description":"Log Calculator - 100% free, fast and accurate online calculator. Runs in your browser.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a logarithm?","acceptedAnswer":{"@type":"Answer","text":"A logarithm answers \"to what exponent must the base be raised to produce this number?\" For example log(100) base 10 = 2 because 10^2 = 100."}},{"@type":"Question","name":"What is the natural log?","acceptedAnswer":{"@type":"Answer","text":"The natural logarithm (ln) uses base e (about 2.71828). It is widely used in science and finance."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Log Calculator","url":"https://emimaster.com/log-calculator.html","description":"Free log calculator. Find logarithms in any base, natural log, log base 2, plus antilogarithms with instant results.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a logarithm?","acceptedAnswer":{"@type":"Answer","text":"A logarithm is the inverse of a power: logₓ(a) is the exponent you raise the base x to in order to get a. For example log₁₀(1000) = 3."}},{"@type":"Question","name":"What is the natural log?","acceptedAnswer":{"@type":"Answer","text":"The natural log, written ln, uses base e (≈ 2.71828). It appears constantly in calculus, growth models and physics."}},{"@type":"Question","name":"How do I calculate log in a custom base?","acceptedAnswer":{"@type":"Answer","text":"Pick Custom as the base and enter it. The calculator uses the change-of-base formula logₓ(a) = log(a) / log(x)."}},{"@type":"Question","name":"What is an antilogarithm?","acceptedAnswer":{"@type":"Answer","text":"The antilogarithm reverses a logarithm: if logₓ(a) = b, then the antilog of b in base x is xᵇ = a. For example the antilog of 3 in base 10 is 1000."}},{"@type":"Question","name":"Why must the input be positive?","acceptedAnswer":{"@type":"Answer","text":"Logarithms of zero or negative numbers are not defined for real numbers, because no power of a positive base produces zero or a negative number."}}]}</script>
+<script type="application/json" id="relatedData">[{"href":"exponent-calculator.html","label":"Exponent Calculator","icon":"²"},{"href":"scientific-calculator.html","label":"Scientific Calculator","icon":"√"},{"href":"root-calculator.html","label":"Root Calculator","icon":"√"}]</script>
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
@@ -32,71 +33,89 @@
 <div id="siteHeader"></div>
 
 <section class="hero hero-compact">
-<div class="container">
-<h1>Log Calculator</h1>
-<p>Fast, free, accurate and 100% private. Works on any device.</p>
-</div>
+  <div class="container">
+    <h1>Log Calculator</h1>
+    <p>Logarithms in any base, plus antilogarithms.</p>
+  </div>
 </section>
 
 <div class="layout">
-<div id="siteSidebar"></div>
+  <div id="siteSidebar"></div>
 
-<main class="main-content">
-<div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Log Calculator</div>
-<h1 class="page-title">Log Calculator</h1>
-<p class="page-subtitle">Enter your values below and click the button for instant results.</p>
+  <main class="main-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="index.html#math">Math Calculators</a> &rsaquo; Log Calculator</div>
+    <h1 class="page-title">Log Calculator</h1>
+    <p class="page-subtitle">Choose logarithm or antilogarithm, enter a number and base, and get the exact result. Common, natural and base-2 shortcuts are included.</p>
 
 <div class="card">
 <h2>Logarithm</h2>
 <div class="form-grid">
-<div class="form-group"><label>Number</label><input type="number" id="num" value="1000" min="0.0001"></div>
-<div class="form-group"><label>Base</label><select id="baseSel"><option value="10">10 (common)</option><option value="e">e (natural)</option><option value="2">2</option></select></div>
-<div class="form-group"><label>Custom Base</label><input type="number" id="baseCustom" value="10" min="0.001"></div>
+<div class="form-group"><label>Mode</label><select id="mode"><option value="log">Logarithm</option><option value="anti">Antilogarithm</option></select></div>
+<div class="form-group"><label>Number / value</label><input type="number" id="num" value="1000" step="any"></div>
+<div class="form-group"><label>Base</label><select id="baseSel"><option value="10">10 (common)</option><option value="e">e (natural)</option><option value="2">2</option><option value="custom">Custom</option></select></div>
+<div class="form-group"><label>Custom base</label><input type="number" id="baseCustom" value="5" min="0.0001" step="any"></div>
 </div>
 <div class="form-actions"><button class="btn btn-primary" id="calcBtn" type="button">Calculate</button></div>
 </div>
 
-<div class="result-panel" id="resultPanel">
-<h3 id="resultLabel">Result</h3>
-<div class="result-main" id="resultMain">—</div>
-<div class="result-grid" id="resultGrid"></div>
-</div>
-
-<div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
-
-<div class="content-section">
-<h2>About Log Calculator</h2>
-<p>This Log Calculator is fast, accurate and 100% private. All calculations run locally in your browser, so your information never leaves your device. No sign-up, no downloads, works beautifully on mobile and desktop.</p>
-</div>
-
-<div class="content-section">
-<h2>FAQ</h2>
-<div class="faq-item">
-      <div class="faq-q">What is a logarithm?<span class="arrow">&#9654;</span></div>
-      <div class="faq-a">A logarithm answers "to what exponent must the base be raised to produce this number?" For example log(100) base 10 = 2 because 10^2 = 100.</div>
+    <div class="result-panel" id="resultPanel">
+      <h3>Result</h3>
+      <div class="result-main" id="resultMain">&mdash;</div>
+      <div class="result-grid" id="resultGrid"></div>
     </div>
-    <div class="faq-item">
-      <div class="faq-q">What is the natural log?<span class="arrow">&#9654;</span></div>
-      <div class="faq-a">The natural logarithm (ln) uses base e (about 2.71828). It is widely used in science and finance.</div>
+
+    <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
+
+    <div class="quick-facts">
+    <div class="fact-chip"><strong>Definition:</strong> logₓ(a) answers bˣ = a</div>
+    <div class="fact-chip"><strong>Common log:</strong> Base 10</div>
+    <div class="fact-chip"><strong>Natural log:</strong> Base e ≈ 2.71828</div>
+    <div class="fact-chip"><strong>Extras:</strong> log₂ and antilog included</div>
     </div>
-</div>
-</main>
+
+<div class="content-section"><h2 id="what-is-a-logarithm">What is a logarithm?</h2><p>A logarithm answers the question: to what power must the base be raised to get this number? For example log₁₀(1000) = 3 because 10³ = 1000. It is the inverse operation of exponentiation.</p>
+      <p>Logarithms compress multiplication into addition: log(x × y) = log(x) + log(y). That property made them the foundation of slide rules and scientific tables before electronic calculators, and it still powers logarithmic scales in sound, earthquakes and pH.</p></div>
+    <div class="content-section"><h2 id="common-natural-and-base-2-logs">Common, natural and base-2 logs</h2><p>The common logarithm uses base 10 and is written log or log₁₀. The natural logarithm uses base e (≈ 2.71828) and is written ln. Base-2 logs are essential in computer science for measuring bits and algorithm complexity.</p>
+      <p>The change-of-base formula, logₓ(a) = log(a) / log(x), lets you compute a logarithm in any base from any other. This calculator applies it automatically for custom bases.</p></div>
+<div class="content-section"><h2 id="how-to-use">How to use this calculator</h2><ol><li>Choose Logarithm or Antilogarithm mode.</li><li>Enter the number (for a logarithm) or the exponent (for an antilog).</li><li>Pick a base: 10, e, 2 or a custom base.</li><li>Press Calculate and read the result plus its meaning.</li></ol></div>
+<div class="content-section tips-box"><h2>Pro tips</h2><ul><li>Remember log(1) = 0 and log(base) = 1 for any valid base.</li><li>Use log₂ for computer-science problems like binary search depths.</li><li>Antilog answers 'the base raised to which exponent gives this value'.</li></ul></div>
+<div class="content-section"><h2>Advantages &amp; considerations</h2><div class="pros-cons"><div class="pros"><h3>&#9989; Advantages</h3><ul><li>Any base, including custom values</li><li>Antilogarithm mode built in</li><li>Shows the exponential meaning of every result</li></ul></div><div class="cons"><h3>&#9888;&#65039; Considerations</h3><ul><li>Input must be positive for logarithms</li><li>Base cannot be 1 or negative</li></ul></div></div></div>
+<div class="content-section"><h2 id="faq">Frequently asked questions</h2><div class="faq-item"><div class="faq-q">What is a logarithm?<span class="arrow">&#9654;</span></div><div class="faq-a">A logarithm is the inverse of a power: logₓ(a) is the exponent you raise the base x to in order to get a. For example log₁₀(1000) = 3.</div></div>
+      <div class="faq-item"><div class="faq-q">What is the natural log?<span class="arrow">&#9654;</span></div><div class="faq-a">The natural log, written ln, uses base e (≈ 2.71828). It appears constantly in calculus, growth models and physics.</div></div>
+      <div class="faq-item"><div class="faq-q">How do I calculate log in a custom base?<span class="arrow">&#9654;</span></div><div class="faq-a">Pick Custom as the base and enter it. The calculator uses the change-of-base formula logₓ(a) = log(a) / log(x).</div></div>
+      <div class="faq-item"><div class="faq-q">What is an antilogarithm?<span class="arrow">&#9654;</span></div><div class="faq-a">The antilogarithm reverses a logarithm: if logₓ(a) = b, then the antilog of b in base x is xᵇ = a. For example the antilog of 3 in base 10 is 1000.</div></div>
+      <div class="faq-item"><div class="faq-q">Why must the input be positive?<span class="arrow">&#9654;</span></div><div class="faq-a">Logarithms of zero or negative numbers are not defined for real numbers, because no power of a positive base produces zero or a negative number.</div></div></div>
+  </main>
 </div>
 
 <div id="siteFooter"></div>
 
 <script src="js/math.js"></script>
 <script>
-document.getElementById('calcBtn').onclick=function(){
-var n=parseFloat(document.getElementById('num').value);
-if(isNaN(n)||n<=0){document.getElementById('resultMain').textContent='Number must be positive';return;}
-var baseSel=document.getElementById('baseSel').value;
-var base=baseSel==='e'?Math.E:baseSel==='2'?2:parseFloat(document.getElementById('baseCustom').value)||10;
-var r=MathCalc.logarithm(n,base);
-document.getElementById('resultMain').textContent=MathCalc.fmt(r.value,8);
-var label=baseSel==='e'?'ln':'log base '+base;
-document.getElementById('resultGrid').innerHTML='<div class="result-item"><div class="label">'+label+'('+n+')</div><div class="value">'+MathCalc.fmt(r.value,8)+'</div></div>';
-};
+function item(l,v){return '<div class="result-item"><div class="label">'+l+'</div><div class="value">'+v+'</div></div>';}
+document.getElementById("calcBtn").onclick=function(){
+var mode=document.getElementById("mode").value;
+var n=parseFloat(document.getElementById("num").value);
+var sel=document.getElementById("baseSel").value;
+var base=sel==="e"?Math.E:sel==="2"?2:sel==="10"?10:parseFloat(document.getElementById("baseCustom").value);
+if(isNaN(n)||isNaN(base)){document.getElementById("resultMain").textContent="Enter valid numbers";document.getElementById("resultGrid").innerHTML="";return;}
+var grid="";
+if(mode==="log"){
+if(n<=0){document.getElementById("resultMain").textContent="Number must be positive";return;}
+if(base<=0||base===1){document.getElementById("resultMain").textContent="Base must be positive and not 1";return;}
+var r=MathCalc.logarithm(n,base).value;
+var name=sel==="e"?"ln":sel==="2"?"log₂":sel==="10"?"log₁₀":"log";
+document.getElementById("resultMain").textContent=MathCalc.fmt(r,8);
+grid=item(name+"("+n+")",MathCalc.fmt(r,8))+item("Meaning",""+base+"^"+MathCalc.fmt(r,6)+" = "+n);
+if(sel==="10"){grid+=item("Natural log",MathCalc.fmt(Math.log(n),8));}
+if(sel==="e"){grid+=item("Log base 10",MathCalc.fmt(Math.log10(n),8));}
+}else{
+if(base<=0||base===1){document.getElementById("resultMain").textContent="Base must be positive and not 1";return;}
+var v=MathCalc.antiLog(n,base).value;
+document.getElementById("resultMain").textContent=MathCalc.fmt(v,8);
+grid=item("Antilog",base+"^"+n+" = "+MathCalc.fmt(v,8))+item("Scientific notation",MathCalc.toScientific(v,6).value);
+}
+document.getElementById("resultGrid").innerHTML=grid;};
 </script>
 <script src="js/currency.js"></script>
 <script src="js/seo-content.js"></script>

@@ -569,6 +569,75 @@ img {
   font-size: 1.4rem;
 }
 
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 12px;
+}
+
+.calc-keypad {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.calc-keypad .btn {
+  min-height: 46px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  padding: 8px;
+}
+
+.matrix-grid {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.matrix-box {
+  flex: 1;
+  min-width: 180px;
+}
+
+.matrix-box input {
+  width: 56px;
+  text-align: center;
+  margin: 2px;
+  padding: 8px 4px;
+}
+
+.matrix-box .matrix-row {
+  display: flex;
+  gap: 2px;
+}
+
+.frac-display {
+  font-family: var(--font-mono, monospace);
+  text-align: center;
+  line-height: 1.2;
+}
+
+.frac-top {
+  display: block;
+  padding: 2px 10px;
+  border-bottom: 2px solid currentColor;
+}
+
+.frac-bottom {
+  display: block;
+  padding: 2px 10px;
+}
+
+.checkbox-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-right: 14px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
 .quick-facts {
   display: flex;
   flex-wrap: wrap;

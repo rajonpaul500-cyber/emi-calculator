@@ -1,5 +1,5 @@
 /* EMI Master Service Worker - Offline-first PWA */
-var CACHE_NAME = 'emimaster-v1';
+var CACHE_NAME = 'emimaster-v2';
 var OFFLINE_URL = 'index.html';
 
 var PRECACHE = [
@@ -14,6 +14,7 @@ var PRECACHE = [
   './js/retirement.js',
   './js/depreciation.js',
   './js/chart.js',
+  './js/math.js',
   './js/seo-content.js',
   './logo.svg',
   './favicon.svg',
@@ -46,6 +47,21 @@ self.addEventListener('activate', function (event) {
 
 self.addEventListener('fetch', function (event) {
   if (event.request.method !== 'GET') return;
+
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      fetch(event.request).then(function (response) {
+        var clone = response.clone();
+        caches.open(CACHE_NAME).then(function (cache) {
+          cache.put(event.request, clone);
+        });
+        return response;
+      }).catch(function () {
+        return caches.match(OFFLINE_URL);
+      })
+    );
+    return;
+  }
 
   event.respondWith(
     caches.match(event.request).then(function (cached) {
