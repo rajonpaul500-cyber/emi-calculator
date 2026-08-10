@@ -9,6 +9,18 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
 
+# 301 redirects from clean URLs to .html (consolidate indexing signals on .html URLs)
+# This matches the site-wide pattern where every indexed page uses the .html URL.
+[[redirects]]
+  from = "/annuity-payout-calculator"
+  to = "/annuity-payout-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/debt-to-income"
+  to = "/debt-to-income.html"
+  status = 301
+
 [[redirects]]
   from = "/*"
   to = "/404.html"

@@ -122,7 +122,10 @@
 
   function currentPage() {
     var path = window.location.pathname.split("/").pop();
-    return path || "index.html";
+    if (!path) return "index.html";
+    // Normalize clean URLs (e.g. /debt-to-income) to .html page keys
+    if (path.indexOf(".html") === -1) path += ".html";
+    return path;
   }
 
   function tr(key) {
@@ -412,6 +415,9 @@
     if (!main) return;
     var page = currentPage();
     if (page === "index.html" || page === "privacy-policy.html" || page === "404.html") return;
+    // If the SEO content was pre-rendered statically (see scripts/prerender-seo.js),
+    // skip JS injection to avoid duplicate content on the page.
+    if (main.innerHTML.indexOf("<!--SEO-CONTENT-START-->") !== -1) return;
     if (!window.SEO_CONTENT || !window.SEO_CONTENT[page]) return;
 
     var data = window.SEO_CONTENT[page];

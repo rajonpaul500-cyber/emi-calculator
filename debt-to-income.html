@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-M8XM9611FL"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-M8XM9611FL');
-</script>
-  <script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-M8XM9611FL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-M8XM9611FL');
+  </script>
+  <script>try { if (localStorage.getItem("emimaster-theme") === "dark") document.documentElement.setAttribute("data-theme", "dark") } catch (e) { }</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Debt-to-Income Ratio Calculator - DTI Check | EMI Master</title>
-  <meta name="description" content="Calculate your debt-to-income (DTI) ratio and see if it is healthy for lenders. Free DTI calculator with front-end and back-end ratios.">
-  <meta name="keywords" content="debt to income ratio calculator, DTI calculator, debt ratio calculator, loan eligibility">
+  <meta name="description"
+    content="Calculate your debt-to-income (DTI) ratio and see if it is healthy for lenders. Free DTI calculator with front-end and back-end ratios.">
+  <meta name="keywords"
+    content="debt to income ratio calculator, DTI calculator, debt ratio calculator, loan eligibility">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://emimaster.com/debt-to-income.html">
   <meta property="og:title" content="Debt-to-Income Ratio Calculator | EMI Master">
@@ -61,107 +64,201 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
 </head>
+
 <body>
 
-<div id="siteHeader"></div>
+  <div id="siteHeader"></div>
 
-<section class="hero hero-compact">
-  <div class="container">
-    <h1>Debt-to-Income Ratio Calculator</h1>
-    <p>See if your debts are healthy before you apply for a loan.</p>
+  <section class="hero hero-compact">
+    <div class="container">
+      <h1>Debt-to-Income Ratio Calculator</h1>
+      <p>See if your debts are healthy before you apply for a loan.</p>
+    </div>
+  </section>
+
+  <div class="layout">
+    <div id="siteSidebar"></div>
+
+    <main class="main-content">
+      <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Debt-to-Income Ratio Calculator</div>
+      <h1 class="page-title">Debt-to-Income (DTI) Calculator</h1>
+      <p class="page-subtitle">Your DTI ratio is one of the most important numbers lenders check.</p>
+
+      <div class="card">
+        <h2>Income &amp; Debts</h2>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="income">Gross Monthly Income ($)</label>
+            <div class="input-wrap">
+              <span class="prefix">$</span>
+              <input type="number" id="income" value="80000" min="0" step="5000">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="housing">Monthly Housing Payment ($)</label>
+            <div class="input-wrap">
+              <span class="prefix">$</span>
+              <input type="number" id="housing" value="20000" min="0" step="1000">
+            </div>
+            <p style="font-size:0.8rem;color:var(--text-muted);">Rent or mortgage payment</p>
+          </div>
+
+          <div class="form-group">
+            <label for="debts">Other Monthly Debts ($)</label>
+            <div class="input-wrap">
+              <span class="prefix">$</span>
+              <input type="number" id="debts" value="8000" min="0" step="500">
+            </div>
+            <p style="font-size:0.8rem;color:var(--text-muted);">Loans, cards, car, EMIs</p>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-primary" id="calculateBtn" type="button">Calculate</button>
+          <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
+        </div>
+      </div>
+
+      <div class="result-panel" id="resultPanel">
+        <h3 id="resultLabel">Back-end Debt-to-Income Ratio</h3>
+        <div class="result-main" id="resultMain">—</div>
+        <div class="result-grid">
+          <div class="result-item">
+            <div class="label">Front-end Ratio (Housing only)</div>
+            <div class="value" id="rFront">—</div>
+          </div>
+          <div class="result-item">
+            <div class="label">Max Monthly Debt at 36%</div>
+            <div class="value" id="rMax">—</div>
+          </div>
+          <div class="result-item">
+            <div class="label">Assessment</div>
+            <div class="value positive" id="rVerdict">—</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
+
+      <div class="content-section">
+        <h2>How to read your DTI</h2>
+        <p>The <strong>front-end ratio</strong> is your housing payment divided by income. The <strong>back-end
+            ratio</strong> adds all other debts &mdash; this is the number lenders care about most.</p>
+        <ul>
+          <li><strong>Under 36%</strong> &mdash; healthy; most lenders approve comfortably.</li>
+          <li><strong>36% &ndash; 43%</strong> &mdash; acceptable for some lenders, especially with a good credit score.
+          </li>
+          <li><strong>Above 43%</strong> &mdash; risky; you may face higher rates or denial.</li>
+        </ul>
+      </div>
+
+      <div class="content-section">
+        <h2>DTI Calculator FAQ</h2>
+        <div class="faq-item">
+          <div class="faq-q">What is a good debt-to-income ratio?<span class="arrow">&#9654;</span></div>
+          <div class="faq-a">A back-end DTI of 36% or less is considered good. Staying under 43% is usually required for
+            most loans, and under 50% for some government programs.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">How can I lower my DTI?<span class="arrow">&#9654;</span></div>
+          <div class="faq-a">Pay down credit card balances and small loans, avoid taking on new debt, or increase your
+            income. Even small reductions improve your loan eligibility.</div>
+        </div>
+      </div>
+
+      <!--SEO-CONTENT-START-->
+      <!-- =====================================================
+     SEO CONTENT (pre-rendered static) - do not remove
+     ===================================================== -->
+      <div class="content-section quick-facts">
+        <div class="fact-chip"><strong>DTI:</strong> Monthly debt ÷ gross income</div>
+        <div class="fact-chip"><strong>Good:</strong> Below 36%</div>
+        <div class="fact-chip"><strong>Mortgage:</strong> Front ratio ≤ 28%</div>
+        <div class="fact-chip"><strong>Lenders:</strong> Max ~43–45%</div>
+      </div>
+      <div class="content-section toc-card">
+        <h2>On this page</h2>
+        <ol class="toc">
+          <li><a href="#understanding-front-and-back-dti">Understanding front and back DTI</a></li>
+          <li><a href="#improving-your-dti">Improving your DTI</a></li>
+          <li><a href="#how-to-use">How to use this calculator</a></li>
+          <li><a href="#faq">Frequently asked questions</a></li>
+        </ol>
+      </div>
+      <div class="content-section">
+        <h2>Debt-to-Income Ratio Calculator — your lending health score</h2>
+        <p>Your debt-to-income (DTI) ratio is how lenders judge whether you can handle new debt. This calculator adds up
+          your monthly obligations and divides by gross income to compute your front (housing-only) and back (total
+          debt) ratios — instantly showing your lending health.</p>
+      </div>
+      <div class="content-section">
+        <h2 id="understanding-front-and-back-dti">Understanding front and back DTI</h2>
+        <p>Front-end ratio: housing costs (mortgage, tax, insurance) ÷ gross income. Target ≤ 28%.</p>
+        <p>Back-end ratio: ALL debt payments ÷ gross income. Target ≤ 36%.</p>
+        <p>Example: $30,000 housing + $18,000 other debts on $1,20,000 income → front 25%, back 40%. A second loan would
+          push you over the 36% norm.</p>
+      </div>
+      <div class="content-section">
+        <h2 id="improving-your-dti">Improving your DTI</h2>
+        <p>Pay off small high-rate debts first — each closed account lowers monthly obligations.</p>
+        <p>Increase income (side income, rental) or make a larger down payment to shrink the housing payment.</p>
+        <p>Avoid new credit lines 6 months before applying for a mortgage — lenders pull updated DTI on day one.</p>
+      </div>
+      <div class="content-section">
+        <h2 id="how-to-use">How to use this calculator</h2>
+        <ol>
+          <li>Enter your gross monthly income.</li>
+          <li>Enter monthly debt payments: housing, car, personal loans, cards, student loans, other.</li>
+          <li>Read your front-end and back-end DTI ratios with health status.</li>
+          <li>Check whether you're in the 'good' (≤36%) or 'caution' (37–45%) range.</li>
+        </ol>
+      </div>
+      <div class="content-section tips-box">
+        <h2>Pro tips</h2>
+        <ul>
+          <li>Lenders approve up to 43–45% DTI, but 36% keeps you comfortable with life's surprises.</li>
+          <li>A zero-balance credit card still shows a minimum payment — close or settle old cards before applying.</li>
+          <li>Rent counts in the back-end ratio too, though not the front.</li>
+        </ul>
+      </div>
+      <div class="content-section">
+        <h2 id="faq">Frequently asked questions</h2>
+        <div class="faq-item">
+          <div class="faq-q">What is a good debt-to-income ratio?<span class="arrow">&#9654;</span></div>
+          <div class="faq-a">Lenders prefer a back-end DTI of 36% or below. 37–45% may qualify with strong credit and
+            savings; above 45% rarely qualifies for prime mortgages.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">How do I calculate DTI?<span class="arrow">&#9654;</span></div>
+          <div class="faq-a">Add all monthly debt payments (housing, loans, cards, alimony) and divide by gross monthly
+            income. Multiply by 100 for the percentage.</div>
+        </div>
+      </div>
+      <div class="content-section">
+        <h2>Related calculators</h2>
+        <div class="related-grid"><a class="related-card" href="house-affordability.html"><span
+              class="related-icon">🏠</span><span>Affordability</span></a><a class="related-card"
+            href="mortgage-calculator.html"><span class="related-icon">🏡</span><span>Mortgage</span></a><a
+            class="related-card" href="loan-payoff.html"><span class="related-icon">⏱️</span><span>Loan
+              Payoff</span></a><a class="related-card" href="personal-loan.html"><span
+              class="related-icon">👤</span><span>Personal Loan</span></a></div>
+      </div>
+      <!--SEO-CONTENT-END-->
+    </main>
   </div>
-</section>
 
-<div class="layout">
-  <div id="siteSidebar"></div>
+  <div id="siteFooter"></div>
 
-  <main class="main-content">
-    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Debt-to-Income Ratio Calculator</div>
-    <h1 class="page-title">Debt-to-Income (DTI) Calculator</h1>
-    <p class="page-subtitle">Your DTI ratio is one of the most important numbers lenders check.</p>
-
-    <div class="card">
-      <h2>Income &amp; Debts</h2>
-      <div class="form-grid">
-        <div class="form-group">
-          <label for="income">Gross Monthly Income ($)</label>
-          <div class="input-wrap">
-            <span class="prefix">$</span>
-            <input type="number" id="income" value="80000" min="0" step="5000">
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="housing">Monthly Housing Payment ($)</label>
-          <div class="input-wrap">
-            <span class="prefix">$</span>
-            <input type="number" id="housing" value="20000" min="0" step="1000">
-          </div>
-          <p style="font-size:0.8rem;color:var(--text-muted);">Rent or mortgage payment</p>
-        </div>
-
-        <div class="form-group">
-          <label for="debts">Other Monthly Debts ($)</label>
-          <div class="input-wrap">
-            <span class="prefix">$</span>
-            <input type="number" id="debts" value="8000" min="0" step="500">
-          </div>
-          <p style="font-size:0.8rem;color:var(--text-muted);">Loans, cards, car, EMIs</p>
-        </div>
-      </div>
-      <div class="form-actions">
-        <button class="btn btn-primary" id="calculateBtn" type="button">Calculate</button>
-        <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
-      </div>
-    </div>
-
-    <div class="result-panel" id="resultPanel">
-      <h3 id="resultLabel">Back-end Debt-to-Income Ratio</h3>
-      <div class="result-main" id="resultMain">—</div>
-      <div class="result-grid">
-        <div class="result-item"><div class="label">Front-end Ratio (Housing only)</div><div class="value" id="rFront">—</div></div>
-        <div class="result-item"><div class="label">Max Monthly Debt at 36%</div><div class="value" id="rMax">—</div></div>
-        <div class="result-item"><div class="label">Assessment</div><div class="value positive" id="rVerdict">—</div></div>
-      </div>
-    </div>
-
-    <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
-
-    <div class="content-section">
-      <h2>How to read your DTI</h2>
-      <p>The <strong>front-end ratio</strong> is your housing payment divided by income. The <strong>back-end ratio</strong> adds all other debts &mdash; this is the number lenders care about most.</p>
-      <ul>
-        <li><strong>Under 36%</strong> &mdash; healthy; most lenders approve comfortably.</li>
-        <li><strong>36% &ndash; 43%</strong> &mdash; acceptable for some lenders, especially with a good credit score.</li>
-        <li><strong>Above 43%</strong> &mdash; risky; you may face higher rates or denial.</li>
-      </ul>
-    </div>
-
-    <div class="content-section">
-      <h2>DTI Calculator FAQ</h2>
-      <div class="faq-item">
-        <div class="faq-q">What is a good debt-to-income ratio?<span class="arrow">&#9654;</span></div>
-        <div class="faq-a">A back-end DTI of 36% or less is considered good. Staying under 43% is usually required for most loans, and under 50% for some government programs.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">How can I lower my DTI?<span class="arrow">&#9654;</span></div>
-        <div class="faq-a">Pay down credit card balances and small loans, avoid taking on new debt, or increase your income. Even small reductions improve your loan eligibility.</div>
-      </div>
-    </div>
-  </main>
-</div>
-
-<div id="siteFooter"></div>
-
-<script>
-  window.calcConfig = {
-    type: 'dti',
-    defaults: { income: 80000, housing: 20000, debts: 8000 }
-  };
-</script>
-<script src="js/currency.js"></script>
-<script src="js/seo-content.js"></script>
-<script src="js/common.js"></script>
-<script src="js/mortgage.js"></script>
+  <script>
+    window.calcConfig = {
+      type: 'dti',
+      defaults: { income: 80000, housing: 20000, debts: 8000 }
+    };
+  </script>
+  <script src="js/currency.js"></script>
+  <script src="js/seo-content.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/mortgage.js"></script>
 </body>
+
 </html>

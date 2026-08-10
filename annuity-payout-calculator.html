@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-M8XM9611FL"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-M8XM9611FL');
-</script>
-  <script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-M8XM9611FL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-M8XM9611FL');
+  </script>
+  <script>try { if (localStorage.getItem("emimaster-theme") === "dark") document.documentElement.setAttribute("data-theme", "dark") } catch (e) { }</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Annuity Payout Calculator - Monthly Income from Lump Sum | EMI Master</title>
-  <meta name="description" content="Calculate the monthly income a lump sum can pay for a fixed period, plus total payouts and interest earned. Free annuity payout calculator.">
-  <meta name="keywords" content="annuity payout calculator, annuity income, retirement income calculator, immediate annuity">
+  <meta name="description"
+    content="Calculate the monthly income a lump sum can pay for a fixed period, plus total payouts and interest earned. Free annuity payout calculator.">
+  <meta name="keywords"
+    content="annuity payout calculator, annuity income, retirement income calculator, immediate annuity">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://emimaster.com/annuity-payout-calculator.html">
   <meta property="og:title" content="Annuity Payout Calculator | EMI Master">
@@ -61,101 +64,198 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
 </head>
+
 <body>
 
-<div id="siteHeader"></div>
+  <div id="siteHeader"></div>
 
-<section class="hero hero-compact">
-  <div class="container">
-    <h1>Annuity Payout Calculator</h1>
-    <p>How much income can your lump sum produce?</p>
+  <section class="hero hero-compact">
+    <div class="container">
+      <h1>Annuity Payout Calculator</h1>
+      <p>How much income can your lump sum produce?</p>
+    </div>
+  </section>
+
+  <div class="layout">
+    <div id="siteSidebar"></div>
+
+    <main class="main-content">
+      <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Annuity Payout Calculator</div>
+      <h1 class="page-title">Annuity Payout Calculator</h1>
+      <p class="page-subtitle">Convert a lump sum into fixed monthly income for a chosen period.</p>
+
+      <div class="card">
+        <h2>Payout Details</h2>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="lump">Lump Sum Amount</label>
+            <div class="input-wrap">
+              <span class="prefix">$</span>
+              <input type="number" id="lump" value="5000000" min="0" step="100000">
+            </div>
+            <input type="range" id="lumpRange" min="100000" max="100000000" step="100000" value="5000000">
+          </div>
+
+          <div class="form-group">
+            <label for="rate">Annual Return</label>
+            <div class="input-wrap">
+              <span class="suffix">%</span>
+              <input type="number" id="rate" value="6" min="0" max="20" step="0.5">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="years">Payout Period (years)</label>
+            <div class="input-wrap">
+              <span class="suffix">yrs</span>
+              <input type="number" id="years" value="20" min="1" max="50" step="1">
+            </div>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-primary" id="calculateBtn" type="button">Calculate</button>
+          <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
+        </div>
+      </div>
+
+      <div class="result-panel" id="resultPanel">
+        <h3 id="resultLabel">Monthly Payout</h3>
+        <div class="result-main" id="resultMain">—</div>
+        <div class="result-grid">
+          <div class="result-item">
+            <div class="label">Total Payouts</div>
+            <div class="value positive" id="rTotal">—</div>
+          </div>
+          <div class="result-item">
+            <div class="label">Interest Earned</div>
+            <div class="value positive" id="rInterest">—</div>
+          </div>
+          <div class="result-item">
+            <div class="label">Payout Years</div>
+            <div class="value" id="rYears">—</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
+
+      <div class="content-section">
+        <h2>How the payout works</h2>
+        <p>A lump sum of 5,000,000 at 6% over 20 years pays about <strong>35,700 monthly</strong> &mdash; roughly
+          8,500,000 in total. The extra 3,500,000 is the interest earned by the money still invested, which is exactly
+          what makes the income last the full period.</p>
+      </div>
+
+      <div class="content-section">
+        <h2>Annuity Payout FAQ</h2>
+        <div class="faq-item">
+          <div class="faq-q">What happens if I outlive the payout period?<span class="arrow">&#9654;</span></div>
+          <div class="faq-a">With a fixed-period annuity the payments stop when the period ends. A lifetime annuity pays
+            until death but typically pays less per month &mdash; a classic trade-off between certainty and income.
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Should I buy an annuity or manage the money myself?<span class="arrow">&#9654;</span></div>
+          <div class="faq-a">Annuities remove market risk and the risk of outliving savings, but they lock your money
+            and often carry fees. Compare the payout here with what you could safely withdraw yourself.</div>
+        </div>
+      </div>
+
+      <!--SEO-CONTENT-START-->
+      <!-- =====================================================
+     SEO CONTENT (pre-rendered static) - do not remove
+     ===================================================== -->
+      <div class="content-section quick-facts">
+        <div class="fact-chip"><strong>Payout:</strong> Monthly income from lump sum</div>
+        <div class="fact-chip"><strong>Fixed period:</strong> Income for N years</div>
+        <div class="fact-chip"><strong>Inverse:</strong> Reverse of annuity</div>
+        <div class="fact-chip"><strong>Retirees:</strong> Convert corpus to income</div>
+      </div>
+      <div class="content-section toc-card">
+        <h2>On this page</h2>
+        <ol class="toc">
+          <li><a href="#the-payout-formula">The payout formula</a></li>
+          <li><a href="#planning-the-withdrawal-rate">Planning the withdrawal rate</a></li>
+          <li><a href="#how-to-use">How to use this calculator</a></li>
+          <li><a href="#faq">Frequently asked questions</a></li>
+        </ol>
+      </div>
+      <div class="content-section">
+        <h2>Annuity Payout Calculator — income from your lump sum</h2>
+        <p>You've built a corpus — now how much can you safely withdraw each month? This annuity payout calculator
+          answers it: given your lump sum, rate and the number of years, it computes the exact monthly payout, total
+          payout and interest portion.</p>
+      </div>
+      <div class="content-section">
+        <h2 id="the-payout-formula">The payout formula</h2>
+        <p>Monthly payout = P × r ÷ [1 − (1+r)^−n], where P is the lump sum, r the monthly rate and n the number of
+          months.</p>
+        <p>A $50,00,000 corpus at 6% for 20 years pays about $35,800/month.</p>
+        <p>Extending to 30 years drops the payout to about $30,000/month — trade income for longevity.</p>
+      </div>
+      <div class="content-section">
+        <h2 id="planning-the-withdrawal-rate">Planning the withdrawal rate</h2>
+        <p>A 4% annual withdrawal is the classic conservative rule for a 30-year retirement; at 6% return you'd withdraw
+          ~4% and keep the rest growing.</p>
+        <p>This fixed-period payout spends both principal and interest — your corpus hits zero at the end.</p>
+        <p>For lifetime income instead, consider an immediate annuity product or a withdrawal policy tied to market
+          performance.</p>
+      </div>
+      <div class="content-section">
+        <h2 id="how-to-use">How to use this calculator</h2>
+        <ol>
+          <li>Enter your lump sum (retirement corpus).</li>
+          <li>Input the expected annual return.</li>
+          <li>Set the number of years income must last.</li>
+          <li>Read the monthly payout, total payout and interest earned.</li>
+        </ol>
+      </div>
+      <div class="content-section tips-box">
+        <h2>Pro tips</h2>
+        <ul>
+          <li>Be conservative with the return during withdrawal phase — 5–6% is prudent.</li>
+          <li>Add inflation: a fixed payout buys less every year. Consider an inflation-indexed withdrawal.</li>
+          <li>Keep 2–3 years of expenses in cash to avoid selling investments in a downturn.</li>
+        </ul>
+      </div>
+      <div class="content-section">
+        <h2 id="faq">Frequently asked questions</h2>
+        <div class="faq-item">
+          <div class="faq-q">How much can I withdraw per month?<span class="arrow">&#9654;</span></div>
+          <div class="faq-a">With a 4% rule, divide your corpus by 300 for a rough monthly figure. This calculator gives
+            the exact amount for your specific return and time horizon.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">What is a lifetime annuity?<span class="arrow">&#9654;</span></div>
+          <div class="faq-a">A lifetime annuity pays a guaranteed income until death in exchange for your corpus. It
+            protects against outliving savings but usually offers lower income than a managed withdrawal plan.</div>
+        </div>
+      </div>
+      <div class="content-section">
+        <h2>Related calculators</h2>
+        <div class="related-grid"><a class="related-card" href="annuity-calculator.html"><span
+              class="related-icon">📅</span><span>Annuity</span></a><a class="related-card"
+            href="retirement-calculator.html"><span class="related-icon">🏖️</span><span>Retirement</span></a><a
+            class="related-card" href="pension-calculator.html"><span
+              class="related-icon">👵</span><span>Pension</span></a><a class="related-card"
+            href="present-value-calculator.html"><span class="related-icon">⏪</span><span>Present Value</span></a></div>
+      </div>
+      <!--SEO-CONTENT-END-->
+    </main>
   </div>
-</section>
 
-<div class="layout">
-  <div id="siteSidebar"></div>
+  <div id="siteFooter"></div>
 
-  <main class="main-content">
-    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Annuity Payout Calculator</div>
-    <h1 class="page-title">Annuity Payout Calculator</h1>
-    <p class="page-subtitle">Convert a lump sum into fixed monthly income for a chosen period.</p>
-
-    <div class="card">
-      <h2>Payout Details</h2>
-      <div class="form-grid">
-        <div class="form-group">
-          <label for="lump">Lump Sum Amount</label>
-          <div class="input-wrap">
-            <span class="prefix">$</span>
-            <input type="number" id="lump" value="5000000" min="0" step="100000">
-          </div>
-          <input type="range" id="lumpRange" min="100000" max="100000000" step="100000" value="5000000">
-        </div>
-
-        <div class="form-group">
-          <label for="rate">Annual Return</label>
-          <div class="input-wrap">
-            <span class="suffix">%</span>
-            <input type="number" id="rate" value="6" min="0" max="20" step="0.5">
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="years">Payout Period (years)</label>
-          <div class="input-wrap">
-            <span class="suffix">yrs</span>
-            <input type="number" id="years" value="20" min="1" max="50" step="1">
-          </div>
-        </div>
-      </div>
-      <div class="form-actions">
-        <button class="btn btn-primary" id="calculateBtn" type="button">Calculate</button>
-        <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
-      </div>
-    </div>
-
-    <div class="result-panel" id="resultPanel">
-      <h3 id="resultLabel">Monthly Payout</h3>
-      <div class="result-main" id="resultMain">—</div>
-      <div class="result-grid">
-        <div class="result-item"><div class="label">Total Payouts</div><div class="value positive" id="rTotal">—</div></div>
-        <div class="result-item"><div class="label">Interest Earned</div><div class="value positive" id="rInterest">—</div></div>
-        <div class="result-item"><div class="label">Payout Years</div><div class="value" id="rYears">—</div></div>
-      </div>
-    </div>
-
-    <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
-
-    <div class="content-section">
-      <h2>How the payout works</h2>
-      <p>A lump sum of 5,000,000 at 6% over 20 years pays about <strong>35,700 monthly</strong> &mdash; roughly 8,500,000 in total. The extra 3,500,000 is the interest earned by the money still invested, which is exactly what makes the income last the full period.</p>
-    </div>
-
-    <div class="content-section">
-      <h2>Annuity Payout FAQ</h2>
-      <div class="faq-item">
-        <div class="faq-q">What happens if I outlive the payout period?<span class="arrow">&#9654;</span></div>
-        <div class="faq-a">With a fixed-period annuity the payments stop when the period ends. A lifetime annuity pays until death but typically pays less per month &mdash; a classic trade-off between certainty and income.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Should I buy an annuity or manage the money myself?<span class="arrow">&#9654;</span></div>
-        <div class="faq-a">Annuities remove market risk and the risk of outliving savings, but they lock your money and often carry fees. Compare the payout here with what you could safely withdraw yourself.</div>
-      </div>
-    </div>
-  </main>
-</div>
-
-<div id="siteFooter"></div>
-
-<script>
-  window.calcConfig = {
-    type: 'annuity-payout',
-    defaults: { lump: 5000000, rate: 6, years: 20 }
-  };
-</script>
-<script src="js/currency.js"></script>
-<script src="js/seo-content.js"></script>
-<script src="js/common.js"></script>
-<script src="js/retirement.js"></script>
+  <script>
+    window.calcConfig = {
+      type: 'annuity-payout',
+      defaults: { lump: 5000000, rate: 6, years: 20 }
+    };
+  </script>
+  <script src="js/currency.js"></script>
+  <script src="js/seo-content.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/retirement.js"></script>
 </body>
+
 </html>
