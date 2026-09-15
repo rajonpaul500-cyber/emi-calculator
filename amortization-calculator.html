@@ -13,25 +13,37 @@
   <script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Amortization Calculator - Full Loan Schedule with Extra Payments | EMI Master</title>
-  <meta name="description" content="Generate a full amortization schedule for any loan. See monthly principal, interest, extra payments and remaining balance for every payment period.">
-  <meta name="keywords" content="amortization calculator, amortization schedule, loan schedule, principal and interest breakdown">
+  <title>Amortization Calculator - Free Loan &amp; Mortgage Schedule with Extra Payments | EMI Master</title>
+  <meta name="description" content="Free amortization calculator and schedule generator (calculator.net style). Calculate monthly loan payments, see principal &amp; interest breakdown with interactive donut &amp; area charts, and model extra payments to pay off debt early.">
+  <meta name="keywords" content="amortization calculator, amortization schedule, loan amortization schedule, mortgage amortization calculator with extra payments, monthly amortization schedule, early payoff calculator, loan payment calculator, principal and interest calculator, excel amortization schedule">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://emimaster.com/amortization-calculator.html">
-  <meta property="og:title" content="Amortization Calculator | EMI Master">
-  <meta property="og:description" content="Full amortization schedule for any loan with extra payments.">
+  <meta property="og:title" content="Amortization Calculator - Free Loan &amp; Mortgage Schedule | EMI Master">
+  <meta property="og:description" content="Generate a complete amortization schedule for any mortgage or loan. Interactive charts, extra payment models, and instant CSV download.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://emimaster.com/amortization-calculator.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Amortization Calculator - Loan Schedule with Extra Payments">
+  <meta name="twitter:description" content="Calculate loan amortization, see principal vs interest donut charts, and calculate how extra payments shave years off your loan.">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "EMI Master Amortization Calculator",
     "url": "https://emimaster.com/amortization-calculator.html",
-    "description": "Free amortization schedule calculator showing principal, interest, extra payments and balance for every payment period.",
+    "description": "Free loan amortization schedule calculator showing principal, interest, extra payments, visual charts, and remaining balance for every payment period.",
     "applicationCategory": "FinanceApplication",
     "operatingSystem": "Any",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "featureList": [
+      "Annual and monthly loan amortization schedules",
+      "Interactive principal vs interest donut pie chart",
+      "Remaining balance vs cumulative interest area curves",
+      "Extra payments engine (monthly, annual, one-time lump sum)",
+      "Flexible payment frequencies: monthly, bi-weekly, weekly, semi-monthly",
+      "Exact calendar payoff date calculation",
+      "CSV export and print-ready amortization tables"
+    ]
   }
   </script>
   <script type="application/ld+json">
@@ -41,18 +53,34 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "What is amortization?",
+        "name": "What is an amortization schedule?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Amortization is the process of paying off a loan in equal installments over a fixed period. Each payment covers the interest for that period first, then reduces the principal balance."
+          "text": "An amortization schedule is a complete table of periodic loan payments showing the amount of principal and the amount of interest that comprise each payment until the loan is paid off at the end of its term."
         }
       },
       {
         "@type": "Question",
-        "name": "How do extra payments change the amortization schedule?",
+        "name": "Why is interest front-loaded in an amortization schedule?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Extra payments reduce the principal directly. This lowers the interest charged in future months and shortens the total number of payments, as shown in the schedule above."
+          "text": "Interest is calculated on the remaining loan balance. In the early years of a loan, the principal balance is at its highest, so the interest charge is highest. As you pay down the principal over time, the interest portion shrinks and the principal portion increases."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do extra payments affect my amortization schedule?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Extra payments go directly toward reducing your principal balance. Because subsequent interest is charged on a smaller balance, extra payments dramatically accelerate payoff, saving thousands or tens of thousands of dollars in interest and cutting years off your loan."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is bi-weekly payment better than monthly payment?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Paying half of your monthly payment every two weeks results in 26 bi-weekly payments per year, which equals 13 full monthly payments instead of 12. That extra payment each year can shave 4 to 6 years off a 30-year mortgage without stressing your monthly budget."
         }
       }
     ]
@@ -68,7 +96,7 @@
 <section class="hero hero-compact">
   <div class="container">
     <h1>Amortization Calculator</h1>
-    <p>Generate a complete month-by-month loan schedule for any loan.</p>
+    <p>Generate a complete loan amortization schedule with interactive charts, extra payment modeling, and instant payoff dates.</p>
   </div>
 </section>
 
@@ -77,129 +105,326 @@
 
   <main class="main-content">
     <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Amortization Calculator</div>
-    <h1 class="page-title">Amortization Schedule Calculator</h1>
-    <p class="page-subtitle">See every payment broken into principal, interest and balance.</p>
+    <h1 class="page-title">Loan Amortization Calculator</h1>
+    <p class="page-subtitle">Understand every payment &mdash; see exactly how much goes to principal vs. interest and how extra payments accelerate debt freedom.</p>
 
-    <div class="card">
-      <h2>Loan Details</h2>
+    <!-- Popular US Loan Presets Bar -->
+    <div class="loan-preset-bar">
+      <span style="font-size:0.82rem;font-weight:700;color:var(--text-muted);display:inline-flex;align-items:center;margin-right:4px;">Popular Presets:</span>
+      <button type="button" class="preset-pill-btn active" data-preset="mortgage30">🏠 30-Yr Mortgage</button>
+      <button type="button" class="preset-pill-btn" data-preset="mortgage15">🏡 15-Yr Mortgage</button>
+      <button type="button" class="preset-pill-btn" data-preset="auto5">🚗 5-Yr Auto Loan</button>
+      <button type="button" class="preset-pill-btn" data-preset="personal3">💳 3-Yr Personal Loan</button>
+    </div>
+
+    <!-- Loan Details Input Card -->
+    <div class="card" id="amortizationInputCard">
+      <h2>Loan Parameters</h2>
+      
       <div class="form-grid">
-        <div class="form-group">
-          <label for="amount">Loan Amount ($)</label>
+        <!-- Loan Amount -->
+        <div class="form-group" style="grid-column: 1 / -1;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+            <label for="amount" style="margin-bottom:0;">Loan Amount ($)</label>
+            <span style="font-size:0.82rem;color:var(--text-muted);">Principal balance borrowed</span>
+          </div>
           <div class="input-wrap">
             <span class="prefix">$</span>
-            <input type="number" id="amount" value="500000" min="0" step="10000">
+            <input type="number" id="amount" value="400000" min="1000" step="5000">
           </div>
-          <input type="range" id="amountRange" min="10000" max="10000000" step="10000" value="500000">
+          <input type="range" id="amountRange" min="5000" max="1500000" step="5000" value="400000">
         </div>
 
+        <!-- Loan Term (Years & Months) -->
+        <div class="form-group">
+          <label for="termYears">Loan Term</label>
+          <div class="form-duo">
+            <div class="input-wrap">
+              <span class="suffix">yrs</span>
+              <input type="number" id="termYears" value="30" min="0" max="40" step="1">
+            </div>
+            <div class="input-wrap">
+              <span class="suffix">mos</span>
+              <input type="number" id="termMonths" value="0" min="0" max="11" step="1">
+            </div>
+          </div>
+          <input type="range" id="termYearsRange" min="1" max="40" step="1" value="30">
+          <div class="pill-options" style="margin-top:6px;">
+            <button type="button" class="pill-opt term-opt-pill active" data-term="30">30 Yrs</button>
+            <button type="button" class="pill-opt term-opt-pill" data-term="20">20 Yrs</button>
+            <button type="button" class="pill-opt term-opt-pill" data-term="15">15 Yrs</button>
+            <button type="button" class="pill-opt term-opt-pill" data-term="10">10 Yrs</button>
+            <button type="button" class="pill-opt term-opt-pill" data-term="5">5 Yrs</button>
+          </div>
+        </div>
+
+        <!-- Interest Rate -->
         <div class="form-group">
           <label for="rate">Interest Rate (% per annum)</label>
           <div class="input-wrap">
             <span class="suffix">%</span>
-            <input type="number" id="rate" value="8.5" min="0" max="30" step="0.1">
+            <input type="number" id="rate" value="6.5" min="0.1" max="30" step="0.05">
           </div>
-          <input type="range" id="rateRange" min="0.5" max="30" step="0.1" value="8.5">
+          <input type="range" id="rateRange" min="1" max="20" step="0.05" value="6.5">
         </div>
 
+        <!-- Start Date (Month & Year) -->
         <div class="form-group">
-          <label for="term">Loan Term (years)</label>
-          <div class="input-wrap">
-            <span class="suffix">yrs</span>
-            <input type="number" id="term" value="5" min="1" max="30" step="1">
+          <label for="startMonth">Loan Start Date</label>
+          <div class="form-duo">
+            <select id="startMonth" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--card-bg);color:var(--text);font-size:0.9rem;"></select>
+            <select id="startYear" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--card-bg);color:var(--text);font-size:0.9rem;"></select>
           </div>
-          <input type="range" id="termRange" min="1" max="30" step="1" value="5">
         </div>
 
+        <!-- Payment Frequency (Pay Back) -->
         <div class="form-group">
-          <label for="compound">Compound</label>
-          <select id="compound">
-            <option value="monthly" selected>Monthly</option>
+          <label for="payback">Payment Frequency</label>
+          <select id="payback" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--card-bg);color:var(--text);font-size:0.9rem;">
+            <option value="monthly" selected>Every Month (Monthly - 12/yr)</option>
+            <option value="biweekly">Every 2 Weeks (Bi-weekly - 26/yr)</option>
+            <option value="weekly">Every Week (Weekly - 52/yr)</option>
+            <option value="semi-monthly">Twice a Month (Semi-monthly - 24/yr)</option>
+            <option value="quarterly">Every Quarter (Quarterly - 4/yr)</option>
+            <option value="annually">Every Year (Annually - 1/yr)</option>
+          </select>
+        </div>
+
+        <!-- Compounding Frequency -->
+        <div class="form-group">
+          <label for="compound">Compound Frequency</label>
+          <select id="compound" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--card-bg);color:var(--text);font-size:0.9rem;">
+            <option value="monthly" selected>Monthly (Standard US Loans &amp; Mortgages)</option>
+            <option value="semi-annually">Semi-annually (Canadian Mortgages)</option>
             <option value="quarterly">Quarterly</option>
-            <option value="semi-annually">Semi-annually</option>
             <option value="annually">Annually</option>
-            <option value="continuous">Continuous</option>
+            <option value="continuous">Continuous Compounding</option>
           </select>
         </div>
+      </div>
 
-        <div class="form-group">
-          <label for="payback">Pay Back</label>
-          <select id="payback">
-            <option value="monthly" selected>Every Month</option>
-            <option value="semi-monthly">Semi-monthly</option>
-            <option value="biweekly">Bi-weekly</option>
-            <option value="weekly">Every Week</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="monthlyExtra">Extra Monthly Payment ($)</label>
-          <div class="input-wrap">
-            <span class="prefix">$</span>
-            <input type="number" id="monthlyExtra" value="0" min="0" step="500" placeholder="e.g. 2000">
+      <!-- Extra Payments Section (Accelerated Early Payoff) -->
+      <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border);">
+        <h3 style="font-size:1.02rem;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;">
+          <span>&#9889;</span> Optional Extra Payments (Calculate Interest &amp; Time Saved)
+        </h3>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="monthlyExtra">Monthly Extra Payment</label>
+            <div class="input-wrap">
+              <span class="prefix">$</span>
+              <input type="number" id="monthlyExtra" value="0" min="0" step="50" placeholder="0">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="annualExtra">Annual Extra Payment (every 12 mos)</label>
+            <div class="input-wrap">
+              <span class="prefix">$</span>
+              <input type="number" id="annualExtra" value="0" min="0" step="500" placeholder="0">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="oneTimeExtra">One-Time Lump Sum Payment</label>
+            <div class="form-duo">
+              <div class="input-wrap">
+                <span class="prefix">$</span>
+                <input type="number" id="oneTimeExtra" value="0" min="0" step="1000" placeholder="0">
+              </div>
+              <div class="input-wrap">
+                <span class="suffix">Pmt #</span>
+                <input type="number" id="oneTimePeriod" value="12" min="1" max="480" step="1">
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="form-actions">
-        <button class="btn btn-primary" id="calculateBtn" type="button">Calculate</button>
+
+      <div class="form-actions" style="margin-top:20px;">
+        <button class="btn btn-primary" id="calculateBtn" type="button">Calculate Schedule</button>
         <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
       </div>
     </div>
 
-    <div class="result-panel" id="resultPanel">
-      <h3 id="resultLabel">Monthly Payment</h3>
-      <div class="result-main" id="resultMain">—</div>
-      <div class="result-grid">
-        <div class="result-item"><div class="label">Loan Amount</div><div class="value" id="loanAmountOut">—</div></div>
-        <div class="result-item"><div class="label">Total Payment</div><div class="value" id="totalPaymentOut">—</div></div>
-        <div class="result-item"><div class="label">Total Interest</div><div class="value negative" id="totalInterestOut">—</div></div>
+    <!-- Extra Savings Celebratory Callout Banner -->
+    <div id="extraSavingsCallout" class="extra-savings-callout" style="display:none;"></div>
+
+    <!-- Hero Result Panel -->
+    <div class="result-panel show" id="resultPanel">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:6px;">
+        <h3 id="resultLabel" style="margin:0;">Monthly Payment</h3>
+        <span id="payoffDateBadge" style="background:rgba(255,255,255,0.2);padding:4px 12px;border-radius:14px;font-size:0.82rem;font-weight:600;letter-spacing:0;">Payoff Date: —</span>
       </div>
-      <div class="payoff-note" id="payoffNote"></div>
+      <div class="result-main" id="resultMain">—</div>
+      
+      <!-- Summary Grid of Key Metrics -->
+      <div class="result-grid">
+        <div class="result-item"><div class="label">Loan Amount (Principal)</div><div class="value" id="outLoanAmount">—</div></div>
+        <div class="result-item"><div class="label">Total Interest Paid</div><div class="value negative" id="outTotalInterest">—</div></div>
+        <div class="result-item"><div class="label">Total Cost of Loan</div><div class="value" id="outTotalPayments">—</div></div>
+        <div class="result-item"><div class="label">Interest Rate</div><div class="value" id="outInterestRate">—</div></div>
+        <div class="result-item"><div class="label">Total Payments</div><div class="value" id="outTotalPeriods">—</div></div>
+        <div class="result-item"><div class="label">Estimated Payoff</div><div class="value positive" id="outPayoffDate">—</div></div>
+      </div>
+
       <div class="result-actions">
-        <button id="downloadCsv" type="button">&#11015; Download CSV</button>
+        <button id="downloadCsv" type="button">&#11015; Download CSV Schedule</button>
+        <button id="printScheduleBtn" type="button">&#128438; Print Schedule</button>
+        <button id="copySummaryBtn" type="button">&#128203; Copy Summary</button>
       </div>
     </div>
 
-    <div class="chart-box">
-      <div class="chart-title">Principal vs Interest by Year</div>
-      <canvas id="resultChart" aria-label="Result chart"></canvas>
+    <!-- Interactive Donut / Pie Chart & Financial Breakdown Card -->
+    <div class="mortgage-donut-grid">
+      <div class="mortgage-donut-wrap">
+        <h3 style="font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:12px;">Principal vs. Interest</h3>
+        <canvas id="amortizationDonutChart" class="mortgage-donut-canvas" width="240" height="240" aria-label="Amortization loan breakdown pie chart"></canvas>
+      </div>
+
+      <div class="mortgage-breakdown-list">
+        <!-- Principal -->
+        <div class="mortgage-breakdown-item">
+          <div class="mortgage-breakdown-header">
+            <span class="mortgage-breakdown-label"><span class="color-dot" style="background:#2563eb;"></span> Principal (Original Loan)</span>
+            <span class="mortgage-breakdown-val"><span id="breakdownPrinVal">—</span><span class="mortgage-breakdown-pct" id="breakdownPrinPct">(0%)</span></span>
+          </div>
+          <div class="mortgage-breakdown-track"><div class="mortgage-breakdown-fill" id="breakdownPrinFill" style="background:#2563eb;width:0%;"></div></div>
+        </div>
+
+        <!-- Interest -->
+        <div class="mortgage-breakdown-item">
+          <div class="mortgage-breakdown-header">
+            <span class="mortgage-breakdown-label"><span class="color-dot" style="background:#f59e0b;"></span> Total Interest Paid</span>
+            <span class="mortgage-breakdown-val"><span id="breakdownIntVal">—</span><span class="mortgage-breakdown-pct" id="breakdownIntPct">(0%)</span></span>
+          </div>
+          <div class="mortgage-breakdown-track"><div class="mortgage-breakdown-fill" id="breakdownIntFill" style="background:#f59e0b;width:0%;"></div></div>
+        </div>
+
+        <!-- Extra Payments (if present) -->
+        <div class="mortgage-breakdown-item" id="breakdownExtraRow" style="display:none;">
+          <div class="mortgage-breakdown-header">
+            <span class="mortgage-breakdown-label"><span class="color-dot" style="background:#10b981;"></span> Extra Payments</span>
+            <span class="mortgage-breakdown-val"><span id="breakdownExtraVal">—</span><span class="mortgage-breakdown-pct" id="breakdownExtraPct">(0%)</span></span>
+          </div>
+          <div class="mortgage-breakdown-track"><div class="mortgage-breakdown-fill" id="breakdownExtraFill" style="background:#10b981;width:0%;"></div></div>
+        </div>
+      </div>
     </div>
+
+    <!-- Visual Charts Card (Balance Curves & Annual Bar) -->
+    <div class="chart-box">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
+        <div class="chart-title" style="margin:0;">Visual Amortization Analysis</div>
+        <div class="tab-switcher">
+          <button type="button" id="tabChartBalance" class="tab-btn active">Balance vs. Cumulative Interest</button>
+          <button type="button" id="tabChartPI" class="tab-btn">Principal vs. Interest by Year</button>
+        </div>
+      </div>
+
+      <div id="chartWrapBalance">
+        <canvas id="balanceCurveChart" aria-label="Loan balance curve chart" style="width:100%;height:240px;display:block;"></canvas>
+      </div>
+      <div id="chartWrapPI" style="display:none;">
+        <canvas id="annualBarChart" aria-label="Principal and interest bar chart" style="width:100%;height:240px;display:block;"></canvas>
+      </div>
+    </div>
+
     <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
 
+    <!-- Complete Amortization Schedule Card -->
     <div class="card">
-      <h2>Amortization Schedule</h2>
-      <p>Full breakdown for every payment period. <span id="scheduleCount" style="font-weight:700;color:var(--primary);"></span></p>
-      <div class="table-wrap">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:14px;">
+        <div>
+          <h2 style="margin:0 0 4px;">Amortization Schedule</h2>
+          <p style="margin:0;color:var(--text-muted);font-size:0.88rem;">See every payment broken into principal, interest, extra, and balance. <span id="scheduleCount" style="font-weight:700;color:var(--primary);"></span></p>
+        </div>
+        
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+          <div class="schedule-search-wrap">
+            <span class="schedule-search-icon">&#128269;</span>
+            <input type="text" id="scheduleSearchInput" class="schedule-search-input" placeholder="Filter by year or date...">
+          </div>
+          <div class="tab-switcher" style="margin-bottom:0;">
+            <button type="button" id="tabAnnualSchedule" class="tab-btn active">Annual Schedule</button>
+            <button type="button" id="tabMonthlySchedule" class="tab-btn">Monthly Schedule</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Annual Schedule Wrap -->
+      <div id="annualScheduleWrap" class="table-wrap">
         <table>
           <thead>
             <tr>
-              <th>Month</th>
+              <th>Year</th>
+              <th class="num">Beginning Balance</th>
+              <th class="num">Total Payment</th>
+              <th class="num">Principal</th>
+              <th class="num">Interest</th>
+              <th class="num">Extra Paid</th>
+              <th class="num">Ending Balance</th>
+              <th class="num">Total Interest to Date</th>
+            </tr>
+          </thead>
+          <tbody id="annualScheduleBody"></tbody>
+        </table>
+      </div>
+
+      <!-- Monthly / Period Schedule Wrap -->
+      <div id="monthlyScheduleWrap" class="table-wrap" style="display:none;max-height:550px;overflow-y:auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Date</th>
               <th class="num">Payment</th>
               <th class="num">Principal</th>
               <th class="num">Interest</th>
-              <th class="num">Extra</th>
-              <th class="num">Balance</th>
+              <th class="num">Extra Paid</th>
+              <th class="num">Ending Balance</th>
+              <th class="num">Total Interest to Date</th>
             </tr>
           </thead>
-          <tbody id="scheduleBody"></tbody>
-          <tfoot id="scheduleFoot"></tfoot>
+          <tbody id="monthlyScheduleBody"></tbody>
         </table>
       </div>
     </div>
 
+    <!-- US In-depth Guide & FAQ Section -->
     <div class="content-section">
-      <h2>How amortization works</h2>
-      <p>Each payment first covers the interest that accrued on the remaining balance, and the rest reduces the principal. Early in the schedule most of your payment is interest; near the end most of it is principal. Extra payments accelerate this by reducing the balance faster, which is why the schedule above ends early when extras are added.</p>
+      <h2>How Amortization Works: The Math Behind Your Loan</h2>
+      <p>Amortization is the process of spreading out a loan into a series of equal periodic payments. While each periodic payment is typically identical (on a fixed-rate loan), the internal ratio between principal and interest shifts continuously over the life of the debt.</p>
+      
+      <h3>The Front-Loaded Interest Phenomenon</h3>
+      <p>In the beginning of your loan, your outstanding principal balance is at its absolute highest. Because interest is calculated as a percentage of the remaining balance each period (<code>Interest = Current Balance &times; Periodic Rate</code>), the majority of your early payments go purely to the bank for finance charges. As the principal drops, less interest accrues each month, allowing a steadily increasing percentage of your payment to build equity.</p>
+    </div>
+
+    <div class="content-section">
+      <h2>The Real Power of Extra Payments</h2>
+      <p>Any payment you make above and beyond your scheduled payment is applied <strong>100% directly toward reducing your principal balance</strong>. This has a compounding domino effect:</p>
+      <ul style="margin:12px 0 16px 20px;line-height:1.7;">
+        <li><strong>Immediate Balance Reduction:</strong> Lowers the base on which all future interest is calculated.</li>
+        <li><strong>Permanent Interest Elimination:</strong> You never have to pay interest on that paid-off portion for all remaining years of the loan.</li>
+        <li><strong>Shortened Loan Term:</strong> Even an extra $100/month on a typical $400,000, 30-year fixed mortgage at 6.5% can pay off your home <strong>over 4 years earlier</strong> and save <strong>more than $60,000</strong> in interest!</li>
+      </ul>
     </div>
 
     <div class="content-section">
       <h2>Amortization Calculator FAQ</h2>
       <div class="faq-item">
-        <div class="faq-q">What is the difference between amortization and interest rate?<span class="arrow">&#9654;</span></div>
-        <div class="faq-a">The interest rate determines how much interest accrues. Amortization describes the payment schedule that gradually pays down the principal while covering that interest.</div>
+        <div class="faq-q">What is the difference between an amortization schedule and a payment schedule?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">A basic payment schedule only lists due dates and the total amount owed. An <strong>amortization schedule</strong> goes deeper, breaking down each payment into its exact principal and interest portions, tracking your remaining balance, and displaying cumulative interest paid over the life of the loan.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">Can I download the amortization schedule?<span class="arrow">&#9654;</span></div>
-        <div class="faq-a">Yes, click the "Download CSV" button in the result panel to export the full schedule to Excel or Google Sheets.</div>
+        <div class="faq-q">Can I download or print this amortization schedule?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">Yes! You can click <strong>Download CSV Schedule</strong> to export the full table for Microsoft Excel or Google Sheets, or click <strong>Print Schedule</strong> for a clean, ad-free printable document.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Are mortgage interest payments tax-deductible in the US?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">In the United States, homeowners who itemize their tax deductions on Schedule A (Form 1040) can typically deduct interest paid on qualified home acquisition debt up to $750,000 (or $375,000 if married filing separately). Consult your CPA or tax professional for advice specific to your financial situation.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What happens if I make bi-weekly mortgage payments?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">When you switch to bi-weekly payments (paying half of your monthly payment every two weeks), you make 26 half-payments a year. That equals 13 full payments per year instead of 12. That single extra monthly payment per year accelerates equity growth and can shorten a 30-year mortgage by 4 to 6 years!</div>
       </div>
     </div>
   
@@ -207,31 +432,75 @@
 <!-- =====================================================
      SEO CONTENT (pre-rendered static) - do not remove
      ===================================================== -->
-<div class="content-section quick-facts"><div class="fact-chip"><strong>Amortize:</strong> Repay in equal instalments</div><div class="fact-chip"><strong>Schedule:</strong> Month-by-month breakdown</div><div class="fact-chip"><strong>Equity:</strong> Balance minus interest</div><div class="fact-chip"><strong>Extra:</strong> Payment = term &amp; interest cut</div></div>
+<div class="content-section quick-facts"><div class="fact-chip"><strong>Amortize:</strong> Repay in equal installments</div><div class="fact-chip"><strong>Schedule:</strong> Month-by-month breakdown</div><div class="fact-chip"><strong>Equity:</strong> Property value minus balance</div><div class="fact-chip"><strong>Extra:</strong> 100% principal = term &amp; interest cut</div></div>
 <div class="content-section toc-card"><h2>On this page</h2><ol class="toc"><li><a href="#reading-an-amortization-schedule">Reading an amortization schedule</a></li><li><a href="#the-power-of-extra-payments">The power of extra payments</a></li><li><a href="#how-to-use">How to use this calculator</a></li><li><a href="#faq">Frequently asked questions</a></li></ol></div>
 <div class="content-section"><h2>Amortization Calculator — your complete loan repayment schedule</h2><p>An amortization schedule is the month-by-month map of your loan: how much of each payment goes to principal, how much to interest, and your remaining balance. This calculator produces the full schedule instantly and shows how extra payments shorten the term and slash total interest.</p></div>
 <div class="content-section"><h2 id="reading-an-amortization-schedule">Reading an amortization schedule</h2><p>Each row shows payment number, EMI, principal portion, interest portion and outstanding balance.</p><p>Early rows are interest-heavy; later rows flip to principal-heavy. Interest is calculated on the declining balance each month.</p><p>The total interest is the sum of the interest column — this is what costs more than double on long loans.</p></div>
-<div class="content-section"><h2 id="the-power-of-extra-payments">The power of extra payments</h2><p>Add just 5% extra to each EMI and a 20-year loan finishes about 3 years early, saving 10–15% of total interest.</p><p>A single yearly lump sum (like a bonus) applied to principal has an even larger effect because it avoids future interest on that amount.</p><p>Two strategies to compare: reduce EMI (recast) vs shorten term. Shortening term always saves more interest.</p></div>
-<div class="content-section"><h2 id="how-to-use">How to use this calculator</h2><ol><li>Enter the loan amount.</li><li>Add the annual interest rate.</li><li>Choose the loan term in years.</li><li>Optionally add an extra monthly payment.</li><li>Scroll the schedule to follow your balance to zero — and see interest saved.</li></ol></div>
-<div class="content-section tips-box"><h2>Pro tips</h2><ul><li>Use the schedule to find your break-even month for refinancing.</li><li>Make sure extra payments are applied to principal, not 'paid ahead'.</li><li>For a mortgage, extra payments before year 10 save the most.</li></ul></div>
-<div class="content-section"><h2 id="faq">Frequently asked questions</h2><div class="faq-item"><div class="faq-q">What is an amortization schedule used for?<span class="arrow">&#9654;</span></div><div class="faq-a">It shows the exact repayment path of a loan, helping borrowers see equity growth, plan prepayments and compare loan offers by total interest.</div></div><div class="faq-item"><div class="faq-q">Does the EMI change during the loan?<span class="arrow">&#9654;</span></div><div class="faq-a">For fixed-rate loans the EMI is constant, but the principal-interest split changes each month. For floating-rate loans, the EMI changes when rates reset.</div></div></div>
+<div class="content-section"><h2 id="the-power-of-extra-payments">The power of extra payments</h2><p>Add just 5% extra to each payment and a 20-year loan finishes about 3 years early, saving 10–15% of total interest.</p><p>A single yearly lump sum (like a tax refund or work bonus) applied to principal has an even larger effect because it avoids future interest on that amount.</p><p>Two strategies to compare: reduce monthly payment (recast) vs shorten term. Shortening term always saves more interest.</p></div>
+<div class="content-section"><h2 id="how-to-use">How to use this calculator</h2><ol><li>Select a popular loan preset (30-Yr Mortgage, 15-Yr Mortgage, Auto Loan, Personal Loan) or enter custom parameters.</li><li>Enter the loan amount and interest rate.</li><li>Choose the loan term in years and months.</li><li>Select your payment frequency (Monthly, Bi-weekly, Weekly) and compounding method.</li><li>Optionally add monthly, annual, or one-time extra payments to see your interest savings and earlier payoff date.</li><li>Examine the interactive Donut chart, Balance vs. Interest curves, and Amortization tables.</li></ol></div>
+<div class="content-section tips-box"><h2>Pro tips</h2><ul><li>Use the schedule to find your break-even month for refinancing.</li><li>Make sure extra payments are applied to principal, not 'paid ahead'.</li><li>For a 30-year fixed mortgage, extra payments made in the first 5 to 7 years save the most interest over time.</li></ul></div>
+<div class="content-section"><h2 id="faq">Frequently asked questions</h2><div class="faq-item"><div class="faq-q">What is an amortization schedule used for?<span class="arrow">&#9654;</span></div><div class="faq-a">It shows the exact repayment path of a loan, helping borrowers see equity growth, plan prepayments and compare loan offers by total interest.</div></div><div class="faq-item"><div class="faq-q">Does the payment change during the loan?<span class="arrow">&#9654;</span></div><div class="faq-a">For fixed-rate loans the total payment is constant, but the principal-interest split changes each month. For adjustable-rate loans, the payment changes when interest rates reset.</div></div></div>
 <div class="content-section"><h2>Related calculators</h2><div class="related-grid"><a class="related-card" href="emi-calculator.html"><span class="related-icon">💹</span><span>EMI Calculator</span></a><a class="related-card" href="mortgage-calculator.html"><span class="related-icon">🏡</span><span>Mortgage</span></a><a class="related-card" href="loan-payoff.html"><span class="related-icon">⏱️</span><span>Loan Payoff</span></a><a class="related-card" href="mortgage-payoff.html"><span class="related-icon">🏠</span><span>Mortgage Payoff</span></a></div></div>
 <!--SEO-CONTENT-END-->
 </main>
 </div>
 
-<div id="siteFooter"></div>
+<div id="siteFooter">
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>EMI Master</h4>
+        <p>Free, instant, and private online calculators for mortgages, loans, investments, retirement, and mathematics. Your inputs never leave your browser.</p>
+        <p><a href="sitemap.html"><strong>&rarr; All 50+ Calculators (Directory)</strong></a></p>
+      </div>
+      <div class="footer-col">
+        <h4>Popular Calculators</h4>
+        <ul>
+          <li><a href="mortgage-calculator.html">Mortgage Calculator</a></li>
+          <li><a href="amortization-calculator.html">Amortization Calculator</a></li>
+          <li><a href="emi-calculator.html">EMI Calculator</a></li>
+          <li><a href="home-loan.html">Home Loan Calculator</a></li>
+          <li><a href="car-loan.html">Car Loan Calculator</a></li>
+          <li><a href="personal-loan.html">Personal Loan Calculator</a></li>
+          <li><a href="compound-interest-calculator.html">Compound Interest</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Loans &amp; Real Estate</h4>
+        <ul>
+          <li><a href="refinance-calculator.html">Refinance Calculator</a></li>
+          <li><a href="fha-loan.html">FHA Loan Calculator</a></li>
+          <li><a href="va-loan.html">VA Mortgage Calculator</a></li>
+          <li><a href="home-equity-loan.html">Home Equity Loan</a></li>
+          <li><a href="heloc-calculator.html">HELOC Calculator</a></li>
+          <li><a href="loan-payoff.html">Loan Payoff Calculator</a></li>
+          <li><a href="house-affordability.html">House Affordability</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Investment &amp; Tools</h4>
+        <ul>
+          <li><a href="investment-calculator.html">Investment Calculator</a></li>
+          <li><a href="retirement-calculator.html">Retirement Calculator</a></li>
+          <li><a href="social-security-calculator.html">Social Security</a></li>
+          <li><a href="scientific-calculator.html">Scientific Calculator</a></li>
+          <li><a href="percentage-calculator.html">Percentage Calculator</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="sitemap.html"><strong>Complete HTML Sitemap</strong></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 EMI Master. All rights reserved. For educational and planning purposes only.
+    </div>
+  </footer>
+</div>
 
-<script>
-  window.calcConfig = {
-    type: 'loan',
-    defaults: { amount: 500000, rate: 8.5, term: 5 }
-  };
-</script>
 <script src="js/currency.js"></script>
 <script src="js/chart.js"></script>
 <script src="js/seo-content.js"></script>
 <script src="js/common.js"></script>
-<script src="js/emi.js"></script>
+<script src="js/amortization-calculator.js"></script>
 </body>
 </html>
+

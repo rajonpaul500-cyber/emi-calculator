@@ -53,7 +53,7 @@ window.SEO_CONTENT = {
         ],
         tips: [
             "A longer tenure lowers your EMI but more than doubles total interest — always compare total cost, not just the monthly number.",
-            "A higher credit score (750+) typically gets you 0.25–0.50% lower interest, saving lakhs over 20 years.",
+            "A higher credit score (750+) typically gets you 0.25–0.50% lower interest, saving tens of thousands over the life of the loan.",
             "Making one extra EMI per year can reduce a 20-year loan by roughly 3–4 years."
         ],
         pros: [
@@ -129,8 +129,8 @@ window.SEO_CONTENT = {
                 title: "How much home loan can you afford?",
                 body: [
                     "The 28/36 rule: keep your housing payment below 28% of gross income, and total debts below 36%.",
-                    "In India, lenders cap your total EMI at 40–50% of net take-home income and usually require a down payment of 15–25%.",
-                    "A common multiplier is 4–5× your annual income. For a $10 lakh annual income, expect eligibility around $40–50 lakh."
+                    "In the US, mortgage lenders generally follow the 28/36 qualifying ratio rule and require down payments ranging from 3% to 20%.",
+                    "A common multiplier is 4–5× your annual income. For a $100,000 annual income, expect home purchasing power around $350,000 to $450,000."
                 ]
             }
         ],
@@ -142,8 +142,8 @@ window.SEO_CONTENT = {
             "Adjust the tenure slider to see how much interest you can save with a shorter term."
         ],
         tips: [
-            "A 0.5% lower rate on a $40L, 20-year loan saves roughly $4–5 lakh in interest.",
-            "Claim tax deductions under 80C and 24(b) to reduce your effective cost.",
+            "A 0.5% lower rate on a $400,000, 30-year loan saves over $40,000 in interest.",
+            "Deduct qualified mortgage interest on IRS Form 1040 Schedule A to lower your tax bill.",
             "If your income grows, use annual bonuses for part-prepayment — it cuts interest massively."
         ],
         pros: [
@@ -616,8 +616,8 @@ window.SEO_CONTENT = {
             {
                 title: "Why starting early beats investing more",
                 body: [
-                    "Investor A invests $5,000/month from age 25 to 35 ($6 lakh total). Investor B invests $5,000/month from 35 to 60 ($15 lakh total). At 10% p.a., A's money grows to about $1.06 crore vs B's $99 lakh — A ends with more despite investing 2.5× less!",
-                    "The first decade of contributions does roughly 60% of the work over a 40-year horizon because every rupee compounds for decades.",
+                    "Investor A invests $5,000/month from age 25 to 35 ($60,000 total). Investor B invests $5,000/month from 35 to 60 ($150,000 total). At 10% p.a., A's money grows to about $1.4 million vs B's $600,000 — A ends with more despite investing 2.5× less!",
+                    "The first decade of contributions does roughly 60% of the work over a 40-year horizon because every dollar compounds for decades.",
                     "This is why financial advisors repeat: start yesterday."
                 ]
             },
@@ -690,7 +690,7 @@ window.SEO_CONTENT = {
                 title: "The math behind the monthly deposit",
                 body: [
                     "Monthly deposit = Goal × r ÷ [(1 + r)^n − 1], where r is the monthly rate and n the number of months.",
-                    "To save $10,00,000 in 5 years at 8%: the deposit is about $13,600/month, not the $16,667/month simple division would suggest — the gap is compounding working for you.",
+                    "To save $250,000 in 5 years at 8%: the deposit is about $13,600/month, not the $16,667/month simple division would suggest — the gap is compounding working for you.",
                     "A 6-month emergency fund (3–6× monthly expenses) is the first goal every planner recommends before investing."
                 ]
             },
@@ -899,8 +899,8 @@ window.SEO_CONTENT = {
                 a: "Reduce debts first (pay off cards), increase your down payment, or choose a cheaper home. Some lenders accept 43–45% DTI with compensating factors like high savings."
             },
             {
-                q: "How much house can I afford with $1 lakh/month income?",
-                a: "Housing budget ≈ $28,000/month. At 6.5% for 20 years with 20% down, that supports roughly a $50,00,000–55,00,000 home."
+                q: "How much house can I afford with $10,000/month income?",
+                a: "Housing budget ≈ $2,800/month (28% front-end ratio). At 6.5% for 30 years with 20% down, that supports roughly a $450,000–$500,000 home."
             }
         ],
         related: [
@@ -1045,9 +1045,9 @@ window.SEO_CONTENT = {
             {
                 title: "SIP: the disciplined investor's tool",
                 body: [
-                    "SIP (Systematic Investment Plan) invests a fixed amount monthly, averaging the purchase price through market ups and downs (rupee-cost averaging).",
-                    "A $10,000/month SIP at 12% for 15 years grows to about $50 lakh — six times more than the $18 lakh invested.",
-                    "Even small delays matter: starting 3 years late on the same plan costs roughly $12 lakh of terminal value."
+                    "SIP (Systematic Investment Plan) invests a fixed amount monthly, averaging the purchase price through market ups and downs (dollar-cost averaging).",
+                    "A $10,000/month SIP at 12% for 15 years grows to about $500,000 — six times more than the $180,000 invested.",
+                    "Even small delays matter: starting 3 years late on the same plan costs roughly $120,000 of terminal value."
                 ]
             },
             {
@@ -1055,7 +1055,7 @@ window.SEO_CONTENT = {
                 body: [
                     "Nominal return is the headline return; real return subtracts inflation to show true purchasing-power growth.",
                     "At 12% nominal with 6% inflation, the real return is about 5.7% — your money grows 5.7% in actual buying power.",
-                    "This calculator shows both, so you can plan a retirement or a goal in today's rupees."
+                    "This calculator shows both, so you can plan a retirement or a goal in today's dollars."
                 ]
             }
         ],
@@ -1106,7 +1106,7 @@ window.SEO_CONTENT = {
                 title: "How SIP returns build up",
                 body: [
                     "Each monthly contribution buys units at that month's NAV (Net Asset Value), naturally averaging your entry price.",
-                    "$5,000/month at 12% for 20 years becomes about $50 lakh against $12 lakh invested — $38 lakh of wealth from market returns.",
+                    "$5,000/month at 12% for 20 years becomes about $500,000 against $120,000 invested — $38 lakh of wealth from market returns.",
                     "CAGR (Compound Annual Growth Rate) is the annualized return: the single number that lets you compare funds fairly."
                 ]
             },
@@ -1166,7 +1166,7 @@ window.SEO_CONTENT = {
                 title: "The reverse compound formula",
                 body: [
                     "Rate = n × [(Maturity ÷ Principal)^(1/(n×years)) − 1] × 100, where n is the compounding frequency per year.",
-                    "To grow $5,00,000 to $10,00,000 in 8 years, you need about 9.05% annual compounding — a rate achievable with a balanced equity fund but not with an FD.",
+                    "To grow $5,00,000 to $250,000 in 8 years, you need about 9.05% annual compounding — a rate achievable with a balanced equity fund but not with an FD.",
                     "Compounding frequency slightly changes the required nominal rate: quarterly compounding needs a lower nominal rate than annual."
                 ]
             },
@@ -1253,7 +1253,7 @@ window.SEO_CONTENT = {
         faqs: [
             {
                 q: "What is time value of money?",
-                a: "A rupee today is worth more than a rupee tomorrow because it can earn interest. TVM accounts for this when comparing cash flows at different points in time."
+                a: "A dollar today is worth more than a dollar tomorrow because it can earn interest. TVM accounts for this when comparing cash flows at different points in time."
             },
             {
                 q: "What is the annuity formula?",
@@ -1279,7 +1279,7 @@ window.SEO_CONTENT = {
             { k: "Inverse", v: "Future value in reverse" }
         ],
         introTitle: "Present Value Calculator — what is future money worth today?",
-        intro: "A rupee you'll receive in 10 years is not worth a rupee today. Present value (PV) discounts future money back to today's rupees using a discount rate — the core of investing, bond pricing and fair-valuation thinking.",
+        intro: "A dollar you'll receive in 10 years is not worth a dollar today. Present value (PV) discounts future money back to today's dollars using a discount rate — the core of investing, bond pricing and fair-valuation thinking.",
         sections: [
             {
                 title: "The discounting concept",
@@ -1345,15 +1345,15 @@ window.SEO_CONTENT = {
                 title: "The growth formula",
                 body: [
                     "FV = PV × (1 + r/m)^(m×t), where PV is the present amount, r the annual rate, m compounding frequency and t the years.",
-                    "$10,00,000 at 10% for 10 years compounded annually grows to $25,93,742; compounded monthly, slightly more.",
+                    "$250,000 at 10% for 10 years compounded annually grows to $25,93,742; compounded monthly, slightly more.",
                     "The 'rule of 72' reverse-checks your numbers: 72 ÷ rate ≈ years to double."
                 ]
             },
             {
                 title: "Planning goals accurately",
                 body: [
-                    "Education: a $20 lakh cost today at 10% inflation will be $52.9 lakh in 10 years — plan FV, not PV.",
-                    "Retirement: today's $40,000 monthly expense at 6% inflation becomes $1,28,000/month in 20 years.",
+                    "College fund: a $100,000 tuition cost today at 5% inflation will be $162,889 in 10 years — plan FV, not PV.",
+                    "Retirement: today's $5,000 monthly living expense at 3% inflation becomes $9,030/month in 20 years.",
                     "The difference between assuming 8% vs 10% over 30 years is nearly double the terminal amount — choose your rate carefully."
                 ]
             }
@@ -1586,14 +1586,14 @@ window.SEO_CONTENT = {
                 body: [
                     "IRR is the implied annual return of a series of cash flows: an initial outflow followed by inflows.",
                     "Decision rule: accept a project if IRR exceeds your cost of capital (e.g. 12%). Reject if IRR < hurdle rate.",
-                    "For the example of a $10,00,000 investment returning $2,50,000/year for 5 years plus a $2,00,000 residual, IRR ≈ 12.3%."
+                    "For the example of a $250,000 investment returning $2,50,000/year for 5 years plus a $2,00,000 residual, IRR ≈ 12.3%."
                 ]
             },
             {
                 title: "IRR vs NPV vs payback",
                 body: [
                     "NPV tells you the absolute value created (in money) at your discount rate; IRR tells you the percentage return.",
-                    "IRR alone can mislead when projects have different scales — a 50% IRR on $1 lakh is worth less than 20% IRR on $1 crore.",
+                    "IRR alone can mislead when projects have different scales — a 50% IRR on $10,000 produces far less absolute wealth than 20% IRR on $1,000,000.",
                     "Payback period is the simplest but ignores profitability after breakeven — use all three for big decisions."
                 ]
             }
@@ -1644,7 +1644,7 @@ window.SEO_CONTENT = {
             {
                 title: "Simple vs discounted payback",
                 body: [
-                    "Simple payback = Investment ÷ annual cash flow. A $10,00,000 machine generating $2,50,000/year pays back in 4 years.",
+                    "Simple payback = Investment ÷ annual cash flow. A $250,000 machine generating $2,50,000/year pays back in 4 years.",
                     "Discounted payback discounts each year's cash flow first — more conservative, and what this calculator's time-value-aware cousin (NPV/IRR) uses.",
                     "Short paybacks reduce risk: the faster capital returns, the sooner you can reinvest."
                 ]
@@ -1817,7 +1817,7 @@ window.SEO_CONTENT = {
             { k: "Power", v: "Interest on every deposit" }
         ],
         introTitle: "Annuity Calculator — family future value for regular payments",
-        intro: "An annuity is a series of regular payments — either contributions growing for the future or payouts received in retirement. This calculator projects the future value of your annuity contributions (lump sum plus regular deposits) including every rupee of compound interest.",
+        intro: "An annuity is a series of regular payments — either contributions growing for the future or payouts received in retirement. This calculator projects the future value of your annuity contributions (lump sum plus regular deposits) including every dollar of compound interest.",
         sections: [
             {
                 title: "Annuity future value explained",
@@ -1932,7 +1932,7 @@ window.SEO_CONTENT = {
             {
                 title: "Why pension math matters",
                 body: [
-                    "A $40,000/month pension with 3% annual COLA for 25 years totals about $1.74 crore — far more than the $1.2 crore without COLA.",
+                    "A $40,000/month pension with 3% annual COLA for 25 years totals about $1.74 million — far more than the $1.2 million without COLA.",
                     "Without COLA, inflation halves your purchasing power roughly every 12 years at 6% inflation.",
                     "Deciding to take a lump sum vs a pension? Compare the pension's present value against the lump sum offer — this calculator shows the lifetime picture."
                 ]
@@ -1965,7 +1965,7 @@ window.SEO_CONTENT = {
             },
             {
                 q: "How is a pension's present value calculated?",
-                a: "Sum each future monthly payment discounted to today's money at your discount rate. A $40,000 pension for 25 years at 7% has a present value near $55 lakh."
+                a: "Sum each future monthly payment discounted to today's money at your discount rate. A $40,000 pension for 25 years at 7% has a present value near $550,000."
             }
         ],
         related: [
@@ -2111,7 +2111,7 @@ window.SEO_CONTENT = {
             {
                 title: "Down payment thresholds",
                 body: [
-                    "20% is the sweet spot — it avoids PMI and gives instant equity. For a $50,00,000 home, that's $10,00,000 cash.",
+                    "20% is the sweet spot — it avoids PMI and gives instant equity. For a $50,00,000 home, that's $250,000 cash.",
                     "FHA loans allow as little as 3.5%, but add mortgage insurance premiums for life of the loan in many cases.",
                     "VA (0%) and USDA (0%) loans exist for eligible buyers — no PMI either. Private lenders often offer 5–10% down with PMI."
                 ]
@@ -2119,8 +2119,8 @@ window.SEO_CONTENT = {
             {
                 title: "Saving for the down payment",
                 body: [
-                    "A $10,00,000 down payment in 3 years at 7% needs about $25,000/month saved — 10% of a $2.5 lakh monthly income.",
-                    "Keep down-payment savings in FDs or liquid funds — never equity you may need at a market low.",
+                    "A $250,000 down payment in 3 years at 7% needs about $25,000/month saved — 10% of a $2.5 lakh monthly income.",
+                    "Keep down-payment savings in high-yield savings or CDs — never volatile stocks you may need at a market low.",
                     "Gift funds from family are allowed by most lenders but must be documented."
                 ]
             }
@@ -2143,7 +2143,7 @@ window.SEO_CONTENT = {
             },
             {
                 q: "How much house can I afford with my down payment?",
-                a: "Divide your cash by your planned down payment percentage. With $10,00,000 at 20%, you can afford a $50,00,000 home. Use the house affordability calculator for the full picture."
+                a: "Divide your cash by your planned down payment percentage. With $250,000 at 20%, you can afford a $50,00,000 home. Use the house affordability calculator for the full picture."
             }
         ],
         related: [
@@ -2229,9 +2229,9 @@ window.SEO_CONTENT = {
             {
                 title: "Strategies to pay off early",
                 body: [
-                    "Extra monthly payment: $5,000 extra/month on a $40 lakh mortgage saves lakhs and cuts years.",
+                    "Extra monthly payment: $200 extra/month on a $350,000 mortgage saves thousands and cuts years.",
                     "Biweekly payments: paying half the EMI every two weeks creates one extra full payment each year — a classic zero-pain accelerator.",
-                    "Annual lump sums from bonuses: a $1,00,000 yearly bonus applied to principal works like compounding in reverse."
+                    "Annual lump sums from bonuses: a $5,000 yearly tax refund or bonus applied to principal works like compounding in reverse."
                 ]
             },
             {
@@ -2483,7 +2483,7 @@ window.SEO_CONTENT = {
             {
                 title: "The 1% and 50% rules",
                 body: [
-                    "1% rule: monthly rent should be at least 1% of purchase price (e.g. $90,000 rent on a $90 lakh property). Many Indian metros fall short — the rule is a filter, not a law.",
+                    "1% rule: monthly rent should be at least 1% of purchase price (e.g. $3,000 rent on a $300,000 property). Many high-demand housing markets fall short — the rule is a filter, not a law.",
                     "50% rule: roughly 50% of gross rent goes to vacancy, maintenance, taxes and insurance (before mortgage).",
                     "If cash flow is negative month one, it rarely self-corrects without appreciation — run the numbers cold."
                 ]
@@ -2536,8 +2536,8 @@ window.SEO_CONTENT = {
                 title: "APR vs interest rate",
                 body: [
                     "The interest rate is the cost of the principal; APR adds origination fees, points, mortgage insurance and some closing costs divided over the loan term.",
-                    "For a $10,00,000 loan at 10% with 2% fees, the APR is about 10.3–10.5% — the real cost.",
-                    "Always compare APR across lenders. On a 30-year loan, 0.2% APR difference equals lakhs of rupees."
+                    "For a $250,000 loan at 10% with 2% fees, the APR is about 10.3–10.5% — the real cost.",
+                    "Always compare APR across lenders. On a 30-year loan, 0.2% APR difference equals thousands of dollars."
                 ]
             },
             {
@@ -2655,7 +2655,7 @@ window.SEO_CONTENT = {
             {
                 title: "VA loan advantages",
                 body: [
-                    "0% down and no PMI — the only major loan with both. Compare: a $40 lakh conventional loan with 5% down carries ~$19,000/year in PMI at the typical rate.",
+                    "0% down and no PMI — the only major loan with both. Compare: a $400,000 conventional loan with 5% down carries ~$2,500 to $3,500/year in PMI at the typical rate.",
                     "Rates are typically 0.25–0.5% below conventional and there's no minimum credit score (lenders set their own, often 620).",
                     "The funding fee is 2.15% for first use with 0% down (regular military) — it can be financed into the loan or waived entirely for disabled veterans."
                 ]
@@ -2747,7 +2747,7 @@ window.SEO_CONTENT = {
             },
             {
                 q: "How much can I borrow?",
-                a: "Typically 80–85% of the home value minus the outstanding mortgage. On a $1 crore home with a $40 lakh mortgage, you may access $40–45 lakh."
+                a: "Typically 80–85% of the home value minus the outstanding mortgage. On a $500,000 home with a $250,000 mortgage, you may access $150,000 to $175,000 in home equity."
             }
         ],
         related: [

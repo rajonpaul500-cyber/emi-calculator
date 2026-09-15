@@ -31,7 +31,7 @@
     "description": "Free mortgage payment calculator including property tax, home insurance, PMI and HOA fees with amortization schedule.",
     "applicationCategory": "FinanceApplication",
     "operatingSystem": "Any",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
   }
   </script>
   <script type="application/ld+json">
@@ -78,114 +78,351 @@
   <main class="main-content">
     <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Mortgage Calculator</div>
     <h1 class="page-title">Mortgage Calculator</h1>
-    <p class="page-subtitle">See your complete monthly house payment including all property costs.</p>
+    <p class="page-subtitle">Know your true monthly payment &mdash; principal, interest, taxes, insurance, PMI, HOA fees and complete amortization schedule.</p>
 
-    <div class="card">
+    <!-- Main Calculator Inputs Card -->
+    <div class="card" id="mortgageInputCard">
       <h2>Mortgage Details</h2>
+      
       <div class="form-grid">
-        <div class="form-group">
-          <label for="amount">Mortgage Amount ($)</label>
+        <!-- Home Price -->
+        <div class="form-group" style="grid-column: 1 / -1;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+            <label for="homePrice" style="margin-bottom:0;">Home Price</label>
+            <span id="loanAmountBadge" style="font-size:0.84rem;font-weight:700;color:var(--primary);">$320,000 (80% LTV)</span>
+          </div>
           <div class="input-wrap">
             <span class="prefix">$</span>
-            <input type="number" id="amount" value="3000000" min="0" step="100000">
+            <input type="number" id="homePrice" value="400000" min="10000" step="10000">
           </div>
-          <input type="range" id="amountRange" min="100000" max="100000000" step="100000" value="3000000">
+          <input type="range" id="homePriceRange" min="50000" max="2500000" step="10000" value="400000">
         </div>
 
+        <!-- Down Payment (Amount & Percent Duo) -->
+        <div class="form-group">
+          <label for="downPaymentAmt">Down Payment ($ and %)</label>
+          <div class="form-duo">
+            <div class="input-wrap">
+              <span class="prefix">$</span>
+              <input type="number" id="downPaymentAmt" value="80000" min="0" step="5000">
+            </div>
+            <div class="input-wrap">
+              <span class="suffix">%</span>
+              <input type="number" id="downPaymentPct" value="20" min="0" max="100" step="0.5">
+            </div>
+          </div>
+          <div class="pill-options" style="margin-top:8px;">
+            <button type="button" class="pill-opt down-preset-pill" data-pct="0">0%</button>
+            <button type="button" class="pill-opt down-preset-pill" data-pct="3.5">3.5% FHA</button>
+            <button type="button" class="pill-opt down-preset-pill" data-pct="5">5%</button>
+            <button type="button" class="pill-opt down-preset-pill" data-pct="10">10%</button>
+            <button type="button" class="pill-opt down-preset-pill active" data-pct="20">20% (No PMI)</button>
+          </div>
+          <div id="pmiStatusBadge" class="pmi-info-badge pmi-badge-free">&#10004; No PMI required (Down payment &ge; 20%)</div>
+        </div>
+
+        <!-- Loan Term -->
+        <div class="form-group">
+          <label for="term">Loan Term (years)</label>
+          <div class="input-wrap">
+            <span class="suffix">yrs</span>
+            <input type="number" id="term" value="30" min="1" max="40" step="1">
+          </div>
+          <input type="range" id="termRange" min="5" max="40" step="1" value="30">
+          <div class="pill-options" style="margin-top:6px;">
+            <button type="button" class="pill-opt term-preset-pill active" data-term="30">30 Years</button>
+            <button type="button" class="pill-opt term-preset-pill" data-term="20">20 Years</button>
+            <button type="button" class="pill-opt term-preset-pill" data-term="15">15 Years</button>
+            <button type="button" class="pill-opt term-preset-pill" data-term="10">10 Years</button>
+          </div>
+        </div>
+
+        <!-- Interest Rate -->
         <div class="form-group">
           <label for="rate">Interest Rate (% per annum)</label>
           <div class="input-wrap">
             <span class="suffix">%</span>
-            <input type="number" id="rate" value="6.5" min="0" max="30" step="0.1">
+            <input type="number" id="rate" value="6.5" min="0.1" max="25" step="0.05">
           </div>
-          <input type="range" id="rateRange" min="0.5" max="30" step="0.1" value="6.5">
+          <input type="range" id="rateRange" min="1" max="15" step="0.05" value="6.5">
         </div>
 
+        <!-- Start Date (Month & Year) -->
         <div class="form-group">
-          <label for="term">Mortgage Term (years)</label>
-          <div class="input-wrap">
-            <span class="suffix">yrs</span>
-            <input type="number" id="term" value="20" min="1" max="30" step="1">
+          <label for="startMonth">Loan Start Date</label>
+          <div class="form-duo">
+            <select id="startMonth" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--card-bg);color:var(--text);font-size:0.9rem;"></select>
+            <select id="startYear" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--card-bg);color:var(--text);font-size:0.9rem;"></select>
           </div>
-          <input type="range" id="termRange" min="1" max="30" step="1" value="20">
         </div>
 
+        <!-- Property Tax ($/yr & % duo) -->
         <div class="form-group">
-          <label for="propertyTax">Property Tax ($/year)</label>
-          <div class="input-wrap">
-            <span class="prefix">$</span>
-            <input type="number" id="propertyTax" value="9000" min="0" step="1000">
+          <label for="propertyTax">Property Tax ($/yr &amp; %)</label>
+          <div class="form-duo">
+            <div class="input-wrap">
+              <span class="prefix">$</span>
+              <input type="number" id="propertyTax" value="4800" min="0" step="100">
+            </div>
+            <div class="input-wrap">
+              <span class="suffix">%/yr</span>
+              <input type="number" id="propertyTaxPct" value="1.2" min="0" max="10" step="0.05">
+            </div>
           </div>
         </div>
 
+        <!-- Home Insurance -->
         <div class="form-group">
           <label for="insurance">Home Insurance ($/year)</label>
           <div class="input-wrap">
             <span class="prefix">$</span>
-            <input type="number" id="insurance" value="6000" min="0" step="1000">
+            <input type="number" id="insurance" value="1500" min="0" step="100">
           </div>
         </div>
 
+        <!-- PMI Rate -->
         <div class="form-group">
           <label for="pmiRate">PMI (% of loan / year)</label>
           <div class="input-wrap">
             <span class="suffix">%</span>
-            <input type="number" id="pmiRate" value="0" min="0" max="5" step="0.1">
+            <input type="number" id="pmiRate" value="0.5" min="0" max="5" step="0.05">
           </div>
         </div>
 
+        <!-- HOA Fees -->
         <div class="form-group">
           <label for="hoa">HOA Fees ($/month)</label>
           <div class="input-wrap">
             <span class="prefix">$</span>
-            <input type="number" id="hoa" value="0" min="0" step="500">
+            <input type="number" id="hoa" value="0" min="0" step="25">
+          </div>
+        </div>
+
+        <!-- Other Costs -->
+        <div class="form-group">
+          <label for="otherCosts">Other Costs ($/month)</label>
+          <div class="input-wrap">
+            <span class="prefix">$</span>
+            <input type="number" id="otherCosts" value="0" min="0" step="25">
           </div>
         </div>
       </div>
-      <div class="form-actions">
-        <button class="btn btn-primary" id="calculateBtn" type="button">Calculate</button>
+
+      <!-- Extra Payments Section (Accelerated Payoff) -->
+      <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border);">
+        <h3 style="font-size:1.02rem;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;">
+          <span>&#9889;</span> Extra Payments (Pay Off Sooner &amp; Save Interest)
+        </h3>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="monthlyExtra">Monthly Extra Payment</label>
+            <div class="input-wrap">
+              <span class="prefix">$</span>
+              <input type="number" id="monthlyExtra" value="0" min="0" step="50" placeholder="0">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="annualExtra">Annual Extra Payment (every 12 mo)</label>
+            <div class="input-wrap">
+              <span class="prefix">$</span>
+              <input type="number" id="annualExtra" value="0" min="0" step="500" placeholder="0">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="oneTimeExtra">One-Time Extra Payment</label>
+            <div class="form-duo">
+              <div class="input-wrap">
+                <span class="prefix">$</span>
+                <input type="number" id="oneTimeExtra" value="0" min="0" step="1000" placeholder="0">
+              </div>
+              <div class="input-wrap">
+                <span class="suffix">Mo #</span>
+                <input type="number" id="oneTimeMonth" value="12" min="1" max="480" step="1">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions" style="margin-top:20px;">
+        <button class="btn btn-primary" id="calculateBtn" type="button">Calculate Mortgage</button>
         <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
       </div>
     </div>
 
-    <div class="result-panel" id="resultPanel">
-      <h3 id="resultLabel">Total Monthly Payment</h3>
-      <div class="result-main" id="resultMain">—</div>
-      <div class="result-grid">
-        <div class="result-item"><div class="label">Principal &amp; Interest (EMI)</div><div class="value" id="emiOnlyOut">—</div></div>
-        <div class="result-item"><div class="label">Tax, Insurance, PMI &amp; HOA</div><div class="value" id="nonEMIOut">—</div></div>
-        <div class="result-item"><div class="label">Loan Amount</div><div class="value" id="loanAmountOut">—</div></div>
-        <div class="result-item"><div class="label">Total Payment</div><div class="value" id="totalPaymentOut">—</div></div>
-        <div class="result-item"><div class="label">Total Interest</div><div class="value negative" id="totalInterestOut">—</div></div>
+    <!-- Extra Savings Celebratory Callout Banner -->
+    <div id="extraSavingsCallout" class="extra-savings-callout" style="display:none;"></div>
+
+    <!-- Hero Result Panel -->
+    <div class="result-panel show" id="resultPanel">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:6px;">
+        <h3 id="resultLabel" style="margin:0;">Total Monthly Payment</h3>
+        <span id="payoffDateBadge" style="background:rgba(255,255,255,0.2);padding:4px 12px;border-radius:14px;font-size:0.82rem;font-weight:600;letter-spacing:0;">Payoff: —</span>
       </div>
+      <div class="result-main" id="resultMain">—</div>
+      
+      <!-- Summary Grid of Key Loan Metrics -->
+      <div class="result-grid">
+        <div class="result-item"><div class="label">Home Price</div><div class="value" id="outHomePrice">—</div></div>
+        <div class="result-item"><div class="label">Down Payment</div><div class="value" id="outDownPayment">—</div></div>
+        <div class="result-item"><div class="label">Loan Amount</div><div class="value" id="outLoanAmount">—</div></div>
+        <div class="result-item"><div class="label">Total Interest Paid</div><div class="value negative" id="outTotalInterest">—</div></div>
+        <div class="result-item"><div class="label">Total Mortgage Payments</div><div class="value" id="outTotalPayments">—</div></div>
+        <div class="result-item"><div class="label">Total All-In Cost</div><div class="value" id="outTotalAllIn">—</div></div>
+        <div class="result-item"><div class="label">Total Property Taxes</div><div class="value" id="outTotalTaxes">—</div></div>
+        <div class="result-item"><div class="label">Total Home Insurance</div><div class="value" id="outTotalInsurance">—</div></div>
+        <div class="result-item"><div class="label">Estimated Payoff</div><div class="value positive" id="outPayoffDate">—</div></div>
+      </div>
+
       <div class="result-actions">
-        <button id="downloadCsv" type="button">&#11015; Download CSV</button>
+        <button id="downloadCsv" type="button">&#11015; Download CSV Schedule</button>
+        <button id="printScheduleBtn" type="button">&#128438; Print Schedule</button>
+        <button id="copySummaryBtn" type="button">&#128203; Copy Summary</button>
       </div>
     </div>
 
-    <div class="chart-box">
-      <div class="chart-title">Principal vs Interest by Year</div>
-      <canvas id="resultChart" aria-label="Result chart"></canvas>
+    <!-- Interactive Donut Chart & Monthly Breakdown Card -->
+    <div class="mortgage-donut-grid">
+      <div class="mortgage-donut-wrap">
+        <h3 style="font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:12px;">Monthly Cost Breakdown</h3>
+        <canvas id="mortgageDonutChart" class="mortgage-donut-canvas" width="240" height="240" aria-label="Monthly payment donut chart"></canvas>
+      </div>
+
+      <div class="mortgage-breakdown-list">
+        <!-- P&I -->
+        <div class="mortgage-breakdown-item">
+          <div class="mortgage-breakdown-header">
+            <span class="mortgage-breakdown-label"><span class="color-dot" style="background:#2563eb;"></span> Principal &amp; Interest</span>
+            <span class="mortgage-breakdown-val"><span id="breakdownPIVal">—</span><span class="mortgage-breakdown-pct" id="breakdownPIPct">(0%)</span></span>
+          </div>
+          <div class="mortgage-breakdown-track"><div class="mortgage-breakdown-fill" id="breakdownPIFill" style="background:#2563eb;width:0%;"></div></div>
+        </div>
+
+        <!-- Property Tax -->
+        <div class="mortgage-breakdown-item">
+          <div class="mortgage-breakdown-header">
+            <span class="mortgage-breakdown-label"><span class="color-dot" style="background:#f59e0b;"></span> Property Taxes</span>
+            <span class="mortgage-breakdown-val"><span id="breakdownTaxVal">—</span><span class="mortgage-breakdown-pct" id="breakdownTaxPct">(0%)</span></span>
+          </div>
+          <div class="mortgage-breakdown-track"><div class="mortgage-breakdown-fill" id="breakdownTaxFill" style="background:#f59e0b;width:0%;"></div></div>
+        </div>
+
+        <!-- Home Insurance -->
+        <div class="mortgage-breakdown-item">
+          <div class="mortgage-breakdown-header">
+            <span class="mortgage-breakdown-label"><span class="color-dot" style="background:#10b981;"></span> Home Insurance</span>
+            <span class="mortgage-breakdown-val"><span id="breakdownInsVal">—</span><span class="mortgage-breakdown-pct" id="breakdownInsPct">(0%)</span></span>
+          </div>
+          <div class="mortgage-breakdown-track"><div class="mortgage-breakdown-fill" id="breakdownInsFill" style="background:#10b981;width:0%;"></div></div>
+        </div>
+
+        <!-- PMI -->
+        <div class="mortgage-breakdown-item" id="pmiBreakdownRow">
+          <div class="mortgage-breakdown-header">
+            <span class="mortgage-breakdown-label"><span class="color-dot" style="background:#8b5cf6;"></span> PMI (Mortgage Insurance)</span>
+            <span class="mortgage-breakdown-val"><span id="breakdownPmiVal">—</span><span class="mortgage-breakdown-pct" id="breakdownPmiPct">(0%)</span></span>
+          </div>
+          <div class="mortgage-breakdown-track"><div class="mortgage-breakdown-fill" id="breakdownPmiFill" style="background:#8b5cf6;width:0%;"></div></div>
+        </div>
+
+        <!-- HOA & Other -->
+        <div class="mortgage-breakdown-item">
+          <div class="mortgage-breakdown-header">
+            <span class="mortgage-breakdown-label"><span class="color-dot" style="background:#06b6d4;"></span> HOA &amp; Other Fees</span>
+            <span class="mortgage-breakdown-val"><span id="breakdownHoaVal">—</span><span class="mortgage-breakdown-pct" id="breakdownHoaPct">(0%)</span></span>
+          </div>
+          <div class="mortgage-breakdown-track"><div class="mortgage-breakdown-fill" id="breakdownHoaFill" style="background:#06b6d4;width:0%;"></div></div>
+        </div>
+      </div>
     </div>
+
+    <!-- 30-Year vs 15-Year Comparison Card -->
+    <div class="card">
+      <h2>30-Year vs. 15-Year Fixed Mortgage Comparison</h2>
+      <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:14px;">See how choosing a 15-year mortgage can save you tens or hundreds of thousands of dollars in interest.</p>
+      <div class="table-wrap">
+        <table class="mortgage-compare-table">
+          <thead>
+            <tr>
+              <th>Comparison Metric</th>
+              <th>30-Year Fixed</th>
+              <th>15-Year Fixed</th>
+              <th>Difference / Savings</th>
+            </tr>
+          </thead>
+          <tbody id="mortgageCompareBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Visual Charts Card -->
+    <div class="chart-box">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
+        <div class="chart-title" style="margin:0;">Visual Amortization Analysis</div>
+        <div class="tab-switcher">
+          <button type="button" id="tabChartBalance" class="tab-btn active">Balance vs. Home Equity</button>
+          <button type="button" id="tabChartPI" class="tab-btn">Principal vs. Interest by Year</button>
+        </div>
+      </div>
+
+      <div id="chartWrapBalance">
+        <canvas id="balanceEquityChart" aria-label="Balance vs Equity chart" style="width:100%;height:240px;display:block;"></canvas>
+      </div>
+      <div id="chartWrapPI" style="display:none;">
+        <canvas id="principalInterestChart" aria-label="Principal vs Interest chart" style="width:100%;height:240px;display:block;"></canvas>
+      </div>
+    </div>
+
     <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
 
+    <!-- Full Amortization Schedule Card -->
     <div class="card">
-      <h2>Mortgage Amortization Schedule</h2>
-      <p>See how each payment builds your home equity. <span id="scheduleCount" style="font-weight:700;color:var(--primary);"></span></p>
-      <div class="table-wrap">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:14px;">
+        <div>
+          <h2 style="margin:0 0 4px;">Amortization Schedule</h2>
+          <p style="margin:0;color:var(--text-muted);font-size:0.88rem;">Track your principal repayment, interest, and home equity growth. <span id="scheduleCount" style="font-weight:700;color:var(--primary);"></span></p>
+        </div>
+        <div class="tab-switcher">
+          <button type="button" id="tabAnnualSchedule" class="tab-btn active">Annual Schedule</button>
+          <button type="button" id="tabMonthlySchedule" class="tab-btn">Monthly Schedule</button>
+        </div>
+      </div>
+
+      <!-- Annual Schedule Wrap -->
+      <div id="annualScheduleWrap" class="table-wrap">
         <table>
           <thead>
             <tr>
-              <th>Month</th>
+              <th>Year</th>
+              <th class="num">Beginning Balance</th>
+              <th class="num">Total Payment</th>
+              <th class="num">Principal</th>
+              <th class="num">Interest</th>
+              <th class="num">Taxes &amp; Ins.</th>
+              <th class="num">Ending Balance</th>
+              <th class="num">Home Equity</th>
+            </tr>
+          </thead>
+          <tbody id="annualScheduleBody"></tbody>
+        </table>
+      </div>
+
+      <!-- Monthly Schedule Wrap -->
+      <div id="monthlyScheduleWrap" class="table-wrap" style="display:none;max-height:550px;overflow-y:auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Date</th>
               <th class="num">Payment</th>
               <th class="num">Principal</th>
               <th class="num">Interest</th>
               <th class="num">Extra</th>
               <th class="num">Balance</th>
+              <th class="num">Home Equity</th>
             </tr>
           </thead>
-          <tbody id="scheduleBody"></tbody>
-          <tfoot id="scheduleFoot"></tfoot>
+          <tbody id="monthlyScheduleBody"></tbody>
         </table>
       </div>
     </div>
@@ -194,15 +431,19 @@
       <h2>Mortgage Calculator FAQ</h2>
       <div class="faq-item">
         <div class="faq-q">What is included in my monthly mortgage payment?<span class="arrow">&#9654;</span></div>
-        <div class="faq-a">Your total payment includes the EMI (principal and interest), property tax, home insurance, private mortgage insurance (PMI) when required, and any HOA fees &mdash; sometimes called PITI.</div>
+        <div class="faq-a">Your total monthly payment is known as <strong>PITI</strong> (Principal, Interest, Property Taxes, and Homeowners Insurance), plus any Private Mortgage Insurance (PMI) and Homeowners Association (HOA) fees.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Should I choose a 15-year or 30-year mortgage?<span class="arrow">&#9654;</span></div>
-        <div class="faq-a">A 30-year term has a lower monthly payment but much higher total interest. A 15-year term costs more per month but saves a large amount of interest and builds equity faster.</div>
+        <div class="faq-a">A 30-year term offers lower monthly payments, which maximizes cash-flow flexibility. However, a 15-year term typically offers a lower interest rate, builds equity twice as fast, and saves hundreds of thousands of dollars in total interest.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">When does PMI go away?<span class="arrow">&#9654;</span></div>
-        <div class="faq-a">PMI is generally removed automatically once you reach 22% equity and can be cancelled at 20% equity by requesting it from your lender.</div>
+        <div class="faq-q">When does PMI automatically go away?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">Under the federal Homeowners Protection Act, lenders must automatically cancel Private Mortgage Insurance (PMI) once your loan balance reaches 78% of the original property value, and you can request cancellation when it reaches 80% (20% equity).</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How much interest can I save by making extra payments?<span class="arrow">&#9654;</span></div>
+        <div class="faq-a">Because extra payments go 100% directly toward paying down principal, even an extra $100–$200 per month can shave 4 to 6 years off a 30-year mortgage and save over $50,000 in interest!</div>
       </div>
     </div>
   
@@ -213,29 +454,72 @@
 <div class="content-section quick-facts"><div class="fact-chip"><strong>PITI:</strong> Principal, Interest, Taxes, Insurance</div><div class="fact-chip"><strong>Common terms:</strong> 15 / 30 years</div><div class="fact-chip"><strong>20% down:</strong> Avoids PMI</div><div class="fact-chip"><strong>28/36 rule:</strong> Housing ≤28% gross income</div></div>
 <div class="content-section toc-card"><h2>On this page</h2><ol class="toc"><li><a href="#understanding-piti-and-dti">Understanding PITI and DTI</a></li><li><a href="#pmi-when-you-must-pay-it">PMI — when you must pay it</a></li><li><a href="#15-vs-30-year-mortgage">15 vs 30 year mortgage</a></li><li><a href="#how-to-use">How to use this calculator</a></li><li><a href="#faq">Frequently asked questions</a></li></ol></div>
 <div class="content-section"><h2>Mortgage Calculator — know your true monthly payment</h2><p>Your real mortgage payment is more than just principal and interest. Property tax, homeowners insurance, PMI and HOA fees all add up. This complete PITI mortgage calculator shows your true monthly outlay, the principal-and-interest split, and a full amortization schedule — perfect for buyers comparing houses or refinancing.</p></div>
-<div class="content-section"><h2 id="understanding-piti-and-dti">Understanding PITI and DTI</h2><p>PITI = Principal + Interest + Taxes + Insurance. Lenders underwrite primarily on PITI and total Debt-to-Income (DTI).</p><p>The 28/36 rule: keep PITI under 28% of gross income and total debts under 36%.</p><p>A 300,000 monetary-unit loan at 6.5% for 30 years has a base EMI near 1,896; adding 200/month taxes, 100 insurance and 50 HOA brings the real payment to about 2,246 — 18% higher than the quoted EMI.</p></div>
+<div class="content-section"><h2 id="understanding-piti-and-dti">Understanding PITI and DTI</h2><p>PITI = Principal + Interest + Taxes + Insurance. Lenders underwrite primarily on PITI and total Debt-to-Income (DTI).</p><p>The 28/36 rule: keep PITI under 28% of gross income and total debts under 36%.</p><p>A 400,000 monetary-unit home with 20% down at 6.5% for 30 years has a base P&I near $2,022; adding $400/month taxes, $125 insurance and $50 HOA brings the real payment to about $2,597 — giving you the true cost of homeownership.</p></div>
 <div class="content-section"><h2 id="pmi-when-you-must-pay-it">PMI — when you must pay it</h2><p>PMI (Private Mortgage Insurance) is required when your down payment is below 20%. It costs roughly 0.3–1.5% of the loan per year.</p><p>PMI automatically ends at 78% loan-to-value and can be cancelled at 80% by request.</p><p>Ways to avoid PMI: a 20% down payment, a piggyback second loan, or lender-paid PMI with a slightly higher rate.</p></div>
-<div class="content-section"><h2 id="15-vs-30-year-mortgage">15 vs 30 year mortgage</h2><p>A 30-year loan maximizes affordability but roughly doubles total interest. On 300,000 at 6.5%, 30 years costs 383,000 in interest, while 15 years at 6.0% costs just 156,000.</p><p>The 15-year loan also builds equity twice as fast and is a forced savings plan.</p><p>Many borrowers choose 30 years with biweekly payments — the equivalent of one extra payment a year — giving much of the 15-year benefit with flexibility.</p></div>
-<div class="content-section"><h2 id="how-to-use">How to use this calculator</h2><ol><li>Enter the mortgage amount (home price minus down payment).</li><li>Input your interest rate — check today's market rates.</li><li>Choose the term: 15, 20 or 30 years.</li><li>Add annual property tax, home insurance and PMI if applicable.</li><li>Read the true monthly payment and amortization schedule below.</li></ol></div>
-<div class="content-section tips-box"><h2>Pro tips</h2><ul><li>Shop rates from at least 3 lenders; even 0.25% saves thousands over 30 years.</li><li>Buying discount points (paying upfront to lower rate) pays off if you stay 7+ years.</li><li>Refinance when rates drop 0.75–1% and you plan to stay at least 2 years.</li></ul></div>
+<div class="content-section"><h2 id="15-vs-30-year-mortgage">15 vs 30 year mortgage</h2><p>A 30-year loan maximizes affordability but roughly doubles total interest. On $320,000 at 6.5%, 30 years costs over $408,000 in interest, while 15 years at 6.0% costs just $166,000 — saving over $242,000!</p><p>The 15-year loan also builds equity twice as fast and serves as a forced savings plan.</p><p>Many borrowers choose 30 years with extra monthly payments — giving the flexibility of lower required payments with the interest savings of a shorter term.</p></div>
+<div class="content-section"><h2 id="how-to-use">How to use this calculator</h2><ol><li>Enter your target Home Price and Down Payment (as a dollar amount or percentage).</li><li>Choose your loan term: 30, 20, 15, or 10 years.</li><li>Input the interest rate and start date.</li><li>Adjust annual property tax, home insurance, and any HOA fees.</li><li>Optionally enter extra payments to see your interest savings and earlier payoff date.</li><li>Review the interactive donut breakdown, 30 vs 15-year comparison, and amortization schedule.</li></ol></div>
+<div class="content-section tips-box"><h2>Pro tips</h2><ul><li>Shop rates from at least 3 lenders; even 0.25% saves thousands over 30 years.</li><li>Paying an extra $100 to $200 per month directly towards principal can shorten a 30-year loan by 4 to 6 years.</li><li>Refinance when rates drop 0.75–1% and you plan to stay at least 2 to 3 years.</li></ul></div>
 <div class="content-section"><h2 id="faq">Frequently asked questions</h2><div class="faq-item"><div class="faq-q">What is a good mortgage rate?<span class="arrow">&#9654;</span></div><div class="faq-a">Rates follow the 10-year Treasury and vary by credit, down payment and loan type. Compare current averages for 15- and 30-year fixed loans to see if your quote is competitive.</div></div><div class="faq-item"><div class="faq-q">How much can I afford?<span class="arrow">&#9654;</span></div><div class="faq-a">Follow the 28/36 rule. Multiply gross monthly income by 0.28 for housing, 0.36 for total debt. This calculator includes taxes and insurance so the number is realistic.</div></div><div class="faq-item"><div class="faq-q">What happens if I pay extra?<span class="arrow">&#9654;</span></div><div class="faq-a">Extra payments reduce the balance directly, saving interest and shortening the term. An extra payment each year on a 30-year loan typically saves 3–4 years of payments.</div></div></div>
 <div class="content-section"><h2>Related calculators</h2><div class="related-grid"><a class="related-card" href="amortization-calculator.html"><span class="related-icon">📊</span><span>Amortization</span></a><a class="related-card" href="house-affordability.html"><span class="related-icon">🏠</span><span>Affordability</span></a><a class="related-card" href="refinance-calculator.html"><span class="related-icon">🔄</span><span>Refinance</span></a><a class="related-card" href="mortgage-payoff.html"><span class="related-icon">⏱️</span><span>Payoff</span></a></div></div>
 <!--SEO-CONTENT-END-->
 </main>
 </div>
 
-<div id="siteFooter"></div>
+<div id="siteFooter">
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>EMI Master</h4>
+        <p>Free, instant, and private online calculators for mortgages, loans, investments, retirement, and mathematics. Your inputs never leave your browser.</p>
+        <p><a href="sitemap.html"><strong>&rarr; All 50+ Calculators (Directory)</strong></a></p>
+      </div>
+      <div class="footer-col">
+        <h4>Popular Calculators</h4>
+        <ul>
+          <li><a href="mortgage-calculator.html">Mortgage Calculator</a></li>
+          <li><a href="amortization-calculator.html">Amortization Calculator</a></li>
+          <li><a href="emi-calculator.html">EMI Calculator</a></li>
+          <li><a href="home-loan.html">Home Loan Calculator</a></li>
+          <li><a href="car-loan.html">Car Loan Calculator</a></li>
+          <li><a href="personal-loan.html">Personal Loan Calculator</a></li>
+          <li><a href="compound-interest-calculator.html">Compound Interest</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Loans &amp; Real Estate</h4>
+        <ul>
+          <li><a href="refinance-calculator.html">Refinance Calculator</a></li>
+          <li><a href="fha-loan.html">FHA Loan Calculator</a></li>
+          <li><a href="va-loan.html">VA Mortgage Calculator</a></li>
+          <li><a href="home-equity-loan.html">Home Equity Loan</a></li>
+          <li><a href="heloc-calculator.html">HELOC Calculator</a></li>
+          <li><a href="loan-payoff.html">Loan Payoff Calculator</a></li>
+          <li><a href="house-affordability.html">House Affordability</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Investment &amp; Tools</h4>
+        <ul>
+          <li><a href="investment-calculator.html">Investment Calculator</a></li>
+          <li><a href="retirement-calculator.html">Retirement Calculator</a></li>
+          <li><a href="social-security-calculator.html">Social Security</a></li>
+          <li><a href="scientific-calculator.html">Scientific Calculator</a></li>
+          <li><a href="percentage-calculator.html">Percentage Calculator</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="sitemap.html"><strong>Complete HTML Sitemap</strong></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 EMI Master. All rights reserved. For educational and planning purposes only.
+    </div>
+  </footer>
+</div>
 
-<script>
-  window.calcConfig = {
-    type: 'home',
-    defaults: { amount: 3000000, rate: 6.5, term: 20 }
-  };
-</script>
 <script src="js/currency.js"></script>
 <script src="js/chart.js"></script>
 <script src="js/seo-content.js"></script>
 <script src="js/common.js"></script>
-<script src="js/emi.js"></script>
+<script src="js/mortgage-calculator.js"></script>
 </body>
 </html>

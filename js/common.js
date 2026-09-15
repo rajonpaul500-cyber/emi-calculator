@@ -214,6 +214,7 @@
     html += '</ul></div>';
 
     html += '<div class="sidebar-card"><h3>' + tr('sidebar.quicklinks') + '</h3><ul>';
+    html += '<li><a href="sitemap.html"><span class="sidebar-icon">&#128506;&#65039;</span>All Calculators (Sitemap)</a></li>';
     html += '<li><a href="privacy-policy.html"><span class="sidebar-icon">&#128274;</span>' + tr('sidebar.privacy') + '</a></li>';
     html += '</ul></div>';
 
@@ -251,12 +252,23 @@
     html += '<div class="footer-col">';
     html += '<h4>' + tr('footer.company') + '</h4><ul>';
     html += '<li><a href="index.html">' + tr('nav.home') + '</a></li>';
+    html += '<li><a href="sitemap.html"><strong>All Calculators (Sitemap)</strong></a></li>';
     html += '<li><a href="loan-payoff.html">Loan Payoff Calculator</a></li>';
     html += '<li><a href="personal-loan.html">Personal Loan Calculator</a></li>';
     html += '<li><a href="debt-to-income.html">Debt-to-Income Ratio</a></li>';
     html += '<li><a href="apr-calculator.html">APR Calculator</a></li>';
     html += '<li><a href="refinance-calculator.html">Refinance Calculator</a></li>';
     html += '<li><a href="privacy-policy.html">' + tr('sidebar.privacy') + '</a></li>';
+    html += '</ul></div>';
+    html += '<div class="footer-col">';
+    html += '<h4>Math &amp; Tools</h4><ul>';
+    html += '<li><a href="scientific-calculator.html">Scientific Calculator</a></li>';
+    html += '<li><a href="percentage-calculator.html">Percentage Calculator</a></li>';
+    html += '<li><a href="fraction-calculator.html">Fraction Calculator</a></li>';
+    html += '<li><a href="amortization-calculator.html">Amortization Schedule</a></li>';
+    html += '<li><a href="random-number-generator.html">Random Number Gen</a></li>';
+    html += '<li><a href="binary-calculator.html">Binary Calculator</a></li>';
+    html += '<li><a href="sitemap.html">&rarr; View All 50+ Tools</a></li>';
     html += '</ul></div>';
     html += '</div>';
     html += '<div class="footer-bottom">';

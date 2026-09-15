@@ -9,17 +9,342 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
 
-# 301 redirects from clean URLs to .html (consolidate indexing signals on .html URLs)
-# This matches the site-wide pattern where every indexed page uses the .html URL.
+# 301 redirects from clean URLs to .html (consolidates indexing on canonical .html URLs)
+[[redirects]]
+  from = "/amortization-calculator"
+  to = "/amortization-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/annuity-calculator"
+  to = "/annuity-calculator.html"
+  status = 301
+
 [[redirects]]
   from = "/annuity-payout-calculator"
   to = "/annuity-payout-calculator.html"
   status = 301
 
 [[redirects]]
+  from = "/apr-calculator"
+  to = "/apr-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/average-return-calculator"
+  to = "/average-return-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/big-number-calculator"
+  to = "/big-number-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/binary-calculator"
+  to = "/binary-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/bond-calculator"
+  to = "/bond-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/car-loan"
+  to = "/car-loan.html"
+  status = 301
+
+[[redirects]]
+  from = "/cd-calculator"
+  to = "/cd-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/compound-interest-calculator"
+  to = "/compound-interest-calculator.html"
+  status = 301
+
+[[redirects]]
   from = "/debt-to-income"
   to = "/debt-to-income.html"
   status = 301
+
+[[redirects]]
+  from = "/depreciation-calculator"
+  to = "/depreciation-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/down-payment-calculator"
+  to = "/down-payment-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/dps"
+  to = "/dps.html"
+  status = 301
+
+[[redirects]]
+  from = "/emi-calculator"
+  to = "/emi-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/exponent-calculator"
+  to = "/exponent-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/factor-calculator"
+  to = "/factor-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/fdr"
+  to = "/fdr.html"
+  status = 301
+
+[[redirects]]
+  from = "/fha-loan"
+  to = "/fha-loan.html"
+  status = 301
+
+[[redirects]]
+  from = "/finance-calculator"
+  to = "/finance-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/fraction-calculator"
+  to = "/fraction-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/future-value-calculator"
+  to = "/future-value-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/greatest-common-factor-calculator"
+  to = "/greatest-common-factor-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/half-life-calculator"
+  to = "/half-life-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/heloc-calculator"
+  to = "/heloc-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/hex-calculator"
+  to = "/hex-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/home-equity-loan"
+  to = "/home-equity-loan.html"
+  status = 301
+
+[[redirects]]
+  from = "/home-loan"
+  to = "/home-loan.html"
+  status = 301
+
+[[redirects]]
+  from = "/house-affordability"
+  to = "/house-affordability.html"
+  status = 301
+
+[[redirects]]
+  from = "/interest-calculator"
+  to = "/interest-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/interest-rate-calculator"
+  to = "/interest-rate-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/investment-calculator"
+  to = "/investment-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/irr-calculator"
+  to = "/irr-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/least-common-multiple-calculator"
+  to = "/least-common-multiple-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/loan-payoff"
+  to = "/loan-payoff.html"
+  status = 301
+
+[[redirects]]
+  from = "/log-calculator"
+  to = "/log-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/matrix-calculator"
+  to = "/matrix-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/mortgage-calculator"
+  to = "/mortgage-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/mortgage-payoff"
+  to = "/mortgage-payoff.html"
+  status = 301
+
+[[redirects]]
+  from = "/mutual-fund-calculator"
+  to = "/mutual-fund-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/payback-period-calculator"
+  to = "/payback-period-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/pension-calculator"
+  to = "/pension-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/percent-error-calculator"
+  to = "/percent-error-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/percentage-calculator"
+  to = "/percentage-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/personal-loan"
+  to = "/personal-loan.html"
+  status = 301
+
+[[redirects]]
+  from = "/present-value-calculator"
+  to = "/present-value-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/privacy-policy"
+  to = "/privacy-policy.html"
+  status = 301
+
+[[redirects]]
+  from = "/quadratic-formula-calculator"
+  to = "/quadratic-formula-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/random-number-generator"
+  to = "/random-number-generator.html"
+  status = 301
+
+[[redirects]]
+  from = "/ratio-calculator"
+  to = "/ratio-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/real-estate-calculator"
+  to = "/real-estate-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/refinance-calculator"
+  to = "/refinance-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/rent-calculator"
+  to = "/rent-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/rent-vs-buy"
+  to = "/rent-vs-buy.html"
+  status = 301
+
+[[redirects]]
+  from = "/rental-property"
+  to = "/rental-property.html"
+  status = 301
+
+[[redirects]]
+  from = "/retirement-calculator"
+  to = "/retirement-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/roi-calculator"
+  to = "/roi-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/root-calculator"
+  to = "/root-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/rounding-calculator"
+  to = "/rounding-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/savings-calculator"
+  to = "/savings-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/scientific-calculator"
+  to = "/scientific-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/scientific-notation-calculator"
+  to = "/scientific-notation-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/simple-interest-calculator"
+  to = "/simple-interest-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/sitemap"
+  to = "/sitemap.html"
+  status = 301
+
+[[redirects]]
+  from = "/social-security-calculator"
+  to = "/social-security-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/va-loan"
+  to = "/va-loan.html"
+  status = 301
+
 
 [[redirects]]
   from = "/*"
