@@ -47,16 +47,39 @@
     <h1 class="page-title">Factor Calculator</h1>
     <p class="page-subtitle">Enter a positive whole number to see all of its factors, factor pairs, prime factorization, and whether it is prime.</p>
 
-<div class="card">
-<h2>Factors of a number</h2>
-<div class="form-group"><label>Number</label><input type="number" id="num" value="120" min="1" max="9007199254740991"></div>
-<div class="form-actions"><button class="btn btn-primary" id="calcBtn" type="button">Find factors</button></div>
-</div>
+    <!-- Quick Presets -->
+    <div class="preset-chips" id="presetChips" style="margin-bottom:16px;">
+      <span class="preset-label" style="font-size:0.85rem; font-weight:600; color:var(--text-muted);">Quick Presets:</span>
+      <button type="button" class="preset-chip active" data-num="120">120 (Composite)</button>
+      <button type="button" class="preset-chip" data-num="36">36 (Perfect Square)</button>
+      <button type="button" class="preset-chip" data-num="97">97 (Prime)</button>
+      <button type="button" class="preset-chip" data-num="1024">1024 (Power of 2)</button>
+      <button type="button" class="preset-chip" data-num="720">720 (Highly Composite)</button>
+    </div>
 
-    <div class="result-panel" id="resultPanel">
-      <h3>Result</h3>
-      <div class="result-main" id="resultMain">&mdash;</div>
-      <div class="result-grid" id="resultGrid"></div>
+    <div class="card">
+      <h2>Integer Factorization &amp; Divisor Explorer</h2>
+      <div class="form-group">
+        <label for="num">Positive Integer (n)</label>
+        <input type="number" id="num" value="120" min="1" max="9007199254740991">
+      </div>
+      <div class="form-actions" style="display:flex; gap:12px; margin-top:16px;">
+        <button class="btn btn-primary" id="calcBtn" type="button" style="flex:1;">Find Factors</button>
+        <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
+      </div>
+    </div>
+
+    <div class="result-panel" id="resultPanel" style="margin-top:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:12px; margin-bottom:16px;">
+        <h3 style="margin:0; font-size:1.15rem;">Factors &amp; Number Properties</h3>
+        <button type="button" class="btn btn-sm btn-outline" id="copyResultBtn" title="Copy result text">📋 Copy</button>
+      </div>
+      <div class="result-main" id="resultMain" style="font-size:1.5rem; font-weight:800; color:var(--primary); text-align:center; padding:12px 0; word-break:break-word;">&mdash;</div>
+      <div class="result-grid" id="resultGrid" style="margin-top:16px;"></div>
+      <div id="stepContainer" style="margin-top:20px; padding:16px; background:var(--bg-alt); border-radius:8px; border:1px solid var(--border); display:none;">
+        <h4 style="margin:0 0 10px; font-size:1rem; color:var(--primary);">Step-by-Step Divisor &amp; Factorization Breakdown</h4>
+        <div id="stepContent" style="font-size:0.92rem; line-height:1.7;"></div>
+      </div>
     </div>
 
     <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
@@ -136,16 +159,100 @@
 
 <script src="js/math.js"></script>
 <script>
-function item(l,v){return '<div class="result-item"><div class="label">'+l+'</div><div class="value">'+v+'</div></div>';}
-document.getElementById("calcBtn").onclick=function(){
-var n=parseInt(document.getElementById("num").value,10);
-if(isNaN(n)||n<1||n>9007199254740991){document.getElementById("resultMain").textContent="Enter a positive whole number";document.getElementById("resultGrid").innerHTML="";return;}
-var f=MathCalc.factor(n).value;
-document.getElementById("resultMain").textContent=f.join(", ");
-var grid=item("Factors ("+f.length+")",f.join(", "));
-var pairs=f.slice(0,Math.ceil(f.length/2)).map(function(x){return x+" × "+(n/x);});
-grid+=item("Factor pairs",pairs.join("; "))+item("Prime factorization",MathCalc.primeFactors(n).join(" × "))+item("Number of factors",f.length)+item("Sum of factors",MathCalc.fmt(f.reduce(function(a,b){return a+b;},0),0))+item("Is prime",f.length===2?"Yes":"No")+item("Perfect square",Number.isInteger(Math.sqrt(n))?"Yes":"No");
-document.getElementById("resultGrid").innerHTML=grid;};
+(function () {
+  function item(l, v) {
+    return '<div class="result-item"><div class="label">' + l + '</div><div class="value">' + v + '</div></div>';
+  }
+
+  function calcFactors() {
+    var n = parseInt(document.getElementById("num").value, 10);
+    if (isNaN(n) || n < 1 || n > 9007199254740991) {
+      document.getElementById("resultMain").textContent = "\u2014";
+      document.getElementById("resultGrid").innerHTML = "";
+      document.getElementById("stepContainer").style.display = "none";
+      return;
+    }
+
+    var f = MathCalc.factor(n).value;
+    var primes = MathCalc.primeFactors(n);
+    var sum = f.reduce(function (a, b) { return a + b; }, 0);
+    var isSquare = Number.isInteger(Math.sqrt(n));
+
+    document.getElementById("resultMain").textContent = f.join(", ");
+
+    var counts = {};
+    primes.forEach(function (p) { counts[p] = (counts[p] || 0) + 1; });
+    var primeExpParts = Object.keys(counts).map(function (p) {
+      return counts[p] > 1 ? p + "<sup>" + counts[p] + "</sup>" : p;
+    });
+
+    var pairs = f.slice(0, Math.ceil(f.length / 2)).map(function (x) {
+      return x + " &times; " + (n / x);
+    });
+
+    var grid = item("All Divisors (" + f.length + ")", f.join(", ")) +
+               item("Factor Pairs (" + pairs.length + ")", pairs.join("; ")) +
+               item("Prime Factorization", primeExpParts.join(" &times; ") || "None (1)") +
+               item("Divisor Count d(n)", f.length) +
+               item("Divisor Sum &sigma;(n)", MathCalc.fmt(sum, 0)) +
+               item("Classification", f.length === 2 ? "Prime Number" : (n === 1 ? "Unit (Neither prime nor composite)" : "Composite Number")) +
+               item("Perfect Square?", isSquare ? "Yes (&radic;" + n + " = " + Math.sqrt(n) + ")" : "No");
+
+    document.getElementById("resultGrid").innerHTML = grid;
+
+    var stepHtml = "<strong>1. Number Classification:</strong><br>" +
+                   n + " has " + f.length + " positive divisors.<br><br>" +
+                   "<strong>2. Prime Factor Decomposition:</strong><br>" +
+                   (n === 1 ? "1 is a unit with no prime factors." : (primes.length > 0 ? n + " = " + primes.join(" &times; ") + " = <strong>" + primeExpParts.join(" &times; ") + "</strong>" : "Prime")) + "<br><br>" +
+                   "<strong>3. Divisor Counting Formula d(n):</strong><br>";
+
+    if (n > 1) {
+      var formulaParts = Object.keys(counts).map(function (p) { return "(" + counts[p] + " + 1)"; });
+      stepHtml += "d(" + n + ") = " + formulaParts.join(" &times; ") + " = <strong>" + f.length + " divisors</strong><br><br>";
+    }
+
+    stepHtml += "<strong>4. Complete List of Factor Pairs:</strong><br>";
+    pairs.forEach(function (pair) {
+      stepHtml += "&bull; " + pair + " = " + n + "<br>";
+    });
+
+    document.getElementById("stepContent").innerHTML = stepHtml;
+    document.getElementById("stepContainer").style.display = "block";
+  }
+
+  // Bind events
+  document.getElementById("calcBtn").onclick = calcFactors;
+  document.getElementById("num").oninput = calcFactors;
+
+  document.getElementById("resetBtn").onclick = function () {
+    document.getElementById("num").value = "120";
+    calcFactors();
+  };
+
+  // Presets
+  document.querySelectorAll("#presetChips .preset-chip").forEach(function (btn) {
+    btn.onclick = function () {
+      document.querySelectorAll("#presetChips .preset-chip").forEach(function (b) { b.classList.remove("active"); });
+      this.classList.add("active");
+      document.getElementById("num").value = this.getAttribute("data-num") || "120";
+      calcFactors();
+    };
+  });
+
+  // Copy Result
+  document.getElementById("copyResultBtn").onclick = function () {
+    var text = document.getElementById("resultMain").textContent;
+    if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).catch(function () {});
+    }
+    this.textContent = "✓ Copied";
+    var btn = this;
+    setTimeout(function () { btn.textContent = "📋 Copy"; }, 1500);
+  };
+
+  // Initial calculation
+  calcFactors();
+})();
 </script>
 <script src="js/currency.js"></script>
 <script src="js/seo-content.js"></script>

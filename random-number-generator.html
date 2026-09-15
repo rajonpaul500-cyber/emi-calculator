@@ -12,21 +12,20 @@
 <script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Random Number Generator - Random Integers &amp; Decimals</title>
-<meta name="description" content="Free random number generator. Create random integers or decimals between any range, with unique values, sorting and instant statistics.">
-<meta name="keywords" content="random number generator, random number between, random integers, random decimals">
+<title>Random Number Generator - Integers, Decimals, Dice &amp; Lottery</title>
+<meta name="description" content="Free random number generator. Generate true random integers, decimals, roll dice, flip coins, and pick lottery numbers with instant statistics.">
+<meta name="keywords" content="random number generator, random number between, dice roller, coin flipper, lottery picker, random integers, random decimals">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://emimaster.com/random-number-generator.html">
-<meta property="og:title" content="Random Number Generator - Random Integers &amp; Decimals">
-<meta property="og:description" content="Free random number generator. Create random integers or decimals between any range, with unique values, sorting and instant statistics.">
+<meta property="og:title" content="Random Number Generator - Integers, Decimals, Dice &amp; Lottery">
+<meta property="og:description" content="Free random number generator. Generate true random integers, decimals, roll dice, flip coins, and pick lottery numbers with instant statistics.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://emimaster.com/random-number-generator.html">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Random Number Generator","url":"https://emimaster.com/random-number-generator.html","description":"Free random number generator. Create random integers or decimals between any range, with unique values, sorting and instant statistics.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How does the random number generator work?","acceptedAnswer":{"@type":"Answer","text":"It uses the browser's random number source to draw values uniformly between your minimum and maximum. Each draw is independent of the previous one."}},{"@type":"Question","name":"Can I generate the same number twice?","acceptedAnswer":{"@type":"Answer","text":"Yes, unless you tick 'No repeats'. Without that option, any number in the range can appear more than once, just like rolling dice."}},{"@type":"Question","name":"What is the best range for a dice roll?","acceptedAnswer":{"@type":"Answer","text":"Set minimum 1 and maximum 6 in integer mode. For two dice, generate two numbers and add them."}},{"@type":"Question","name":"Can I generate decimal numbers?","acceptedAnswer":{"@type":"Answer","text":"Yes. Choose Decimal as the type and set how many decimal places you want, for example 2 places gives values like 37.42."}},{"@type":"Question","name":"Are the numbers stored or sent anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. Generation happens entirely in your browser and nothing is transmitted or stored."}}]}</script>
-<script type="application/json" id="relatedData">[{"href":"rounding-calculator.html","label":"Rounding Calculator","icon":"±"},{"href":"big-number-calculator.html","label":"Big Number Calculator","icon":"#"},{"href":"scientific-notation-calculator.html","label":"Scientific Notation","icon":"×10"}]</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Random Number Generator","url":"https://emimaster.com/random-number-generator.html","description":"Free random number generator for integers, decimals, dice rolls, coin flips, and lotteries with statistics.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How does the random number generator work?","acceptedAnswer":{"@type":"Answer","text":"It uses cryptographically secure browser randomization (window.crypto.getRandomValues or high-entropy uniform distribution) to generate unbiased, truly uniform random numbers."}},{"@type":"Question","name":"Can I generate unique random numbers without repeats?","acceptedAnswer":{"@type":"Answer","text":"Yes, simply check 'No duplicates (Unique)' and each drawn value will appear at most once."}},{"@type":"Question","name":"What modes does this random generator support?","acceptedAnswer":{"@type":"Answer","text":"It supports Standard Range (integers/decimals), Virtual Dice Roller (d4 to d100), Coin Flipper, and Lottery/Raffle Number Picker."}}]}</script>
+<script type="application/json" id="relatedData">[{"href":"rounding-calculator.html","label":"Rounding Calculator","icon":"±"},{"href":"fraction-calculator.html","label":"Fraction Calculator","icon":"⅙"},{"href":"percentage-calculator.html","label":"Percentage Calculator","icon":"%"}]</script>
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-
 </head>
 <body>
 
@@ -35,7 +34,7 @@
 <section class="hero hero-compact">
   <div class="container">
     <h1>Random Number Generator</h1>
-    <p>Generate random integers or decimals between any two numbers.</p>
+    <p>Generate truly random integers or decimals, roll dice, flip coins, and draw lottery numbers with full statistical analysis.</p>
   </div>
 </section>
 
@@ -44,87 +43,493 @@
 
   <main class="main-content">
     <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="index.html#math">Math Calculators</a> &rsaquo; Random Number Generator</div>
-    <h1 class="page-title">Random Number Generator</h1>
-    <p class="page-subtitle">Set the range and quantity, choose integer or decimal output, and generate truly random numbers with instant statistics.</p>
+    <h1 class="page-title">Random Number Generator &amp; Dice Roller</h1>
+    <p class="page-subtitle">Configure your custom numerical boundaries, select unique drawing or sorting, and generate unbiased random values instantly.</p>
 
-<div class="card">
-<h2>Generate random numbers</h2>
-<div class="form-grid">
-<div class="form-group"><label>Minimum</label><input type="number" id="min" value="1"></div>
-<div class="form-group"><label>Maximum</label><input type="number" id="max" value="100"></div>
-<div class="form-group"><label>How many</label><input type="number" id="count" value="5" min="1" max="200"></div>
-<div class="form-group"><label>Type</label><select id="type"><option value="int">Integer</option><option value="float">Decimal</option></select></div>
-<div class="form-group"><label>Decimal places (decimals)</label><input type="number" id="decimals" value="2" min="1" max="6"></div>
-<div class="form-group"><label>Options</label>
-<label class="checkbox-inline"><input type="checkbox" id="unique"> No repeats</label>
-<label class="checkbox-inline"><input type="checkbox" id="sort"> Sort ascending</label>
-</div>
-</div>
-<div class="form-actions"><button class="btn btn-primary" id="calcBtn" type="button">Generate</button></div>
-</div>
+    <!-- Generator Mode Tabs -->
+    <div class="calc-tabs" id="rngTabs" style="display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap;">
+      <button type="button" class="btn btn-sm btn-primary tab-btn active" data-mode="range">Standard Range (Min - Max)</button>
+      <button type="button" class="btn btn-sm btn-outline tab-btn" data-mode="dice">🎲 Dice Roller</button>
+      <button type="button" class="btn btn-sm btn-outline tab-btn" data-mode="coin">🪙 Coin Flipper</button>
+      <button type="button" class="btn btn-sm btn-outline tab-btn" data-mode="lottery">🎟️ Lottery / Raffle Draw</button>
+    </div>
 
-    <div class="result-panel" id="resultPanel">
-      <h3>Result</h3>
-      <div class="result-main" id="resultMain">&mdash;</div>
+    <!-- Quick Presets -->
+    <div class="preset-chips" id="presetChips" style="margin-bottom:16px;">
+      <span class="preset-label" style="font-size:0.85rem; font-weight:600; color:var(--text-muted);">Quick Presets:</span>
+      <button type="button" class="preset-chip active" data-preset="1-100">1 to 100 (5 items)</button>
+      <button type="button" class="preset-chip" data-preset="1-10">1 to 10 (Single)</button>
+      <button type="button" class="preset-chip" data-preset="dice2d6">2d6 Dice Roll</button>
+      <button type="button" class="preset-chip" data-preset="dice1d20">1d20 D&amp;D Roll</button>
+      <button type="button" class="preset-chip" data-preset="lottery649">Lottery (6 of 49)</button>
+    </div>
+
+    <div class="card">
+      <h2 id="generatorCardTitle">Standard Range Configuration</h2>
+
+      <!-- Standard Range Form -->
+      <div id="formRange">
+        <div class="form-grid">
+          <div class="form-group"><label>Minimum Value</label><input type="number" id="min" value="1" step="any"></div>
+          <div class="form-group"><label>Maximum Value</label><input type="number" id="max" value="100" step="any"></div>
+          <div class="form-group"><label>Quantity (How Many)</label><input type="number" id="count" value="5" min="1" max="500"></div>
+          <div class="form-group"><label>Number Format</label>
+            <select id="type">
+              <option value="int">Integer (Whole Numbers)</option>
+              <option value="float">Decimal (Floating Point)</option>
+            </select>
+          </div>
+          <div class="form-group" id="groupDec" style="display:none;"><label>Decimal Precision (Places)</label><input type="number" id="decimals" value="2" min="1" max="8"></div>
+        </div>
+        <div style="display:flex; gap:16px; margin-top:12px; flex-wrap:wrap;">
+          <label class="checkbox-inline" style="display:inline-flex; align-items:center; gap:6px; cursor:pointer;">
+            <input type="checkbox" id="unique"> <strong>No duplicates (Unique values)</strong>
+          </label>
+          <label class="checkbox-inline" style="display:inline-flex; align-items:center; gap:6px; cursor:pointer;">
+            <input type="checkbox" id="sort"> <strong>Sort ascending (Low to High)</strong>
+          </label>
+        </div>
+      </div>
+
+      <!-- Dice Roller Form -->
+      <div id="formDice" style="display:none;">
+        <div class="form-grid">
+          <div class="form-group"><label>Number of Dice</label><input type="number" id="diceCount" value="2" min="1" max="50"></div>
+          <div class="form-group"><label>Dice Type (Sides)</label>
+            <select id="diceSides">
+              <option value="4">d4 (4-sided)</option>
+              <option value="6" selected>d6 (Standard 6-sided)</option>
+              <option value="8">d8 (8-sided)</option>
+              <option value="10">d10 (10-sided)</option>
+              <option value="12">d12 (12-sided)</option>
+              <option value="20">d20 (20-sided / D&amp;D)</option>
+              <option value="100">d100 (Percentile)</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Modifier (+ / &minus; Bonus)</label><input type="number" id="diceMod" value="0"></div>
+        </div>
+      </div>
+
+      <!-- Coin Flipper Form -->
+      <div id="formCoin" style="display:none;">
+        <div class="form-grid">
+          <div class="form-group"><label>Number of Coin Flips</label><input type="number" id="coinCount" value="10" min="1" max="1000"></div>
+        </div>
+      </div>
+
+      <!-- Lottery Form -->
+      <div id="formLottery" style="display:none;">
+        <div class="form-grid">
+          <div class="form-group"><label>Numbers to Pick</label><input type="number" id="lotteryPick" value="6" min="1" max="30"></div>
+          <div class="form-group"><label>From a Pool of (Max)</label><input type="number" id="lotteryPool" value="49" min="2" max="100"></div>
+        </div>
+      </div>
+
+      <div class="form-actions" style="display:flex; gap:12px; margin-top:20px;">
+        <button class="btn btn-primary" id="calcBtn" type="button" style="flex:1; font-size:1.05rem; padding:12px 24px;">⚡ Generate Numbers</button>
+        <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
+      </div>
+    </div>
+
+    <!-- PRO RESULT PANEL -->
+    <div class="result-panel" id="resultPanel" style="margin-top:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:12px; margin-bottom:16px;">
+        <h3 style="margin:0; font-size:1.15rem;">Generated Random Outcome</h3>
+        <button type="button" class="btn btn-sm btn-outline" id="copyResultBtn" title="Copy numbers to clipboard">📋 Copy Numbers</button>
+      </div>
+
+      <!-- Tokenized Numbers Box -->
+      <div id="tokensContainer" style="display:flex; flex-wrap:wrap; gap:10px; justify-content:center; padding:16px; background:var(--bg, #f8fafc); border-radius:10px; border:1px solid var(--border, #e2e8f0); min-height:70px; align-items:center;">
+        <div style="color:var(--text-muted);">Press "Generate Numbers" to begin...</div>
+      </div>
+
+      <!-- Summary String -->
+      <div class="result-main" id="resultMain" style="font-size:1.4rem; font-weight:800; color:var(--primary); text-align:center; padding:12px 0;">&mdash;</div>
+
+      <!-- Statistical Breakdown Grid -->
       <div class="result-grid" id="resultGrid"></div>
     </div>
 
     <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
 
     <div class="quick-facts">
-    <div class="fact-chip"><strong>Types:</strong> Integers or decimals</div>
-    <div class="fact-chip"><strong>Range:</strong> Any minimum and maximum</div>
-    <div class="fact-chip"><strong>Extras:</strong> No repeats, sorting, statistics</div>
-    <div class="fact-chip"><strong>Usage:</strong> Lotteries, samples, games, testing</div>
+      <div class="fact-chip"><strong>Distribution:</strong> Uniform Pseudorandom</div>
+      <div class="fact-chip"><strong>Cryptographic Base:</strong> High-entropy browser entropy</div>
+      <div class="fact-chip"><strong>Modes:</strong> Range, Dice, Coin, Lottery</div>
+      <div class="fact-chip"><strong>Client Privacy:</strong> 100% computed in browser</div>
     </div>
 
-<div class="content-section"><h2 id="what-makes-a-number-random">What makes a number random?</h2><p>A random number has no predictable pattern. This generator uses the browser's random number source, which produces values that behave like independent, uniformly distributed draws across your chosen range.</p>
-      <p>Uniform distribution means every number in the range has an equal chance of appearing. Over many draws, the results spread evenly; a small sample can still look 'clustered' purely by chance.</p></div>
-    <div class="content-section"><h2 id="integers-vs-decimals">Integers vs decimals</h2><p>Integer mode returns whole numbers only, ideal for dice rolls, lottery numbers or picking an item from a list.</p>
-      <p>Decimal mode returns values with a chosen number of decimal places, useful for statistics, simulation and experiments where continuous values are needed.</p></div>
-<div class="content-section"><h2 id="how-to-use">How to use this calculator</h2><ol><li>Enter the minimum and maximum of the range.</li><li>Choose how many numbers to generate and the type (integer or decimal).</li><li>Optionally tick 'No repeats' and 'Sort ascending'.</li><li>Press Generate and read the list plus sum, mean, minimum and maximum.</li></ol></div>
-<div class="content-section tips-box"><h2>Pro tips</h2><ul><li>For a coin flip use integers 1-2; for dice use 1-6.</li><li>Tick 'No repeats' when drawing a sample without replacement.</li><li>Use decimal mode with 2 places for realistic money or measurement values.</li></ul></div>
-<div class="content-section"><h2>Advantages &amp; considerations</h2><div class="pros-cons"><div class="pros"><h3>&#9989; Advantages</h3><ul><li>Integers and decimals with adjustable precision</li><li>Unique and sorted output options</li><li>Instant statistics on every generation</li></ul></div><div class="cons"><h3>&#9888;&#65039; Considerations</h3><ul><li>Truly random means patterns can appear by chance</li><li>Unique decimals may run out if the range is tiny</li></ul></div></div></div>
-<div class="content-section"><h2 id="faq">Frequently asked questions</h2><div class="faq-item"><div class="faq-q">How does the random number generator work?<span class="arrow">&#9654;</span></div><div class="faq-a">It uses the browser's random number source to draw values uniformly between your minimum and maximum. Each draw is independent of the previous one.</div></div>
-      <div class="faq-item"><div class="faq-q">Can I generate the same number twice?<span class="arrow">&#9654;</span></div><div class="faq-a">Yes, unless you tick 'No repeats'. Without that option, any number in the range can appear more than once, just like rolling dice.</div></div>
-      <div class="faq-item"><div class="faq-q">What is the best range for a dice roll?<span class="arrow">&#9654;</span></div><div class="faq-a">Set minimum 1 and maximum 6 in integer mode. For two dice, generate two numbers and add them.</div></div>
-      <div class="faq-item"><div class="faq-q">Can I generate decimal numbers?<span class="arrow">&#9654;</span></div><div class="faq-a">Yes. Choose Decimal as the type and set how many decimal places you want, for example 2 places gives values like 37.42.</div></div>
-      <div class="faq-item"><div class="faq-q">Are the numbers stored or sent anywhere?<span class="arrow">&#9654;</span></div><div class="faq-a">No. Generation happens entirely in your browser and nothing is transmitted or stored.</div></div></div>
+    <div class="content-section">
+      <h2 id="what-makes-a-number-random">What makes a number random?</h2>
+      <p>A random sequence is characterized by unpredictable independence: every prospective integer or decimal across your specified boundary has an exact, uniform mathematical probability of being selected. The generation occurs locally inside your browser without any network delays or caching.</p>
+    </div>
+
+    <div class="content-section">
+      <h2 id="faq">Frequently asked questions</h2>
+      <div class="faq-item"><div class="faq-q">How does the random number generator work?<span class="arrow">&#9654;</span></div><div class="faq-a">It uses cryptographically secure browser randomization to generate unbiased, truly uniform random numbers.</div></div>
+      <div class="faq-item"><div class="faq-q">Can I generate unique random numbers without repeats?<span class="arrow">&#9654;</span></div><div class="faq-a">Yes, simply check 'No duplicates (Unique)' and each drawn value will appear at most once.</div></div>
+      <div class="faq-item"><div class="faq-q">What modes does this random generator support?<span class="arrow">&#9654;</span></div><div class="faq-a">It supports Standard Range (integers/decimals), Virtual Dice Roller (d4 to d100), Coin Flipper, and Lottery/Raffle Number Picker.</div></div>
+    </div>
   </main>
 </div>
 
-<div id="siteFooter"></div>
+<div id="siteFooter">
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>EMI Master</h4>
+        <p>Free, instant, and private online calculators for mortgages, loans, investments, retirement, and mathematics. Your inputs never leave your browser.</p>
+        <p><a href="sitemap.html"><strong>&rarr; All 50+ Calculators (Directory)</strong></a></p>
+      </div>
+      <div class="footer-col">
+        <h4>Popular Calculators</h4>
+        <ul>
+          <li><a href="mortgage-calculator.html">Mortgage Calculator</a></li>
+          <li><a href="amortization-calculator.html">Amortization Calculator</a></li>
+          <li><a href="emi-calculator.html">EMI Calculator</a></li>
+          <li><a href="home-loan.html">Home Loan Calculator</a></li>
+          <li><a href="car-loan.html">Car Loan Calculator</a></li>
+          <li><a href="personal-loan.html">Personal Loan Calculator</a></li>
+          <li><a href="compound-interest-calculator.html">Compound Interest</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Loans &amp; Real Estate</h4>
+        <ul>
+          <li><a href="refinance-calculator.html">Refinance Calculator</a></li>
+          <li><a href="fha-loan.html">FHA Loan Calculator</a></li>
+          <li><a href="va-loan.html">VA Mortgage Calculator</a></li>
+          <li><a href="home-equity-loan.html">Home Equity Loan</a></li>
+          <li><a href="heloc-calculator.html">HELOC Calculator</a></li>
+          <li><a href="loan-payoff.html">Loan Payoff Calculator</a></li>
+          <li><a href="house-affordability.html">House Affordability</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Investment &amp; Tools</h4>
+        <ul>
+          <li><a href="investment-calculator.html">Investment Calculator</a></li>
+          <li><a href="retirement-calculator.html">Retirement Calculator</a></li>
+          <li><a href="social-security-calculator.html">Social Security</a></li>
+          <li><a href="scientific-calculator.html">Scientific Calculator</a></li>
+          <li><a href="percentage-calculator.html">Percentage Calculator</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="sitemap.html"><strong>Complete HTML Sitemap</strong></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 EMI Master. All rights reserved. For educational and planning purposes only.
+    </div>
+  </footer>
+</div>
 
 <script src="js/math.js"></script>
 <script>
-function item(l,v){return '<div class="result-item"><div class="label">'+l+'</div><div class="value">'+v+'</div></div>';}
-document.getElementById("calcBtn").onclick=function(){
-var min=parseFloat(document.getElementById("min").value);
-var max=parseFloat(document.getElementById("max").value);
-var count=parseInt(document.getElementById("count").value,10);
-var type=document.getElementById("type").value;
-var dec=parseInt(document.getElementById("decimals").value,10)||2;
-var uniq=document.getElementById("unique").checked;
-var sort=document.getElementById("sort").checked;
-if(isNaN(min)||isNaN(max)||isNaN(count)||count<1||count>200){document.getElementById("resultMain").textContent="Enter valid values";document.getElementById("resultGrid").innerHTML="";return;}
-if(min>max){var t=min;min=max;max=t;}
-if(uniq&&type==="int"&&max-min+1<count){document.getElementById("resultMain").textContent="Range too small for unique numbers";document.getElementById("resultGrid").innerHTML="";return;}
-var nums=[],seen={};
-while(nums.length<count){
-var v;
-if(type==="int"){v=Math.floor(Math.random()*(max-min+1))+min;}
-else{v=Math.round((Math.random()*(max-min)+min)*Math.pow(10,dec))/Math.pow(10,dec);}
-if(uniq){var key=type==="int"?String(v):v.toFixed(dec);if(seen[key])continue;seen[key]=1;}
-nums.push(v);
-if(uniq&&nums.length>10000){break;}
-}
-if(sort){nums.sort(function(a,b){return a-b;});}
-var sum=nums.reduce(function(a,b){return a+b;},0);
-var mean=sum/nums.length;
-var nmin=Math.min.apply(null,nums);
-var nmax=Math.max.apply(null,nums);
-document.getElementById("resultMain").textContent=nums.join(", ");
-document.getElementById("resultGrid").innerHTML=item("Numbers",nums.length)+item("Sum",MathCalc.fmt(sum,dec))+item("Mean",MathCalc.fmt(mean,dec))+item("Min",MathCalc.fmt(nmin,dec))+item("Max",MathCalc.fmt(nmax,dec));};
+(function(){
+  function item(l,v){return '<div class="result-item"><div class="label">'+l+'</div><div class="value">'+v+'</div></div>';}
+
+  var currentMode = "range";
+  var lastGeneratedList = [];
+
+  // Mode switching
+  document.querySelectorAll("#rngTabs .tab-btn").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      document.querySelectorAll("#rngTabs .tab-btn").forEach(function(b){
+        b.classList.remove("active", "btn-primary");
+        b.classList.add("btn-outline");
+      });
+      btn.classList.add("active", "btn-primary");
+      btn.classList.remove("btn-outline");
+
+      currentMode = btn.getAttribute("data-mode");
+      document.getElementById("formRange").style.display = currentMode === "range" ? "block" : "none";
+      document.getElementById("formDice").style.display = currentMode === "dice" ? "block" : "none";
+      document.getElementById("formCoin").style.display = currentMode === "coin" ? "block" : "none";
+      document.getElementById("formLottery").style.display = currentMode === "lottery" ? "block" : "none";
+
+      var titles = {
+        range: "Standard Range Configuration",
+        dice: "🎲 Virtual Multi-Sided Dice Roller",
+        coin: "🪙 Virtual Coin Flipper",
+        lottery: "🎟️ Lottery & Raffle Draw Simulator"
+      };
+      document.getElementById("generatorCardTitle").textContent = titles[currentMode];
+      generate();
+    });
+  });
+
+  // Toggle decimal precision input
+  document.getElementById("type").addEventListener("change", function(){
+    document.getElementById("groupDec").style.display = this.value === "float" ? "block" : "none";
+    generate();
+  });
+
+  // Presets
+  document.querySelectorAll("#presetChips .preset-chip").forEach(function(chip){
+    chip.addEventListener("click", function(){
+      document.querySelectorAll("#presetChips .preset-chip").forEach(function(c){ c.classList.remove("active"); });
+      chip.classList.add("active");
+
+      var p = chip.getAttribute("data-preset");
+      if (p === "1-100") {
+        setMode("range");
+        document.getElementById("min").value = 1;
+        document.getElementById("max").value = 100;
+        document.getElementById("count").value = 5;
+        document.getElementById("type").value = "int";
+        document.getElementById("unique").checked = false;
+        document.getElementById("sort").checked = false;
+      } else if (p === "1-10") {
+        setMode("range");
+        document.getElementById("min").value = 1;
+        document.getElementById("max").value = 10;
+        document.getElementById("count").value = 1;
+        document.getElementById("type").value = "int";
+      } else if (p === "dice2d6") {
+        setMode("dice");
+        document.getElementById("diceCount").value = 2;
+        document.getElementById("diceSides").value = "6";
+        document.getElementById("diceMod").value = 0;
+      } else if (p === "dice1d20") {
+        setMode("dice");
+        document.getElementById("diceCount").value = 1;
+        document.getElementById("diceSides").value = "20";
+        document.getElementById("diceMod").value = 0;
+      } else if (p === "lottery649") {
+        setMode("lottery");
+        document.getElementById("lotteryPick").value = 6;
+        document.getElementById("lotteryPool").value = 49;
+      }
+      generate();
+    });
+  });
+
+  function setMode(m) {
+    currentMode = m;
+    var btn = document.querySelector('#rngTabs [data-mode="' + m + '"]');
+    if (btn) {
+      document.querySelectorAll("#rngTabs .tab-btn").forEach(function(x){
+        x.classList.remove("active", "btn-primary");
+        x.classList.add("btn-outline");
+      });
+      btn.classList.add("active", "btn-primary");
+      btn.classList.remove("btn-outline");
+    }
+    document.getElementById("formRange").style.display = m === "range" ? "block" : "none";
+    document.getElementById("formDice").style.display = m === "dice" ? "block" : "none";
+    document.getElementById("formCoin").style.display = m === "coin" ? "block" : "none";
+    document.getElementById("formLottery").style.display = m === "lottery" ? "block" : "none";
+  }
+
+  function getCryptoRandomFloat() {
+    if (window.crypto && window.crypto.getRandomValues) {
+      var buffer = new Uint32Array(1);
+      window.crypto.getRandomValues(buffer);
+      return buffer[0] / (0xFFFFFFFF + 1);
+    }
+    return Math.random();
+  }
+
+  function generate() {
+    var tokensBox = document.getElementById("tokensContainer");
+    tokensBox.innerHTML = "";
+
+    if (currentMode === "range") {
+      var min = parseFloat(document.getElementById("min").value);
+      var max = parseFloat(document.getElementById("max").value);
+      var count = parseInt(document.getElementById("count").value, 10);
+      var type = document.getElementById("type").value;
+      var dec = parseInt(document.getElementById("decimals").value, 10) || 2;
+      var uniq = document.getElementById("unique").checked;
+      var sort = document.getElementById("sort").checked;
+
+      if (isNaN(min) || isNaN(max) || isNaN(count) || count < 1 || count > 500) {
+        document.getElementById("resultMain").textContent = "Please enter valid range parameters";
+        document.getElementById("resultGrid").innerHTML = "";
+        return;
+      }
+
+      if (min > max) { var temp = min; min = max; max = temp; }
+
+      if (uniq && type === "int" && (max - min + 1) < count) {
+        document.getElementById("resultMain").innerHTML = '<span style="color:#dc2626;">Range is too small to produce ' + count + ' unique integers.</span>';
+        document.getElementById("resultGrid").innerHTML = "";
+        return;
+      }
+
+      var nums = [], seen = {};
+      var attempts = 0;
+      while (nums.length < count && attempts < 20000) {
+        attempts++;
+        var val;
+        var r = getCryptoRandomFloat();
+        if (type === "int") {
+          val = Math.floor(r * (max - min + 1)) + min;
+        } else {
+          val = parseFloat((r * (max - min) + min).toFixed(dec));
+        }
+
+        if (uniq) {
+          var key = val.toString();
+          if (seen[key]) continue;
+          seen[key] = true;
+        }
+        nums.push(val);
+      }
+
+      if (sort) {
+        nums.sort(function(a,b){ return a - b; });
+      }
+
+      lastGeneratedList = nums;
+
+      // Render Tokens
+      nums.forEach(function(n){
+        var token = document.createElement("span");
+        token.style.cssText = "display:inline-flex; align-items:center; justify-content:center; min-width:44px; height:44px; padding:0 12px; background:var(--primary, #2563eb); color:#ffffff; font-weight:700; border-radius:8px; font-size:1.1rem; box-shadow:0 2px 4px rgba(0,0,0,0.1);";
+        token.textContent = n;
+        tokensBox.appendChild(token);
+      });
+
+      document.getElementById("resultMain").textContent = nums.join(", ");
+
+      // Stats
+      var sum = nums.reduce(function(a, b){ return a + b; }, 0);
+      var mean = sum / nums.length;
+      var nmin = Math.min.apply(null, nums);
+      var nmax = Math.max.apply(null, nums);
+
+      // Median
+      var sorted = nums.slice().sort(function(a,b){ return a - b; });
+      var mid = Math.floor(sorted.length / 2);
+      var median = sorted.length % 2 !== 0 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
+
+      // Even / Odd counts
+      var evens = nums.filter(function(n){ return Math.floor(n) % 2 === 0; }).length;
+      var odds = nums.length - evens;
+
+      var gridHtml = item("Total Generated", nums.length) +
+                     item("Sum (&Sigma;)", MathCalc.fmt(sum, dec)) +
+                     item("Arithmetic Mean", MathCalc.fmt(mean, dec)) +
+                     item("Median", MathCalc.fmt(median, dec)) +
+                     item("Minimum", MathCalc.fmt(nmin, dec)) +
+                     item("Maximum", MathCalc.fmt(nmax, dec)) +
+                     item("Even / Odd Count", evens + " Evens / " + odds + " Odds");
+      document.getElementById("resultGrid").innerHTML = gridHtml;
+
+    } else if (currentMode === "dice") {
+      var dCount = parseInt(document.getElementById("diceCount").value, 10) || 1;
+      var dSides = parseInt(document.getElementById("diceSides").value, 10) || 6;
+      var dMod = parseInt(document.getElementById("diceMod").value, 10) || 0;
+
+      var diceRolls = [];
+      for (var i = 0; i < dCount; i++) {
+        var roll = Math.floor(getCryptoRandomFloat() * dSides) + 1;
+        diceRolls.push(roll);
+
+        var die = document.createElement("span");
+        die.style.cssText = "display:inline-flex; align-items:center; justify-content:center; width:48px; height:48px; background:#f1f5f9; color:#0f172a; border:2px solid #cbd5e1; font-weight:800; border-radius:10px; font-size:1.25rem;";
+        die.textContent = roll;
+        tokensBox.appendChild(die);
+      }
+
+      var rawSum = diceRolls.reduce(function(a,b){ return a+b; }, 0);
+      var finalTotal = rawSum + dMod;
+      lastGeneratedList = diceRolls;
+
+      document.getElementById("resultMain").textContent = "Total: " + finalTotal + " (Rolls: " + diceRolls.join(" + ") + (dMod !== 0 ? (dMod > 0 ? " + " + dMod : " − " + Math.abs(dMod)) : "") + ")";
+
+      var gridHtml = item("Dice Total", finalTotal) +
+                     item("Raw Roll Sum", rawSum) +
+                     item("Modifier Bonus", (dMod >= 0 ? "+" : "") + dMod) +
+                     item("Dice Type", dCount + "d" + dSides);
+      document.getElementById("resultGrid").innerHTML = gridHtml;
+
+    } else if (currentMode === "coin") {
+      var cCount = parseInt(document.getElementById("coinCount").value, 10) || 10;
+      var flips = [];
+      var heads = 0, tails = 0;
+
+      for (var j = 0; j < cCount; j++) {
+        var isHead = getCryptoRandomFloat() < 0.5;
+        if (isHead) { heads++; flips.push("Heads"); }
+        else { tails++; flips.push("Tails"); }
+
+        var coinEl = document.createElement("span");
+        coinEl.style.cssText = "display:inline-flex; align-items:center; justify-content:center; padding:4px 10px; background:" + (isHead ? "#dcfce7; color:#166534;" : "#e0e7ff; color:#3730a3;") + " font-weight:700; border-radius:16px; font-size:0.9rem;";
+        coinEl.textContent = isHead ? "🪙 Heads" : "🪙 Tails";
+        tokensBox.appendChild(coinEl);
+      }
+
+      lastGeneratedList = flips;
+      document.getElementById("resultMain").textContent = heads + " Heads (" + ((heads / cCount)*100).toFixed(1) + "%) | " + tails + " Tails (" + ((tails / cCount)*100).toFixed(1) + "%)";
+
+      var gridHtml = item("Total Flips", cCount) +
+                     item("Heads Count", heads + " (" + ((heads / cCount)*100).toFixed(1) + "%)") +
+                     item("Tails Count", tails + " (" + ((tails / cCount)*100).toFixed(1) + "%)") +
+                     item("Ratio H:T", (heads / Math.max(1, tails)).toFixed(2) + " : 1");
+      document.getElementById("resultGrid").innerHTML = gridHtml;
+
+    } else if (currentMode === "lottery") {
+      var lPick = parseInt(document.getElementById("lotteryPick").value, 10) || 6;
+      var lPool = parseInt(document.getElementById("lotteryPool").value, 10) || 49;
+
+      if (lPick > lPool) {
+        document.getElementById("resultMain").textContent = "Cannot pick more numbers than the pool size.";
+        return;
+      }
+
+      var pool = [];
+      for (var k = 1; k <= lPool; k++) pool.push(k);
+
+      // Fisher-Yates Shuffle
+      for (var m = pool.length - 1; m > 0; m--) {
+        var randIdx = Math.floor(getCryptoRandomFloat() * (m + 1));
+        var tempP = pool[m];
+        pool[m] = pool[randIdx];
+        pool[randIdx] = tempP;
+      }
+
+      var picked = pool.slice(0, lPick).sort(function(a,b){ return a - b; });
+      lastGeneratedList = picked;
+
+      picked.forEach(function(num){
+        var ball = document.createElement("span");
+        ball.style.cssText = "display:inline-flex; align-items:center; justify-content:center; width:46px; height:46px; background:radial-gradient(circle at 30% 30%, #ef4444, #991b1b); color:#ffffff; font-weight:800; border-radius:50%; font-size:1.15rem; box-shadow:0 3px 6px rgba(0,0,0,0.2);";
+        ball.textContent = num;
+        tokensBox.appendChild(ball);
+      });
+
+      document.getElementById("resultMain").textContent = "Lucky Numbers: " + picked.join("  -  ");
+
+      var gridHtml = item("Numbers Picked", lPick) +
+                     item("Pool Size", "1 to " + lPool) +
+                     item("Selected Range", picked[0] + " to " + picked[picked.length - 1]);
+      document.getElementById("resultGrid").innerHTML = gridHtml;
+    }
+  }
+
+  document.getElementById("calcBtn").addEventListener("click", generate);
+  document.getElementById("resetBtn").addEventListener("click", function(){
+    document.getElementById("min").value = 1;
+    document.getElementById("max").value = 100;
+    document.getElementById("count").value = 5;
+    generate();
+  });
+
+  document.getElementById("copyResultBtn").addEventListener("click", function(){
+    var txt = lastGeneratedList.join(", ");
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(txt).then(function(){
+        if (window.EMIMaster && window.EMIMaster.showToast) window.EMIMaster.showToast("Copied random numbers to clipboard!");
+      });
+    }
+  });
+
+  // Init
+  generate();
+})();
 </script>
 <script src="js/currency.js"></script>
 <script src="js/seo-content.js"></script>

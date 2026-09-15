@@ -47,30 +47,80 @@
     <h1 class="page-title">Scientific Notation Calculator</h1>
     <p class="page-subtitle">Convert any number to scientific notation, or perform arithmetic on two numbers in scientific notation with full precision.</p>
 
-<div class="card">
-<h2>Number to scientific notation</h2>
-<div class="form-group"><label>Number (or use E-notation like 1.2e5)</label><input type="text" id="num" value="123456789" placeholder="e.g. 123456789 or 1.2e5"></div>
-<div class="form-actions"><button class="btn btn-primary" id="convBtn" type="button">Convert</button></div>
-</div>
+    <!-- Quick Presets -->
+    <div class="preset-chips" id="presetChips" style="margin-bottom:16px;">
+      <span class="preset-label" style="font-size:0.85rem; font-weight:600; color:var(--text-muted);">Quick Presets:</span>
+      <button type="button" class="preset-chip active" data-mode="conv" data-val="299792458">Speed of Light (299,792,458)</button>
+      <button type="button" class="preset-chip" data-mode="conv" data-val="6.02214076e23">Avogadro's Number (6.022e23)</button>
+      <button type="button" class="preset-chip" data-mode="conv" data-val="0.0000000000000000001602">Electron Charge (1.602e-19)</button>
+      <button type="button" class="preset-chip" data-mode="arith" data-ma="3.2" data-ea="4" data-mb="1.5" data-eb="3" data-op="mul">Multiply (3.2e4 &times; 1.5e3)</button>
+      <button type="button" class="preset-chip" data-mode="arith" data-ma="9.8" data-ea="6" data-mb="2.4" data-ea="6" data-op="add">Add (9.8e6 + 2.4e6)</button>
+    </div>
 
-<div class="card">
-<h2>Arithmetic in scientific notation</h2>
-<div class="form-grid">
-<div class="form-group"><label>A mantissa</label><input type="number" id="ma" value="3.2" step="any"></div>
-<div class="form-group"><label>A exponent</label><input type="number" id="ea" value="4" step="any"></div>
-<div class="form-group"><label>B mantissa</label><input type="number" id="mb" value="1.5" step="any"></div>
-<div class="form-group"><label>B exponent</label><input type="number" id="eb" value="3" step="any"></div>
-<div class="form-group"><label>Operation</label>
-<select id="op"><option value="add">+ Add</option><option value="sub">- Subtract</option><option value="mul">× Multiply</option><option value="div">÷ Divide</option></select>
-</div>
-</div>
-<div class="form-actions"><button class="btn btn-outline" id="arithBtn" type="button">Calculate</button></div>
-</div>
+    <!-- Mode Tabs -->
+    <div style="display:flex; gap:8px; margin-bottom:16px;">
+      <button type="button" class="btn btn-primary" id="tabConv" style="flex:1;">Number Converter</button>
+      <button type="button" class="btn btn-outline" id="tabArith" style="flex:1;">Scientific Arithmetic</button>
+    </div>
 
-    <div class="result-panel" id="resultPanel">
-      <h3>Result</h3>
-      <div class="result-main" id="resultMain">&mdash;</div>
-      <div class="result-grid" id="resultGrid"></div>
+    <div class="card" id="cardConv">
+      <h2>Convert to Scientific &amp; Engineering Notation</h2>
+      <div class="form-group">
+        <label for="num">Decimal or Scientific Number (e.g. 123456789 or 1.2e5 or 0.0045)</label>
+        <input type="text" id="num" value="123456789" placeholder="e.g. 123456789 or 1.2e5">
+      </div>
+      <div class="form-actions" style="display:flex; gap:12px; margin-top:16px;">
+        <button class="btn btn-primary" id="convBtn" type="button" style="flex:1;">Convert</button>
+        <button class="btn btn-outline" id="resetConvBtn" type="button">Reset</button>
+      </div>
+    </div>
+
+    <div class="card" id="cardArith" style="display:none;">
+      <h2>Arithmetic with Scientific Exponents</h2>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="ma">Number A (Mantissa)</label>
+          <input type="number" id="ma" value="3.2" step="any">
+        </div>
+        <div class="form-group">
+          <label for="ea">Number A (10^Exponent)</label>
+          <input type="number" id="ea" value="4" step="any">
+        </div>
+        <div class="form-group">
+          <label for="mb">Number B (Mantissa)</label>
+          <input type="number" id="mb" value="1.5" step="any">
+        </div>
+        <div class="form-group">
+          <label for="eb">Number B (10^Exponent)</label>
+          <input type="number" id="eb" value="3" step="any">
+        </div>
+        <div class="form-group" style="grid-column:1/-1;">
+          <label for="op">Operation</label>
+          <select id="op">
+            <option value="mul">&times; Multiplication (A &times; B)</option>
+            <option value="div">&divide; Division (A &divide; B)</option>
+            <option value="add">+ Addition (A + B)</option>
+            <option value="sub">&minus; Subtraction (A &minus; B)</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-actions" style="display:flex; gap:12px; margin-top:16px;">
+        <button class="btn btn-primary" id="arithBtn" type="button" style="flex:1;">Calculate Operation</button>
+        <button class="btn btn-outline" id="resetArithBtn" type="button">Reset</button>
+      </div>
+    </div>
+
+    <div class="result-panel" id="resultPanel" style="margin-top:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:12px; margin-bottom:16px;">
+        <h3 style="margin:0; font-size:1.15rem;">Notation &amp; Calculation Result</h3>
+        <button type="button" class="btn btn-sm btn-outline" id="copyResultBtn" title="Copy result text">📋 Copy</button>
+      </div>
+      <div class="result-main" id="resultMain" style="font-size:1.8rem; font-weight:800; color:var(--primary); text-align:center; padding:12px 0;">&mdash;</div>
+      <div class="result-grid" id="resultGrid" style="margin-top:16px;"></div>
+      <div id="stepContainer" style="margin-top:20px; padding:16px; background:var(--bg-alt); border-radius:8px; border:1px solid var(--border); display:none;">
+        <h4 style="margin:0 0 10px; font-size:1rem; color:var(--primary);">Step-by-Step Notation Breakdown</h4>
+        <div id="stepContent" style="font-size:0.92rem; line-height:1.7;"></div>
+      </div>
     </div>
 
     <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
@@ -97,39 +147,274 @@
   </main>
 </div>
 
-<div id="siteFooter"></div>
+<div id="siteFooter">
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>EMI Master</h4>
+        <p>Free, instant, and private online calculators for mortgages, loans, investments, retirement, and mathematics. Your inputs never leave your browser.</p>
+        <p><a href="sitemap.html"><strong>&rarr; All 50+ Calculators (Directory)</strong></a></p>
+      </div>
+      <div class="footer-col">
+        <h4>Popular Calculators</h4>
+        <ul>
+          <li><a href="mortgage-calculator.html">Mortgage Calculator</a></li>
+          <li><a href="amortization-calculator.html">Amortization Calculator</a></li>
+          <li><a href="emi-calculator.html">EMI Calculator</a></li>
+          <li><a href="home-loan.html">Home Loan Calculator</a></li>
+          <li><a href="car-loan.html">Car Loan Calculator</a></li>
+          <li><a href="personal-loan.html">Personal Loan Calculator</a></li>
+          <li><a href="compound-interest-calculator.html">Compound Interest</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Loans &amp; Real Estate</h4>
+        <ul>
+          <li><a href="refinance-calculator.html">Refinance Calculator</a></li>
+          <li><a href="fha-loan.html">FHA Loan Calculator</a></li>
+          <li><a href="va-loan.html">VA Mortgage Calculator</a></li>
+          <li><a href="home-equity-loan.html">Home Equity Loan</a></li>
+          <li><a href="heloc-calculator.html">HELOC Calculator</a></li>
+          <li><a href="loan-payoff.html">Loan Payoff Calculator</a></li>
+          <li><a href="house-affordability.html">House Affordability</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Investment &amp; Tools</h4>
+        <ul>
+          <li><a href="investment-calculator.html">Investment Calculator</a></li>
+          <li><a href="retirement-calculator.html">Retirement Calculator</a></li>
+          <li><a href="social-security-calculator.html">Social Security</a></li>
+          <li><a href="scientific-calculator.html">Scientific Calculator</a></li>
+          <li><a href="percentage-calculator.html">Percentage Calculator</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="sitemap.html"><strong>Complete HTML Sitemap</strong></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 EMI Master. All rights reserved. For educational and planning purposes only.
+    </div>
+  </footer>
+</div>
 
 <script src="js/math.js"></script>
 <script>
-function item(l,v){return '<div class="result-item"><div class="label">'+l+'</div><div class="value">'+v+'</div></div>';}
-function sciStr(r){return MathCalc.fmt(r.m,6)+" × 10^"+r.e;}
-document.getElementById("convBtn").onclick=function(){
-var raw=document.getElementById("num").value.trim();
-if(raw===""){document.getElementById("resultMain").textContent="Enter a number";return;}
-var n=Number(raw);
-if(isNaN(n)){document.getElementById("resultMain").textContent="Invalid number";return;}
-var sci=MathCalc.toScientific(n,8);
-var eNot=n.toExponential(6);
-document.getElementById("resultMain").textContent=sci.value;
-document.getElementById("resultGrid").innerHTML=item("Number",raw)+item("Scientific notation",sci.value)+item("E-notation",eNot)+item("Digits",String(n).replace("-","").split(".").join("").length);};
-document.getElementById("arithBtn").onclick=function(){
-var ma=parseFloat(document.getElementById("ma").value);
-var ea=parseFloat(document.getElementById("ea").value);
-var mb=parseFloat(document.getElementById("mb").value);
-var eb=parseFloat(document.getElementById("eb").value);
-var op=document.getElementById("op").value;
-if([ma,ea,mb,eb].some(isNaN)){document.getElementById("resultMain").textContent="Enter valid values";document.getElementById("resultGrid").innerHTML="";return;}
-var A={m:ma,e:ea},B={m:mb,e:eb},r;
-if(op==="add"){r=MathCalc.sciAdd(A,B,6);}
-else if(op==="sub"){r=MathCalc.sciSub(A,B,6);}
-else if(op==="mul"){r=MathCalc.sciMul(A,B,6);}
-else{r=MathCalc.sciDiv(A,B,6);}
-if(r.error){document.getElementById("resultMain").textContent=r.error;return;}
-document.getElementById("resultMain").textContent=sciStr(r);
-var dec=A.m*Math.pow(10,A.e)+(op==="sub"?-1:op==="div"||op==="mul"?0:1)*(op==="add"||op==="sub"?B.m*Math.pow(10,B.e):0);
-if(op==="mul"){dec=A.m*Math.pow(10,A.e)*B.m*Math.pow(10,B.e);}
-if(op==="div"){dec=(A.m*Math.pow(10,A.e))/(B.m*Math.pow(10,B.e));}
-document.getElementById("resultGrid").innerHTML=item("Input A",sciStr(A))+item("Input B",sciStr(B))+item("Result",sciStr(r))+item("Decimal form",MathCalc.fmt(dec,8));};
+(function () {
+  var currentMode = "conv";
+
+  function item(l, v) {
+    return '<div class="result-item"><div class="label">' + l + '</div><div class="value">' + v + '</div></div>';
+  }
+
+  function sciStr(r) {
+    return MathCalc.fmt(r.m, 6) + " &times; 10<sup>" + r.e + "</sup>";
+  }
+
+  function setMode(mode) {
+    currentMode = mode;
+    if (mode === "conv") {
+      document.getElementById("tabConv").className = "btn btn-primary";
+      document.getElementById("tabArith").className = "btn btn-outline";
+      document.getElementById("cardConv").style.display = "block";
+      document.getElementById("cardArith").style.display = "none";
+      calcConv();
+    } else {
+      document.getElementById("tabConv").className = "btn btn-outline";
+      document.getElementById("tabArith").className = "btn btn-primary";
+      document.getElementById("cardConv").style.display = "none";
+      document.getElementById("cardArith").style.display = "block";
+      calcArith();
+    }
+  }
+
+  function calcConv() {
+    var raw = document.getElementById("num").value.trim();
+    if (raw === "") {
+      document.getElementById("resultMain").textContent = "\u2014";
+      document.getElementById("resultGrid").innerHTML = "";
+      document.getElementById("stepContainer").style.display = "none";
+      return;
+    }
+    var n = Number(raw);
+    if (isNaN(n)) {
+      document.getElementById("resultMain").textContent = "Invalid Number";
+      document.getElementById("resultGrid").innerHTML = "";
+      document.getElementById("stepContainer").style.display = "none";
+      return;
+    }
+
+    var sci = MathCalc.toScientific(n, 8);
+    var exp = n.toExponential(6);
+    var eParts = exp.split("e");
+    var mantissa = parseFloat(eParts[0]);
+    var exponent = parseInt(eParts[1], 10);
+
+    // Engineering notation (exponent multiple of 3)
+    var engExp = Math.floor(exponent / 3) * 3;
+    var engMant = mantissa * Math.pow(10, exponent - engExp);
+
+    document.getElementById("resultMain").innerHTML = MathCalc.fmt(mantissa, 6) + " &times; 10<sup>" + exponent + "</sup>";
+
+    var grid = item("Standard Scientific Form", MathCalc.fmt(mantissa, 6) + " &times; 10<sup>" + exponent + "</sup>") +
+               item("E-Notation", exp) +
+               item("Engineering Notation", MathCalc.fmt(engMant, 4) + " &times; 10<sup>" + engExp + "</sup>") +
+               item("Decimal Representation", (Math.abs(n) < 1e12 && Math.abs(n) > 1e-6) ? n.toLocaleString("en-US", { maximumFractionDigits: 10 }) : n.toString()) +
+               item("Mantissa (Significand)", MathCalc.fmt(mantissa, 6)) +
+               item("Exponent (Power of 10)", exponent);
+
+    var stepHtml = "<strong>1. Identifying the Decimal Shift:</strong><br>" +
+                   "&bull; Raw value: <code>" + raw + "</code><br>";
+    if (exponent > 0) {
+      stepHtml += "&bull; The decimal point moves <strong>" + exponent + " places to the LEFT</strong> to leave one non-zero digit before the dot.<br>" +
+                  "&bull; Resulting mantissa: <code>" + MathCalc.fmt(mantissa, 6) + "</code> (1 &le; |m| < 10)<br>" +
+                  "&bull; Power of 10: <code>10<sup>" + exponent + "</sup></code><br><br>";
+    } else if (exponent < 0) {
+      stepHtml += "&bull; The decimal point moves <strong>" + Math.abs(exponent) + " places to the RIGHT</strong> to leave one non-zero digit before the dot.<br>" +
+                  "&bull; Resulting mantissa: <code>" + MathCalc.fmt(mantissa, 6) + "</code> (1 &le; |m| < 10)<br>" +
+                  "&bull; Power of 10: <code>10<sup>" + exponent + "</sup></code><br><br>";
+    } else {
+      stepHtml += "&bull; The number is already between 1 and 10 &rarr; exponent = 0.<br><br>";
+    }
+
+    stepHtml += "<strong>2. Canonical Form:</strong><br>" +
+                "<code>" + MathCalc.fmt(mantissa, 6) + " &times; 10<sup>" + exponent + "</sup></code>";
+
+    document.getElementById("resultGrid").innerHTML = grid;
+    document.getElementById("stepContent").innerHTML = stepHtml;
+    document.getElementById("stepContainer").style.display = "block";
+  }
+
+  function calcArith() {
+    var ma = parseFloat(document.getElementById("ma").value);
+    var ea = parseFloat(document.getElementById("ea").value);
+    var mb = parseFloat(document.getElementById("mb").value);
+    var eb = parseFloat(document.getElementById("eb").value);
+    var op = document.getElementById("op").value;
+
+    if ([ma, ea, mb, eb].some(isNaN)) {
+      document.getElementById("resultMain").textContent = "\u2014";
+      document.getElementById("resultGrid").innerHTML = "";
+      document.getElementById("stepContainer").style.display = "none";
+      return;
+    }
+
+    var A = { m: ma, e: ea };
+    var B = { m: mb, e: eb };
+    var r;
+    var stepHtml = "";
+
+    if (op === "mul") {
+      r = MathCalc.sciMul(A, B, 6);
+      stepHtml = "<strong>1. Exponent &amp; Mantissa Rules for Multiplication:</strong><br>" +
+                 "&bull; Multiply mantissas: " + ma + " &times; " + mb + " = " + (ma * mb) + "<br>" +
+                 "&bull; Add exponents: " + ea + " + " + eb + " = " + (ea + eb) + "<br>" +
+                 "&bull; Intermediate: (" + (ma * mb) + ") &times; 10<sup>" + (ea + eb) + "</sup><br>" +
+                 "&bull; Normalized form: <strong>" + sciStr(r) + "</strong>";
+    } else if (op === "div") {
+      if (mb === 0) {
+        document.getElementById("resultMain").textContent = "Division by zero";
+        return;
+      }
+      r = MathCalc.sciDiv(A, B, 6);
+      stepHtml = "<strong>1. Exponent &amp; Mantissa Rules for Division:</strong><br>" +
+                 "&bull; Divide mantissas: " + ma + " &divide; " + mb + " = " + (ma / mb) + "<br>" +
+                 "&bull; Subtract exponents: " + ea + " &minus; " + eb + " = " + (ea - eb) + "<br>" +
+                 "&bull; Intermediate: (" + (ma / mb).toFixed(6) + ") &times; 10<sup>" + (ea - eb) + "</sup><br>" +
+                 "&bull; Normalized form: <strong>" + sciStr(r) + "</strong>";
+    } else if (op === "add") {
+      r = MathCalc.sciAdd(A, B, 6);
+      stepHtml = "<strong>1. Addition Rules (Align Exponents First):</strong><br>" +
+                 "&bull; Input A = " + sciStr(A) + "<br>" +
+                 "&bull; Input B = " + sciStr(B) + "<br>" +
+                 "&bull; Normalized Sum: <strong>" + sciStr(r) + "</strong>";
+    } else {
+      r = MathCalc.sciSub(A, B, 6);
+      stepHtml = "<strong>1. Subtraction Rules (Align Exponents First):</strong><br>" +
+                 "&bull; Input A = " + sciStr(A) + "<br>" +
+                 "&bull; Input B = " + sciStr(B) + "<br>" +
+                 "&bull; Normalized Difference: <strong>" + sciStr(r) + "</strong>";
+    }
+
+    if (r.error) {
+      document.getElementById("resultMain").textContent = r.error;
+      return;
+    }
+
+    document.getElementById("resultMain").innerHTML = sciStr(r);
+
+    var grid = item("Number A", sciStr(A)) +
+               item("Number B", sciStr(B)) +
+               item("Operation Result", "<strong>" + sciStr(r) + "</strong>") +
+               item("E-Notation Result", r.m.toFixed(6) + "e" + (r.e >= 0 ? "+" + r.e : r.e));
+
+    document.getElementById("resultGrid").innerHTML = grid;
+    document.getElementById("stepContent").innerHTML = stepHtml;
+    document.getElementById("stepContainer").style.display = "block";
+  }
+
+  // Events
+  document.getElementById("tabConv").onclick = function () { setMode("conv"); };
+  document.getElementById("tabArith").onclick = function () { setMode("arith"); };
+
+  document.getElementById("convBtn").onclick = calcConv;
+  document.getElementById("num").oninput = calcConv;
+
+  document.getElementById("arithBtn").onclick = calcArith;
+  ["ma", "ea", "mb", "eb", "op"].forEach(function (id) {
+    document.getElementById(id).oninput = calcArith;
+    document.getElementById(id).onchange = calcArith;
+  });
+
+  document.getElementById("resetConvBtn").onclick = function () {
+    document.getElementById("num").value = "123456789";
+    calcConv();
+  };
+
+  document.getElementById("resetArithBtn").onclick = function () {
+    document.getElementById("ma").value = "3.2";
+    document.getElementById("ea").value = "4";
+    document.getElementById("mb").value = "1.5";
+    document.getElementById("eb").value = "3";
+    document.getElementById("op").value = "mul";
+    calcArith();
+  };
+
+  // Presets
+  document.querySelectorAll("#presetChips .preset-chip").forEach(function (btn) {
+    btn.onclick = function () {
+      document.querySelectorAll("#presetChips .preset-chip").forEach(function (b) { b.classList.remove("active"); });
+      this.classList.add("active");
+      var mode = this.getAttribute("data-mode");
+      if (mode === "conv") {
+        setMode("conv");
+        document.getElementById("num").value = this.getAttribute("data-val");
+        calcConv();
+      } else {
+        setMode("arith");
+        document.getElementById("ma").value = this.getAttribute("data-ma");
+        document.getElementById("ea").value = this.getAttribute("data-ea");
+        document.getElementById("mb").value = this.getAttribute("data-mb");
+        document.getElementById("eb").value = this.getAttribute("data-eb");
+        document.getElementById("op").value = this.getAttribute("data-op");
+        calcArith();
+      }
+    };
+  });
+
+  // Copy
+  document.getElementById("copyResultBtn").onclick = function () {
+    var text = document.getElementById("resultMain").textContent;
+    if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).catch(function () {});
+    }
+    this.textContent = "✓ Copied";
+    var btn = this;
+    setTimeout(function () { btn.textContent = "📋 Copy"; }, 1500);
+  };
+
+  calcConv();
+})();
 </script>
 <script src="js/currency.js"></script>
 <script src="js/seo-content.js"></script>

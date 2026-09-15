@@ -13,25 +13,25 @@
   <script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rent Calculator - How Much Rent Can I Afford? | EMI Master</title>
-  <meta name="description" content="Calculate how much rent you can afford with the 30% rule, and see your annual rent cost. Free rent affordability calculator.">
-  <meta name="keywords" content="rent calculator, rent affordability calculator, how much rent can I afford, 30 percent rule rent">
+  <title>Rent Calculator: How Much Rent Can I Afford? (30% & 40x Rule) | EMI Master</title>
+  <meta name="description" content="Free professional rent calculator (calculator.net style). Calculate how much rent you can afford based on income and debts using the 30% rule, 40x landlord rule, 50/30/20 budget, or split rent among roommates.">
+  <meta name="keywords" content="rent calculator, how much rent can I afford, rent affordability calculator, 30 percent rule rent, 40x rent rule, apartment rent calculator, required income for rent, roommate rent split calculator">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://emimaster.com/rent-calculator.html">
-  <meta property="og:title" content="Rent Calculator | EMI Master">
-  <meta property="og:description" content="How much rent can you afford? Check with the 30% rule.">
+  <meta property="og:title" content="Rent Calculator: How Much Rent Can I Afford? | EMI Master">
+  <meta property="og:description" content="Calculate your maximum affordable rent, required annual income, upfront move-in cash, and fair roommate splits using industry landlord rules.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://emimaster.com/rent-calculator.html">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "EMI Master Rent Calculator",
+    "name": "EMI Master Rent Affordability Calculator",
     "url": "https://emimaster.com/rent-calculator.html",
-    "description": "Free rent affordability calculator using the 30% rule, with annual rent cost breakdown.",
+    "description": "Professional rent affordability calculator estimating maximum monthly rent, required income for landlord approval (40x rule and 30% rule), upfront move-in costs, and roommate rent splitting.",
     "applicationCategory": "FinanceApplication",
     "operatingSystem": "Any",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
   }
   </script>
   <script type="application/ld+json">
@@ -44,15 +44,47 @@
         "name": "What is the 30% rent rule?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The 30% rule suggests you should not spend more than 30% of your gross monthly income on rent. Staying within this limit helps keep room in your budget for other expenses and savings."
+          "text": "The 30% rule is a widely accepted financial guideline suggesting that you should spend no more than 30% of your gross monthly income on housing expenses (rent, utilities, and renter's insurance). This ensures you have 70% left over for food, debt payments, retirement savings, healthcare, and discretionary spending."
         }
       },
       {
         "@type": "Question",
-        "name": "How much rent can I afford?",
+        "name": "What is the 40x rent rule used by landlords?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Multiply your gross monthly income by 0.30. For example, with a monthly income of Rs 80,000, your affordable rent is up to Rs 24,000 per month."
+          "text": "The 40x rule is an underwriting standard enforced by landlords and property managers in major metropolitan markets like New York City, Boston, and San Francisco. It requires that a tenant's annual gross household income must be at least 40 times the monthly rent. Mathematically, dividing your annual income by 40 equals exactly 30% of your gross monthly income."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much income do I need for a $2,000/month apartment?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Under the standard 40x rule, you need an annual gross income of at least $80,000 ($2,000 × 40), or roughly $6,667 per month before taxes. Under the 3x monthly rent rule common in suburban rentals, you need at least $6,000 per month in gross income ($72,000 per year)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should utilities and renter's insurance be included in the 30% rule?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. True housing costs encompass base rent, electricity, gas/heating, water/sewer, trash, internet, and renter's insurance. If you allocate a full 30% strictly to base rent, utility bills can push your total shelter burden to 35% or higher, straining your monthly budget."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much cash do I need upfront when moving into a rental?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Upfront move-in costs typically range between 2.5 to 4 times one month's rent. Standard expenses include the first month's rent, a security deposit (usually 1 month's rent), an optional last month's rent, broker fees (if applicable in cities like NYC), application background check fees, moving truck costs, and utility connection deposits."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you fairly split rent between roommates?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Fair rent splitting generally combines equal sharing of communal living spaces (living room, kitchen, bathrooms) with weighted adjustments for private bedroom square footage and premium perks like an en-suite bathroom, private balcony, walk-in closet, or dedicated parking space."
         }
       }
     ]
@@ -68,7 +100,7 @@
 <section class="hero hero-compact">
   <div class="container">
     <h1>Rent Calculator</h1>
-    <p>Check your rent budget and annual housing cost in seconds.</p>
+    <p>Determine your maximum affordable rent, required income for landlord approval, and fair roommate splits.</p>
   </div>
 </section>
 
@@ -76,103 +108,940 @@
   <div id="siteSidebar"></div>
 
   <main class="main-content">
-    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Rent Calculator</div>
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="mortgage-calculator.html">Housing Calculators</a> &rsaquo; Rent Calculator</div>
     <h1 class="page-title">Rent Affordability Calculator</h1>
-    <p class="page-subtitle">See if your rent fits within the recommended 30% budget.</p>
+    <p class="page-subtitle">Calculate how much rent you can safely afford, view your take-home budget breakdown, and estimate move-in cash.</p>
 
-    <div class="card">
-      <h2>Your Rent Details</h2>
-      <div class="form-grid">
-        <div class="form-group">
-          <label for="rent">Monthly Rent ($)</label>
-          <div class="input-wrap">
-            <span class="prefix">$</span>
-            <input type="number" id="rent" value="20000" min="0" step="500">
+    <!-- Mode Switcher Tabs -->
+    <div class="rent-mode-tabs" id="rentModeTabs">
+      <button class="rent-mode-btn active" data-mode="afford" type="button">
+        <span>&#128176;</span> How Much Rent Can I Afford?
+      </button>
+      <button class="rent-mode-btn" data-mode="required" type="button">
+        <span>&#128269;</span> Required Income for Rent
+      </button>
+      <button class="rent-mode-btn" data-mode="roommate" type="button">
+        <span>&#129309;</span> Roommate Rent Splitter
+      </button>
+    </div>
+
+    <!-- Quick Profile Presets (For Affordability Mode) -->
+    <div class="afford-preset-bar" id="affordPresetBar">
+      <span style="font-size:0.84rem;font-weight:700;color:var(--text-muted);margin-right:4px;">Quick Profiles:</span>
+      <button class="afford-preset-btn active" data-preset="starter" type="button">&#127891; Starter ($55k)</button>
+      <button class="afford-preset-btn" data-preset="urban" type="button">&#127970; Urban Pro ($95k)</button>
+      <button class="afford-preset-btn" data-preset="couple" type="button">&#128101; Couple ($160k)</button>
+      <button class="afford-preset-btn" data-preset="frugal" type="button">&#128200; Frugal Saver (20% cap)</button>
+    </div>
+
+    <!-- =====================================================
+         PANEL 1: How Much Rent Can I Afford?
+         ===================================================== -->
+    <div id="panelModeAfford">
+      <div class="card" id="affordForm">
+        <h2>Your Income &amp; Expenses</h2>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="rentIncome">Gross Income ($)</label>
+            <div style="display:flex;gap:8px;">
+              <div class="input-wrap" style="flex:1;">
+                <span class="prefix">$</span>
+                <input type="number" id="rentIncome" value="55000" min="0" step="1000">
+              </div>
+              <select id="rentIncomeFreq" style="width:125px;">
+                <option value="annual" selected>Per Year</option>
+                <option value="monthly">Per Month</option>
+              </select>
+            </div>
+            <input type="range" id="rentIncomeRange" min="15000" max="350000" step="2500" value="55000">
+            <span class="help-text">Before taxes and deductions</span>
           </div>
-          <input type="range" id="rentRange" min="1000" max="200000" step="500" value="20000">
+
+          <div class="form-group">
+            <label for="rentDebts">Monthly Debt Payments ($)</label>
+            <div class="input-wrap">
+              <span class="prefix">$</span>
+              <input type="number" id="rentDebts" value="350" min="0" step="50">
+            </div>
+            <span class="help-text">Student loans, car payment, credit card minimums</span>
+          </div>
+
+          <div class="form-group">
+            <label for="rentUtilities">Estimated Monthly Utilities ($)</label>
+            <div class="input-wrap">
+              <span class="prefix">$</span>
+              <input type="number" id="rentUtilities" value="150" min="0" step="25">
+            </div>
+            <span class="help-text">Electricity, gas/heat, water, trash, internet</span>
+          </div>
+
+          <div class="form-group">
+            <label for="rentInsurance">Renter's Insurance ($/mo)</label>
+            <div class="input-wrap">
+              <span class="prefix">$</span>
+              <input type="number" id="rentInsurance" value="15" min="0" step="5">
+            </div>
+            <span class="help-text">Standard liability and personal property protection</span>
+          </div>
+
+          <div class="form-group">
+            <label for="rentRule">Affordability Rule / Standard</label>
+            <select id="rentRule">
+              <option value="30pct" selected>30% Rule (Standard Benchmark)</option>
+              <option value="40x">40x Landlord Screening Rule (NYC/Metros)</option>
+              <option value="balanced">25% Rule (Balanced Financial Buffer)</option>
+              <option value="conservative">20% Rule (Frugal / Aggressive Investing)</option>
+              <option value="aggressive">35% Rule (High-Cost Metro Cap)</option>
+              <option value="503020">50/30/20 Budgeting Rule (50% for Needs)</option>
+              <option value="dti43">43% DTI Debt-Adjusted Cap</option>
+              <option value="custom">Custom Rent Percentage</option>
+            </select>
+            <span class="help-text">Guideline used to set maximum allowable shelter cost</span>
+          </div>
+
+          <div class="form-group" id="customRentRuleWrap" style="display:none;">
+            <label for="customRentPct">Custom Rent Percentage (%)</label>
+            <div class="input-wrap">
+              <input type="number" id="customRentPct" value="28" min="10" max="60" step="1">
+              <span class="suffix">%</span>
+            </div>
+            <span class="help-text">Percentage of gross monthly income allocated to rent</span>
+          </div>
         </div>
 
-        <div class="form-group">
-          <label for="income">Monthly Income ($)</label>
-          <div class="input-wrap">
-            <span class="prefix">$</span>
-            <input type="number" id="income" value="80000" min="0" step="5000">
-          </div>
-          <input type="range" id="incomeRange" min="10000" max="1000000" step="5000" value="80000">
-        </div>
+        <!-- Collapsible Advanced Move-In & Tax Settings -->
+        <details style="margin-top:16px;background:rgba(15,23,42,0.03);border:1px solid var(--border);border-radius:var(--radius);padding:14px;">
+          <summary style="font-weight:700;font-size:0.9rem;cursor:pointer;color:var(--primary);">
+            &#9881; Advanced Assumptions (Taxes &amp; Upfront Move-In Costs)
+          </summary>
+          <div class="form-grid" style="margin-top:16px;">
+            <div class="form-group">
+              <label for="rentTaxRate">Effective Tax / Deduction Rate (%)</label>
+              <div class="input-wrap">
+                <input type="number" id="rentTaxRate" value="22" min="5" max="50" step="1">
+                <span class="suffix">%</span>
+              </div>
+              <span class="help-text">Estimated federal, state, and payroll deductions</span>
+            </div>
 
-        <div class="form-group">
-          <label for="utilities">Monthly Utilities ($)</label>
-          <div class="input-wrap">
-            <span class="prefix">$</span>
-            <input type="number" id="utilities" value="3000" min="0" step="500">
+            <div class="form-group">
+              <label for="upfrontSecMonths">Security Deposit (Months of Rent)</label>
+              <select id="upfrontSecMonths">
+                <option value="1" selected>1 Month's Rent (Standard)</option>
+                <option value="1.5">1.5 Months' Rent</option>
+                <option value="2">2 Months' Rent</option>
+                <option value="0">No Deposit / Deposit Waiver</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="upfrontBrokerType">Broker / Realtor Fee</label>
+              <select id="upfrontBrokerType">
+                <option value="none" selected>No Broker Fee ($0)</option>
+                <option value="oneMonth">1 Month's Rent</option>
+                <option value="fifteenPct">15% of Annual Rent (NYC standard)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="upfrontMoving">Estimated Moving Truck &amp; Supplies ($)</label>
+              <div class="input-wrap">
+                <span class="prefix">$</span>
+                <input type="number" id="upfrontMoving" value="600" min="0" step="50">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="upfrontUtilitySetup">Utility Connection &amp; Internet Deposits ($)</label>
+              <div class="input-wrap">
+                <span class="prefix">$</span>
+                <input type="number" id="upfrontUtilitySetup" value="150" min="0" step="25">
+              </div>
+            </div>
+
+            <div class="form-group" style="display:flex;align-items:center;margin-top:20px;">
+              <label style="cursor:pointer;display:flex;align-items:center;gap:8px;font-size:0.88rem;font-weight:600;">
+                <input type="checkbox" id="upfrontLastMonth"> Landlord requires Last Month's Rent upfront
+              </label>
+            </div>
           </div>
+        </details>
+
+        <div class="form-actions" style="margin-top:20px;">
+          <button class="btn btn-primary" id="calculateBtn" type="button">Calculate Affordability</button>
+          <button class="btn btn-outline" id="resetBtn" type="button">Reset Defaults</button>
         </div>
       </div>
-      <div class="form-actions">
-        <button class="btn btn-primary" id="calculateBtn" type="button">Calculate</button>
-        <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
+
+      <!-- Affordability Output Panel -->
+      <div class="result-panel" style="display:block;margin-top:24px;">
+        <!-- Rent Hero Box -->
+        <div class="rent-hero-box">
+          <div class="hero-icon">&#127968;</div>
+          <div style="flex:1;">
+            <div style="font-size:0.85rem;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;color:var(--text-muted);margin-bottom:2px;" id="affordRuleLabel">Maximum Recommended Rent</div>
+            <h3 id="affordResultMain" style="font-size:2.3rem;margin:2px 0;">$1,375</h3>
+            <p id="affordHeroRange" style="font-weight:600;">Comfortable rent range: $1,170 – $1,375 / month</p>
+          </div>
+        </div>
+
+        <!-- 4 Stat Metric Cards -->
+        <div class="result-grid" style="margin-bottom:24px;">
+          <div class="result-item">
+            <div class="label">Affordable Monthly Rent</div>
+            <div class="value positive" id="statAffordRent">$1,375</div>
+          </div>
+          <div class="result-item">
+            <div class="label">Total Housing (Rent + Utilities)</div>
+            <div class="value" id="statTotalHousing">$1,540 / mo</div>
+          </div>
+          <div class="result-item">
+            <div class="label">Remaining Monthly Take-Home</div>
+            <div class="value" id="statRemainingCash">$1,685 / mo</div>
+          </div>
+          <div class="result-item">
+            <div class="label">Estimated Upfront Move-In Cash</div>
+            <div class="value" id="statUpfrontCash">$3,500</div>
+          </div>
+        </div>
+
+        <!-- Monthly Budget Breakdown Table -->
+        <div class="card" style="margin-bottom:24px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+            <h3 style="font-size:1.15rem;margin:0;">Monthly Cash Flow &amp; Budget Allocation</h3>
+            <span id="affordRentBadge" class="dti-badge badge-green">Standard (25% - 30%)</span>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Budget Component</th>
+                  <th class="num">Monthly Amount</th>
+                  <th class="num">% of Housing</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Base Apartment Rent</strong></td>
+                  <td class="num font-bold text-primary" id="bbRent">$1,375.00</td>
+                  <td class="num" id="pctBbRent">89.3%</td>
+                </tr>
+                <tr>
+                  <td>Estimated Utilities (Electric, Gas, Water, Internet)</td>
+                  <td class="num" id="bbUtil">$150.00</td>
+                  <td class="num" id="pctBbUtil">9.7%</td>
+                </tr>
+                <tr>
+                  <td>Renter's Insurance</td>
+                  <td class="num" id="bbIns">$15.00</td>
+                  <td class="num" id="pctBbIns">1.0%</td>
+                </tr>
+                <tr style="border-top:2px solid var(--border);background:rgba(15,23,42,0.03);">
+                  <td><strong>Total Monthly Housing Commitment</strong></td>
+                  <td class="num font-bold" id="bbTotalHousing">$1,540.00</td>
+                  <td class="num">100.0%</td>
+                </tr>
+                <tr>
+                  <td>Existing Monthly Debt Obligations</td>
+                  <td class="num" id="bbDebts">$350.00</td>
+                  <td class="num">—</td>
+                </tr>
+                <tr>
+                  <td>Estimated Net Take-Home Pay</td>
+                  <td class="num font-bold" id="bbNetIncome">$3,575.00</td>
+                  <td class="num">—</td>
+                </tr>
+                <tr style="background:rgba(16,185,129,0.08);">
+                  <td><strong>Remaining for Food, Living Expenses, Savings &amp; Discretionary</strong></td>
+                  <td class="num font-bold" style="color:#059669;" id="bbRemaining">$1,685.00</td>
+                  <td class="num">—</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div style="display:flex;flex-wrap:wrap;gap:18px;margin-top:14px;font-size:0.85rem;color:var(--text-muted);">
+            <div><strong>Gross Housing Ratio:</strong> <span id="affordHousingPctGross">28.0%</span></div>
+            <div><strong>Net Take-Home Housing Ratio:</strong> <span id="affordHousingPctNet">43.1%</span></div>
+            <div><strong>Total DTI Ratio:</strong> <span id="affordTotalDti">34.4%</span></div>
+          </div>
+        </div>
+
+        <!-- Interactive Visual Chart -->
+        <div class="card" style="margin-bottom:24px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px;">
+            <h3 style="font-size:1.15rem;margin:0;">Visual Housing &amp; Budget Insights</h3>
+            <div class="tab-switcher" style="margin-bottom:0;">
+              <button class="tab-btn chart-tab-btn active" data-chart="budget" type="button">Monthly Budget Allocation</button>
+              <button class="tab-btn chart-tab-btn" data-chart="rules" type="button">Compare Across Rules</button>
+            </div>
+          </div>
+          <div class="mortgage-chart-canvas-wrap">
+            <canvas id="rentChartCanvas"></canvas>
+          </div>
+        </div>
+
+        <!-- Rule Benchmark Scenarios Table -->
+        <div class="card" style="margin-bottom:24px;">
+          <h3 style="font-size:1.15rem;margin-bottom:8px;">Affordable Rent Across Different Guidelines</h3>
+          <p style="font-size:0.88rem;color:var(--text-muted);margin-bottom:14px;">
+            Compare what your salary yields under different financial philosophies and underwriting constraints.
+          </p>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Guideline / Standard</th>
+                  <th class="num">Monthly Rent</th>
+                  <th class="num">Annual Rent</th>
+                  <th>Key Application</th>
+                </tr>
+              </thead>
+              <tbody id="rentBenchmarkBody">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Upfront Move-In Cost Breakdown Table -->
+        <div class="card" style="margin-bottom:24px;">
+          <h3 style="font-size:1.15rem;margin-bottom:8px;">Estimated Upfront Cash to Move In</h3>
+          <p style="font-size:0.88rem;color:var(--text-muted);margin-bottom:14px;">
+            Landlords require substantial liquid cash reserves at lease execution. Here is what you should budget for move-in day:
+          </p>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Move-In Expense</th>
+                  <th class="num">Estimated Cost</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>First Month's Rent</td>
+                  <td class="num font-bold" id="miFirstMonth">$1,375.00</td>
+                  <td>Paid upon key handover</td>
+                </tr>
+                <tr>
+                  <td>Security Deposit</td>
+                  <td class="num font-bold" id="miSecurity">$1,375.00</td>
+                  <td>Refundable escrow against damages</td>
+                </tr>
+                <tr>
+                  <td>Last Month's Rent</td>
+                  <td class="num" id="miLastMonth">$0.00</td>
+                  <td>Required by some private landlords</td>
+                </tr>
+                <tr>
+                  <td>Brokerage / Finder's Fee</td>
+                  <td class="num" id="miBroker">$0.00</td>
+                  <td>Common in competitive metropolitan rental markets</td>
+                </tr>
+                <tr>
+                  <td>Moving Truck &amp; Packing Supplies</td>
+                  <td class="num" id="miMoving">$600.00</td>
+                  <td>Vehicle rental, boxes, fuel, or movers</td>
+                </tr>
+                <tr>
+                  <td>Utility &amp; Telecom Hookup Deposits</td>
+                  <td class="num" id="miUtilitySetup">$150.00</td>
+                  <td>Initial connection and activation charges</td>
+                </tr>
+                <tr style="border-top:2px solid var(--border);background:rgba(37,99,235,0.08);">
+                  <td><strong>Total Cash Required on Move-In Day</strong></td>
+                  <td class="num font-bold text-primary" style="font-size:1.1rem;" id="miTotal">$3,500.00</td>
+                  <td><strong>Total liquid reserves needed</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Export & Share Toolbar -->
+        <div class="result-actions" style="margin-top:20px;">
+          <button class="btn btn-outline" id="downloadCsv" type="button">&#128190; Export Budget (CSV)</button>
+          <button class="btn btn-outline" id="printSchedule" type="button">&#128424; Print Rent Report</button>
+          <button class="btn btn-outline" id="copySummaryBtn" type="button">&#128203; Copy Summary</button>
+        </div>
       </div>
     </div>
 
-    <div class="result-panel" id="resultPanel">
-      <h3 id="resultLabel">Affordable Max Rent (30% rule)</h3>
-      <div class="result-main" id="resultMain">—</div>
-      <div class="result-grid">
-        <div class="result-item"><div class="label">Your Rent + Utilities</div><div class="value" id="rRent">—</div></div>
-        <div class="result-item"><div class="label">Annual Housing Cost</div><div class="value" id="rAnnual">—</div></div>
-        <div class="result-item"><div class="label">% of Monthly Income</div><div class="value" id="rPct">—</div></div>
-        <div class="result-item"><div class="label">Budget Check</div><div class="value positive" id="rVerdict">—</div></div>
+    <!-- =====================================================
+         PANEL 2: Required Income for a Given Rent
+         ===================================================== -->
+    <div id="panelModeRequired" style="display:none;">
+      <div class="card" id="requiredForm">
+        <h2>Target Apartment Rent</h2>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="targetRent">Target Monthly Rent ($)</label>
+            <div class="input-wrap">
+              <span class="prefix">$</span>
+              <input type="number" id="targetRent" value="2200" min="200" step="50">
+            </div>
+            <input type="range" id="targetRentRange" min="500" max="8000" step="50" value="2200">
+            <span class="help-text">Monthly asking rent for the unit</span>
+          </div>
+
+          <div class="form-group">
+            <label for="targetUtilities">Estimated Utilities ($/mo)</label>
+            <div class="input-wrap">
+              <span class="prefix">$</span>
+              <input type="number" id="targetUtilities" value="180" min="0" step="20">
+            </div>
+            <span class="help-text">Electric, heat, water, internet</span>
+          </div>
+
+          <div class="form-group">
+            <label for="targetInsurance">Renter's Insurance ($/mo)</label>
+            <div class="input-wrap">
+              <span class="prefix">$</span>
+              <input type="number" id="targetInsurance" value="18" min="0" step="5">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="targetDebts">Monthly Debt Payments ($)</label>
+            <div class="input-wrap">
+              <span class="prefix">$</span>
+              <input type="number" id="targetDebts" value="400" min="0" step="50">
+            </div>
+            <span class="help-text">Car, student loans, cards</span>
+          </div>
+
+          <div class="form-group">
+            <label for="targetStandard">Landlord Qualification Rule</label>
+            <select id="targetStandard">
+              <option value="40x" selected>40x Rule (Annual income = 40 × rent)</option>
+              <option value="30pct">30% Rule (Total housing ≤ 30% of income)</option>
+              <option value="3xMonthly">3x Monthly Rent Rule (Income = 3 × rent)</option>
+              <option value="dti43">43% DTI Debt-Adjusted Rule</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="result-panel" style="display:block;margin-top:24px;">
+        <div class="rent-hero-box">
+          <div class="hero-icon">&#128188;</div>
+          <div style="flex:1;">
+            <div style="font-size:0.85rem;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;color:var(--text-muted);margin-bottom:2px;">Minimum Required Annual Gross Income</div>
+            <h3 id="reqAnnualIncome" style="font-size:2.3rem;margin:2px 0;">$88,000 / yr</h3>
+            <p id="reqRuleDesc" style="font-weight:600;">Landlord 40x Rule: Annual income must equal at least 40 times monthly rent</p>
+          </div>
+        </div>
+
+        <div class="result-grid" style="margin-bottom:24px;">
+          <div class="result-item">
+            <div class="label">Minimum Annual Income</div>
+            <div class="value positive" id="reqStatAnnual">$88,000</div>
+          </div>
+          <div class="result-item">
+            <div class="label">Required Monthly Gross</div>
+            <div class="value" id="reqStatMonthly">$7,333 / mo</div>
+          </div>
+          <div class="result-item">
+            <div class="label">Required Hourly Wage (40h/wk)</div>
+            <div class="value" id="reqStatHourly">$42.31 / hr</div>
+          </div>
+          <div class="result-item">
+            <div class="label">Total Monthly Housing Burden</div>
+            <div class="value" id="reqStatHousing">$2,398 / mo</div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:24px;">
+          <h3 style="font-size:1.15rem;margin-bottom:12px;">Income &amp; Financial Qualifications Summary</h3>
+          <div class="table-wrap">
+            <table class="data-table">
+              <tbody>
+                <tr>
+                  <td><strong>Required Annual Gross Salary</strong></td>
+                  <td class="num font-bold text-primary" id="reqAnnualIncomeRow">$88,000 / yr</td>
+                </tr>
+                <tr>
+                  <td>Required Monthly Gross Income</td>
+                  <td class="num" id="reqMonthlyIncome">$7,333 / mo</td>
+                </tr>
+                <tr>
+                  <td>Required Weekly Gross Income</td>
+                  <td class="num" id="reqWeeklyWage">$1,692 / wk</td>
+                </tr>
+                <tr>
+                  <td>Required Equivalent Hourly Wage (2,080 hours/year)</td>
+                  <td class="num font-bold" id="reqHourlyWage">$42.31 / hr</td>
+                </tr>
+                <tr>
+                  <td>Recommended Emergency Savings Buffer</td>
+                  <td class="num" id="reqEmergencyFund">$6,600 – $13,200 (3 to 6 months rent)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
 
+    <!-- =====================================================
+         PANEL 3: Roommate Rent Splitter
+         ===================================================== -->
+    <div id="panelModeRoommate" style="display:none;">
+      <div class="card" id="roommateForm">
+        <h2>Apartment &amp; Roommate Details</h2>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="roommateTotalRent">Total Apartment Monthly Rent ($)</label>
+            <div class="input-wrap">
+              <span class="prefix">$</span>
+              <input type="number" id="roommateTotalRent" value="3200" min="500" step="50">
+            </div>
+            <span class="help-text">Total rent on the master lease</span>
+          </div>
+
+          <div class="form-group">
+            <label for="roommateCount">Number of Roommates</label>
+            <select id="roommateCount">
+              <option value="2" selected>2 Roommates</option>
+              <option value="3">3 Roommates</option>
+              <option value="4">4 Roommates</option>
+              <option value="5">5 Roommates</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="roommateMethod">Splitting Algorithm</label>
+            <select id="roommateMethod">
+              <option value="sqft" selected>Square Footage &amp; Amenities (Fair share)</option>
+              <option value="equal">Equal Split (Equal division)</option>
+              <option value="income">Income-Proportional Split (Ability to pay)</option>
+            </select>
+            <span class="help-text">Weights 40% for equal common space and 60% for private amenities</span>
+          </div>
+        </div>
+
+        <div style="margin-top:20px;">
+          <h3 style="font-size:1.05rem;margin-bottom:12px;">Roommate Configurations &amp; Perks</h3>
+          <div id="roommatesList">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </div>
+
+      <div class="result-panel" style="display:block;margin-top:24px;">
+        <div class="card">
+          <h3 style="font-size:1.15rem;margin-bottom:12px;">Calculated Fair Rent Split</h3>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Roommate</th>
+                  <th class="num">Monthly Rent Share</th>
+                  <th class="num">% of Total</th>
+                  <th class="num">Room Size</th>
+                  <th>Amenities Included</th>
+                </tr>
+              </thead>
+              <tbody id="roommateResultBody">
+                <!-- Dynamically generated rows -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Responsive Advertisement Slot -->
     <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
 
-    <div class="content-section">
-      <h2>What is the 30% rent rule?</h2>
-      <p>The 30% rule is a widely used budgeting guideline: keep your housing costs at or below 30% of your gross monthly income. It leaves room for food, transport, savings and unexpected expenses. In expensive cities you may need to go higher, but the smaller the percentage, the more comfortable your budget.</p>
-    </div>
-
-    <div class="content-section">
-      <h2>Rent Calculator FAQ</h2>
-      <div class="faq-item">
-        <div class="faq-q">Should I include utilities in my rent budget?<span class="arrow">&#9654;</span></div>
-        <div class="faq-a">Yes. Electricity, water, gas and internet add up quickly. This calculator adds utilities to your rent so you see your true housing cost each month.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Is the 30% rule always accurate?<span class="arrow">&#9654;</span></div>
-        <div class="faq-a">It is a guideline, not a law. High-income earners can often afford a higher percentage, while lower-income households may need to keep it well below 30% to make ends meet.</div>
-      </div>
-    </div>
-  
 <!--SEO-CONTENT-START-->
 <!-- =====================================================
-     SEO CONTENT (pre-rendered static) - do not remove
+     SEO CONTENT (Comprehensive, AdSense-Ready Technical Guide)
      ===================================================== -->
-<div class="content-section quick-facts"><div class="fact-chip"><strong>Budget:</strong> 30% of income max</div><div class="fact-chip"><strong>Share:</strong> Split with roommates</div><div class="fact-chip"><strong>Afford:</strong> Rent ~ Gross income ÷ 40</div><div class="fact-chip"><strong>Includes:</strong> Utilities &amp; deposit</div></div>
-<div class="content-section toc-card"><h2>On this page</h2><ol class="toc"><li><a href="#the-30-rule-and-reality">The 30% rule and reality</a></li><li><a href="#hidden-costs-renters-forget">Hidden costs renters forget</a></li><li><a href="#how-to-use">How to use this calculator</a></li><li><a href="#faq">Frequently asked questions</a></li></ol></div>
-<div class="content-section"><h2>Rent Calculator — what rent can you really afford?</h2><p>The classic advice: keep housing under 30% of gross income. This rent calculator turns your income and expenses into a realistic monthly rent figure — including utilities and deposit, plus smart roommate-splitting guidance.</p></div>
-<div class="content-section"><h2 id="the-30-rule-and-reality">The 30% rule and reality</h2><p>30% of gross income is the affordability benchmark: $40,000/month income → $12,000 rent.</p><p>In high-cost cities, many renters hit 40–50%; that's the reality of metro cities — compensate by cutting other variable costs.</p><p>The 3× income rule for annual rent is another check: annual rent should be ≤ 3× annual gross income.</p></div>
-<div class="content-section"><h2 id="hidden-costs-renters-forget">Hidden costs renters forget</h2><p>Security deposits (usually 1–3 months' rent), brokerage, utilities, internet and moving costs.</p><p>Renter's insurance is cheap insurance against theft and liability — typically under $5,000/year.</p><p>Use this calculator's budget view to keep total housing within your comfort zone.</p></div>
-<div class="content-section"><h2 id="how-to-use">How to use this calculator</h2><ol><li>Enter your monthly net (or gross) income.</li><li>Add fixed monthly expenses (EMIs, bills, savings goals).</li><li>Read the recommended rent range for comfort (30% rule) and max (50%).</li><li>Use the budget line to negotiate with roommates or landlords.</li></ol></div>
-<div class="content-section tips-box"><h2>Pro tips</h2><ul><li>Target 25–30% of income for rent; the 20% buffer covers utilities and rent increases.</li><li>Negotiate renewals: 5% less than asking is often accepted to avoid vacancy.</li><li>Roommate splitting by room size (40/60 instead of 50/50) is fairer in 2-BHKs with a master bedroom.</li></ul></div>
-<div class="content-section"><h2 id="faq">Frequently asked questions</h2><div class="faq-item"><div class="faq-q">How much rent can I afford?<span class="arrow">&#9654;</span></div><div class="faq-a">Most advisors cap rent at 30% of gross income. On $60,000/month income, that's $18,000. Factor utilities separately — they can add $2,000–5,000.</div></div><div class="faq-item"><div class="faq-q">What is the rule of thumb for rent?<span class="arrow">&#9654;</span></div><div class="faq-a">Spend no more than 30% of gross income on housing, including rent and utilities. Some metro renters push to 40% by trimming food and travel budgets.</div></div></div>
-<div class="content-section"><h2>Related calculators</h2><div class="related-grid"><a class="related-card" href="rent-vs-buy.html"><span class="related-icon">⚖️</span><span>Rent vs Buy</span></a><a class="related-card" href="house-affordability.html"><span class="related-icon">🏠</span><span>Affordability</span></a><a class="related-card" href="debt-to-income.html"><span class="related-icon">📊</span><span>DTI</span></a><a class="related-card" href="real-estate-calculator.html"><span class="related-icon">🏢</span><span>Real Estate</span></a></div></div>
+<div class="content-section quick-facts">
+  <div class="fact-chip"><strong>Standard Rule:</strong> Rent &le; 30% Gross Income</div>
+  <div class="fact-chip"><strong>Landlord Screening:</strong> 40x Monthly Rent</div>
+  <div class="fact-chip"><strong>Upfront Cash:</strong> 2.5x to 4x Rent</div>
+  <div class="fact-chip"><strong>Safety Buffer:</strong> Keep DTI Under 43%</div>
+</div>
+
+<div class="content-section toc-card">
+  <h2>On This Page: Comprehensive Rent Affordability Guide</h2>
+  <ol class="toc">
+    <li><a href="#salary-reference-table">Salary to Affordable Rent Reference Table</a></li>
+    <li><a href="#the-30-rule-explained">The 30% Rule: History, Formula, and Real-World Math</a></li>
+    <li><a href="#the-40x-rule">The 40x Rent Rule: Why Landlords Enforce It</a></li>
+    <li><a href="#debt-and-dti-impact">How Monthly Debt Payments Impact Tenant Approval</a></li>
+    <li><a href="#upfront-costs-of-renting">The Hidden Upfront Costs of Moving into an Apartment</a></li>
+    <li><a href="#the-50-30-20-budget">Applying the 50/30/20 Budgeting Rule to Renting</a></li>
+    <li><a href="#high-cost-city-tactics">How to Afford an Apartment in Expensive Metros</a></li>
+    <li><a href="#frequently-asked-questions">Frequently Asked Questions (FAQ)</a></li>
+  </ol>
+</div>
+
+<!-- SECTION 1: Salary Reference Table -->
+<div class="content-section" id="salary-reference-table">
+  <h2>Salary to Affordable Rent Reference Table</h2>
+  <p>
+    When apartment hunting, knowing your exact rent ceilings across various financial standards prevents wasted application fees and ensures smooth landlord approval. The table below illustrates the maximum affordable monthly rent for common annual salaries based on the <strong>30% Rule</strong>, the <strong>40x Landlord Rule</strong>, and a <strong>Conservative 20% Rule</strong>.
+  </p>
+  <div class="table-wrap">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Annual Gross Salary</th>
+          <th class="num">Monthly Gross</th>
+          <th class="num">30% Standard Rule</th>
+          <th class="num">40x Landlord Rule</th>
+          <th class="num">20% Conservative</th>
+          <th class="num">Equivalent Hourly</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>$35,000 / yr</strong></td>
+          <td class="num">$2,917 / mo</td>
+          <td class="num font-bold">$875 / mo</td>
+          <td class="num font-bold">$875 / mo</td>
+          <td class="num">$583 / mo</td>
+          <td class="num">$16.83 / hr</td>
+        </tr>
+        <tr>
+          <td><strong>$45,000 / yr</strong></td>
+          <td class="num">$3,750 / mo</td>
+          <td class="num font-bold">$1,125 / mo</td>
+          <td class="num font-bold">$1,125 / mo</td>
+          <td class="num">$750 / mo</td>
+          <td class="num">$21.63 / hr</td>
+        </tr>
+        <tr>
+          <td><strong>$60,000 / yr</strong></td>
+          <td class="num">$5,000 / mo</td>
+          <td class="num font-bold text-primary">$1,500 / mo</td>
+          <td class="num font-bold text-primary">$1,500 / mo</td>
+          <td class="num">$1,000 / mo</td>
+          <td class="num">$28.85 / hr</td>
+        </tr>
+        <tr>
+          <td><strong>$75,000 / yr</strong></td>
+          <td class="num">$6,250 / mo</td>
+          <td class="num font-bold text-primary">$1,875 / mo</td>
+          <td class="num font-bold text-primary">$1,875 / mo</td>
+          <td class="num">$1,250 / mo</td>
+          <td class="num">$36.06 / hr</td>
+        </tr>
+        <tr>
+          <td><strong>$90,000 / yr</strong></td>
+          <td class="num">$7,500 / mo</td>
+          <td class="num font-bold text-primary">$2,250 / mo</td>
+          <td class="num font-bold text-primary">$2,250 / mo</td>
+          <td class="num">$1,500 / mo</td>
+          <td class="num">$43.27 / hr</td>
+        </tr>
+        <tr>
+          <td><strong>$120,000 / yr</strong></td>
+          <td class="num">$10,000 / mo</td>
+          <td class="num font-bold">$3,000 / mo</td>
+          <td class="num font-bold">$3,000 / mo</td>
+          <td class="num">$2,000 / mo</td>
+          <td class="num">$57.69 / hr</td>
+        </tr>
+        <tr>
+          <td><strong>$150,000 / yr</strong></td>
+          <td class="num">$12,500 / mo</td>
+          <td class="num font-bold">$3,750 / mo</td>
+          <td class="num font-bold">$3,750 / mo</td>
+          <td class="num">$2,500 / mo</td>
+          <td class="num">$72.12 / hr</td>
+        </tr>
+        <tr>
+          <td><strong>$200,000 / yr</strong></td>
+          <td class="num">$16,667 / mo</td>
+          <td class="num font-bold">$5,000 / mo</td>
+          <td class="num font-bold">$5,000 / mo</td>
+          <td class="num">$3,333 / mo</td>
+          <td class="num">$96.15 / hr</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- SECTION 2: The 30% Rule Explained -->
+<div class="content-section" id="the-30-rule-explained">
+  <h2>The 30% Rule: History, Formula, and Real-World Math</h2>
+  <p>
+    The <strong>30% rule</strong> is the most ubiquitous metric in consumer financial planning. It advises that your housing costs—ideally including base rent, tenant-paid utilities, and renter's insurance—should consume no more than 30% of your gross (pre-tax) monthly earnings.
+  </p>
+  <p>
+    <strong>Origin of the 30% Benchmark:</strong> The standard stems from the United States Brooke Amendment to the 1968 Housing and Urban Development Act (enacted in 1969). Originally, public housing rents were capped at 25% of a resident's income, which was adjusted upward to 30% by Congress in 1981. Over time, financial institutions, consumer advocacy groups, and municipal agencies adopted 30% as the threshold between an affordable housing arrangement and being <em>"cost-burdened."</em>
+  </p>
+  <p>
+    <strong>The Mathematical Calculation:</strong>
+  </p>
+  <div class="formula-box">
+    <strong>Affordable Monthly Rent</strong> = (Gross Annual Income &divide; 12) &times; 0.30<br>
+    <em>Example:</em> For an annual salary of $72,000: ($72,000 &divide; 12) &times; 0.30 = $6,000 &times; 0.30 = <strong>$1,800 per month</strong>.
+  </div>
+  <p>
+    While the 30% rule provides a swift mental calculation, it does not account for heavy individual debts (such as substantial student loans or high-interest credit cards) or payroll taxes. A worker earning $6,000 monthly who takes home $4,400 after taxes and pays $600 toward student loans has only $3,800 left. Committing $1,800 to rent leaves just $2,000 for groceries, transportation, insurance, medical care, and savings.
+  </p>
+</div>
+
+<!-- SECTION 3: The 40x Rule -->
+<div class="content-section" id="the-40x-rule">
+  <h2>The 40x Rent Rule: Why Landlords Enforce It</h2>
+  <p>
+    In high-density rental hubs—most notably New York City, Boston, Chicago, and San Francisco—landlords rarely compute complex personal budgets. Instead, leasing offices enforce the strict <strong>40x Rent Rule</strong> during applicant screening.
+  </p>
+  <p>
+    <strong>How the 40x Rule Works:</strong> To qualify as an independent leaseholder, your total verified annual gross income must equal or exceed <strong>40 times the monthly rent</strong>:
+  </p>
+  <div class="formula-box">
+    <strong>Required Annual Salary</strong> = Monthly Rent &times; 40<br>
+    <strong>Maximum Allowable Rent</strong> = Annual Salary &divide; 40<br>
+    <em>Example:</em> For an apartment listing at $2,500/month: $2,500 &times; 40 = <strong>$100,000 minimum annual income</strong>.
+  </div>
+  <p>
+    Notice that dividing annual salary by 40 is mathematically identical to dedicating exactly 30% of gross monthly income:
+  </p>
+  <p style="text-align:center;font-family:monospace;font-weight:700;color:var(--primary);">
+    (Annual Income &divide; 12) &times; 0.30 = Annual Income &times; (0.30 / 12) = Annual Income &divide; 40
+  </p>
+  <p>
+    <strong>Combined Household Incomes:</strong> If you are applying with a spouse, partner, or roommate, most landlords permit you to combine your gross incomes to satisfy the 40x hurdle. For example, two roommates each earning $55,000 have a combined income of $110,000, qualifying them for an apartment renting up to $2,750 per month ($110,000 &divide; 40).
+  </p>
+</div>
+
+<!-- SECTION 4: Debt and DTI Impact -->
+<div class="content-section" id="debt-and-dti-impact">
+  <h2>How Monthly Debt Payments Impact Tenant Approval</h2>
+  <p>
+    Many renters mistakenly believe that meeting the 40x income threshold guarantees lease approval. However, institutional property management companies routinely run a comprehensive credit check and calculate your <strong>Debt-to-Income (DTI) ratio</strong>.
+  </p>
+  <p>
+    Your back-end DTI represents the percentage of your gross income committed to mandatory recurring debt payments plus proposed housing:
+  </p>
+  <div class="formula-box">
+    <strong>Total DTI (%)</strong> = [ (Proposed Rent + Minimum Debt Payments) &divide; Gross Monthly Income ] &times; 100
+  </div>
+  <p>
+    <strong>Underwriting Thresholds for Renters:</strong>
+  </p>
+  <ul>
+    <li><strong>DTI Under 36% (Preferred):</strong> Landlords view you as a prime tenant with minimal default risk.</li>
+    <li><strong>DTI 36% to 43% (Standard Acceptable):</strong> Typical for urban renters with manageable student loans or a modest auto lease.</li>
+    <li><strong>DTI 44% to 50% (High Risk):</strong> Often triggers a requirement for an institutional guarantor, a qualified cosigner, or an increased security deposit.</li>
+    <li><strong>DTI Over 50% (Likely Rejection):</strong> Most institutional corporate landlords will automatically decline the application due to high risk of delinquency during financial shocks.</li>
+  </ul>
+</div>
+
+<!-- SECTION 5: Upfront Costs of Renting -->
+<div class="content-section" id="upfront-costs-of-renting">
+  <h2>The Hidden Upfront Costs of Moving into an Apartment</h2>
+  <p>
+    Securing an apartment requires substantial liquid capital on day one. Beginners often budget only for first month's rent and are caught off guard when lease execution demands thousands in additional upfront escrow.
+  </p>
+  <div class="table-wrap">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Upfront Fee Item</th>
+          <th>Typical Amount</th>
+          <th>Purpose &amp; Refundability</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>First Month's Rent</strong></td>
+          <td>1 Month</td>
+          <td>Paid upfront; covers your occupancy during the initial 30 days. Non-refundable.</td>
+        </tr>
+        <tr>
+          <td><strong>Security Deposit</strong></td>
+          <td>1 to 1.5 Months</td>
+          <td>Held in an interest-bearing escrow account against damage or breach of lease. 100% refundable upon move-out if apartment is left in good condition.</td>
+        </tr>
+        <tr>
+          <td><strong>Last Month's Rent</strong></td>
+          <td>1 Month (Optional)</td>
+          <td>Requested by some independent landlords in competitive markets to protect against lease abandonment. Applied to your final month.</td>
+        </tr>
+        <tr>
+          <td><strong>Brokerage / Realtor Fee</strong></td>
+          <td>1 Month to 15% Annual</td>
+          <td>Common in New York City, Boston, and tight urban markets where the tenant pays the listing broker. Non-refundable.</td>
+        </tr>
+        <tr>
+          <td><strong>Application &amp; Credit Check</strong></td>
+          <td>$20 – $100 per applicant</td>
+          <td>Covers third-party credit bureau pulls, eviction database checks, and criminal history screening. Non-refundable.</td>
+        </tr>
+        <tr>
+          <td><strong>Moving &amp; Transport</strong></td>
+          <td>$300 – $2,000</td>
+          <td>Truck rental (U-Haul/Penske), professional movers, boxes, tape, and fuel.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    <strong>The Golden Rule for Move-In Savings:</strong> Keep a dedicated moving reserve equal to at least <strong>3 to 4 times your intended monthly rent</strong> before signing a lease.
+  </p>
+</div>
+
+<!-- SECTION 6: The 50/30/20 Budget -->
+<div class="content-section" id="the-50-30-20-budget">
+  <h2>Applying the 50/30/20 Budgeting Rule to Renting</h2>
+  <p>
+    Popularized by personal finance authorities, the <strong>50/30/20 rule</strong> allocates your <em>after-tax net take-home pay</em> across three structural pillars:
+  </p>
+  <ul>
+    <li><strong>50% for Needs:</strong> Housing (rent, utilities, insurance), essential groceries, minimum debt payments, transportation, and health care.</li>
+    <li><strong>30% for Wants:</strong> Dining out, entertainment, hobbies, travel, shopping, and streaming subscriptions.</li>
+    <li><strong>20% for Savings &amp; Debt Acceleration:</strong> Emergency fund reserves, Roth IRA / 401(k) contributions, and principal paydowns on loans.</li>
+  </ul>
+  <p>
+    Under the 50/30/20 framework, your base rent should ideally consume no more than <strong>60% of your total Needs category</strong> (i.e., roughly 30% of your net take-home income). If your take-home pay is $4,000 monthly, your total Needs budget is $2,000. Keeping your rent, utilities, and insurance under $1,400 ensures that the remaining $600 can comfortably absorb groceries, gas, and utility bills without cannibalizing your savings goals.
+  </p>
+</div>
+
+<!-- SECTION 7: High-Cost City Tactics -->
+<div class="content-section" id="high-cost-city-tactics">
+  <h2>How to Afford an Apartment in Expensive Metros</h2>
+  <p>
+    In high-cost-of-living metropolitan areas like Manhattan, San Francisco, Seattle, or Los Angeles, standard median rents frequently outpace entry- and mid-level corporate salaries. Renters successfully navigate these conditions using several proven strategies:
+  </p>
+  <div class="tips-box">
+    <h2>Actionable Renter Strategies</h2>
+    <ul>
+      <li><strong>Lease Guarantors &amp; Cosigners:</strong> If your individual salary falls short of the 40x rule, many landlords accept a guarantor (such as a parent or relative). Guarantors are typically required to prove an annual income of <strong>70x to 80x monthly rent</strong> and exceptional credit.</li>
+      <li><strong>Institutional Guarantor Services:</strong> Companies like Insurent, Rhino, or The Guarantors act as institutional cosigners for a one-time fee (usually 60% to 85% of one month's rent) if you lack a qualifying personal guarantor.</li>
+      <li><strong>Split Rent with Roommates:</strong> Combining household buying power for a 2-bedroom or 3-bedroom apartment drastically reduces per-person shelter costs compared to renting a studio or 1-bedroom alone. Use our built-in <strong>Roommate Splitter</strong> above to allocate rent fairly based on bedroom square footage and en-suite bathrooms.</li>
+      <li><strong>Negotiate Concessions:</strong> During slower winter leasing months (November through February), landlords frequently offer concessions such as "1 month free on a 13-month lease" or waived security deposits. Always confirm whether the advertised rent is <em>net effective</em> or <em>gross rent</em> to understand your true renewal obligation.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- SECTION 8: FAQ Section -->
+<div class="content-section" id="frequently-asked-questions">
+  <h2>Frequently Asked Questions (FAQ)</h2>
+  
+  <div class="faq-item">
+    <div class="faq-q">What percentage of my income should go toward rent?<span class="arrow">&#9654;</span></div>
+    <div class="faq-a">Most financial planners recommend capping total housing costs (rent, utilities, and renter's insurance) at 25% to 30% of your gross monthly income. If you have significant debt obligations or ambitious savings goals, staying closer to 20% to 25% provides greater long-term financial security.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">What is the difference between the 30% rule and the 40x rule?<span class="arrow">&#9654;</span></div>
+    <div class="faq-a">Mathematically, they arrive at the exact same figure. Dividing an annual salary by 40 produces the identical dollar amount as multiplying your gross monthly income by 30%. The difference is contextual: the 30% rule is used by consumers for budgeting, while the 40x rule is an underwriting threshold enforced by commercial landlords during tenant screening.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">How do landlords calculate income if I am self-employed or freelance?<span class="arrow">&#9654;</span></div>
+    <div class="faq-a">For 1099 independent contractors, freelancers, or business owners, landlords typically evaluate the net adjusted gross income shown on your IRS Form 1040 tax returns from the past two consecutive tax years, rather than top-line revenue. They may also request 3 to 6 months of complete business bank statements proving steady cash inflows.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Can a landlord deny my application even if I make 40x the rent?<span class="arrow">&#9654;</span></div>
+    <div class="faq-a">Yes. Income is only one leg of the underwriting decision. Landlords also check your FICO credit score (most institutional properties require 650 to 700+), verify rental payment history with previous landlords, check for prior evictions or civil judgments, and inspect your debt-to-income (DTI) ratio.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Should I use gross income or net take-home pay when calculating rent?<span class="arrow">&#9654;</span></div>
+    <div class="faq-a">Landlord qualification rules (like the 40x rule and 3x monthly rent rule) universally assess gross (pre-tax) earnings. However, for personal budgeting peace of mind, it is best to verify that your rent and essential bills do not consume more than 45% to 50% of your actual net take-home paycheck.</div>
+  </div>
+</div>
+
+<div class="content-section">
+  <h2>Related Real Estate &amp; Financing Calculators</h2>
+  <div class="related-grid">
+    <a class="related-card" href="rent-vs-buy.html">
+      <span class="related-icon">&#9878;</span>
+      <span>Rent vs Buy</span>
+    </a>
+    <a class="related-card" href="house-affordability.html">
+      <span class="related-icon">&#127969;</span>
+      <span>House Affordability</span>
+    </a>
+    <a class="related-card" href="debt-to-income.html">
+      <span class="related-icon">&#128202;</span>
+      <span>DTI Calculator</span>
+    </a>
+    <a class="related-card" href="mortgage-calculator.html">
+      <span class="related-icon">&#128181;</span>
+      <span>Mortgage Calculator</span>
+    </a>
+    <a class="related-card" href="mortgage-payoff-calculator.html">
+      <span class="related-icon">&#128640;</span>
+      <span>Mortgage Payoff</span>
+    </a>
+    <a class="related-card" href="real-estate-calculator.html">
+      <span class="related-icon">&#127970;</span>
+      <span>Real Estate Investment</span>
+    </a>
+  </div>
+</div>
 <!--SEO-CONTENT-END-->
 </main>
 </div>
 
-<div id="siteFooter"></div>
+<div id="siteFooter">
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>EMI Master</h4>
+        <p>Free, instant, and private online calculators for mortgages, loans, investments, retirement, and mathematics. Your inputs never leave your browser.</p>
+        <p><a href="sitemap.html"><strong>&rarr; All 50+ Calculators (Directory)</strong></a></p>
+      </div>
+      <div class="footer-col">
+        <h4>Popular Calculators</h4>
+        <ul>
+          <li><a href="mortgage-calculator.html">Mortgage Calculator</a></li>
+          <li><a href="amortization-calculator.html">Amortization Calculator</a></li>
+          <li><a href="emi-calculator.html">EMI Calculator</a></li>
+          <li><a href="home-loan.html">Home Loan Calculator</a></li>
+          <li><a href="car-loan.html">Car Loan Calculator</a></li>
+          <li><a href="personal-loan.html">Personal Loan Calculator</a></li>
+          <li><a href="compound-interest-calculator.html">Compound Interest</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Loans &amp; Real Estate</h4>
+        <ul>
+          <li><a href="rent-calculator.html">Rent Calculator</a></li>
+          <li><a href="rent-vs-buy.html">Rent vs Buy Calculator</a></li>
+          <li><a href="house-affordability.html">House Affordability</a></li>
+          <li><a href="refinance-calculator.html">Refinance Calculator</a></li>
+          <li><a href="mortgage-payoff-calculator.html">Mortgage Payoff</a></li>
+          <li><a href="fha-loan.html">FHA Loan Calculator</a></li>
+          <li><a href="va-loan.html">VA Mortgage Calculator</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Investment &amp; Tools</h4>
+        <ul>
+          <li><a href="investment-calculator.html">Investment Calculator</a></li>
+          <li><a href="retirement-calculator.html">Retirement Calculator</a></li>
+          <li><a href="social-security-calculator.html">Social Security</a></li>
+          <li><a href="scientific-calculator.html">Scientific Calculator</a></li>
+          <li><a href="percentage-calculator.html">Percentage Calculator</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="sitemap.html"><strong>Complete HTML Sitemap</strong></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 EMI Master. All rights reserved. For educational and planning purposes only.
+    </div>
+  </footer>
+</div>
 
-<script>
-  window.calcConfig = {
-    type: 'rent',
-    defaults: { rent: 20000, income: 80000, utilities: 3000 }
-  };
-</script>
 <script src="js/currency.js"></script>
 <script src="js/seo-content.js"></script>
 <script src="js/common.js"></script>
-<script src="js/mortgage.js"></script>
+<script src="js/rent-calculator.js"></script>
 </body>
 </html>

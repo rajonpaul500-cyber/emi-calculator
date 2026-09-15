@@ -47,16 +47,39 @@
     <h1 class="page-title">Least Common Multiple Calculator</h1>
     <p class="page-subtitle">Enter two or more numbers separated by commas to find their least common multiple (LCM), greatest common factor (GCF) and prime factorization.</p>
 
-<div class="card">
-<h2>Least common multiple (LCM)</h2>
-<div class="form-group"><label>Numbers (comma separated)</label><input type="text" id="nums" value="12, 18, 24" placeholder="e.g. 12, 18, 24"></div>
-<div class="form-actions"><button class="btn btn-primary" id="calcBtn" type="button">Calculate LCM</button></div>
-</div>
+    <!-- Quick Presets -->
+    <div class="preset-chips" id="presetChips" style="margin-bottom:16px;">
+      <span class="preset-label" style="font-size:0.85rem; font-weight:600; color:var(--text-muted);">Quick Presets:</span>
+      <button type="button" class="preset-chip active" data-nums="12, 18, 24">12, 18, 24 (LCM = 72)</button>
+      <button type="button" class="preset-chip" data-nums="4, 6, 8">4, 6, 8 (LCM = 24)</button>
+      <button type="button" class="preset-chip" data-nums="15, 20, 25">15, 20, 25 (LCM = 300)</button>
+      <button type="button" class="preset-chip" data-nums="7, 13">7, 13 (Primes = 91)</button>
+      <button type="button" class="preset-chip" data-nums="6, 14, 21">6, 14, 21 (LCM = 42)</button>
+    </div>
 
-    <div class="result-panel" id="resultPanel">
-      <h3>Result</h3>
-      <div class="result-main" id="resultMain">&mdash;</div>
-      <div class="result-grid" id="resultGrid"></div>
+    <div class="card">
+      <h2>Least Common Multiple (LCM) Calculator</h2>
+      <div class="form-group">
+        <label for="nums">Integers (separated by commas or spaces)</label>
+        <input type="text" id="nums" value="12, 18, 24" placeholder="e.g. 12, 18, 24">
+      </div>
+      <div class="form-actions" style="display:flex; gap:12px; margin-top:16px;">
+        <button class="btn btn-primary" id="calcBtn" type="button" style="flex:1;">Calculate LCM</button>
+        <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
+      </div>
+    </div>
+
+    <div class="result-panel" id="resultPanel" style="margin-top:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:12px; margin-bottom:16px;">
+        <h3 style="margin:0; font-size:1.15rem;">LCM &amp; Factorization Result</h3>
+        <button type="button" class="btn btn-sm btn-outline" id="copyResultBtn" title="Copy result text">📋 Copy</button>
+      </div>
+      <div class="result-main" id="resultMain" style="font-size:1.8rem; font-weight:800; color:var(--primary); text-align:center; padding:12px 0;">&mdash;</div>
+      <div class="result-grid" id="resultGrid" style="margin-top:16px;"></div>
+      <div id="stepContainer" style="margin-top:20px; padding:16px; background:var(--bg-alt); border-radius:8px; border:1px solid var(--border); display:none;">
+        <h4 style="margin:0 0 10px; font-size:1rem; color:var(--primary);">Step-by-Step Prime Factor Analysis</h4>
+        <div id="stepContent" style="font-size:0.92rem; line-height:1.7;"></div>
+      </div>
     </div>
 
     <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
@@ -136,20 +159,110 @@
 
 <script src="js/math.js"></script>
 <script>
-function item(l,v){return '<div class="result-item"><div class="label">'+l+'</div><div class="value">'+v+'</div></div>';}
-document.getElementById("calcBtn").onclick=function(){
-var raw=document.getElementById("nums").value.split(",").map(function(s){return parseInt(s.trim(),10);});
-var nums=raw.filter(function(n){return !isNaN(n)&&n>0;});
-if(nums.length<2){document.getElementById("resultMain").textContent="Enter at least two positive numbers";document.getElementById("resultGrid").innerHTML="";return;}
-var l=MathCalc.lcmMulti(nums).value;
-var g=MathCalc.gcfMulti(nums).value;
-var grid="";
-grid+=item("LCM of "+nums.join(", "),MathCalc.fmt(l,0))+item("GCF of "+nums.join(", "),MathCalc.fmt(g,0));
-var pf="";
-nums.forEach(function(n,i){pf+=item("Prime factors of "+n,MathCalc.primeFactors(n).join(" × "));});
-grid+=pf;
-document.getElementById("resultMain").textContent=MathCalc.fmt(l,0);
-document.getElementById("resultGrid").innerHTML=grid;};
+(function () {
+  function item(l, v) {
+    return '<div class="result-item"><div class="label">' + l + '</div><div class="value">' + v + '</div></div>';
+  }
+
+  function calcLcm() {
+    var str = document.getElementById("nums").value;
+    var raw = str.split(/[\s,;]+/).map(function (s) { return parseInt(s.trim(), 10); });
+    var nums = raw.filter(function (n) { return !isNaN(n) && n > 0; });
+
+    if (nums.length < 2) {
+      document.getElementById("resultMain").textContent = "\u2014";
+      document.getElementById("resultGrid").innerHTML = "";
+      document.getElementById("stepContainer").style.display = "none";
+      return;
+    }
+
+    var l = MathCalc.lcmMulti(nums).value;
+    var g = MathCalc.gcfMulti(nums).value;
+
+    document.getElementById("resultMain").textContent = "LCM = " + MathCalc.fmt(l, 0);
+
+    var grid = item("Least Common Multiple (LCM)", MathCalc.fmt(l, 0)) +
+               item("Greatest Common Factor (GCF)", MathCalc.fmt(g, 0)) +
+               item("Numbers Evaluated", nums.join(", "));
+
+    var stepHtml = "<strong>1. Prime Factorization of Each Number:</strong><br>";
+    var primeMaps = [];
+    var allPrimes = {};
+
+    nums.forEach(function (n) {
+      var factors = MathCalc.primeFactors(n);
+      var counts = {};
+      factors.forEach(function (p) {
+        counts[p] = (counts[p] || 0) + 1;
+        allPrimes[p] = true;
+      });
+      primeMaps.push(counts);
+
+      var factorParts = Object.keys(counts).map(function (p) {
+        return counts[p] > 1 ? p + "<sup>" + counts[p] + "</sup>" : p;
+      });
+      stepHtml += "&bull; " + n + " = " + factorParts.join(" &times; ") + " (" + factors.join(" &times; ") + ")<br>";
+      grid += item("Prime Factors of " + n, factorParts.join(" &times; "));
+    });
+
+    stepHtml += "<br><strong>2. Take Maximum Exponents for LCM:</strong><br>";
+    var lcmFactors = [];
+    Object.keys(allPrimes).map(Number).sort(function (a, b) { return a - b; }).forEach(function (p) {
+      var maxExp = 0;
+      primeMaps.forEach(function (m) {
+        if (m[p] && m[p] > maxExp) maxExp = m[p];
+      });
+      lcmFactors.push(maxExp > 1 ? p + "<sup>" + maxExp + "</sup>" : p);
+      stepHtml += "&bull; Highest power of prime " + p + ": " + (maxExp > 1 ? p + "<sup>" + maxExp + "</sup>" : p) + "<br>";
+    });
+
+    stepHtml += "<br><strong>3. Multiply Highest Prime Powers:</strong><br>" +
+                "LCM(" + nums.join(", ") + ") = " + lcmFactors.join(" &times; ") + " = <strong>" + MathCalc.fmt(l, 0) + "</strong>";
+
+    if (nums.length === 2) {
+      stepHtml += "<br><br><strong>4. Verification via Formula:</strong><br>" +
+                  "LCM(a, b) = (a &times; b) / GCF(a, b)<br>" +
+                  "LCM(" + nums[0] + ", " + nums[1] + ") = (" + nums[0] + " &times; " + nums[1] + ") / " + g + " = " + (nums[0] * nums[1]) + " / " + g + " = <strong>" + MathCalc.fmt(l, 0) + "</strong>";
+    }
+
+    document.getElementById("resultGrid").innerHTML = grid;
+    document.getElementById("stepContent").innerHTML = stepHtml;
+    document.getElementById("stepContainer").style.display = "block";
+  }
+
+  // Bind events
+  document.getElementById("calcBtn").onclick = calcLcm;
+  document.getElementById("nums").oninput = calcLcm;
+
+  document.getElementById("resetBtn").onclick = function () {
+    document.getElementById("nums").value = "12, 18, 24";
+    calcLcm();
+  };
+
+  // Presets
+  document.querySelectorAll("#presetChips .preset-chip").forEach(function (btn) {
+    btn.onclick = function () {
+      document.querySelectorAll("#presetChips .preset-chip").forEach(function (b) { b.classList.remove("active"); });
+      this.classList.add("active");
+      document.getElementById("nums").value = this.getAttribute("data-nums") || "12, 18, 24";
+      calcLcm();
+    };
+  });
+
+  // Copy Result
+  document.getElementById("copyResultBtn").onclick = function () {
+    var text = document.getElementById("resultMain").textContent;
+    if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).catch(function () {});
+    }
+    this.textContent = "✓ Copied";
+    var btn = this;
+    setTimeout(function () { btn.textContent = "📋 Copy"; }, 1500);
+  };
+
+  // Initial calculation
+  calcLcm();
+})();
 </script>
 <script src="js/currency.js"></script>
 <script src="js/seo-content.js"></script>

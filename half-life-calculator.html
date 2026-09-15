@@ -47,21 +47,54 @@
     <h1 class="page-title">Half-Life Calculator</h1>
     <p class="page-subtitle">Enter any three of the four values (initial amount, remaining amount, elapsed time, half-life) and leave one empty — the calculator solves it.</p>
 
-<div class="card">
-<h2>Half-life calculations</h2>
-<div class="form-grid">
-<div class="form-group"><label>Initial amount</label><input type="number" id="initial" value="100" step="any"></div>
-<div class="form-group"><label>Remaining amount</label><input type="number" id="remaining" value="25" step="any"></div>
-<div class="form-group"><label>Elapsed time</label><input type="number" id="time" value="10" step="any"></div>
-<div class="form-group"><label>Half-life</label><input type="text" id="halfLife" placeholder="Leave empty to solve" value=""></div>
-</div>
-<div class="form-actions"><button class="btn btn-primary" id="calcBtn" type="button">Solve</button></div>
-</div>
+    <!-- Quick Presets -->
+    <div class="preset-chips" id="presetChips" style="margin-bottom:16px;">
+      <span class="preset-label" style="font-size:0.85rem; font-weight:600; color:var(--text-muted);">Quick Presets:</span>
+      <button type="button" class="preset-chip active" data-init="100" data-rem="25" data-time="10" data-hl="">Solve Half-life (I=100, R=25, t=10)</button>
+      <button type="button" class="preset-chip" data-init="100" data-rem="" data-time="11460" data-hl="5730">Carbon-14 (2 Half-lives)</button>
+      <button type="button" class="preset-chip" data-init="200" data-rem="" data-time="10" data-hl="5">Caffeine (200mg, t=10h, H=5h)</button>
+      <button type="button" class="preset-chip" data-init="1000" data-rem="125" data-time="" data-hl="3">Solve Time (1000 &rarr; 125, H=3)</button>
+      <button type="button" class="preset-chip" data-init="" data-rem="10" data-time="24.06" data-hl="8.02">Iodine-131 (Solve Initial)</button>
+    </div>
 
-    <div class="result-panel" id="resultPanel">
-      <h3>Result</h3>
-      <div class="result-main" id="resultMain">&mdash;</div>
-      <div class="result-grid" id="resultGrid"></div>
+    <div class="card">
+      <h2>Exponential Decay &amp; Half-Life Solver</h2>
+      <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:14px;">Fill any 3 fields and leave 1 empty to solve for the missing parameter.</p>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="initial">Initial Amount (N<sub>0</sub>)</label>
+          <input type="number" id="initial" value="100" step="any" placeholder="e.g. 100">
+        </div>
+        <div class="form-group">
+          <label for="remaining">Remaining Amount (N<sub>t</sub>)</label>
+          <input type="number" id="remaining" value="25" step="any" placeholder="e.g. 25">
+        </div>
+        <div class="form-group">
+          <label for="time">Elapsed Time (t)</label>
+          <input type="number" id="time" value="10" step="any" placeholder="e.g. 10">
+        </div>
+        <div class="form-group">
+          <label for="halfLife">Half-Life (t<sub>1/2</sub>)</label>
+          <input type="number" id="halfLife" step="any" placeholder="Leave empty to solve" value="">
+        </div>
+      </div>
+      <div class="form-actions" style="display:flex; gap:12px; margin-top:16px;">
+        <button class="btn btn-primary" id="calcBtn" type="button" style="flex:1;">Solve Unknown Parameter</button>
+        <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
+      </div>
+    </div>
+
+    <div class="result-panel" id="resultPanel" style="margin-top:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:12px; margin-bottom:16px;">
+        <h3 style="margin:0; font-size:1.15rem;">Decay Analysis Result</h3>
+        <button type="button" class="btn btn-sm btn-outline" id="copyResultBtn" title="Copy result text">📋 Copy</button>
+      </div>
+      <div class="result-main" id="resultMain" style="font-size:1.8rem; font-weight:800; color:var(--primary); text-align:center; padding:12px 0;">&mdash;</div>
+      <div class="result-grid" id="resultGrid" style="margin-top:16px;"></div>
+      <div id="stepContainer" style="margin-top:20px; padding:16px; background:var(--bg-alt); border-radius:8px; border:1px solid var(--border); display:none;">
+        <h4 style="margin:0 0 10px; font-size:1rem; color:var(--primary);">Step-by-Step Derivation &amp; Decay Dynamics</h4>
+        <div id="stepContent" style="font-size:0.92rem; line-height:1.7;"></div>
+      </div>
     </div>
 
     <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
@@ -141,18 +174,131 @@
 
 <script src="js/math.js"></script>
 <script>
-function item(l,v){return '<div class="result-item"><div class="label">'+l+'</div><div class="value">'+v+'</div></div>';}
-document.getElementById("calcBtn").onclick=function(){
-function val(id){var v=document.getElementById(id).value.trim();return v===""?null:parseFloat(v);}
-var r=MathCalc.halfLifeSolve(val("initial"),val("remaining"),val("time"),val("halfLife"));
-if(r.error){document.getElementById("resultMain").textContent=r.error;document.getElementById("resultGrid").innerHTML="";return;}
-var label={initial:"Initial amount",remaining:"Remaining amount",time:"Elapsed time",halfLife:"Half-life"}[r.missing];
-document.getElementById("resultMain").textContent=MathCalc.fmt(r.value,6);
-var grid=item(label,MathCalc.fmt(r.value,6))+item("Decay constant (k)",MathCalc.fmt(r.decayConstant,8)+" per time unit")+item("Mean lifetime",MathCalc.fmt(r.meanLife,6)+" time units")+item("Remaining fraction",MathCalc.fmt(r.remainingFraction*100,2)+"%");
-var rows="";
-for(var h=0;h<=5;h++){var pct=Math.pow(0.5,h)*100;rows+=item(h+" half-lives",MathCalc.fmt(pct,2)+"% remaining");}
-grid+=rows;
-document.getElementById("resultGrid").innerHTML=grid;};
+(function () {
+  function item(l, v) {
+    return '<div class="result-item"><div class="label">' + l + '</div><div class="value">' + v + '</div></div>';
+  }
+
+  function val(id) {
+    var v = document.getElementById(id).value.trim();
+    return v === "" ? null : parseFloat(v);
+  }
+
+  function calcHalfLife() {
+    var i = val("initial");
+    var r = val("remaining");
+    var t = val("time");
+    var hl = val("halfLife");
+
+    var res = MathCalc.halfLifeSolve(i, r, t, hl);
+    if (res.error) {
+      document.getElementById("resultMain").textContent = res.error;
+      document.getElementById("resultGrid").innerHTML = "";
+      document.getElementById("stepContainer").style.display = "none";
+      return;
+    }
+
+    var labelMap = {
+      initial: "Initial Amount (N₀)",
+      remaining: "Remaining Amount (Nₜ)",
+      time: "Elapsed Time (t)",
+      halfLife: "Half-Life (t₁/₂)"
+    };
+
+    var solvedLabel = labelMap[res.missing];
+    document.getElementById("resultMain").textContent = solvedLabel + " = " + MathCalc.fmt(res.value, 6);
+
+    var grid = item(solvedLabel, "<strong>" + MathCalc.fmt(res.value, 6) + "</strong>") +
+               item("Decay Constant (&lambda; or k)", MathCalc.fmt(res.decayConstant, 8) + " / unit") +
+               item("Mean Lifetime (&tau; = 1/k)", MathCalc.fmt(res.meanLife, 6) + " units") +
+               item("Remaining Fraction", MathCalc.fmt(res.remainingFraction * 100, 3) + "%") +
+               item("Elapsed Half-Lives", MathCalc.fmt(res.elapsedHalfLives !== undefined ? res.elapsedHalfLives : (res.time !== undefined && res.halfLife ? res.time / res.halfLife : 0), 4));
+
+    // Progress Table
+    var tableHtml = "<table style='width:100%; border-collapse:collapse; margin-top:10px; font-size:0.88rem; text-align:left;'>" +
+                    "<thead><tr style='border-bottom:2px solid var(--border);'><th style='padding:6px;'>Half-Lives</th><th style='padding:6px;'>Percent Remaining</th><th style='padding:6px;'>Fraction</th></tr></thead><tbody>";
+    for (var h = 0; h <= 6; h++) {
+      var pct = Math.pow(0.5, h) * 100;
+      var frac = "1/" + Math.pow(2, h);
+      tableHtml += "<tr style='border-bottom:1px solid var(--border);'><td style='padding:6px;'>" + h + " t₁/₂</td><td style='padding:6px;'>" + MathCalc.fmt(pct, 2) + "%</td><td style='padding:6px;'>" + frac + "</td></tr>";
+    }
+    tableHtml += "</tbody></table>";
+
+    // Step-by-step
+    var stepHtml = "<strong>1. Exponential Decay Governing Equation:</strong><br>" +
+                   "<code>N(t) = N₀ &times; (1/2)<sup>(t / t₁/₂)</sup> = N₀ &times; e<sup>-&lambda;t</sup></code><br><br>";
+
+    if (res.missing === "halfLife") {
+      stepHtml += "<strong>2. Solving for Half-Life (t₁/₂):</strong><br>" +
+                  "&bull; Ratio: Nₜ / N₀ = " + r + " / " + i + " = " + (r / i) + "<br>" +
+                  "&bull; Natural log: ln(N₀ / Nₜ) = ln(" + i + " / " + r + ") = " + Math.log(i / r).toFixed(6) + "<br>" +
+                  "&bull; Half-life: <code>t₁/₂ = t &times; ln(2) / ln(N₀ / Nₜ) = " + t + " &times; 0.693147 / " + Math.log(i / r).toFixed(6) + " = <strong>" + MathCalc.fmt(res.value, 6) + "</strong></code>";
+    } else if (res.missing === "remaining") {
+      var numHL = t / hl;
+      stepHtml += "<strong>2. Solving for Remaining Amount (Nₜ):</strong><br>" +
+                  "&bull; Elapsed half-lives = t / t₁/₂ = " + t + " / " + hl + " = " + numHL.toFixed(4) + "<br>" +
+                  "&bull; Decay multiplier = (1/2)<sup>" + numHL.toFixed(4) + "</sup> = " + Math.pow(0.5, numHL).toFixed(6) + "<br>" +
+                  "&bull; Nₜ = " + i + " &times; " + Math.pow(0.5, numHL).toFixed(6) + " = <strong>" + MathCalc.fmt(res.value, 6) + "</strong>";
+    } else if (res.missing === "initial") {
+      var numHL2 = t / hl;
+      stepHtml += "<strong>2. Solving for Initial Amount (N₀):</strong><br>" +
+                  "&bull; Elapsed half-lives = t / t₁/₂ = " + t + " / " + hl + " = " + numHL2.toFixed(4) + "<br>" +
+                  "&bull; Multiplier = 2<sup>" + numHL2.toFixed(4) + "</sup> = " + Math.pow(2, numHL2).toFixed(6) + "<br>" +
+                  "&bull; N₀ = " + r + " &times; 2<sup>" + numHL2.toFixed(4) + "</sup> = <strong>" + MathCalc.fmt(res.value, 6) + "</strong>";
+    } else if (res.missing === "time") {
+      stepHtml += "<strong>2. Solving for Elapsed Time (t):</strong><br>" +
+                  "&bull; Ratio: N₀ / Nₜ = " + i + " / " + r + " = " + (i / r) + "<br>" +
+                  "&bull; <code>t = t₁/₂ &times; [ln(N₀ / Nₜ) / ln(2)] = " + hl + " &times; " + (Math.log(i / r) / Math.LN2).toFixed(6) + " = <strong>" + MathCalc.fmt(res.value, 6) + "</strong></code>";
+    }
+
+    stepHtml += "<br><br><strong>3. Standard Half-Life Decay Milestone Table:</strong><br>" + tableHtml;
+
+    document.getElementById("resultGrid").innerHTML = grid;
+    document.getElementById("stepContent").innerHTML = stepHtml;
+    document.getElementById("stepContainer").style.display = "block";
+  }
+
+  // Bind events
+  document.getElementById("calcBtn").onclick = calcHalfLife;
+  ["initial", "remaining", "time", "halfLife"].forEach(function (id) {
+    document.getElementById(id).oninput = calcHalfLife;
+  });
+
+  document.getElementById("resetBtn").onclick = function () {
+    document.getElementById("initial").value = "100";
+    document.getElementById("remaining").value = "25";
+    document.getElementById("time").value = "10";
+    document.getElementById("halfLife").value = "";
+    calcHalfLife();
+  };
+
+  // Presets
+  document.querySelectorAll("#presetChips .preset-chip").forEach(function (btn) {
+    btn.onclick = function () {
+      document.querySelectorAll("#presetChips .preset-chip").forEach(function (b) { b.classList.remove("active"); });
+      this.classList.add("active");
+      document.getElementById("initial").value = this.getAttribute("data-init");
+      document.getElementById("remaining").value = this.getAttribute("data-rem");
+      document.getElementById("time").value = this.getAttribute("data-time");
+      document.getElementById("halfLife").value = this.getAttribute("data-hl");
+      calcHalfLife();
+    };
+  });
+
+  // Copy Result
+  document.getElementById("copyResultBtn").onclick = function () {
+    var text = document.getElementById("resultMain").textContent;
+    if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).catch(function () {});
+    }
+    this.textContent = "✓ Copied";
+    var btn = this;
+    setTimeout(function () { btn.textContent = "📋 Copy"; }, 1500);
+  };
+
+  // Initial calculation
+  calcHalfLife();
+})();
 </script>
 <script src="js/currency.js"></script>
 <script src="js/seo-content.js"></script>

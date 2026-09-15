@@ -47,31 +47,80 @@
     <h1 class="page-title">Hex Calculator</h1>
     <p class="page-subtitle">Fill in any one of the four fields (decimal, hex, binary or octal) and the others update instantly. A separate tool adds and subtracts hex numbers.</p>
 
-<div class="card">
-<h2>Number base converter</h2>
-<div class="form-grid">
-<div class="form-group"><label>Decimal</label><input type="number" id="dec" value="255" placeholder="e.g. 255"></div>
-<div class="form-group"><label>Hex</label><input type="text" id="hex" value="FF" placeholder="e.g. FF"></div>
-<div class="form-group"><label>Binary</label><input type="text" id="bin" value="11111111" placeholder="e.g. 11111111"></div>
-<div class="form-group"><label>Octal</label><input type="text" id="oct" value="377" placeholder="e.g. 377"></div>
-</div>
-<div class="form-actions"><button class="btn btn-primary" id="convBtn" type="button">Convert</button> <button class="btn btn-outline" id="clearBtn" type="button">Clear</button></div>
-</div>
+    <!-- Quick Presets -->
+    <div class="preset-chips" id="presetChips" style="margin-bottom:16px;">
+      <span class="preset-label" style="font-size:0.85rem; font-weight:600; color:var(--text-muted);">Quick Presets:</span>
+      <button type="button" class="preset-chip active" data-dec="255">255 (Byte 0xFF)</button>
+      <button type="button" class="preset-chip" data-dec="1024">1024 (0x400 / 1KB)</button>
+      <button type="button" class="preset-chip" data-dec="65535">65535 (16-bit 0xFFFF)</button>
+      <button type="button" class="preset-chip" data-dec="16777215">16.7M (RGB #FFFFFF)</button>
+      <button type="button" class="preset-chip" data-dec="42">42 (0x2A)</button>
+    </div>
 
-<div class="card">
-<h2>Hex arithmetic</h2>
-<div class="form-grid">
-<div class="form-group"><label>Hex A</label><input type="text" id="ha" value="FF"></div>
-<div class="form-group"><label>Hex B</label><input type="text" id="hb" value="0F"></div>
-<div class="form-group"><label>Operation</label><select id="hop"><option value="add">+ Add</option><option value="sub">- Subtract</option></select></div>
-</div>
-<div class="form-actions"><button class="btn btn-outline" id="hexOpBtn" type="button">Calculate</button></div>
-</div>
+    <div class="card">
+      <h2>Instant Multi-Base Converter</h2>
+      <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:16px;">Edit any field below &mdash; all other bases convert in real time!</p>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="dec">Decimal (Base 10)</label>
+          <input type="number" id="dec" value="255" placeholder="e.g. 255" style="font-family:monospace; font-size:1.1rem;">
+        </div>
+        <div class="form-group">
+          <label for="hex">Hexadecimal (Base 16)</label>
+          <input type="text" id="hex" value="FF" placeholder="e.g. FF" style="font-family:monospace; font-size:1.1rem; text-transform:uppercase;">
+        </div>
+        <div class="form-group">
+          <label for="bin">Binary (Base 2)</label>
+          <input type="text" id="bin" value="11111111" placeholder="e.g. 11111111" style="font-family:monospace; font-size:1.1rem;">
+        </div>
+        <div class="form-group">
+          <label for="oct">Octal (Base 8)</label>
+          <input type="text" id="oct" value="377" placeholder="e.g. 377" style="font-family:monospace; font-size:1.1rem;">
+        </div>
+      </div>
+      <div class="form-actions" style="display:flex; gap:12px; margin-top:16px;">
+        <button class="btn btn-primary" id="convBtn" type="button" style="flex:1;">Sync / Convert</button>
+        <button class="btn btn-outline" id="clearBtn" type="button">Clear All</button>
+      </div>
+    </div>
 
-    <div class="result-panel" id="resultPanel">
-      <h3>Result</h3>
-      <div class="result-main" id="resultMain">&mdash;</div>
-      <div class="result-grid" id="resultGrid"></div>
+    <div class="card" style="margin-top:20px;">
+      <h2>Hexadecimal Arithmetic (+, -, &times;, &divide;)</h2>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="ha">Hex Number A</label>
+          <input type="text" id="ha" value="FF" placeholder="e.g. FF" style="font-family:monospace; font-size:1.1rem; text-transform:uppercase;">
+        </div>
+        <div class="form-group">
+          <label for="hb">Hex Number B</label>
+          <input type="text" id="hb" value="0F" placeholder="e.g. 0F" style="font-family:monospace; font-size:1.1rem; text-transform:uppercase;">
+        </div>
+        <div class="form-group" style="grid-column: 1 / -1;">
+          <label for="hop">Operation</label>
+          <select id="hop">
+            <option value="add" selected>+ Addition (A + B)</option>
+            <option value="sub">- Subtraction (A - B)</option>
+            <option value="mul">&times; Multiplication (A &times; B)</option>
+            <option value="div">&divide; Division (A &divide; B)</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary" id="hexOpBtn" type="button">Calculate Hex Operation</button>
+      </div>
+    </div>
+
+    <div class="result-panel" id="resultPanel" style="margin-top:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:12px; margin-bottom:16px;">
+        <h3 style="margin:0; font-size:1.15rem;">Hex Result</h3>
+        <button type="button" class="btn btn-sm btn-outline" id="copyResultBtn" title="Copy result text">📋 Copy</button>
+      </div>
+      <div class="result-main" id="resultMain" style="font-family:monospace; font-size:1.8rem; font-weight:800; color:var(--primary); text-align:center; padding:12px 0;">&mdash;</div>
+      <div class="result-grid" id="resultGrid" style="margin-top:16px;"></div>
+      <div id="stepContainer" style="margin-top:20px; padding:16px; background:var(--bg-alt); border-radius:8px; border:1px solid var(--border); display:none;">
+        <h4 style="margin:0 0 10px; font-size:1rem; color:var(--primary);">Step-by-Step Breakdown</h4>
+        <div id="stepContent" style="font-size:0.92rem; line-height:1.6; font-family:monospace;"></div>
+      </div>
     </div>
 
     <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
@@ -151,35 +200,179 @@
 
 <script src="js/math.js"></script>
 <script>
-function item(l,v){return '<div class="result-item"><div class="label">'+l+'</div><div class="value">'+v+'</div></div>';}
-document.getElementById("clearBtn").onclick=function(){["dec","hex","bin","oct"].forEach(function(id){document.getElementById(id).value="";});document.getElementById("resultMain").textContent="—";document.getElementById("resultGrid").innerHTML="";};
-document.getElementById("convBtn").onclick=function(){
-var dec=document.getElementById("dec").value.trim();
-var hex=document.getElementById("hex").value.trim();
-var bin=document.getElementById("bin").value.trim();
-var oct=document.getElementById("oct").value.trim();
-var d;
-if(dec!==""){d=parseInt(dec,10);if(isNaN(d)){document.getElementById("resultMain").textContent="Invalid decimal";return;}}
-else if(hex!==""){if(!/^[0-9A-Fa-f]+$/.test(hex)){document.getElementById("resultMain").textContent="Invalid hexadecimal";return;}d=parseInt(hex,16);}
-else if(bin!==""){if(!/^[01]+$/.test(bin)){document.getElementById("resultMain").textContent="Invalid binary";return;}d=parseInt(bin,2);}
-else if(oct!==""){if(!/^[0-7]+$/.test(oct)){document.getElementById("resultMain").textContent="Invalid octal";return;}d=parseInt(oct,8);}
-else{document.getElementById("resultMain").textContent="Fill in at least one field";return;}
-document.getElementById("dec").value=d;
-document.getElementById("hex").value=d.toString(16).toUpperCase();
-document.getElementById("bin").value=(d>>>0).toString(2);
-document.getElementById("oct").value=(d>>>0).toString(8);
-document.getElementById("resultMain").textContent=d;
-document.getElementById("resultGrid").innerHTML=item("Decimal",d)+item("Hex",d.toString(16).toUpperCase())+item("Binary",(d>>>0).toString(2))+item("Octal",(d>>>0).toString(8));};
-document.getElementById("hexOpBtn").onclick=function(){
-var a=document.getElementById("ha").value.trim();
-var b=document.getElementById("hb").value.trim();
-if(!/^[0-9A-Fa-f]+$/.test(a)||!/^[0-9A-Fa-f]+$/.test(b)){document.getElementById("resultMain").textContent="Invalid hex input";return;}
-var A=parseInt(a,16),B=parseInt(b,16);
-var op=document.getElementById("hop").value;
-var r=op==="add"?A+B:A-B;
-var hr=r>=0?r.toString(16).toUpperCase():"-"+Math.abs(r).toString(16).toUpperCase();
-document.getElementById("resultMain").textContent=hr;
-document.getElementById("resultGrid").innerHTML=item("Hex result",hr)+item("Decimal result",r);};
+(function () {
+  function item(l, v) {
+    return '<div class="result-item"><div class="label">' + l + '</div><div class="value">' + v + '</div></div>';
+  }
+
+  var isSyncing = false;
+
+  function syncFromDecimal(d, source) {
+    if (isNaN(d) || !isFinite(d)) {
+      document.getElementById("resultMain").textContent = "Invalid Number";
+      document.getElementById("resultGrid").innerHTML = "";
+      document.getElementById("stepContainer").style.display = "none";
+      return;
+    }
+    isSyncing = true;
+    if (source !== "dec") document.getElementById("dec").value = d;
+    if (source !== "hex") document.getElementById("hex").value = (d >= 0 ? d : d >>> 0).toString(16).toUpperCase();
+    if (source !== "bin") document.getElementById("bin").value = (d >= 0 ? d : d >>> 0).toString(2);
+    if (source !== "oct") document.getElementById("oct").value = (d >= 0 ? d : d >>> 0).toString(8);
+    isSyncing = false;
+
+    var hexStr = (d >= 0 ? d : d >>> 0).toString(16).toUpperCase();
+    var binStr = (d >= 0 ? d : d >>> 0).toString(2);
+    var octStr = (d >= 0 ? d : d >>> 0).toString(8);
+
+    document.getElementById("resultMain").textContent = "0x" + hexStr + " (" + d + ")";
+    var grid = item("Decimal (Base 10)", d) +
+               item("Hexadecimal (Base 16)", "0x" + hexStr) +
+               item("Binary (Base 2)", binStr) +
+               item("Octal (Base 8)", octStr) +
+               item("ASCII Char", (d >= 32 && d <= 126) ? "'" + String.fromCharCode(d) + "'" : "Non-printable");
+    document.getElementById("resultGrid").innerHTML = grid;
+
+    var stepHtml = "<strong>Radix Conversion Breakdown for " + d + " (Decimal):</strong><br>" +
+                   "&bull; <strong>Hexadecimal:</strong> " + d + " &divide; 16 = " + Math.floor(d / 16) + " remainder " + (d % 16) + " &rarr; <strong>0x" + hexStr + "</strong><br>" +
+                   "&bull; <strong>Binary:</strong> " + d + " represented in powers of 2 &rarr; <strong>" + binStr + "<sub>2</sub></strong><br>" +
+                   "&bull; <strong>Octal:</strong> " + d + " represented in powers of 8 &rarr; <strong>" + octStr + "<sub>8</sub></strong>";
+    document.getElementById("stepContent").innerHTML = stepHtml;
+    document.getElementById("stepContainer").style.display = "block";
+  }
+
+  function handleDecInput() {
+    if (isSyncing) return;
+    var val = String(document.getElementById("dec").value || "").trim();
+    if (val === "") return;
+    var d = parseInt(val, 10);
+    syncFromDecimal(d, "dec");
+  }
+
+  function handleHexInput() {
+    if (isSyncing) return;
+    var val = String(document.getElementById("hex").value || "").trim().replace(/^0x/i, '');
+    if (val === "") return;
+    if (!/^[0-9A-Fa-f]+$/.test(val)) {
+      document.getElementById("resultMain").textContent = "Invalid Hex (0-9, A-F only)";
+      return;
+    }
+    var d = parseInt(val, 16);
+    syncFromDecimal(d, "hex");
+  }
+
+  function handleBinInput() {
+    if (isSyncing) return;
+    var val = String(document.getElementById("bin").value || "").trim().replace(/^0b/i, '');
+    if (val === "") return;
+    if (!/^[01]+$/.test(val)) {
+      document.getElementById("resultMain").textContent = "Invalid Binary (0 and 1 only)";
+      return;
+    }
+    var d = parseInt(val, 2);
+    syncFromDecimal(d, "bin");
+  }
+
+  function handleOctInput() {
+    if (isSyncing) return;
+    var val = String(document.getElementById("oct").value || "").trim().replace(/^0o/i, '');
+    if (val === "") return;
+    if (!/^[0-7]+$/.test(val)) {
+      document.getElementById("resultMain").textContent = "Invalid Octal (0-7 only)";
+      return;
+    }
+    var d = parseInt(val, 8);
+    syncFromDecimal(d, "oct");
+  }
+
+  function calcHexOp() {
+    var a = String(document.getElementById("ha").value || "").trim().replace(/^0x/i, '');
+    var b = String(document.getElementById("hb").value || "").trim().replace(/^0x/i, '');
+    var op = document.getElementById("hop").value;
+
+    if (!/^[0-9A-Fa-f]+$/.test(a) || !/^[0-9A-Fa-f]+$/.test(b)) {
+      document.getElementById("resultMain").textContent = "Invalid Hexadecimal inputs";
+      document.getElementById("resultGrid").innerHTML = "";
+      document.getElementById("stepContainer").style.display = "none";
+      return;
+    }
+
+    var A = parseInt(a, 16), B = parseInt(b, 16);
+    var r, opSymbol, opName;
+    switch (op) {
+      case "add": r = A + B; opSymbol = "+"; opName = "Addition"; break;
+      case "sub": r = A - B; opSymbol = "-"; opName = "Subtraction"; break;
+      case "mul": r = A * B; opSymbol = "&times;"; opName = "Multiplication"; break;
+      case "div":
+        if (B === 0) {
+          document.getElementById("resultMain").textContent = "Division by zero";
+          return;
+        }
+        r = Math.floor(A / B); opSymbol = "&divide;"; opName = "Division"; break;
+      default: r = A + B; opSymbol = "+"; opName = "Addition";
+    }
+
+    var hr = r >= 0 ? "0x" + r.toString(16).toUpperCase() : "-0x" + Math.abs(r).toString(16).toUpperCase();
+    document.getElementById("resultMain").textContent = hr;
+    var grid = item("Hexadecimal Result", hr) +
+               item("Decimal Equivalent", r) +
+               item("Binary Equivalent", (r >= 0 ? r : r >>> 0).toString(2)) +
+               item("Operation", opName);
+    document.getElementById("resultGrid").innerHTML = grid;
+
+    var stepHtml = "<strong>Hexadecimal " + opName + ":</strong><br>" +
+                   "0x" + a.toUpperCase() + " (" + A + "<sub>10</sub>) " + opSymbol + " 0x" + b.toUpperCase() + " (" + B + "<sub>10</sub>)<br>" +
+                   "= Decimal: " + A + " " + opSymbol + " " + B + " = <strong>" + r + "</strong><br>" +
+                   "= Hexadecimal: <strong>" + hr + "</strong>";
+    document.getElementById("stepContent").innerHTML = stepHtml;
+    document.getElementById("stepContainer").style.display = "block";
+  }
+
+  // Bind inputs
+  document.getElementById("dec").oninput = handleDecInput;
+  document.getElementById("hex").oninput = handleHexInput;
+  document.getElementById("bin").oninput = handleBinInput;
+  document.getElementById("oct").oninput = handleOctInput;
+  document.getElementById("convBtn").onclick = handleDecInput;
+
+  document.getElementById("ha").oninput = calcHexOp;
+  document.getElementById("hb").oninput = calcHexOp;
+  document.getElementById("hop").onchange = calcHexOp;
+  document.getElementById("hexOpBtn").onclick = calcHexOp;
+
+  document.getElementById("clearBtn").onclick = function () {
+    ["dec", "hex", "bin", "oct"].forEach(function (id) {
+      document.getElementById(id).value = "";
+    });
+    document.getElementById("resultMain").textContent = "\u2014";
+    document.getElementById("resultGrid").innerHTML = "";
+    document.getElementById("stepContainer").style.display = "none";
+  };
+
+  // Presets
+  document.querySelectorAll("#presetChips .preset-chip").forEach(function (btn) {
+    btn.onclick = function () {
+      document.querySelectorAll("#presetChips .preset-chip").forEach(function (b) { b.classList.remove("active"); });
+      this.classList.add("active");
+      var d = parseInt(this.getAttribute("data-dec"), 10);
+      syncFromDecimal(d, null);
+    };
+  });
+
+  // Copy result
+  document.getElementById("copyResultBtn").onclick = function () {
+    var text = document.getElementById("resultMain").textContent;
+    if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).catch(function () {});
+    }
+    this.textContent = "✓ Copied";
+    var btn = this;
+    setTimeout(function () { btn.textContent = "📋 Copy"; }, 1500);
+  };
+
+  // Initial run
+  syncFromDecimal(255, null);
+})();
 </script>
 <script src="js/currency.js"></script>
 <script src="js/seo-content.js"></script>

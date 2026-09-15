@@ -45,71 +45,275 @@
   <main class="main-content">
     <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="index.html#math">Math Calculators</a> &rsaquo; Scientific Calculator</div>
     <h1 class="page-title">Scientific Calculator</h1>
-    <p class="page-subtitle">Enter a mathematical expression below (or tap the buttons) and press Calculate. Everything runs locally in your browser, so your expressions never leave your device.</p>
+    <p class="page-subtitle">Authentic multi-function scientific calculator with natural display, DEG/RAD trigonometry, hyperbolic functions, logarithms, exponents, roots, factorials, memory registers, and calculation history.</p>
 
-<div class="card">
-<h2>Expression</h2>
-<div class="form-group">
-<label for="sciDisplay">Expression</label>
-<input type="text" id="sciDisplay" value="sin(30)+sqrt(9)*2" style="font-size:1.5em;text-align:right;font-family:monospace">
-<small>Use + - * / ( ) ^ &radic; &pi; ! sin cos tan asin acos atan ln log log10 x^2 x^3 1/x e %. Example: sin(30)+&radic;9</small>
-</div>
-<div class="form-group">
-<label for="degMode">Angle mode</label>
-<select id="degMode">
-<option value="deg">Degrees</option>
-<option value="rad">Radians</option>
-</select>
-</div>
-<div class="calc-keypad">
-<button type="button" class="btn btn-outline" onclick="b('(')">(</button>
-<button type="button" class="btn btn-outline" onclick="b(')')">)</button>
-<button type="button" class="btn btn-outline" onclick="b('%')">%</button>
-<button type="button" class="btn btn-outline" id="clearBtn">C</button>
-<button type="button" class="btn btn-outline" onclick="b('7')">7</button>
-<button type="button" class="btn btn-outline" onclick="b('8')">8</button>
-<button type="button" class="btn btn-outline" onclick="b('9')">9</button>
-<button type="button" class="btn btn-outline" onclick="b('/')">&divide;</button>
-<button type="button" class="btn btn-outline" onclick="b('4')">4</button>
-<button type="button" class="btn btn-outline" onclick="b('5')">5</button>
-<button type="button" class="btn btn-outline" onclick="b('6')">6</button>
-<button type="button" class="btn btn-outline" onclick="b('*')">&times;</button>
-<button type="button" class="btn btn-outline" onclick="b('1')">1</button>
-<button type="button" class="btn btn-outline" onclick="b('2')">2</button>
-<button type="button" class="btn btn-outline" onclick="b('3')">3</button>
-<button type="button" class="btn btn-outline" onclick="b('-')">&minus;</button>
-<button type="button" class="btn btn-outline" onclick="b('0')">0</button>
-<button type="button" class="btn btn-outline" onclick="b('.')">.</button>
-<button type="button" class="btn btn-outline" onclick="b('^')">x^y</button>
-<button type="button" class="btn btn-outline" onclick="b('+')">+</button>
-<button type="button" class="btn btn-outline" onclick="b('Math.sqrt(')">&radic;</button>
-<button type="button" class="btn btn-outline" onclick="b('Math.PI')">&pi;</button>
-<button type="button" class="btn btn-outline" onclick="b('Math.E')">e</button>
-<button type="button" class="btn btn-outline" onclick="b('!')">n!</button>
-<button type="button" class="btn btn-outline" onclick="b('Math.sin(')">sin</button>
-<button type="button" class="btn btn-outline" onclick="b('Math.cos(')">cos</button>
-<button type="button" class="btn btn-outline" onclick="b('Math.tan(')">tan</button>
-<button type="button" class="btn btn-outline" onclick="b('Math.asin(')">asin</button>
-<button type="button" class="btn btn-outline" onclick="b('Math.acos(')">acos</button>
-<button type="button" class="btn btn-outline" onclick="b('Math.atan(')">atan</button>
-<button type="button" class="btn btn-outline" onclick="b('Math.log10(')">log</button>
-<button type="button" class="btn btn-outline" onclick="b('Math.log(')">ln</button>
-<button type="button" class="btn btn-outline" onclick="b('Math.log2(')">log2</button>
-<button type="button" class="btn btn-outline" onclick="b('Math.abs(')">|x|</button>
-<button type="button" class="btn btn-outline" onclick="b('Math.floor(')">floor</button>
-<button type="button" class="btn btn-outline" onclick="b('Math.ceil(')">ceil</button>
-<button type="button" class="btn btn-outline" onclick="b('Math.exp(')">e^x</button>
-<button type="button" class="btn btn-outline" id="backBtn">&#9003;</button>
-</div>
-<div class="form-actions">
-<button class="btn btn-primary" id="calcBtn" type="button">= Calculate</button>
-</div>
-</div>
+    <!-- Authentic Scientific Calculator Console & Sidebar -->
+    <div class="sci-calc-wrapper">
+      <!-- Hardware Console Body -->
+      <div class="sci-device" id="sciDevice">
+        <!-- Top Branding & Solar Strip -->
+        <div class="sci-top-bar">
+          <div class="sci-brand-label">
+            <div class="sci-brand-title">
+              EMI MASTER <span class="sci-brand-badge">fx-991 PRO</span>
+            </div>
+            <div class="sci-brand-sub">NATURAL-V.P.A.M. &bull; TWO-WAY POWER</div>
+          </div>
+          <div class="sci-top-right">
+            <div class="sci-solar-cell" title="Photovoltaic Solar Panel Simulation">
+              <div class="sci-solar-line"></div>
+              <div class="sci-solar-line"></div>
+              <div class="sci-solar-line"></div>
+              <div class="sci-solar-line"></div>
+            </div>
+            <button type="button" class="sci-sound-btn" id="sciSoundToggle" title="Toggle Keypad Audio Click">
+              &#128266;
+            </button>
+          </div>
+        </div>
 
-    <div class="result-panel" id="resultPanel">
-      <h3>Result</h3>
-      <div class="result-main" id="resultMain">&mdash;</div>
-      <div class="result-grid" id="resultGrid"></div>
+        <!-- High-Resolution LCD Bezel Display -->
+        <div class="sci-screen-bezel">
+          <!-- Screen Status Indicators Bar -->
+          <div class="sci-screen-header">
+            <div class="sci-indicators-group">
+              <span class="sci-indicator active clickable" id="degIndicator" title="Click to toggle DEG / RAD">DEG</span>
+              <span class="sci-indicator" id="invIndicator">2nd</span>
+              <span class="sci-indicator" id="hypIndicator">HYP</span>
+              <span class="sci-indicator" id="memIndicator">M</span>
+              <span class="sci-indicator">MATH</span>
+            </div>
+            <div class="sci-screen-actions">
+              <span class="sci-screen-notice" id="sciScreenNotice"></span>
+              <button type="button" class="sci-screen-btn" id="sciCopyBtn" title="Copy result to clipboard">&#x2398; Copy</button>
+            </div>
+          </div>
+
+          <!-- Formula Line -->
+          <div class="sci-formula-display" id="sciFormula">0</div>
+
+          <!-- Real-time Live Result Preview -->
+          <div class="sci-preview-display" id="sciPreviewResult"></div>
+
+          <!-- Main Result Line -->
+          <div class="sci-result-display" id="sciMainResult">0</div>
+        </div>
+
+        <!-- 6-Column Scientific Hardware Keypad -->
+        <div class="sci-keypad">
+          <!-- Row 1: Mode & Memory -->
+          <button type="button" class="sci-key sci-key-mode" data-fn="2nd" id="btn2nd" title="Secondary / Inverse functions">
+            <span class="sci-key-sub">INV</span>
+            <span class="sci-key-main">2nd</span>
+          </button>
+          <button type="button" class="sci-key sci-key-mode" data-fn="deg" id="btnToggleDeg" title="Toggle Degrees / Radians">
+            <span class="sci-key-sub">MODE</span>
+            <span class="sci-key-main" id="degModePill">DEG</span>
+          </button>
+          <button type="button" class="sci-key sci-key-mode" data-fn="hyp" id="btnHyp" title="Hyperbolic functions">
+            <span class="sci-key-sub">HYP</span>
+            <span class="sci-key-main">hyp</span>
+          </button>
+          <button type="button" class="sci-key sci-key-mode" data-fn="MC" title="Memory Clear">
+            <span class="sci-key-sub">CLEAR</span>
+            <span class="sci-key-main">MC</span>
+          </button>
+          <button type="button" class="sci-key sci-key-mode" data-fn="MR" id="btnMr" title="Memory Recall (2nd: Memory Store)">
+            <span class="sci-key-sub">MS</span>
+            <span class="sci-key-main">MR</span>
+          </button>
+          <button type="button" class="sci-key sci-key-mode" data-fn="M+" id="btnMPlus" title="Memory Add (2nd: Memory Subtract)">
+            <span class="sci-key-sub">M-</span>
+            <span class="sci-key-main">M+</span>
+          </button>
+
+          <!-- Row 2: Trig, Logs & Powers -->
+          <button type="button" class="sci-key sci-key-fn" data-fn="sin(" id="btnSin">
+            <span class="sci-key-sub">sin⁻¹</span>
+            <span class="sci-key-main">sin</span>
+          </button>
+          <button type="button" class="sci-key sci-key-fn" data-fn="cos(" id="btnCos">
+            <span class="sci-key-sub">cos⁻¹</span>
+            <span class="sci-key-main">cos</span>
+          </button>
+          <button type="button" class="sci-key sci-key-fn" data-fn="tan(" id="btnTan">
+            <span class="sci-key-sub">tan⁻¹</span>
+            <span class="sci-key-main">tan</span>
+          </button>
+          <button type="button" class="sci-key sci-key-fn" data-fn="ln(" id="btnLn">
+            <span class="sci-key-sub">eˣ</span>
+            <span class="sci-key-main">ln</span>
+          </button>
+          <button type="button" class="sci-key sci-key-fn" data-fn="log(" id="btnLog">
+            <span class="sci-key-sub">10ˣ</span>
+            <span class="sci-key-main">log</span>
+          </button>
+          <button type="button" class="sci-key sci-key-fn" data-fn="^" id="btnPow">
+            <span class="sci-key-sub">ʸ√x</span>
+            <span class="sci-key-main">xʸ</span>
+          </button>
+
+          <!-- Row 3: Roots, Powers & Parentheses -->
+          <button type="button" class="sci-key sci-key-fn" data-fn="sqrt(" id="btnSqrt">
+            <span class="sci-key-sub">&#8731;</span>
+            <span class="sci-key-main">&radic;</span>
+          </button>
+          <button type="button" class="sci-key sci-key-fn" data-fn="^2" id="btnX2">
+            <span class="sci-key-sub">x³</span>
+            <span class="sci-key-main">x²</span>
+          </button>
+          <button type="button" class="sci-key sci-key-fn" data-fn="1/x" id="btnInvX">
+            <span class="sci-key-sub">|x|</span>
+            <span class="sci-key-main">1/x</span>
+          </button>
+          <button type="button" class="sci-key sci-key-fn" data-fn="(">
+            <span class="sci-key-sub">&nbsp;</span>
+            <span class="sci-key-main">(</span>
+          </button>
+          <button type="button" class="sci-key sci-key-fn" data-fn=")">
+            <span class="sci-key-sub">&nbsp;</span>
+            <span class="sci-key-main">)</span>
+          </button>
+          <button type="button" class="sci-key sci-key-fn" data-fn="%" id="btnPct">
+            <span class="sci-key-sub">EXP</span>
+            <span class="sci-key-main">%</span>
+          </button>
+
+          <!-- Row 4: Factorial, 7-9, DEL, AC -->
+          <button type="button" class="sci-key sci-key-fn" data-fn="!" id="btnFact">
+            <span class="sci-key-sub">RND</span>
+            <span class="sci-key-main">n!</span>
+          </button>
+          <button type="button" class="sci-key sci-key-num" data-fn="7">
+            <span class="sci-key-main">7</span>
+          </button>
+          <button type="button" class="sci-key sci-key-num" data-fn="8">
+            <span class="sci-key-main">8</span>
+          </button>
+          <button type="button" class="sci-key sci-key-num" data-fn="9">
+            <span class="sci-key-main">9</span>
+          </button>
+          <button type="button" class="sci-key sci-key-del" data-fn="DEL" title="Delete last character (Backspace)">
+            <span class="sci-key-main">DEL</span>
+          </button>
+          <button type="button" class="sci-key sci-key-clear" data-fn="AC" title="All Clear (Escape)">
+            <span class="sci-key-main">AC</span>
+          </button>
+
+          <!-- Row 5: Pi, 4-6, Operators Multiply, Divide -->
+          <button type="button" class="sci-key sci-key-fn" data-fn="π">
+            <span class="sci-key-sub">3.1415</span>
+            <span class="sci-key-main">&pi;</span>
+          </button>
+          <button type="button" class="sci-key sci-key-num" data-fn="4">
+            <span class="sci-key-main">4</span>
+          </button>
+          <button type="button" class="sci-key sci-key-num" data-fn="5">
+            <span class="sci-key-main">5</span>
+          </button>
+          <button type="button" class="sci-key sci-key-num" data-fn="6">
+            <span class="sci-key-main">6</span>
+          </button>
+          <button type="button" class="sci-key sci-key-op" data-fn="*" data-disp=" &times; ">
+            <span class="sci-key-main">&times;</span>
+          </button>
+          <button type="button" class="sci-key sci-key-op" data-fn="/" data-disp=" &divide; ">
+            <span class="sci-key-main">&divide;</span>
+          </button>
+
+          <!-- Row 6: e, 1-3, Operators Add, Subtract -->
+          <button type="button" class="sci-key sci-key-fn" data-fn="e">
+            <span class="sci-key-sub">2.7182</span>
+            <span class="sci-key-main">e</span>
+          </button>
+          <button type="button" class="sci-key sci-key-num" data-fn="1">
+            <span class="sci-key-main">1</span>
+          </button>
+          <button type="button" class="sci-key sci-key-num" data-fn="2">
+            <span class="sci-key-main">2</span>
+          </button>
+          <button type="button" class="sci-key sci-key-num" data-fn="3">
+            <span class="sci-key-main">3</span>
+          </button>
+          <button type="button" class="sci-key sci-key-op" data-fn="+" data-disp=" + ">
+            <span class="sci-key-main">+</span>
+          </button>
+          <button type="button" class="sci-key sci-key-op" data-fn="-" data-disp=" &minus; ">
+            <span class="sci-key-main">&minus;</span>
+          </button>
+
+          <!-- Row 7: Ans, 0, ., ±, mod, = -->
+          <button type="button" class="sci-key sci-key-fn" data-fn="Ans" title="Previous result">
+            <span class="sci-key-sub">PREV</span>
+            <span class="sci-key-main">Ans</span>
+          </button>
+          <button type="button" class="sci-key sci-key-num" data-fn="0">
+            <span class="sci-key-main">0</span>
+          </button>
+          <button type="button" class="sci-key sci-key-num" data-fn=".">
+            <span class="sci-key-main">.</span>
+          </button>
+          <button type="button" class="sci-key sci-key-fn" data-fn="±" title="Toggle positive / negative">
+            <span class="sci-key-sub">(-/+)</span>
+            <span class="sci-key-main">&plusmn;</span>
+          </button>
+          <button type="button" class="sci-key sci-key-fn" data-fn=" mod " data-disp=" mod " title="Modulo remainder">
+            <span class="sci-key-sub">REM</span>
+            <span class="sci-key-main">mod</span>
+          </button>
+          <button type="button" class="sci-key sci-key-eq" data-fn="=" title="Calculate (Enter)">
+            <span class="sci-key-main">=</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Right Companion Sidebar: History Tape & Quick Reference -->
+      <div class="sci-sidebar-card">
+        <!-- History Tape -->
+        <div class="sci-sidebar-header">
+          <h3>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            Calculation History
+          </h3>
+          <button type="button" class="sci-history-clear-btn" id="sciHistoryClear">Clear Tape</button>
+        </div>
+        <div class="sci-history-list" id="sciHistoryList">
+          <div class="history-empty">No calculations recorded yet.</div>
+        </div>
+
+        <!-- Keyboard Shortcuts -->
+        <div class="sci-shortcuts-box">
+          <div class="sci-shortcuts-title">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M6 8h.001M10 8h.001M14 8h.001M18 8h.001M8 12h.001M12 12h.001M16 12h.001M7 16h10"></path></svg>
+            Keyboard Shortcuts
+          </div>
+          <div class="sci-shortcuts-grid">
+            <div class="sci-shortcut-row"><span>Calculate:</span> <span class="sci-kbd">Enter</span> / <span class="sci-kbd">=</span></div>
+            <div class="sci-shortcut-row"><span>All Clear:</span> <span class="sci-kbd">Esc</span></div>
+            <div class="sci-shortcut-row"><span>Backspace:</span> <span class="sci-kbd">&#9003;</span></div>
+            <div class="sci-shortcut-row"><span>Trig (sin):</span> <span class="sci-kbd">s</span></div>
+            <div class="sci-shortcut-row"><span>Trig (cos):</span> <span class="sci-kbd">c</span></div>
+            <div class="sci-shortcut-row"><span>Trig (tan):</span> <span class="sci-kbd">t</span></div>
+            <div class="sci-shortcut-row"><span>Pi (&pi;):</span> <span class="sci-kbd">p</span></div>
+            <div class="sci-shortcut-row"><span>Euler (e):</span> <span class="sci-kbd">e</span></div>
+          </div>
+        </div>
+
+        <!-- Constants & Exact Trig Reference -->
+        <div class="sci-shortcuts-box">
+          <div class="sci-shortcuts-title">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+            Exact Values &amp; Constants
+          </div>
+          <div style="font-size:0.78rem;line-height:1.7;color:var(--text);">
+            <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding:2px 0;"><strong>&pi; (Pi)</strong><span>3.1415926535...</span></div>
+            <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding:2px 0;"><strong>e (Euler)</strong><span>2.7182818284...</span></div>
+            <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding:2px 0;"><strong>sin(30&deg;) / cos(60&deg;)</strong><span>0.5 (Exact)</span></div>
+            <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding:2px 0;"><strong>tan(45&deg;)</strong><span>1.0 (Exact)</span></div>
+            <div style="display:flex;justify-content:space-between;padding:2px 0;"><strong>ln(e) / log(100)</strong><span>1.0 / 2.0</span></div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
@@ -137,25 +341,59 @@
   </main>
 </div>
 
-<div id="siteFooter"></div>
+<div id="siteFooter">
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>EMI Master</h4>
+        <p>Free, instant, and private online calculators for mortgages, loans, investments, retirement, and mathematics. Your inputs never leave your browser.</p>
+        <p><a href="sitemap.html"><strong>&rarr; All 50+ Calculators (Directory)</strong></a></p>
+      </div>
+      <div class="footer-col">
+        <h4>Popular Calculators</h4>
+        <ul>
+          <li><a href="mortgage-calculator.html">Mortgage Calculator</a></li>
+          <li><a href="amortization-calculator.html">Amortization Calculator</a></li>
+          <li><a href="emi-calculator.html">EMI Calculator</a></li>
+          <li><a href="home-loan.html">Home Loan Calculator</a></li>
+          <li><a href="car-loan.html">Car Loan Calculator</a></li>
+          <li><a href="personal-loan.html">Personal Loan Calculator</a></li>
+          <li><a href="compound-interest-calculator.html">Compound Interest</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Loans &amp; Real Estate</h4>
+        <ul>
+          <li><a href="refinance-calculator.html">Refinance Calculator</a></li>
+          <li><a href="fha-loan.html">FHA Loan Calculator</a></li>
+          <li><a href="va-loan.html">VA Mortgage Calculator</a></li>
+          <li><a href="home-equity-loan.html">Home Equity Loan</a></li>
+          <li><a href="heloc-calculator.html">HELOC Calculator</a></li>
+          <li><a href="loan-payoff.html">Loan Payoff Calculator</a></li>
+          <li><a href="house-affordability.html">House Affordability</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Investment &amp; Tools</h4>
+        <ul>
+          <li><a href="investment-calculator.html">Investment Calculator</a></li>
+          <li><a href="retirement-calculator.html">Retirement Calculator</a></li>
+          <li><a href="social-security-calculator.html">Social Security</a></li>
+          <li><a href="scientific-calculator.html">Scientific Calculator</a></li>
+          <li><a href="percentage-calculator.html">Percentage Calculator</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="sitemap.html"><strong>Complete HTML Sitemap</strong></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 EMI Master. All rights reserved. For educational and planning purposes only.
+    </div>
+  </footer>
+</div>
 
 <script src="js/math.js"></script>
-<script>
-var deg = true;
-function b(v){var d=document.getElementById("sciDisplay");d.value+=v;d.focus();}
-function item(l,v){return '<div class="result-item"><div class="label">'+l+'</div><div class="value">'+v+'</div></div>';}
-document.getElementById("clearBtn").onclick=function(){document.getElementById("sciDisplay").value="";document.getElementById("resultMain").textContent="—";document.getElementById("resultGrid").innerHTML="";};
-document.getElementById("backBtn").onclick=function(){var d=document.getElementById("sciDisplay");d.value=d.value.slice(0,-1);d.focus();};
-document.getElementById("degMode").onchange=function(){deg=this.value==="deg";};
-document.getElementById("calcBtn").onclick=function(){
-var expr=document.getElementById("sciDisplay").value;
-var r=MathCalc.scientific(expr,deg);
-if(r.error){document.getElementById("resultMain").textContent=r.error;document.getElementById("resultGrid").innerHTML="";return;}
-var out=MathCalc.fmt(r.value,10);
-document.getElementById("resultMain").textContent=out;
-document.getElementById("resultGrid").innerHTML=item("Expression",expr)+item("Result",out)+item("Mode",deg?"Degrees":"Radians");
-};
-</script>
+<script src="js/scientific-calculator.js"></script>
 <script src="js/currency.js"></script>
 <script src="js/seo-content.js"></script>
 <script src="js/common.js"></script>

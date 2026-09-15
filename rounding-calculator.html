@@ -47,20 +47,49 @@
     <h1 class="page-title">Rounding Calculator</h1>
     <p class="page-subtitle">Enter a number and the calculator rounds it to decimal places, significant figures and common nearest values all at once.</p>
 
-<div class="card">
-<h2>Round a number</h2>
-<div class="form-grid">
-<div class="form-group"><label>Number</label><input type="number" id="num" value="1234.5678" step="any"></div>
-<div class="form-group"><label>Decimal places</label><input type="number" id="dp" value="2" min="0" max="10"></div>
-<div class="form-group"><label>Significant figures</label><input type="number" id="sig" value="4" min="1" max="10"></div>
-</div>
-<div class="form-actions"><button class="btn btn-primary" id="calcBtn" type="button">Round</button></div>
-</div>
+    <!-- Quick Presets -->
+    <div class="preset-chips" id="presetChips" style="margin-bottom:16px;">
+      <span class="preset-label" style="font-size:0.85rem; font-weight:600; color:var(--text-muted);">Quick Presets:</span>
+      <button type="button" class="preset-chip active" data-num="1234.5678" data-dp="2" data-sig="4">1234.5678 (2 DP, 4 SigFig)</button>
+      <button type="button" class="preset-chip" data-num="3.14159265" data-dp="4" data-sig="5">&pi; &asymp; 3.14159</button>
+      <button type="button" class="preset-chip" data-num="0.0045678" data-dp="4" data-sig="3">0.0045678 (Small Decimal)</button>
+      <button type="button" class="preset-chip" data-num="999.999" data-dp="2" data-sig="3">999.999 (Cascade)</button>
+      <button type="button" class="preset-chip" data-num="2.7182818" data-dp="3" data-sig="4">e &asymp; 2.718</button>
+    </div>
 
-    <div class="result-panel" id="resultPanel">
-      <h3>Result</h3>
-      <div class="result-main" id="resultMain">&mdash;</div>
-      <div class="result-grid" id="resultGrid"></div>
+    <div class="card">
+      <h2>Precision &amp; Significant Figures Rounder</h2>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="num">Input Number</label>
+          <input type="number" id="num" value="1234.5678" step="any">
+        </div>
+        <div class="form-group">
+          <label for="dp">Decimal Places (DP)</label>
+          <input type="number" id="dp" value="2" min="0" max="10">
+        </div>
+        <div class="form-group">
+          <label for="sig">Significant Figures (SigFig)</label>
+          <input type="number" id="sig" value="4" min="1" max="10">
+        </div>
+      </div>
+      <div class="form-actions" style="display:flex; gap:12px; margin-top:16px;">
+        <button class="btn btn-primary" id="calcBtn" type="button" style="flex:1;">Round Number</button>
+        <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
+      </div>
+    </div>
+
+    <div class="result-panel" id="resultPanel" style="margin-top:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:12px; margin-bottom:16px;">
+        <h3 style="margin:0; font-size:1.15rem;">Rounded Values</h3>
+        <button type="button" class="btn btn-sm btn-outline" id="copyResultBtn" title="Copy result text">📋 Copy</button>
+      </div>
+      <div class="result-main" id="resultMain" style="font-size:1.8rem; font-weight:800; color:var(--primary); text-align:center; padding:12px 0;">&mdash;</div>
+      <div class="result-grid" id="resultGrid" style="margin-top:16px;"></div>
+      <div id="stepContainer" style="margin-top:20px; padding:16px; background:var(--bg-alt); border-radius:8px; border:1px solid var(--border); display:none;">
+        <h4 style="margin:0 0 10px; font-size:1rem; color:var(--primary);">Rounding Decision &amp; Digit Analysis</h4>
+        <div id="stepContent" style="font-size:0.92rem; line-height:1.7;"></div>
+      </div>
     </div>
 
     <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
@@ -87,26 +116,172 @@
   </main>
 </div>
 
-<div id="siteFooter"></div>
+<div id="siteFooter">
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>EMI Master</h4>
+        <p>Free, instant, and private online calculators for mortgages, loans, investments, retirement, and mathematics. Your inputs never leave your browser.</p>
+        <p><a href="sitemap.html"><strong>&rarr; All 50+ Calculators (Directory)</strong></a></p>
+      </div>
+      <div class="footer-col">
+        <h4>Popular Calculators</h4>
+        <ul>
+          <li><a href="mortgage-calculator.html">Mortgage Calculator</a></li>
+          <li><a href="amortization-calculator.html">Amortization Calculator</a></li>
+          <li><a href="emi-calculator.html">EMI Calculator</a></li>
+          <li><a href="home-loan.html">Home Loan Calculator</a></li>
+          <li><a href="car-loan.html">Car Loan Calculator</a></li>
+          <li><a href="personal-loan.html">Personal Loan Calculator</a></li>
+          <li><a href="compound-interest-calculator.html">Compound Interest</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Loans &amp; Real Estate</h4>
+        <ul>
+          <li><a href="refinance-calculator.html">Refinance Calculator</a></li>
+          <li><a href="fha-loan.html">FHA Loan Calculator</a></li>
+          <li><a href="va-loan.html">VA Mortgage Calculator</a></li>
+          <li><a href="home-equity-loan.html">Home Equity Loan</a></li>
+          <li><a href="heloc-calculator.html">HELOC Calculator</a></li>
+          <li><a href="loan-payoff.html">Loan Payoff Calculator</a></li>
+          <li><a href="house-affordability.html">House Affordability</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Investment &amp; Tools</h4>
+        <ul>
+          <li><a href="investment-calculator.html">Investment Calculator</a></li>
+          <li><a href="retirement-calculator.html">Retirement Calculator</a></li>
+          <li><a href="social-security-calculator.html">Social Security</a></li>
+          <li><a href="scientific-calculator.html">Scientific Calculator</a></li>
+          <li><a href="percentage-calculator.html">Percentage Calculator</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="sitemap.html"><strong>Complete HTML Sitemap</strong></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 EMI Master. All rights reserved. For educational and planning purposes only.
+    </div>
+  </footer>
+</div>
 
 <script src="js/math.js"></script>
 <script>
-function item(l,v){return '<div class="result-item"><div class="label">'+l+'</div><div class="value">'+v+'</div></div>';}
-document.getElementById("calcBtn").onclick=function(){
-var n=parseFloat(document.getElementById("num").value);
-var dp=parseInt(document.getElementById("dp").value,10);
-var sig=parseInt(document.getElementById("sig").value,10);
-if(isNaN(n)){document.getElementById("resultMain").textContent="Enter a valid number";document.getElementById("resultGrid").innerHTML="";return;}
-if(isNaN(dp)||dp<0||dp>10){dp=2;}
-if(isNaN(sig)||sig<1||sig>10){sig=4;}
-var rDp=MathCalc.roundTo(n,dp).value;
-var rSig=MathCalc.roundSig(n,sig).value;
-var grid=item("Original",n)+item("To "+dp+" decimal places",MathCalc.fmt(rDp,dp))+item("To "+sig+" significant figures",MathCalc.fmt(rSig,sig));
-[[0.01,"nearest hundredth"],[0.1,"nearest tenth"],[1,"nearest integer"],[5,"nearest 5"],[10,"nearest 10"],[100,"nearest 100"],[1000,"nearest 1000"],[0.5,"nearest 0.5"]].forEach(function(pair){
-grid+=item("To "+pair[1],MathCalc.fmt(MathCalc.roundToNearest(n,pair[0]).value,Math.max(2,dp)));
-});
-document.getElementById("resultMain").textContent=MathCalc.fmt(rDp,dp);
-document.getElementById("resultGrid").innerHTML=grid;};
+(function () {
+  function item(l, v) {
+    return '<div class="result-item"><div class="label">' + l + '</div><div class="value">' + v + '</div></div>';
+  }
+
+  function calcRounding() {
+    var n = parseFloat(document.getElementById("num").value);
+    var dp = parseInt(document.getElementById("dp").value, 10);
+    var sig = parseInt(document.getElementById("sig").value, 10);
+
+    if (isNaN(n)) {
+      document.getElementById("resultMain").textContent = "\u2014";
+      document.getElementById("resultGrid").innerHTML = "";
+      document.getElementById("stepContainer").style.display = "none";
+      return;
+    }
+
+    if (isNaN(dp) || dp < 0 || dp > 10) dp = 2;
+    if (isNaN(sig) || sig < 1 || sig > 10) sig = 4;
+
+    var rDp = MathCalc.roundTo(n, dp).value;
+    var rSig = MathCalc.roundSig(n, sig).value;
+
+    document.getElementById("resultMain").textContent = MathCalc.fmt(rDp, dp);
+
+    var grid = item("Original Input", n) +
+               item("Rounded to " + dp + " Decimal Places", MathCalc.fmt(rDp, dp)) +
+               item("Rounded to " + sig + " Significant Figures", MathCalc.fmt(rSig, sig));
+
+    var nearestTargets = [
+      [0.001, "Nearest Thousandth (0.001)"],
+      [0.01, "Nearest Hundredth (0.01)"],
+      [0.1, "Nearest Tenth (0.1)"],
+      [0.5, "Nearest Half (0.5)"],
+      [1, "Nearest Integer (1)"],
+      [5, "Nearest 5"],
+      [10, "Nearest 10"],
+      [100, "Nearest 100"],
+      [1000, "Nearest 1,000"]
+    ];
+
+    nearestTargets.forEach(function (pair) {
+      grid += item("To " + pair[1], MathCalc.fmt(MathCalc.roundToNearest(n, pair[0]).value, Math.max(3, dp)));
+    });
+
+    // Step-by-step breakdown
+    var stepHtml = "<strong>1. Decimal Places Rounding (DP = " + dp + "):</strong><br>";
+    var sStr = n.toString();
+    var dotIdx = sStr.indexOf(".");
+    if (dotIdx === -1) {
+      stepHtml += "&bull; " + n + " is already an integer with no fractional digits &rarr; <strong>" + MathCalc.fmt(rDp, dp) + "</strong><br><br>";
+    } else {
+      var decPart = sStr.slice(dotIdx + 1);
+      if (decPart.length <= dp) {
+        stepHtml += "&bull; Decimal part length (" + decPart.length + ") &le; target DP (" + dp + ") &rarr; padded with zeros: <strong>" + MathCalc.fmt(rDp, dp) + "</strong><br><br>";
+      } else {
+        var keepDigit = decPart[dp - 1] || "0";
+        var nextDigit = parseInt(decPart[dp], 10);
+        var decision = nextDigit >= 5 ? "Round UP (next digit " + nextDigit + " &ge; 5)" : "Round DOWN / TRUNCATE (next digit " + nextDigit + " < 5)";
+        stepHtml += "&bull; Target position: " + dp + "-th decimal digit = <code>" + keepDigit + "</code><br>" +
+                    "&bull; Next deciding digit: <code>" + nextDigit + "</code><br>" +
+                    "&bull; Decision rule: <strong>" + decision + "</strong> &rarr; <strong>" + MathCalc.fmt(rDp, dp) + "</strong><br><br>";
+      }
+    }
+
+    stepHtml += "<strong>2. Significant Figures Rounding (SigFig = " + sig + "):</strong><br>" +
+                "&bull; First non-zero digit determines the most significant digit.<br>" +
+                "&bull; Keeping the first " + sig + " meaningful digits &rarr; <strong>" + MathCalc.fmt(rSig, sig) + "</strong>";
+
+    document.getElementById("resultGrid").innerHTML = grid;
+    document.getElementById("stepContent").innerHTML = stepHtml;
+    document.getElementById("stepContainer").style.display = "block";
+  }
+
+  // Bind events
+  document.getElementById("calcBtn").onclick = calcRounding;
+  document.getElementById("num").oninput = calcRounding;
+  document.getElementById("dp").oninput = calcRounding;
+  document.getElementById("sig").oninput = calcRounding;
+
+  document.getElementById("resetBtn").onclick = function () {
+    document.getElementById("num").value = "1234.5678";
+    document.getElementById("dp").value = "2";
+    document.getElementById("sig").value = "4";
+    calcRounding();
+  };
+
+  // Presets
+  document.querySelectorAll("#presetChips .preset-chip").forEach(function (btn) {
+    btn.onclick = function () {
+      document.querySelectorAll("#presetChips .preset-chip").forEach(function (b) { b.classList.remove("active"); });
+      this.classList.add("active");
+      document.getElementById("num").value = this.getAttribute("data-num") || "1234.5678";
+      document.getElementById("dp").value = this.getAttribute("data-dp") || "2";
+      document.getElementById("sig").value = this.getAttribute("data-sig") || "4";
+      calcRounding();
+    };
+  });
+
+  // Copy Result
+  document.getElementById("copyResultBtn").onclick = function () {
+    var text = document.getElementById("resultMain").textContent;
+    if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).catch(function () {});
+    }
+    this.textContent = "✓ Copied";
+    var btn = this;
+    setTimeout(function () { btn.textContent = "📋 Copy"; }, 1500);
+  };
+
+  // Initial calculation
+  calcRounding();
+})();
 </script>
 <script src="js/currency.js"></script>
 <script src="js/seo-content.js"></script>

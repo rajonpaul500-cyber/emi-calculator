@@ -12,17 +12,17 @@
 <script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Exponent Calculator - Raise Any Base to Any Power</title>
-<meta name="description" content="Free exponent calculator. Compute powers with integer, negative and fractional exponents, with expanded form and scientific notation.">
-<meta name="keywords" content="exponent calculator, power calculator, negative exponents, fractional exponents, exponent rules">
+<title>Exponent Calculator - Power, Exponent Laws &amp; Step-by-Step</title>
+<meta name="description" content="Free professional exponent calculator. Compute powers with integer, negative, fractional, and algebraic exponents with step-by-step breakdowns and scientific notation.">
+<meta name="keywords" content="exponent calculator, power calculator, negative exponents, fractional exponents, exponent rules, power of power, modulo exponentiation">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://emimaster.com/exponent-calculator.html">
-<meta property="og:title" content="Exponent Calculator - Raise Any Base to Any Power">
-<meta property="og:description" content="Free exponent calculator. Compute powers with integer, negative and fractional exponents, with expanded form and scientific notation.">
+<meta property="og:title" content="Exponent Calculator - Power, Exponent Laws &amp; Step-by-Step">
+<meta property="og:description" content="Free professional exponent calculator. Compute powers with integer, negative, fractional, and algebraic exponents with step-by-step breakdowns and scientific notation.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://emimaster.com/exponent-calculator.html">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Exponent Calculator","url":"https://emimaster.com/exponent-calculator.html","description":"Free exponent calculator. Compute powers with integer, negative and fractional exponents, with expanded form and scientific notation.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is an exponent?","acceptedAnswer":{"@type":"Answer","text":"An exponent says how many times to multiply a base by itself. In 2^5, the base 2 is multiplied 5 times: 2 × 2 × 2 × 2 × 2 = 32."}},{"@type":"Question","name":"What is a negative exponent?","acceptedAnswer":{"@type":"Answer","text":"A negative exponent means the reciprocal of the positive power: 2^-3 = 1/(2^3) = 1/8. This is useful for writing very small numbers."}},{"@type":"Question","name":"What is a fractional exponent?","acceptedAnswer":{"@type":"Answer","text":"A fractional exponent represents a root: x^(1/2) is the square root of x, and x^(1/3) is the cube root. More generally x^(m/n) is the nth root of x^m."}},{"@type":"Question","name":"What is 2 to the power of 10?","acceptedAnswer":{"@type":"Answer","text":"2^10 = 1024, the familiar value behind kilobytes in computing (1 KiB = 1024 bytes)."}},{"@type":"Question","name":"What is any number to the power of zero?","acceptedAnswer":{"@type":"Answer","text":"Any non-zero number raised to the power of zero equals 1. For example 5^0 = 1 and 1000^0 = 1."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Exponent Calculator","url":"https://emimaster.com/exponent-calculator.html","description":"Free exponent calculator for calculating base raised to power with laws of exponents and step-by-step solutions.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is an exponent?","acceptedAnswer":{"@type":"Answer","text":"An exponent says how many times to multiply a base by itself. In 2^5, the base 2 is multiplied 5 times: 2 × 2 × 2 × 2 × 2 = 32."}},{"@type":"Question","name":"What is a negative exponent?","acceptedAnswer":{"@type":"Answer","text":"A negative exponent means the reciprocal of the positive power: b^-n = 1 / (b^n). For example, 2^-3 = 1/(2^3) = 1/8 = 0.125."}},{"@type":"Question","name":"What is a fractional exponent?","acceptedAnswer":{"@type":"Answer","text":"A fractional exponent represents a radical root: x^(1/n) is the nth root of x. For example, 27^(2/3) = (³√27)² = 3² = 9."}},{"@type":"Question","name":"What is any non-zero number to the power of zero?","acceptedAnswer":{"@type":"Answer","text":"Any non-zero number raised to the power of zero equals 1 (e.g., 5^0 = 1, 999^0 = 1)."}}]}</script>
 <script type="application/json" id="relatedData">[{"href":"root-calculator.html","label":"Root Calculator","icon":"√"},{"href":"scientific-calculator.html","label":"Scientific Calculator","icon":"√"},{"href":"log-calculator.html","label":"Log Calculator","icon":"log"},{"href":"scientific-notation-calculator.html","label":"Scientific Notation","icon":"×10"}]</script>
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -35,7 +35,7 @@
 <section class="hero hero-compact">
   <div class="container">
     <h1>Exponent Calculator</h1>
-    <p>Raise any base to any power, including negative and fractional exponents.</p>
+    <p>Calculate base raised to any exponent, simplify exponent laws, and solve modular powers with step-by-step derivations.</p>
   </div>
 </section>
 
@@ -44,45 +44,97 @@
 
   <main class="main-content">
     <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="index.html#math">Math Calculators</a> &rsaquo; Exponent Calculator</div>
-    <h1 class="page-title">Exponent Calculator</h1>
-    <p class="page-subtitle">Enter a base and an exponent. The calculator shows the result, the expanded multiplication, and extra forms for negative or fractional exponents.</p>
+    <h1 class="page-title">Exponent &amp; Power Calculator Pro</h1>
+    <p class="page-subtitle">Solve standard powers (b<sup>x</sup>), exponent arithmetic rules (product, quotient, power-of-power), and discrete modular exponentiation.</p>
 
-<div class="card">
-<h2>Exponent</h2>
-<div class="form-grid">
-<div class="form-group"><label>Base</label><input type="number" id="base" value="2" step="any"></div>
-<div class="form-group"><label>Exponent</label><input type="number" id="exp" value="10" step="any"></div>
-</div>
-<div class="form-actions"><button class="btn btn-primary" id="calcBtn" type="button">Calculate</button></div>
-</div>
+    <!-- Exponent Mode Tabs -->
+    <div class="calc-tabs" id="expTabs" style="display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap;">
+      <button type="button" class="btn btn-sm btn-primary tab-btn active" data-mode="single">Standard Power (b<sup>x</sup>)</button>
+      <button type="button" class="btn btn-sm btn-outline tab-btn" data-mode="product">Product Rule (b<sup>x</sup> &times; b<sup>y</sup>)</button>
+      <button type="button" class="btn btn-sm btn-outline tab-btn" data-mode="quotient">Quotient Rule (b<sup>x</sup> &divide; b<sup>y</sup>)</button>
+      <button type="button" class="btn btn-sm btn-outline tab-btn" data-mode="mod">Modular Power (b<sup>x</sup> mod m)</button>
+    </div>
 
-    <div class="result-panel" id="resultPanel">
-      <h3>Result</h3>
-      <div class="result-main" id="resultMain">&mdash;</div>
+    <!-- Quick Presets -->
+    <div class="preset-chips" id="presetChips" style="margin-bottom:16px;">
+      <span class="preset-label" style="font-size:0.85rem; font-weight:600; color:var(--text-muted);">Quick Presets:</span>
+      <button type="button" class="preset-chip active" data-preset="2-10">2<sup>10</sup> (1,024)</button>
+      <button type="button" class="preset-chip" data-preset="frac">27<sup>(2/3)</sup> (Fractional)</button>
+      <button type="button" class="preset-chip" data-preset="neg">5<sup>&minus;3</sup> (Negative)</button>
+      <button type="button" class="preset-chip" data-preset="cube">12<sup>3</sup> (Cube)</button>
+      <button type="button" class="preset-chip" data-preset="prod">3<sup>4</sup> &times; 3<sup>2</sup></button>
+    </div>
+
+    <div class="card">
+      <h2 id="cardTitle">Standard Power Calculation (b<sup>x</sup>)</h2>
+
+      <!-- Form Grid -->
+      <div class="form-grid">
+        <div class="form-group" id="groupBase">
+          <label id="labelBase">Base Number (b)</label>
+          <input type="number" id="base" value="2" step="any">
+        </div>
+        <div class="form-group" id="groupExp1">
+          <label id="labelExp1">Exponent (x)</label>
+          <input type="number" id="exp1" value="10" step="any">
+        </div>
+        <div class="form-group" id="groupExp2" style="display:none;">
+          <label id="labelExp2">Second Exponent (y)</label>
+          <input type="number" id="exp2" value="2" step="any">
+        </div>
+        <div class="form-group" id="groupMod" style="display:none;">
+          <label id="labelMod">Modulus (m)</label>
+          <input type="number" id="modVal" value="1000" min="1" step="1">
+        </div>
+      </div>
+
+      <div class="form-actions" style="display:flex; gap:12px; margin-top:16px;">
+        <button class="btn btn-primary" id="calcBtn" type="button" style="flex:1;">Calculate Power</button>
+        <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
+      </div>
+    </div>
+
+    <!-- PRO RESULT PANEL -->
+    <div class="result-panel" id="resultPanel" style="margin-top:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:12px; margin-bottom:16px;">
+        <h3 style="margin:0; font-size:1.15rem;">Power Evaluation</h3>
+        <button type="button" class="btn btn-sm btn-outline" id="copyResultBtn" title="Copy result text">📋 Copy</button>
+      </div>
+
+      <div class="result-main" id="resultMain" style="font-size:1.9rem; font-weight:800; color:var(--primary); text-align:center; padding:12px 0;">&mdash;</div>
+
       <div class="result-grid" id="resultGrid"></div>
+
+      <!-- Step-by-Step Math Box -->
+      <div class="step-card" id="stepBox" style="margin-top:20px; background:var(--bg, #f8fafc); border:1px solid var(--border, #e2e8f0); border-radius:10px; padding:16px;">
+        <div class="step-header" style="font-weight:700; color:var(--text); margin-bottom:8px; display:flex; align-items:center; gap:8px;">
+          <span>📝</span> Step-by-Step Mathematical Derivation:
+        </div>
+        <div class="step-content" id="stepContent" style="font-family:monospace, sans-serif; line-height:1.7; color:var(--text); font-size:0.92rem;"></div>
+      </div>
     </div>
 
     <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
 
     <div class="quick-facts">
-    <div class="fact-chip"><strong>Definition:</strong> b^n = b × b × ... n times</div>
-    <div class="fact-chip"><strong>Negative:</strong> b^-n = 1 / b^n</div>
-    <div class="fact-chip"><strong>Fractional:</strong> b^(1/n) = nth root of b</div>
-    <div class="fact-chip"><strong>Special:</strong> b^0 = 1 (b ≠ 0)</div>
+      <div class="fact-chip"><strong>Product Rule:</strong> b<sup>x</sup> &times; b<sup>y</sup> = b<sup>(x + y)</sup></div>
+      <div class="fact-chip"><strong>Quotient Rule:</strong> b<sup>x</sup> &divide; b<sup>y</sup> = b<sup>(x &minus; y)</sup></div>
+      <div class="fact-chip"><strong>Power of Power:</strong> (b<sup>x</sup>)<sup>y</sup> = b<sup>(x &times; y)</sup></div>
+      <div class="fact-chip"><strong>Negative Power:</strong> b<sup>&minus;n</sup> = 1 / b<sup>n</sup></div>
     </div>
 
-<div class="content-section"><h2 id="the-meaning-of-an-exponent">The meaning of an exponent</h2><p>An exponent tells you how many times to multiply a base by itself. For example 2^3 means 2 × 2 × 2 = 8. The exponent is sometimes called the 'power'.</p>
-      <p>The calculator also supports negative exponents, where b^-n equals 1 / b^n (for example 2^-2 = 1/4), and fractional exponents, where b^(1/n) is the nth root of b (for example 8^(1/3) = 2).</p></div>
-    <div class="content-section"><h2 id="useful-exponent-rules">Useful exponent rules</h2><p>Multiplying powers with the same base adds the exponents: x^a × x^b = x^(a+b). Dividing subtracts them: x^a ÷ x^b = x^(a-b).</p>
-      <p>A power of a power multiplies exponents: (x^a)^b = x^(a·b). Any non-zero number to the power of zero equals 1, and x^1 equals x.</p></div>
-<div class="content-section"><h2 id="how-to-use">How to use this calculator</h2><ol><li>Enter the base number.</li><li>Enter the exponent (positive, negative, or a fraction like 0.5).</li><li>Press Calculate to see the power.</li><li>Read the expanded form, root form and scientific notation when applicable.</li></ol></div>
-<div class="content-section tips-box"><h2>Pro tips</h2><ul><li>Use an exponent of 0.5 to compute a square root.</li><li>Use a negative exponent to compute a reciprocal quickly.</li><li>Very large results are shown in scientific notation automatically.</li></ul></div>
-<div class="content-section"><h2>Advantages &amp; considerations</h2><div class="pros-cons"><div class="pros"><h3>&#9989; Advantages</h3><ul><li>Handles negative and fractional exponents</li><li>Shows expanded multiplication for small powers</li><li>Gives scientific notation for huge results</li></ul></div><div class="cons"><h3>&#9888;&#65039; Considerations</h3><ul><li>Fractions must be typed as decimals (e.g. 0.25 for 1/4)</li><li>Odd roots of negative bases follow real-number rules</li></ul></div></div></div>
-<div class="content-section"><h2 id="faq">Frequently asked questions</h2><div class="faq-item"><div class="faq-q">What is an exponent?<span class="arrow">&#9654;</span></div><div class="faq-a">An exponent says how many times to multiply a base by itself. In 2^5, the base 2 is multiplied 5 times: 2 × 2 × 2 × 2 × 2 = 32.</div></div>
-      <div class="faq-item"><div class="faq-q">What is a negative exponent?<span class="arrow">&#9654;</span></div><div class="faq-a">A negative exponent means the reciprocal of the positive power: 2^-3 = 1/(2^3) = 1/8. This is useful for writing very small numbers.</div></div>
-      <div class="faq-item"><div class="faq-q">What is a fractional exponent?<span class="arrow">&#9654;</span></div><div class="faq-a">A fractional exponent represents a root: x^(1/2) is the square root of x, and x^(1/3) is the cube root. More generally x^(m/n) is the nth root of x^m.</div></div>
-      <div class="faq-item"><div class="faq-q">What is 2 to the power of 10?<span class="arrow">&#9654;</span></div><div class="faq-a">2^10 = 1024, the familiar value behind kilobytes in computing (1 KiB = 1024 bytes).</div></div>
-      <div class="faq-item"><div class="faq-q">What is any number to the power of zero?<span class="arrow">&#9654;</span></div><div class="faq-a">Any non-zero number raised to the power of zero equals 1. For example 5^0 = 1 and 1000^0 = 1.</div></div></div>
+    <div class="content-section">
+      <h2 id="the-meaning-of-an-exponent">The meaning of an exponent</h2>
+      <p>An exponent indicates repeated multiplication of a base by itself: <code>b<sup>n</sup> = b &times; b &times; ... &times; b</code> (n times). For negative exponents, the operation inverts to reciprocal division: <code>b<sup>&minus;n</sup> = 1 / b<sup>n</sup></code>. For fractional exponents <code>b<sup>m/n</sup></code>, the denominator represents the radical root (e.g. <code>b<sup>1/2</sup> = &radic;b</code>).</p>
+    </div>
+
+    <div class="content-section">
+      <h2 id="faq">Frequently asked questions</h2>
+      <div class="faq-item"><div class="faq-q">What is an exponent?<span class="arrow">&#9654;</span></div><div class="faq-a">An exponent says how many times to multiply a base by itself. In 2^5, the base 2 is multiplied 5 times: 2 × 2 × 2 × 2 × 2 = 32.</div></div>
+      <div class="faq-item"><div class="faq-q">What is a negative exponent?<span class="arrow">&#9654;</span></div><div class="faq-a">A negative exponent means the reciprocal of the positive power: b^-n = 1 / (b^n). For example, 2^-3 = 1/(2^3) = 1/8 = 0.125.</div></div>
+      <div class="faq-item"><div class="faq-q">What is a fractional exponent?<span class="arrow">&#9654;</span></div><div class="faq-a">A fractional exponent represents a radical root: x^(1/n) is the nth root of x. For example, 27^(2/3) = (³√27)² = 3² = 9.</div></div>
+      <div class="faq-item"><div class="faq-q">What is any non-zero number to the power of zero?<span class="arrow">&#9654;</span></div><div class="faq-a">Any non-zero number raised to the power of zero equals 1 (e.g., 5^0 = 1, 999^0 = 1).</div></div>
+    </div>
   </main>
 </div>
 
@@ -139,25 +191,228 @@
 
 <script src="js/math.js"></script>
 <script>
-function item(l,v){return '<div class="result-item"><div class="label">'+l+'</div><div class="value">'+v+'</div></div>';}
-document.getElementById("calcBtn").onclick=function(){
-var b=parseFloat(document.getElementById("base").value);
-var e=parseFloat(document.getElementById("exp").value);
-if(isNaN(b)||isNaN(e)){document.getElementById("resultMain").textContent="Enter valid numbers";document.getElementById("resultGrid").innerHTML="";return;}
-var r=MathCalc.exponent(b,e).value;
-var grid="";
-var display=r>1e15||(r<1e-9&&r!==0)?MathCalc.fmt(r,10):MathCalc.fmt(r,6);
-document.getElementById("resultMain").textContent=display;
-grid+=item("Result",b+"^"+e+" = "+display);
-var sci=MathCalc.toScientific(r,6);grid+=item("Scientific notation",sci.value);
-if(Number.isInteger(e)&&Math.abs(e)<=8&&b!==0){
-var parts=[],eb=Math.abs(e);
-for(var i=0;i<eb;i++){parts.push(b);}
-if(parts.length>0){grid+=item("Expanded form",e>=0?parts.join(" × "):"1 / ("+parts.join(" × ")+")");}
-}
-if(e<0){grid+=item("Reciprocal form",b+"^-"+Math.abs(e)+" = 1 / "+b+"^"+Math.abs(e));}
-if(Math.abs(e)>0&&Math.abs(e)<1&&b>0){var den=Math.round(1/e);grid+=item("Root form",b+"^(1/"+den+") = √ⁿ"+b+" ≈ "+MathCalc.fmt(r,6));}
-document.getElementById("resultGrid").innerHTML=grid;};
+(function(){
+  function item(l,v){return '<div class="result-item"><div class="label">'+l+'</div><div class="value">'+v+'</div></div>';}
+
+  var currentMode = "single";
+
+  // Tab switching
+  document.querySelectorAll("#expTabs .tab-btn").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      document.querySelectorAll("#expTabs .tab-btn").forEach(function(b){
+        b.classList.remove("active", "btn-primary");
+        b.classList.add("btn-outline");
+      });
+      btn.classList.add("active", "btn-primary");
+      btn.classList.remove("btn-outline");
+
+      currentMode = btn.getAttribute("data-mode");
+      setupModeUI(currentMode);
+      calculate();
+    });
+  });
+
+  // Presets
+  document.querySelectorAll("#presetChips .preset-chip").forEach(function(chip){
+    chip.addEventListener("click", function(){
+      document.querySelectorAll("#presetChips .preset-chip").forEach(function(c){ c.classList.remove("active"); });
+      chip.classList.add("active");
+
+      var p = chip.getAttribute("data-preset");
+      if (p === "2-10") {
+        setMode("single", 2, 10);
+      } else if (p === "frac") {
+        setMode("single", 27, 2/3);
+      } else if (p === "neg") {
+        setMode("single", 5, -3);
+      } else if (p === "cube") {
+        setMode("single", 12, 3);
+      } else if (p === "prod") {
+        setMode("product", 3, 4, 2);
+      }
+      calculate();
+    });
+  });
+
+  function setMode(m, b, x, y, mod) {
+    currentMode = m;
+    var btn = document.querySelector('#expTabs [data-mode="' + m + '"]');
+    if (btn) {
+      document.querySelectorAll("#expTabs .tab-btn").forEach(function(xBtn){
+        xBtn.classList.remove("active", "btn-primary");
+        xBtn.classList.add("btn-outline");
+      });
+      btn.classList.add("active", "btn-primary");
+      btn.classList.remove("btn-outline");
+    }
+    setupModeUI(m);
+    if (b !== undefined) document.getElementById("base").value = b;
+    if (x !== undefined) document.getElementById("exp1").value = x;
+    if (y !== undefined) document.getElementById("exp2").value = y;
+    if (mod !== undefined) document.getElementById("modVal").value = mod;
+  }
+
+  function setupModeUI(m) {
+    var titles = {
+      single: "Standard Power Calculation (b<sup>x</sup>)",
+      product: "Product of Powers: b<sup>x</sup> &times; b<sup>y</sup> = b<sup>(x+y)</sup>",
+      quotient: "Quotient of Powers: b<sup>x</sup> &divide; b<sup>y</sup> = b<sup>(x−y)</sup>",
+      mod: "Modular Exponentiation: (b<sup>x</sup>) mod m"
+    };
+    document.getElementById("cardTitle").innerHTML = titles[m];
+    document.getElementById("groupExp2").style.display = (m === "product" || m === "quotient") ? "block" : "none";
+    document.getElementById("groupMod").style.display = (m === "mod") ? "block" : "none";
+  }
+
+  function calculate() {
+    var b = parseFloat(document.getElementById("base").value);
+    var x = parseFloat(document.getElementById("exp1").value);
+    var y = parseFloat(document.getElementById("exp2").value);
+    var m = parseFloat(document.getElementById("modVal").value);
+
+    if (isNaN(b) || isNaN(x)) {
+      document.getElementById("resultMain").textContent = "Please enter valid numbers";
+      document.getElementById("resultGrid").innerHTML = "";
+      document.getElementById("stepContent").textContent = "Waiting for valid numerical inputs...";
+      return;
+    }
+
+    if (currentMode === "single") {
+      var r = MathCalc.exponent(b, x).value;
+      var display = (Math.abs(r) > 1e15 || (Math.abs(r) < 1e-6 && r !== 0)) ? MathCalc.fmt(r, 10) : MathCalc.fmt(r, 8);
+      document.getElementById("resultMain").textContent = b + "^" + MathCalc.fmt(x, 4) + " = " + display;
+
+      var sci = MathCalc.toScientific(r, 6);
+      var grid = item("Calculated Value", display) +
+                 item("Scientific Notation", sci.value) +
+                 item("Base & Exponent", "b = " + b + ", x = " + x);
+
+      if (Number.isInteger(x) && Math.abs(x) <= 10 && b !== 0) {
+        var parts = [], absX = Math.abs(x);
+        for (var i = 0; i < absX; i++) parts.push(b);
+        if (parts.length > 0) {
+          grid += item("Expanded Form", x >= 0 ? parts.join(" × ") : "1 / (" + parts.join(" × ") + ")");
+        }
+      }
+      if (x < 0) {
+        grid += item("Reciprocal Form", "1 / (" + b + "^" + Math.abs(x) + ") = 1 / " + MathCalc.fmt(Math.pow(b, Math.abs(x)), 6));
+      }
+      document.getElementById("resultGrid").innerHTML = grid;
+
+      var stepText = "• Formula: y = b^x\n\n" +
+                     "1. Identify base b = " + b + " and exponent x = " + x + "\n";
+      if (x === 0) {
+        stepText += "2. Any non-zero number to power 0 equals 1:\n   " + b + "^0 = 1\n";
+      } else if (x < 0) {
+        stepText += "2. Invert using reciprocal rule:\n   " + b + "^(" + x + ") = 1 / (" + b + "^" + Math.abs(x) + ")\n" +
+                    "3. Calculate denominator: " + b + "^" + Math.abs(x) + " = " + MathCalc.fmt(Math.pow(b, Math.abs(x)), 6) + "\n" +
+                    "4. Evaluate 1 / " + MathCalc.fmt(Math.pow(b, Math.abs(x)), 6) + " = " + display;
+      } else {
+        stepText += "2. Evaluate power:\n   " + b + "^" + x + " = " + display;
+      }
+      document.getElementById("stepContent").innerText = stepText;
+
+    } else if (currentMode === "product") {
+      if (isNaN(y)) return;
+      var sumExp = x + y;
+      var rProd = Math.pow(b, sumExp);
+      var dispProd = (Math.abs(rProd) > 1e15 || (Math.abs(rProd) < 1e-6 && rProd !== 0)) ? MathCalc.fmt(rProd, 8) : MathCalc.fmt(rProd, 6);
+
+      document.getElementById("resultMain").textContent = b + "^(" + x + " + " + y + ") = " + b + "^" + sumExp + " = " + dispProd;
+
+      var gridHtml = item("Combined Exponent", b + "^" + sumExp) +
+                     item("Product Value", dispProd) +
+                     item("First Term (b^x)", MathCalc.fmt(Math.pow(b, x), 6)) +
+                     item("Second Term (b^y)", MathCalc.fmt(Math.pow(b, y), 6));
+      document.getElementById("resultGrid").innerHTML = gridHtml;
+
+      var stepText = "• Product Law: b^x × b^y = b^(x + y)\n\n" +
+                     "1. Add exponents: " + x + " + " + y + " = " + sumExp + "\n" +
+                     "2. Simplify base: " + b + "^" + sumExp + "\n" +
+                     "3. Final Result: " + dispProd;
+      document.getElementById("stepContent").innerText = stepText;
+
+    } else if (currentMode === "quotient") {
+      if (isNaN(y)) return;
+      var diffExp = x - y;
+      var rQuot = Math.pow(b, diffExp);
+      var dispQuot = (Math.abs(rQuot) > 1e15 || (Math.abs(rQuot) < 1e-6 && rQuot !== 0)) ? MathCalc.fmt(rQuot, 8) : MathCalc.fmt(rQuot, 6);
+
+      document.getElementById("resultMain").textContent = b + "^(" + x + " − " + y + ") = " + b + "^" + diffExp + " = " + dispQuot;
+
+      var gridHtml = item("Simplified Power", b + "^" + diffExp) +
+                     item("Quotient Value", dispQuot) +
+                     item("Numerator (b^x)", MathCalc.fmt(Math.pow(b, x), 6)) +
+                     item("Denominator (b^y)", MathCalc.fmt(Math.pow(b, y), 6));
+      document.getElementById("resultGrid").innerHTML = gridHtml;
+
+      var stepText = "• Quotient Law: b^x ÷ b^y = b^(x − y)\n\n" +
+                     "1. Subtract exponents: " + x + " − " + y + " = " + diffExp + "\n" +
+                     "2. Simplify base: " + b + "^" + diffExp + "\n" +
+                     "3. Final Result: " + dispQuot;
+      document.getElementById("stepContent").innerText = stepText;
+
+    } else if (currentMode === "mod") {
+      if (isNaN(m) || m <= 0) {
+        document.getElementById("resultMain").textContent = "Modulus must be a positive integer";
+        return;
+      }
+      // Integer modular exponentiation
+      var baseInt = Math.floor(b);
+      var expInt = Math.floor(x);
+      var modInt = Math.floor(m);
+
+      var modRes = 1;
+      var curBase = ((baseInt % modInt) + modInt) % modInt;
+      var eTmp = expInt;
+
+      while (eTmp > 0) {
+        if (eTmp % 2 === 1) modRes = (modRes * curBase) % modInt;
+        curBase = (curBase * curBase) % modInt;
+        eTmp = Math.floor(eTmp / 2);
+      }
+
+      document.getElementById("resultMain").textContent = "(" + baseInt + "^" + expInt + ") mod " + modInt + " = " + modRes;
+
+      var gridHtml = item("Modulo Result", modRes) +
+                     item("Base (b)", baseInt) +
+                     item("Exponent (x)", expInt) +
+                     item("Modulus (m)", modInt);
+      document.getElementById("resultGrid").innerHTML = gridHtml;
+
+      var stepText = "• Modular Exponentiation Algorithm:\n\n" +
+                     "1. Base " + baseInt + " mod " + modInt + " = " + ((baseInt % modInt + modInt) % modInt) + "\n" +
+                     "2. Repeated squaring on binary exponent representation of " + expInt + "\n" +
+                     "3. Computed remainder = " + modRes;
+      document.getElementById("stepContent").innerText = stepText;
+    }
+  }
+
+  document.getElementById("calcBtn").addEventListener("click", calculate);
+  document.getElementById("resetBtn").addEventListener("click", function(){
+    document.getElementById("base").value = 2;
+    document.getElementById("exp1").value = 10;
+    document.getElementById("exp2").value = 2;
+    document.getElementById("modVal").value = 1000;
+    calculate();
+  });
+
+  document.querySelectorAll("input").forEach(function(inp){
+    inp.addEventListener("input", calculate);
+  });
+
+  document.getElementById("copyResultBtn").addEventListener("click", function(){
+    var txt = document.getElementById("resultGrid").innerText;
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(txt).then(function(){
+        if (window.EMIMaster && window.EMIMaster.showToast) window.EMIMaster.showToast("Copied to clipboard!");
+      });
+    }
+  });
+
+  // Init
+  calculate();
+})();
 </script>
 <script src="js/currency.js"></script>
 <script src="js/seo-content.js"></script>

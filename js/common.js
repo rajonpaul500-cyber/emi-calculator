@@ -158,6 +158,10 @@
       '</a>' +
       '<nav class="main-nav" id="mainNav">' + nav + '</nav>' +
       '<div class="header-tools">' +
+      '<button type="button" class="header-search-btn" id="headerSearchBtn" title="Search Calculators (Ctrl+K)" aria-label="Search Calculators">' +
+      '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>' +
+      '<span class="search-btn-text">Search...</span><span class="search-shortcut">⌘K</span>' +
+      '</button>' +
       '<select class="lang-select" id="currencySelect" aria-label="Currency">' + buildCurrencyOptions() + '</select>' +
       '<button class="theme-toggle" id="themeToggle" title="Switch theme" aria-label="Toggle dark mode">&#127769;</button>' +
       '<button class="nav-toggle" id="navToggle" aria-label="Menu">&#9776;</button>' +
@@ -383,6 +387,7 @@
     initBackToTop();
     initFaqs();
     initHomeSearch();
+    initGlobalQuickSearchModal();
     initIndexCategoryPills();
     initToolbox();
     initPageTools();
@@ -615,21 +620,278 @@
   }
 
   /* ================================================================
-     Hero search / navigation helpers
+     Master Calculators Registry & Search Engine
      ================================================================ */
+
+  var CALCULATORS_REGISTRY = [
+    // Math Category
+    { title: "Scientific Calculator", url: "scientific-calculator.html", cat: "Math", icon: "📐", desc: "Scientific fx-991 PRO expression evaluator, trigonometry, logarithms, statistics", keywords: "scientific calc trig sin cos tan ln log power root pi e exponent radian degree fx 991 bangla gonona shastrio" },
+    { title: "Fraction Calculator", url: "fraction-calculator.html", cat: "Math", icon: "➗", desc: "Add, subtract, multiply, divide fractions, mixed numbers, simplify & decimals", keywords: "fraction bhognangsho mixed number simplify reduce lcd numerator denominator divide add minus multiply" },
+    { title: "Percentage Calculator", url: "percentage-calculator.html", cat: "Math", icon: "％", desc: "Percent of number, percentage change, increase, decrease & reverse percentage", keywords: "percentage percent shotokora discount tip tax mark up increase decrease change rate" },
+    { title: "Random Number Generator", url: "random-number-generator.html", cat: "Math", icon: "🎲", desc: "Generate random integers, decimals, roll dice, flip coins, shuffle lists", keywords: "random number generator dice roll coin flip lottery pick sample shuffle integer min max" },
+    { title: "Percent Error Calculator", url: "percent-error-calculator.html", cat: "Math", icon: "🎯", desc: "Experimental vs theoretical percent error, accuracy and deviation", keywords: "percent error experimental theoretical true observed value accuracy deviation physics lab chemistry" },
+    { title: "Exponent Calculator", url: "exponent-calculator.html", cat: "Math", icon: "📈", desc: "Powers, negative exponents, fractional powers & power tables", keywords: "exponent power base index power of square cube power table negative exponent" },
+    { title: "Binary Calculator", url: "binary-calculator.html", cat: "Math", icon: "01", desc: "Binary arithmetic (+ - × ÷) and bitwise operations (AND, OR, XOR, NOT)", keywords: "binary base 2 bitwise and or xor not 8bit 16bit 32bit bits nibble byte two's complement" },
+    { title: "Hex Calculator", url: "hex-calculator.html", cat: "Math", icon: "0x", desc: "Hexadecimal converter & arithmetic between Decimal, Hex, Binary & Octal", keywords: "hex hexadecimal base 16 base 8 octal decimal converter bitwise arithmetic hex keypad" },
+    { title: "Half-Life Calculator", url: "half-life-calculator.html", cat: "Math", icon: "⏳", desc: "Radioactive decay, carbon dating, half-life elapsed time and remaining mass", keywords: "half life decay radioactive isotope carbon 14 nuclear radiation remaining mass half-life period" },
+    { title: "Quadratic Formula Calculator", url: "quadratic-formula-calculator.html", cat: "Math", icon: "🧮", desc: "Solve ax² + bx + c = 0 with real & complex roots, vertex and interactive curve", keywords: "quadratic formula equation roots discriminant vertex parabola axis symmetry complex solutions solver" },
+    { title: "Log Calculator", url: "log-calculator.html", cat: "Math", icon: "🪵", desc: "Logarithm solver for Natural log (ln), Base 10, Base 2 & custom base with antilog", keywords: "log logarithm ln log10 log2 natural log euler antilog base change exponent inverse" },
+    { title: "Ratio Calculator", url: "ratio-calculator.html", cat: "Math", icon: "⚖️", desc: "Simplify ratios, solve proportions A:B = C:D, and scale multi-part ratio splits", keywords: "ratio proportion simplify scaling divide share aspect ratio cross multiply anupat" },
+    { title: "Root Calculator", url: "root-calculator.html", cat: "Math", icon: "√", desc: "Square root, cube root, nth roots with radical simplification and factors", keywords: "root square root cube root nth root radical surd radical simplify sqrt cbrt bormul" },
+    { title: "Least Common Multiple (LCM)", url: "least-common-multiple-calculator.html", cat: "Math", icon: "🔢", desc: "LCM of two or more numbers with Prime Factorization & Division steps", keywords: "lcm least common multiple lcd losagu prime factor division ladder method" },
+    { title: "Greatest Common Factor (GCF / GCD)", url: "greatest-common-factor-calculator.html", cat: "Math", icon: "🏛️", desc: "GCF & GCD finder with Euclidean algorithm and prime factor tree", keywords: "gcf gcd greatest common factor divisor hcf gosagu euclidean algorithm prime factors" },
+    { title: "Factor Calculator", url: "factor-calculator.html", cat: "Math", icon: "🧩", desc: "List all factors, factor pairs, prime factorization, divisor sum and count", keywords: "factor prime factors divisors factor pairs prime composite gunoniyok factor tree" },
+    { title: "Rounding Calculator", url: "rounding-calculator.html", cat: "Math", icon: "🪙", desc: "Round to decimal places, nearest multiple, significant figures, floor & ceiling", keywords: "rounding round decimal places sig figs significant figures nearest multiple floor ceil doshomik" },
+    { title: "Matrix Calculator", url: "matrix-calculator.html", cat: "Math", icon: "▦", desc: "2x2 and 3x3 Matrix addition, multiplication, determinant, inverse & transpose", keywords: "matrix matrices determinant inverse transpose add multiply 2x2 3x3 linear algebra cramer" },
+    { title: "Scientific Notation Calculator", url: "scientific-notation-calculator.html", cat: "Math", icon: "🔬", desc: "Standard to scientific notation, E-notation, engineering notation and arithmetic", keywords: "scientific notation e notation standard engineering powers of 10 mantissa exponent metric prefix" },
+    { title: "Big Number Calculator", url: "big-number-calculator.html", cat: "Math", icon: "🐘", desc: "Arbitrary precision arithmetic, words in Western (Trillion) & Indian (Crore/Lakh)", keywords: "big number large number words lakh crore billion trillion bigint huge numbers arbitary precision" },
+
+    // Financial & Loan Category
+    { title: "Mortgage Calculator", url: "mortgage-calculator.html", cat: "Financial", icon: "🏡", desc: "Complete home mortgage payment with principal, interest, taxes, and insurance", keywords: "mortgage home loan monthly payment pmi property tax interest housing" },
+    { title: "Amortization Calculator", url: "amortization-calculator.html", cat: "Financial", icon: "📊", desc: "Detailed month-by-month and annual amortization payment schedule", keywords: "amortization schedule payoff principal interest balance monthly table breakdown" },
+    { title: "EMI Calculator", url: "emi-calculator.html", cat: "Financial", icon: "💳", desc: "Equal Monthly Installments for any loan with live payment schedule", keywords: "emi loan monthly payment installments interest calculator" },
+    { title: "Home Loan Calculator", url: "home-loan.html", cat: "Financial", icon: "🏠", desc: "Home loan repayment estimator with prepayment and amortization", keywords: "home loan house finance mortgage loan emi property" },
+    { title: "Car Loan Calculator", url: "car-loan.html", cat: "Financial", icon: "🚗", desc: "Auto loan calculator with trade-in, sales tax, fees, and monthly payment", keywords: "car loan auto vehicle financing down payment trade in automobile" },
+    { title: "Personal Loan Calculator", url: "personal-loan.html", cat: "Financial", icon: "👤", desc: "Unsecured personal loan installments, interest costs, and repayment term", keywords: "personal loan signature loan unsecured emergency cash borrowing" },
+    { title: "Refinance Calculator", url: "refinance-calculator.html", cat: "Financial", icon: "🔄", desc: "Compare new vs current mortgage, monthly savings and breakeven point", keywords: "refinance refi break even lower rate term mortgage savings" },
+    { title: "FHA Loan Calculator", url: "fha-loan.html", cat: "Financial", icon: "🏛️", desc: "Government-backed FHA mortgage with Upfront & Annual MIP calculations", keywords: "fha loan government mortgage mip upfront annual 3.5 down payment" },
+    { title: "VA Mortgage Calculator", url: "va-loan.html", cat: "Financial", icon: "🎖️", desc: "Zero down payment VA mortgage for US military veterans with funding fee", keywords: "va loan veterans military zero down funding fee certificate eligibility" },
+    { title: "Home Equity Loan Calculator", url: "home-equity-loan.html", cat: "Financial", icon: "🧱", desc: "Fixed-rate second mortgage borrowing against your built-up home equity", keywords: "home equity second mortgage borrowing equity cash out ltv cltv" },
+    { title: "HELOC Calculator", url: "heloc-calculator.html", cat: "Financial", icon: "📑", desc: "Home Equity Line of Credit draw period interest vs repayment phase", keywords: "heloc line of credit draw period interest only repayment variable rate" },
+    { title: "House Affordability Calculator", url: "house-affordability.html", cat: "Financial", icon: "💰", desc: "How much house can you afford based on income, debt, and down payment", keywords: "house affordability how much home budget 28 36 rule income qualified" },
+    { title: "Rent vs Buy Calculator", url: "rent-vs-buy.html", cat: "Financial", icon: "⚖️", desc: "Comprehensive financial comparison between renting and buying a home", keywords: "rent vs buy renting buying comparison wealth homeownership net worth" },
+    { title: "Rent Calculator", url: "rent-calculator.html", cat: "Financial", icon: "🏢", desc: "Rent affordability based on gross income, 30% rule, and 50/30/20 budget", keywords: "rent rent affordability apartment lease 30 percent rule monthly rent" },
+    { title: "Loan Payoff Calculator", url: "loan-payoff.html", cat: "Financial", icon: "🚀", desc: "Calculate early loan payoff savings with extra monthly or lump-sum payments", keywords: "loan payoff extra payment debt free principal reduction early mortgage" },
+    { title: "APR Calculator", url: "apr-calculator.html", cat: "Financial", icon: "📉", desc: "True Annual Percentage Rate factoring in points, closing costs and lender fees", keywords: "apr annual percentage rate effective rate points closing costs true cost" },
+    { title: "Debt-to-Income (DTI) Calculator", url: "debt-to-income.html", cat: "Financial", icon: "⚖️", desc: "Calculate your Front-End and Back-End DTI ratios for loan approval", keywords: "debt to income dti ratio front end back end mortgage qualification" },
+    { title: "Down Payment Calculator", url: "down-payment-calculator.html", cat: "Financial", icon: "💵", desc: "Down payment savings timeline, target percentage, and PMI reduction", keywords: "down payment pmi savings target goal purchase price cash down" },
+    { title: "Real Estate Calculator", url: "real-estate-calculator.html", cat: "Financial", icon: "🏘️", desc: "Real estate investment return, cap rate, cash on cash, and net income", keywords: "real estate property investment cap rate noi cash on cash return" },
+    { title: "Rental Property Calculator", url: "rental-property.html", cat: "Financial", icon: "🏬", desc: "Rental cash flow, gross yield, vacancy rate, expenses, and ROI", keywords: "rental property landlord cash flow vacancy cap rate yield gross operating income" },
+
+    // Investment & Savings
+    { title: "Compound Interest Calculator", url: "compound-interest-calculator.html", cat: "Investment", icon: "📈", desc: "Compound interest growth with regular deposits and compounding frequencies", keywords: "compound interest compounding apy daily monthly annual future growth wealth" },
+    { title: "Simple Interest Calculator", url: "simple-interest-calculator.html", cat: "Investment", icon: "📊", desc: "Simple interest I = P × r × t with total future value and rate solver", keywords: "simple interest principal rate time maturity value basic interest" },
+    { title: "Investment Calculator", url: "investment-calculator.html", cat: "Investment", icon: "💼", desc: "Portfolio investment growth projection with asset allocation and contributions", keywords: "investment portfolio stocks bonds returns wealth building projections" },
+    { title: "Savings Calculator", url: "savings-calculator.html", cat: "Investment", icon: "🐖", desc: "Savings goal tracker, monthly deposit requirements, and target completion date", keywords: "savings goal target timeline monthly deposit emergency fund" },
+    { title: "Retirement Calculator", url: "retirement-calculator.html", cat: "Investment", icon: "🏖️", desc: "Retirement nest egg, 4% safe withdrawal rule, and retirement readiness", keywords: "retirement pension 401k ira nest egg safe withdrawal fire retirement age" },
+    { title: "Social Security Calculator", url: "social-security-calculator.html", cat: "Investment", icon: "🇺🇸", desc: "Estimate US Social Security benefits at ages 62, Full Retirement Age (67), and 70", keywords: "social security retirement benefit ss pia full retirement age 62 70" },
+    { title: "DPS Calculator", url: "dps.html", cat: "Investment", icon: "🏦", desc: "Deposit Pension Scheme maturity amount with compounding interest", keywords: "dps deposit pension scheme bangladesh monthly installment maturity" },
+    { title: "FDR Calculator", url: "fdr.html", cat: "Investment", icon: "📜", desc: "Fixed Deposit Receipt interest earnings and maturity value", keywords: "fdr fixed deposit term deposit cd fixed return maturity interest" },
+    { title: "Mutual Fund Calculator", url: "mutual-fund-calculator.html", cat: "Investment", icon: "💹", desc: "SIP & Lumpsum mutual fund return calculator with expense ratio", keywords: "mutual fund sip systematic investment lumpsum nav expense ratio returns" },
+    { title: "Annuity Calculator", url: "annuity-calculator.html", cat: "Investment", icon: "🪙", desc: "Future value of ordinary annuity and annuity due with regular payments", keywords: "annuity ordinary due future value payment stream retirement cash flow" },
+    { title: "Annuity Payout Calculator", url: "annuity-payout-calculator.html", cat: "Investment", icon: "💸", desc: "Calculate how long your capital will last with regular monthly withdrawals", keywords: "annuity payout withdrawal drawdown longevity capital exhaust" },
+    { title: "Pension Calculator", url: "pension-calculator.html", cat: "Investment", icon: "🧓", desc: "Defined benefit pension payout estimator based on years of service and salary", keywords: "pension defined benefit retirement service salary monthly benefit" },
+    { title: "Interest Calculator", url: "interest-calculator.html", cat: "Investment", icon: "💲", desc: "Calculate interest on any principal with custom compounding terms", keywords: "interest earning rate per annum annual yield simple compound" },
+    { title: "Interest Rate Calculator", url: "interest-rate-calculator.html", cat: "Investment", icon: "🔍", desc: "Solve for the effective annual interest rate or APR on any loan or investment", keywords: "interest rate solve find rate apr ear effective rate yield" },
+    { title: "Future Value Calculator", url: "future-value-calculator.html", cat: "Investment", icon: "🔮", desc: "Time value of money: calculate the future value (FV) of present cash flows", keywords: "future value fv time value money tvm discounting cash flow" },
+    { title: "Present Value Calculator", url: "present-value-calculator.html", cat: "Investment", icon: "⏱️", desc: "Discount future cash flows back to today's present value (PV)", keywords: "present value pv discounting discount rate time value money" },
+    { title: "ROI Calculator", url: "roi-calculator.html", cat: "Investment", icon: "🏆", desc: "Return on Investment percentage and annualized ROI for projects & businesses", keywords: "roi return on investment profit annualized gain margin performance" },
+    { title: "Payback Period Calculator", url: "payback-period-calculator.html", cat: "Investment", icon: "⏳", desc: "Calculate exact time required to recover initial capital investment", keywords: "payback period capital recovery breakeven cash flows investment time" },
+    { title: "Average Return Calculator", url: "average-return-calculator.html", cat: "Investment", icon: "📊", desc: "Arithmetic vs Geometric Mean (CAGR) returns on multi-year investments", keywords: "average return arithmetic mean geometric mean cagr compound annual return" },
+    { title: "Bond Calculator", url: "bond-calculator.html", cat: "Investment", icon: "📜", desc: "Bond price, Yield to Maturity (YTM), and current yield evaluation", keywords: "bond ytm yield to maturity coupon price par value bond pricing" },
+    { title: "IRR Calculator", url: "irr-calculator.html", cat: "Investment", icon: "🎯", desc: "Internal Rate of Return for series of positive & negative cash flows", keywords: "irr internal rate return npv cash flows hurdle rate financial evaluation" },
+    { title: "CD Calculator", url: "cd-calculator.html", cat: "Investment", icon: "💿", desc: "Certificate of Deposit earnings, APY compounding, and maturity value", keywords: "cd certificate deposit apy bank interest term deposit penalty" },
+    { title: "Finance Calculator", url: "finance-calculator.html", cat: "Investment", icon: "💼", desc: "General TVM solver for N, I/Y, PV, PMT, and FV financial equations", keywords: "finance tvm time value money ba ii plus solver financial math" },
+    { title: "Depreciation Calculator", url: "depreciation-calculator.html", cat: "Investment", icon: "📉", desc: "Asset depreciation schedules: Straight-Line, Declining Balance, SYD, Units", keywords: "depreciation straight line slm wdv written down diminishing balance sum of years syd double declining" }
+  ];
+
+  function searchCalculators(query) {
+    if (!query) return CALCULATORS_REGISTRY.slice(0, 10);
+    var q = query.toLowerCase().trim();
+    var words = q.split(/\s+/).filter(Boolean);
+
+    var scored = CALCULATORS_REGISTRY.map(function (item) {
+      var score = 0;
+      var titleLower = item.title.toLowerCase();
+      var descLower = item.desc.toLowerCase();
+      var kwLower = item.keywords.toLowerCase();
+      var catLower = item.cat.toLowerCase();
+
+      if (titleLower === q) score += 100;
+      else if (titleLower.indexOf(q) === 0) score += 60;
+      else if (titleLower.indexOf(q) !== -1) score += 40;
+
+      if (kwLower.indexOf(q) !== -1) score += 35;
+      if (descLower.indexOf(q) !== -1) score += 20;
+      if (catLower.indexOf(q) !== -1) score += 15;
+
+      words.forEach(function (w) {
+        if (titleLower.indexOf(w) !== -1) score += 15;
+        if (kwLower.indexOf(w) !== -1) score += 10;
+        if (descLower.indexOf(w) !== -1) score += 5;
+      });
+
+      return { item: item, score: score };
+    });
+
+    return scored
+      .filter(function (s) { return s.score > 0; })
+      .sort(function (a, b) { return b.score - a.score; })
+      .map(function (s) { return s.item; });
+  }
+
+  function initGlobalQuickSearchModal() {
+    // Inject modal HTML if not already present
+    if (!document.getElementById("quickSearchModalOverlay")) {
+      var modalHtml =
+        '<div class="search-modal-overlay" id="quickSearchModalOverlay" role="dialog" aria-modal="true" aria-label="Search Calculators">' +
+        '<div class="search-modal">' +
+        '<div class="search-modal-header">' +
+        '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>' +
+        '<input type="text" class="search-modal-input" id="quickSearchModalInput" placeholder="Search 50+ calculators (e.g., fraction, quadratic, percentage, EMI)..." autocomplete="off">' +
+        '<button type="button" class="search-modal-close" id="quickSearchModalClose" aria-label="Close search">&times;</button>' +
+        '</div>' +
+        '<div class="search-modal-results" id="quickSearchModalResults"></div>' +
+        '<div class="search-modal-footer">' +
+        '<span><strong>ProTip:</strong> Press <kbd>ESC</kbd> to close &bull; <kbd>&uarr;</kbd><kbd>&darr;</kbd> to navigate</span>' +
+        '<span>50+ Free Calculators</span>' +
+        '</div>' +
+        '</div>' +
+        '</div>';
+      document.body.insertAdjacentHTML("beforeend", modalHtml);
+    }
+
+    var overlay = document.getElementById("quickSearchModalOverlay");
+    var input = document.getElementById("quickSearchModalInput");
+    var resultsBox = document.getElementById("quickSearchModalResults");
+    var closeBtn = document.getElementById("quickSearchModalClose");
+    var headerBtn = document.getElementById("headerSearchBtn");
+
+    function renderModalResults(list) {
+      if (!list || !list.length) {
+        resultsBox.innerHTML = '<div style="padding: 24px; text-align: center; color: var(--text-muted, #64748b);">No calculators found matching your query. Try "Math", "Fraction", "Percentage", "Loan" or "EMI".</div>';
+        return;
+      }
+      var html = "";
+      list.slice(0, 12).forEach(function (c, idx) {
+        html += '<a href="' + c.url + '" class="search-result-item' + (idx === 0 ? ' selected' : '') + '">' +
+          '<div class="search-item-icon">' + c.icon + '</div>' +
+          '<div class="search-item-info">' +
+          '<div class="search-item-title">' + c.title + '</div>' +
+          '<div class="search-item-desc">' + c.desc + '</div>' +
+          '</div>' +
+          '<span class="search-item-category">' + c.cat + '</span>' +
+          '</a>';
+      });
+      resultsBox.innerHTML = html;
+    }
+
+    function openModal() {
+      if (!overlay) return;
+      overlay.classList.add("active");
+      if (input) {
+        input.value = "";
+        input.focus();
+        renderModalResults(CALCULATORS_REGISTRY.slice(0, 8));
+      }
+    }
+
+    function closeModal() {
+      if (!overlay) return;
+      overlay.classList.remove("active");
+    }
+
+    if (headerBtn) {
+      headerBtn.addEventListener("click", openModal);
+    }
+
+    if (closeBtn) {
+      closeBtn.addEventListener("click", closeModal);
+    }
+
+    if (overlay) {
+      overlay.addEventListener("click", function (e) {
+        if (e.target === overlay) closeModal();
+      });
+    }
+
+    if (input) {
+      input.addEventListener("input", function () {
+        var query = input.value;
+        var list = searchCalculators(query);
+        renderModalResults(list);
+      });
+
+      input.addEventListener("keydown", function (e) {
+        var items = resultsBox.querySelectorAll(".search-result-item");
+        var selected = resultsBox.querySelector(".search-result-item.selected");
+        var selIdx = -1;
+        items.forEach(function (it, i) { if (it === selected) selIdx = i; });
+
+        if (e.key === "ArrowDown") {
+          e.preventDefault();
+          if (selIdx < items.length - 1) {
+            if (selected) selected.classList.remove("selected");
+            items[selIdx + 1].classList.add("selected");
+            items[selIdx + 1].scrollIntoView({ block: "nearest" });
+          }
+        } else if (e.key === "ArrowUp") {
+          e.preventDefault();
+          if (selIdx > 0) {
+            if (selected) selected.classList.remove("selected");
+            items[selIdx - 1].classList.add("selected");
+            items[selIdx - 1].scrollIntoView({ block: "nearest" });
+          }
+        } else if (e.key === "Enter") {
+          e.preventDefault();
+          if (selected) {
+            window.location.href = selected.getAttribute("href");
+          } else if (items.length > 0) {
+            window.location.href = items[0].getAttribute("href");
+          }
+        } else if (e.key === "Escape") {
+          closeModal();
+        }
+      });
+    }
+
+    // Global keyboard shortcut: Ctrl+K or / or Command+K
+    window.addEventListener("keydown", function (e) {
+      if ((e.ctrlKey || e.metaKey) && (e.key === "k" || e.key === "K")) {
+        e.preventDefault();
+        openModal();
+      } else if (e.key === "/" && document.activeElement.tagName !== "INPUT" && document.activeElement.tagName !== "TEXTAREA") {
+        e.preventDefault();
+        openModal();
+      } else if (e.key === "Escape" && overlay && overlay.classList.contains("active")) {
+        closeModal();
+      }
+    });
+  }
 
   function initHomeSearch() {
     var form = document.getElementById("heroSearchForm");
     var input = document.getElementById("heroSearchInput");
+    var heroWrap = document.querySelector(".hero-search");
+
+    // Add floating dropdown for index hero search
+    var dropdown = null;
+    if (heroWrap && (currentPage() === "index.html" || currentPage() === "")) {
+      heroWrap.classList.add("hero-search-wrapper");
+      dropdown = document.createElement("div");
+      dropdown.className = "hero-search-dropdown";
+      dropdown.id = "heroSearchDropdown";
+      heroWrap.appendChild(dropdown);
+    }
 
     // Real-time live filtering on index.html
     if (input && (currentPage() === "index.html" || currentPage() === "")) {
       input.addEventListener("input", function () {
         var query = input.value.toLowerCase().trim();
         var cards = document.querySelectorAll(".calc-card");
+
+        // Filter cards in grid
         cards.forEach(function (card) {
           var text = card.textContent.toLowerCase();
-          if (!query || text.indexOf(query) !== -1) {
+          var href = card.getAttribute("href") || "";
+          var matchRegistry = CALCULATORS_REGISTRY.some(function (reg) {
+            if (reg.url === href) {
+              return reg.keywords.toLowerCase().indexOf(query) !== -1 || reg.title.toLowerCase().indexOf(query) !== -1;
+            }
+            return false;
+          });
+
+          if (!query || text.indexOf(query) !== -1 || matchRegistry) {
             card.style.display = "";
           } else {
             card.style.display = "none";
@@ -645,6 +907,39 @@
             sec.style.display = (query && visibleCards.length === 0) ? "none" : "";
           }
         });
+
+        // Live autocomplete dropdown on index
+        if (dropdown) {
+          if (query.length > 0) {
+            var matches = searchCalculators(query);
+            if (matches.length > 0) {
+              var dropHtml = "";
+              matches.slice(0, 6).forEach(function (m) {
+                dropHtml += '<a href="' + m.url + '" class="search-result-item" style="padding:8px 12px; border-bottom: 1px solid var(--border, #f1f5f9);">' +
+                  '<div class="search-item-icon" style="width:30px;height:30px;font-size:0.95rem;">' + m.icon + '</div>' +
+                  '<div class="search-item-info">' +
+                  '<div class="search-item-title" style="font-size:0.9rem;">' + m.title + '</div>' +
+                  '<div class="search-item-desc" style="font-size:0.75rem;">' + m.desc + '</div>' +
+                  '</div>' +
+                  '<span class="search-item-category" style="font-size:0.68rem;">' + m.cat + '</span>' +
+                  '</a>';
+              });
+              dropdown.innerHTML = dropHtml;
+              dropdown.style.display = "block";
+            } else {
+              dropdown.style.display = "none";
+            }
+          } else {
+            dropdown.style.display = "none";
+          }
+        }
+      });
+
+      // Close dropdown on outside click
+      document.addEventListener("click", function (e) {
+        if (dropdown && !heroWrap.contains(e.target)) {
+          dropdown.style.display = "none";
+        }
       });
     }
 
@@ -653,123 +948,12 @@
       e.preventDefault();
       var q = (input ? input.value : "").toLowerCase().trim();
       if (!q) return;
-      var map = {
-        "house affordability": "house-affordability.html",
-        "rent vs buy": "rent-vs-buy.html",
-        "compound interest": "compound-interest-calculator.html",
-        "simple interest": "simple-interest-calculator.html",
-        "average return": "average-return-calculator.html",
-        "payback period": "payback-period-calculator.html",
-        "future value": "future-value-calculator.html",
-        "present value": "present-value-calculator.html",
-        "interest rate": "interest-rate-calculator.html",
-        "interest calculator": "interest-calculator.html",
-        "investment calculator": "investment-calculator.html",
-        "mutual fund": "mutual-fund-calculator.html",
-        "finance calculator": "finance-calculator.html",
-        "savings calculator": "savings-calculator.html",
-        "rental property": "rental-property.html",
-        "real estate": "real-estate-calculator.html",
-        "down payment": "down-payment-calculator.html",
-        "debt to income": "debt-to-income.html",
-        "refinance": "refinance-calculator.html",
-        "amortization": "amortization-calculator.html",
-        "home equity": "home-equity-loan.html",
-        "heloc": "heloc-calculator.html",
-        "deposit pension": "dps.html",
-        "fixed deposit": "fdr.html",
-        "mortgage payoff": "mortgage-payoff.html",
-        "mortgage": "mortgage-calculator.html",
-        "affordability": "house-affordability.html",
-        "apr": "apr-calculator.html",
-        "fha": "fha-loan.html",
-        "va loan": "va-loan.html",
-        "va mortgage": "va-loan.html",
-        "home loan": "home-loan.html",
-        "auto loan": "car-loan.html",
-        "car loan": "car-loan.html",
-        "personal": "personal-loan.html",
-        "payoff": "loan-payoff.html",
-        "extra payment": "loan-payoff.html",
-        "schedule": "amortization-calculator.html",
-        "deposit pension scheme": "dps.html",
-        "straight line": "depreciation-calculator.html",
-        "depreciation": "depreciation-calculator.html",
-        "written down value": "depreciation-calculator.html",
-        "diminishing balance": "depreciation-calculator.html",
-        "double declining": "depreciation-calculator.html",
-        "units of production": "depreciation-calculator.html",
-        "sum of years": "depreciation-calculator.html",
-        "syd": "depreciation-calculator.html",
-        "wdv": "depreciation-calculator.html",
-        "slm": "depreciation-calculator.html",
-        "ddb": "depreciation-calculator.html",
-        "social security": "social-security-calculator.html",
-        "retirement": "retirement-calculator.html",
-        "annuity payout": "annuity-payout-calculator.html",
-        "annuity": "annuity-calculator.html",
-        "pension": "pension-calculator.html",
-        "interest": "interest-calculator.html",
-        "investment": "investment-calculator.html",
-        "savings": "savings-calculator.html",
-        "mutual": "mutual-fund-calculator.html",
-        "bond": "bond-calculator.html",
-        "irr": "irr-calculator.html",
-        "roi": "roi-calculator.html",
-        "payback": "payback-period-calculator.html",
-        "cd": "cd-calculator.html",
-        "rent": "rent-calculator.html",
-        "dps": "dps.html",
-        "fdr": "fdr.html",
-        "fd": "fdr.html",
-        "car": "car-loan.html",
-        "loan": "emi-calculator.html",
-        "emi": "emi-calculator.html",
-        "deposit": "fdr.html",
-        "scientific calculator": "scientific-calculator.html",
-        "scientific": "scientific-calculator.html",
-        "fraction": "fraction-calculator.html",
-        "percentage": "percentage-calculator.html",
-        "percent change": "percentage-calculator.html",
-        "random number": "random-number-generator.html",
-        "random": "random-number-generator.html",
-        "percent error": "percent-error-calculator.html",
-        "exponent": "exponent-calculator.html",
-        "power": "exponent-calculator.html",
-        "binary": "binary-calculator.html",
-        "hex": "hex-calculator.html",
-        "hexadecimal": "hex-calculator.html",
-        "half life": "half-life-calculator.html",
-        "half-life": "half-life-calculator.html",
-        "quadratic": "quadratic-formula-calculator.html",
-        "log": "log-calculator.html",
-        "logarithm": "log-calculator.html",
-        "ratio": "ratio-calculator.html",
-        "root": "root-calculator.html",
-        "square root": "root-calculator.html",
-        "lcm": "least-common-multiple-calculator.html",
-        "least common multiple": "least-common-multiple-calculator.html",
-        "gcf": "greatest-common-factor-calculator.html",
-        "greatest common factor": "greatest-common-factor-calculator.html",
-        "factor": "factor-calculator.html",
-        "rounding": "rounding-calculator.html",
-        "matrix": "matrix-calculator.html",
-        "scientific notation": "scientific-notation-calculator.html",
-        "big number": "big-number-calculator.html",
-        "math": "scientific-calculator.html"
-      };
-      var keys = Object.keys(map).sort(function (a, b) { return b.length - a.length; });
-      var dest = null;
-      for (var i = 0; i < keys.length; i++) {
-        if (q.indexOf(keys[i]) !== -1) {
-          dest = map[keys[i]];
-          break;
-        }
-      }
-      if (dest) {
-        window.location.href = dest;
+
+      var matches = searchCalculators(q);
+      if (matches.length > 0) {
+        window.location.href = matches[0].url;
       } else {
-        showToast("Try searching for 'EMI', 'DPS', 'FDR' or 'Loan'");
+        showToast("Try searching for 'Fraction', 'Quadratic', 'Percentage', or 'EMI'");
       }
     });
   }

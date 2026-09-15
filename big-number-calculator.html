@@ -47,28 +47,55 @@
     <h1 class="page-title">Big Number Calculator</h1>
     <p class="page-subtitle">Enter two huge integers (any number of digits) and choose an operation. The calculator gives the exact result using arbitrary-precision arithmetic.</p>
 
-<div class="card">
-<h2>Big integer arithmetic</h2>
-<div class="form-grid">
-<div class="form-group"><label>Number A</label><input type="text" id="a" value="123456789012345678901234567890"></div>
-<div class="form-group"><label>Operation</label>
-<select id="op"><option value="add">+ Add</option><option value="sub">- Subtract</option><option value="mul">× Multiply</option><option value="div">÷ Divide (quotient)</option><option value="mod">mod Remainder</option></select>
-</div>
-<div class="form-group"><label>Number B</label><input type="text" id="b" value="987654321098765432109876543210"></div>
-</div>
-<div class="form-actions"><button class="btn btn-primary" id="calcBtn" type="button">Calculate</button></div>
-</div>
+    <!-- Quick Presets -->
+    <div class="preset-chips" id="presetChips" style="margin-bottom:16px;">
+      <span class="preset-label" style="font-size:0.85rem; font-weight:600; color:var(--text-muted);">Quick Presets:</span>
+      <button type="button" class="preset-chip active" data-a="123456789012345678901234567890" data-b="987654321098765432109876543210" data-op="mul">30-digit &times; 30-digit</button>
+      <button type="button" class="preset-chip" data-a="18446744073709551615" data-b="2" data-op="mul">2 &times; Max UInt64</button>
+      <button type="button" class="preset-chip" data-a="100000000000000000000000000000000" data-b="7" data-op="mod">10^32 mod 7</button>
+      <button type="button" class="preset-chip" data-a="999999999999999999999999999999" data-b="1" data-op="add">Add 1 to 30 Nines</button>
+      <button type="button" class="preset-chip" data-a="1000000000000000000000000" data-b="123456789" data-op="div">1 Septillion &divide; 123,456,789</button>
+    </div>
 
-<div class="card">
-<h2>Describe a big number</h2>
-<div class="form-group"><label>Number</label><input type="text" id="desc" value="1234567890123456789"></div>
-<div class="form-actions"><button class="btn btn-outline" id="descBtn" type="button">Describe</button></div>
-</div>
+    <div class="card">
+      <h2>Arbitrary Precision Big Integer Calculator</h2>
+      <div class="form-grid">
+        <div class="form-group" style="grid-column:1/-1;">
+          <label for="a">Number A (Any number of digits)</label>
+          <input type="text" id="a" value="123456789012345678901234567890" placeholder="e.g. 12345678901234567890">
+        </div>
+        <div class="form-group">
+          <label for="op">Operation</label>
+          <select id="op">
+            <option value="mul">&times; Multiply (A &times; B)</option>
+            <option value="add">+ Add (A + B)</option>
+            <option value="sub">&minus; Subtract (A &minus; B)</option>
+            <option value="div">&divide; Divide (Quotient)</option>
+            <option value="mod">mod Modulo (Remainder)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="b">Number B (Any number of digits)</label>
+          <input type="text" id="b" value="987654321098765432109876543210" placeholder="e.g. 98765432109876543210">
+        </div>
+      </div>
+      <div class="form-actions" style="display:flex; gap:12px; margin-top:16px;">
+        <button class="btn btn-primary" id="calcBtn" type="button" style="flex:1;">Compute Exact Result</button>
+        <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
+      </div>
+    </div>
 
-    <div class="result-panel" id="resultPanel">
-      <h3>Result</h3>
-      <div class="result-main" id="resultMain">&mdash;</div>
-      <div class="result-grid" id="resultGrid"></div>
+    <div class="result-panel" id="resultPanel" style="margin-top:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:12px; margin-bottom:16px;">
+        <h3 style="margin:0; font-size:1.15rem;">Exact BigInt Result</h3>
+        <button type="button" class="btn btn-sm btn-outline" id="copyResultBtn" title="Copy result text">📋 Copy</button>
+      </div>
+      <div class="result-main" id="resultMain" style="font-size:1.4rem; font-weight:800; color:var(--primary); text-align:center; padding:12px 0; word-break:break-all;">&mdash;</div>
+      <div class="result-grid" id="resultGrid" style="margin-top:16px;"></div>
+      <div id="stepContainer" style="margin-top:20px; padding:16px; background:var(--bg-alt); border-radius:8px; border:1px solid var(--border); display:none;">
+        <h4 style="margin:0 0 10px; font-size:1rem; color:var(--primary);">Scale &amp; Arithmetic Breakdown</h4>
+        <div id="stepContent" style="font-size:0.92rem; line-height:1.7;"></div>
+      </div>
     </div>
 
     <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
@@ -148,28 +175,119 @@
 
 <script src="js/math.js"></script>
 <script>
-function item(l,v){return '<div class="result-item"><div class="label">'+l+'</div><div class="value">'+v+'</div></div>';}
-document.getElementById("calcBtn").onclick=function(){
-var a=document.getElementById("a").value.trim();
-var b=document.getElementById("b").value.trim();
-var op=document.getElementById("op").value;
-var r=MathCalc.bigArith(a,b,op);
-if(r.error){document.getElementById("resultMain").textContent=r.error;document.getElementById("resultGrid").innerHTML="";return;}
-var v=r.value;
-var grid="";
-document.getElementById("resultMain").textContent=v;
-grid+=item("Operation",{add:"Addition",sub:"Subtraction",mul:"Multiplication",div:"Division",mod:"Remainder"}[op])+item("Result",v)+item("Digits in result",MathCalc.digitCount(v));
-if(op==="div"){var rem=MathCalc.bigArith(a,b,"mod");grid+=item("Remainder",rem.value);}
-if(op==="mul"||op==="add"||op==="sub"){grid+=item("Number name (approx)","About "+MathCalc.numberToWords(parseFloat(v.slice(0,15)))+" ...");}
-document.getElementById("resultGrid").innerHTML=grid;};
-document.getElementById("descBtn").onclick=function(){
-var s=document.getElementById("desc").value.trim();
-if(!/^-?\d+$/.test(s)){document.getElementById("resultMain").textContent="Enter a valid integer (digits only)";document.getElementById("resultGrid").innerHTML="";return;}
-var n=parseFloat(s);
-document.getElementById("resultMain").textContent=s;
-var grid=item("Number",s)+item("Digits",MathCalc.digitCount(s))+item("Scientific notation",n.toExponential(6));
-if(Math.abs(n)<1e66){grid+=item("Number name",MathCalc.numberToWords(n));}
-document.getElementById("resultGrid").innerHTML=grid;};
+(function () {
+  function item(l, v) {
+    return '<div class="result-item"><div class="label">' + l + '</div><div class="value">' + v + '</div></div>';
+  }
+
+  function formatBigNumberCommas(str) {
+    var parts = str.split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return parts.join(".");
+  }
+
+  function calcBig() {
+    var a = document.getElementById("a").value.trim().replace(/,/g, "");
+    var b = document.getElementById("b").value.trim().replace(/,/g, "");
+    var op = document.getElementById("op").value;
+
+    if (!/^-?\d+$/.test(a) || !/^-?\d+$/.test(b)) {
+      document.getElementById("resultMain").textContent = "\u2014";
+      document.getElementById("resultGrid").innerHTML = "";
+      document.getElementById("stepContainer").style.display = "none";
+      return;
+    }
+
+    var r = MathCalc.bigArith(a, b, op);
+    if (r.error) {
+      document.getElementById("resultMain").textContent = r.error;
+      document.getElementById("resultGrid").innerHTML = "";
+      document.getElementById("stepContainer").style.display = "none";
+      return;
+    }
+
+    var v = r.value;
+    document.getElementById("resultMain").textContent = v;
+
+    var opNames = {
+      add: "Addition (A + B)",
+      sub: "Subtraction (A &minus; B)",
+      mul: "Multiplication (A &times; B)",
+      div: "Integer Division Quotient (A &divide; B)",
+      mod: "Modulo / Remainder (A mod B)"
+    };
+
+    var grid = item("Operation", opNames[op]) +
+               item("Exact Result", "<span style='word-break:break-all; font-family:monospace;'>" + v + "</span>") +
+               item("Digit Count in Result", MathCalc.digitCount(v) + " digits") +
+               item("Formatted with Grouping", "<span style='word-break:break-all; font-size:0.85rem;'>" + formatBigNumberCommas(v) + "</span>");
+
+    if (op === "div") {
+      var rem = MathCalc.bigArith(a, b, "mod");
+      grid += item("Remainder (A mod B)", rem.value);
+    }
+
+    // Step-by-step
+    var stepHtml = "<strong>1. Operands Scale Analysis:</strong><br>" +
+                   "&bull; Operand A length: <strong>" + a.replace("-", "").length + " digits</strong><br>" +
+                   "&bull; Operand B length: <strong>" + b.replace("-", "").length + " digits</strong><br><br>" +
+                   "<strong>2. Arbitrary Precision Evaluation:</strong><br>" +
+                   "Native JavaScript <code>BigInt</code> evaluated without 64-bit IEEE 754 precision loss.<br>";
+
+    if (op === "div") {
+      var remVal = MathCalc.bigArith(a, b, "mod").value;
+      stepHtml += "<code>" + a + " = (" + b + " &times; " + v + ") + " + remVal + "</code><br>";
+    }
+
+    if (Math.abs(parseFloat(v.slice(0, 15))) < 1e66) {
+      stepHtml += "<br><strong>3. Approximate Scale Name:</strong><br>" +
+                  "&asymp; " + MathCalc.numberToWords(parseFloat(v.slice(0, 15))) + " (order of magnitude ~10<sup>" + (v.length - 1) + "</sup>)";
+    }
+
+    document.getElementById("resultGrid").innerHTML = grid;
+    document.getElementById("stepContent").innerHTML = stepHtml;
+    document.getElementById("stepContainer").style.display = "block";
+  }
+
+  // Events
+  document.getElementById("calcBtn").onclick = calcBig;
+  ["a", "b", "op"].forEach(function (id) {
+    document.getElementById(id).oninput = calcBig;
+    document.getElementById(id).onchange = calcBig;
+  });
+
+  document.getElementById("resetBtn").onclick = function () {
+    document.getElementById("a").value = "123456789012345678901234567890";
+    document.getElementById("b").value = "987654321098765432109876543210";
+    document.getElementById("op").value = "mul";
+    calcBig();
+  };
+
+  // Presets
+  document.querySelectorAll("#presetChips .preset-chip").forEach(function (btn) {
+    btn.onclick = function () {
+      document.querySelectorAll("#presetChips .preset-chip").forEach(function (b) { b.classList.remove("active"); });
+      this.classList.add("active");
+      document.getElementById("a").value = this.getAttribute("data-a");
+      document.getElementById("b").value = this.getAttribute("data-b");
+      document.getElementById("op").value = this.getAttribute("data-op");
+      calcBig();
+    };
+  });
+
+  // Copy
+  document.getElementById("copyResultBtn").onclick = function () {
+    var text = document.getElementById("resultMain").textContent;
+    if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).catch(function () {});
+    }
+    this.textContent = "✓ Copied";
+    var btn = this;
+    setTimeout(function () { btn.textContent = "📋 Copy"; }, 1500);
+  };
+
+  calcBig();
+})();
 </script>
 <script src="js/currency.js"></script>
 <script src="js/seo-content.js"></script>

@@ -13,13 +13,13 @@
   <script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mortgage Payoff Calculator - Pay Off Your Home Early | EMI Master</title>
-  <meta name="description" content="See how extra monthly or one-time payments pay off your mortgage faster and save thousands in interest. Free mortgage payoff calculator with comparison.">
-  <meta name="keywords" content="mortgage payoff calculator, pay off mortgage early, extra mortgage payment, mortgage prepayment">
+  <title>Mortgage Payoff Calculator - Extra Payment & Early Payoff Planner | EMI Master</title>
+  <meta name="description" content="Free professional mortgage payoff calculator (calculator.net style). Calculate how extra monthly, annual, or one-time payments cut your loan term, save thousands in interest, and make you debt-free years earlier.">
+  <meta name="keywords" content="mortgage payoff calculator, pay off mortgage early, extra mortgage payment, mortgage prepayment, biweekly mortgage payment, early loan payoff">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://emimaster.com/mortgage-payoff.html">
   <meta property="og:title" content="Mortgage Payoff Calculator | EMI Master">
-  <meta property="og:description" content="Compare your mortgage with and without extra payments.">
+  <meta property="og:description" content="Calculate how extra payments shorten your mortgage and save thousands in interest with side-by-side comparison.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://emimaster.com/mortgage-payoff.html">
   <script type="application/ld+json">
@@ -28,7 +28,7 @@
     "@type": "WebApplication",
     "name": "EMI Master Mortgage Payoff Calculator",
     "url": "https://emimaster.com/mortgage-payoff.html",
-    "description": "Free mortgage payoff calculator showing how extra payments shorten your mortgage term and save interest.",
+    "description": "Professional mortgage payoff calculator showing how extra payments shorten your mortgage term, reduce interest, and accelerate equity building.",
     "applicationCategory": "FinanceApplication",
     "operatingSystem": "Any",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
@@ -41,18 +41,26 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "Is paying off my mortgage early worth it?",
+        "name": "How much faster will extra payments pay off my mortgage?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "It saves a significant amount of interest and gives you freedom from monthly payments. However, if your mortgage rate is low and you can earn more in investments, many people prefer to invest instead."
+          "text": "Every extra dollar paid toward your mortgage goes 100% to principal reduction. On a $400,000 30-year mortgage at 6.5%, adding just $200 per month pays off the loan 4 years and 7 months earlier and saves over $84,000 in total interest."
         }
       },
       {
         "@type": "Question",
-        "name": "What is a biweekly mortgage payment plan?",
+        "name": "What is an accelerated bi-weekly mortgage payment plan?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Instead of one payment a month, you pay half your payment every two weeks. This results in 26 half-payments a year, which equals 13 full payments &mdash; one extra payment a year that goes straight to principal."
+          "text": "Instead of paying your standard monthly mortgage payment 12 times a year, you pay half of your payment every two weeks. Because there are 52 weeks in a year, you make 26 half-payments, which equals 13 full payments per year — giving you one extra full payment each year without feeling the pinch."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I pay off my mortgage early or invest in the stock market?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Paying off your mortgage provides a guaranteed, risk-free return equal to your mortgage interest rate (e.g. 6.5%). Investing in index funds historically yields 8–10% annually before taxes, but carries market volatility. Many financial advisors recommend investing up to employer 401(k) matches first, then balancing between mortgage prepayment and retirement savings."
         }
       }
     ]
@@ -68,7 +76,7 @@
 <section class="hero hero-compact">
   <div class="container">
     <h1>Mortgage Payoff Calculator</h1>
-    <p>See how much time and money extra payments can save you on your mortgage.</p>
+    <p>See exactly how extra monthly, annual, or lump-sum payments shave years off your mortgage and save thousands in interest.</p>
   </div>
 </section>
 
@@ -78,156 +86,363 @@
   <main class="main-content">
     <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Mortgage Payoff Calculator</div>
     <h1 class="page-title">Mortgage Payoff Calculator</h1>
-    <p class="page-subtitle">Enter your mortgage and the extra payments you plan to make.</p>
+    <p class="page-subtitle">Compare your original mortgage schedule against extra payments, target payoff dates, or bi-weekly plans.</p>
 
-    <div class="card">
+    <!-- Quick Scenario Presets -->
+    <div class="loan-preset-bar">
+      <span style="font-size:0.8rem;font-weight:700;color:var(--text-muted);display:inline-flex;align-items:center;margin-right:4px;">Quick Presets:</span>
+      <button type="button" class="preset-pill-btn active" data-preset="preset30yr400k">&#127969; $400k 30-Yr Fixed (+$200/mo)</button>
+      <button type="button" class="preset-pill-btn" data-preset="preset30yr300k">&#127968; $300k 30-Yr Fixed (+$300/mo)</button>
+      <button type="button" class="preset-pill-btn" data-preset="preset30yr500k">&#127984; $500k 30-Yr Fixed (+$500/mo)</button>
+      <button type="button" class="preset-pill-btn" data-preset="preset15yr250k">&#127970; $250k 15-Yr Fixed (+$150/mo)</button>
+      <button type="button" class="preset-pill-btn" data-preset="presetBiweekly">&#9889; Bi-Weekly Accelerator</button>
+    </div>
+
+    <!-- Calculator Card -->
+    <div class="card" id="mortgageFormCard">
+      <!-- Mode Selection Tabs -->
+      <div class="payoff-mode-tabs">
+        <button type="button" class="payoff-mode-btn active" data-mode="extra">
+          <span>&#128176;</span> Make Extra Payments
+        </button>
+        <button type="button" class="payoff-mode-btn" data-mode="target">
+          <span>&#127919;</span> Target Payoff Goal (In X Years)
+        </button>
+        <button type="button" class="payoff-mode-btn" data-mode="biweekly">
+          <span>&#9889;</span> Bi-Weekly Payment Strategy
+        </button>
+      </div>
+
       <h2>Your Mortgage Details</h2>
-      <div class="form-grid">
-        <div class="form-group">
-          <label for="amount">Mortgage Balance ($)</label>
-          <div class="input-wrap">
-            <span class="prefix">$</span>
-            <input type="number" id="amount" value="3000000" min="0" step="100000">
+      <form id="mortgageForm" onsubmit="return false;">
+        <div class="form-grid">
+          <!-- Mortgage Balance -->
+          <div class="form-group">
+            <label for="amount">Mortgage Balance ($)</label>
+            <div class="input-wrap">
+              <span class="prefix">$</span>
+              <input type="number" id="amount" value="400000" min="10000" max="10000000" step="5000">
+            </div>
+            <input type="range" id="amountRange" min="50000" max="2000000" step="5000" value="400000">
           </div>
-          <input type="range" id="amountRange" min="100000" max="100000000" step="100000" value="3000000">
-        </div>
 
-        <div class="form-group">
-          <label for="rate">Interest Rate (% per annum)</label>
-          <div class="input-wrap">
-            <span class="suffix">%</span>
-            <input type="number" id="rate" value="6.5" min="0" max="30" step="0.1">
+          <!-- Interest Rate -->
+          <div class="form-group">
+            <label for="rate">Interest Rate (% per annum)</label>
+            <div class="input-wrap">
+              <span class="suffix">%</span>
+              <input type="number" id="rate" value="6.5" min="0.1" max="25" step="0.05">
+            </div>
+            <input type="range" id="rateRange" min="0.5" max="15" step="0.05" value="6.5">
           </div>
-          <input type="range" id="rateRange" min="0.5" max="30" step="0.1" value="6.5">
-        </div>
 
-        <div class="form-group">
-          <label for="term">Remaining Term (years)</label>
-          <div class="input-wrap">
-            <span class="suffix">yrs</span>
-            <input type="number" id="term" value="20" min="1" max="30" step="1">
+          <!-- Remaining Term (Years & Months) -->
+          <div class="form-group">
+            <label for="term">Remaining Term</label>
+            <div class="form-duo" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+              <div class="input-wrap">
+                <span class="suffix">yrs</span>
+                <input type="number" id="term" value="30" min="1" max="40" step="1">
+              </div>
+              <div class="input-wrap">
+                <span class="suffix">mos</span>
+                <input type="number" id="termMonths" value="0" min="0" max="11" step="1">
+              </div>
+            </div>
+            <input type="range" id="termRange" min="1" max="40" step="1" value="30">
           </div>
-          <input type="range" id="termRange" min="1" max="30" step="1" value="20">
-        </div>
 
-        <div class="form-group">
-          <label for="monthlyExtra">Extra Monthly Payment ($)</label>
-          <div class="input-wrap">
-            <span class="prefix">$</span>
-            <input type="number" id="monthlyExtra" value="2000" min="0" step="500" placeholder="e.g. 2000">
+          <!-- Start Date -->
+          <div class="form-group">
+            <label for="startMonth">First Payment Date</label>
+            <div class="form-duo" style="display:grid;grid-template-columns:1.2fr 1fr;gap:8px;">
+              <select id="startMonth" aria-label="Start Month"></select>
+              <select id="startYear" aria-label="Start Year"></select>
+            </div>
           </div>
         </div>
 
-        <div class="form-group">
-          <label for="oneTimeExtra">One-time Payment ($)</label>
-          <div class="input-wrap">
-            <span class="prefix">$</span>
-            <input type="number" id="oneTimeExtra" value="0" min="0" step="10000" placeholder="e.g. 100000">
+        <!-- Mode 1: Extra Payments Inputs -->
+        <div id="extraPaymentInputs" style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border);">
+          <h3 style="font-size:1rem;margin-bottom:14px;color:var(--text);">&#128178; Extra Payment Options</h3>
+          <div class="form-grid">
+            <!-- Monthly Extra -->
+            <div class="form-group">
+              <label for="monthlyExtra">Extra Payment Per Month ($)</label>
+              <div class="input-wrap">
+                <span class="prefix">$</span>
+                <input type="number" id="monthlyExtra" value="200" min="0" step="25" placeholder="e.g. 200">
+              </div>
+              <!-- Quick Extra Pills -->
+              <div class="quick-extra-pills">
+                <button type="button" class="quick-extra-btn" data-add="100">+$100</button>
+                <button type="button" class="quick-extra-btn active" data-add="200">+$200</button>
+                <button type="button" class="quick-extra-btn" data-add="300">+$300</button>
+                <button type="button" class="quick-extra-btn" data-add="500">+$500</button>
+                <button type="button" class="quick-extra-btn" data-action="annual">+1 Pmt/Yr</button>
+                <button type="button" class="quick-extra-btn" data-action="clear">Clear</button>
+              </div>
+            </div>
+
+            <!-- Annual Extra -->
+            <div class="form-group">
+              <label for="annualExtra">Extra Payment Per Year ($)</label>
+              <div class="input-wrap">
+                <span class="prefix">$</span>
+                <input type="number" id="annualExtra" value="0" min="0" step="500" placeholder="e.g. 2500 (tax refund/bonus)">
+              </div>
+              <span style="font-size:0.75rem;color:var(--text-muted);margin-top:4px;display:block;">Applied once each year (e.g. annual bonus)</span>
+            </div>
+
+            <!-- One-time Extra -->
+            <div class="form-group">
+              <label for="oneTimeExtra">One-Time Lump Sum ($)</label>
+              <div class="input-wrap">
+                <span class="prefix">$</span>
+                <input type="number" id="oneTimeExtra" value="0" min="0" step="1000" placeholder="e.g. 10000">
+              </div>
+            </div>
+
+            <!-- One-time Date -->
+            <div class="form-group">
+              <label for="oneTimeMonth">Apply One-Time Payment In</label>
+              <div class="form-duo" style="display:grid;grid-template-columns:1.2fr 1fr;gap:8px;">
+                <select id="oneTimeMonth" aria-label="One time month">
+                  <option value="0">January</option>
+                  <option value="1">February</option>
+                  <option value="2">March</option>
+                  <option value="3">April</option>
+                  <option value="4">May</option>
+                  <option value="5">June</option>
+                  <option value="6">July</option>
+                  <option value="7">August</option>
+                  <option value="8">September</option>
+                  <option value="9">October</option>
+                  <option value="10">November</option>
+                  <option value="11">December</option>
+                </select>
+                <select id="oneTimeYear" aria-label="One time year"></select>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="form-group">
-          <label for="oneTimeMonth">Apply One-time Payment in Month</label>
-          <input type="number" id="oneTimeMonth" value="1" min="1" step="1">
+        <!-- Mode 2: Target Payoff Goal Inputs -->
+        <div id="targetPayoffInputs" style="display:none;margin-top:20px;padding-top:16px;border-top:1px solid var(--border);">
+          <h3 style="font-size:1rem;margin-bottom:14px;color:var(--text);">&#127919; Target Payoff Timeline</h3>
+          <p style="font-size:0.88rem;color:var(--text-muted);margin-bottom:14px;">Specify how quickly you want to be completely mortgage-free, and we will calculate the exact extra monthly payment needed.</p>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="targetYears">Desired Payoff Goal (Years &amp; Months)</label>
+              <div class="form-duo" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                <div class="input-wrap">
+                  <span class="suffix">yrs</span>
+                  <input type="number" id="targetYears" value="15" min="1" max="39" step="1">
+                </div>
+                <div class="input-wrap">
+                  <span class="suffix">mos</span>
+                  <input type="number" id="targetMonths" value="0" min="0" max="11" step="1">
+                </div>
+              </div>
+            </div>
+            <div class="form-group" style="display:flex;flex-direction:column;justify-content:center;">
+              <div id="targetCalculatedExtra" class="definition" style="margin-bottom:0;display:none;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mode 3: Bi-Weekly Strategy Inputs -->
+        <div id="biweeklyInputs" style="display:none;margin-top:20px;padding-top:16px;border-top:1px solid var(--border);">
+          <h3 style="font-size:1rem;margin-bottom:14px;color:var(--text);">&#9889; Accelerated Bi-Weekly Strategy</h3>
+          <p style="font-size:0.88rem;color:var(--text-muted);line-height:1.5;margin-bottom:12px;">
+            With an accelerated bi-weekly payment schedule, you pay <strong>half of your normal monthly mortgage payment every two weeks</strong>. Since there are 52 weeks in a year, you make 26 half-payments &mdash; which equals <strong>13 full monthly payments</strong> per year (1 extra full payment automatically without feeling a strain on your monthly cash flow).
+          </p>
+          <div id="biweeklyCalculatedInfo" class="definition" style="margin-bottom:0;"></div>
+        </div>
+
+        <div class="form-actions" style="margin-top:20px;">
+          <button class="btn btn-primary" id="calculateBtn" type="button">Calculate Payoff</button>
+          <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Results Section -->
+    <div class="result-panel" id="resultPanel" style="display:block;">
+      <!-- Hero Celebration Callout -->
+      <div class="payoff-hero-banner" id="payoffHeroBanner" style="display:none;">
+        <div class="banner-icon">&#127881;</div>
+        <div>
+          <h3 id="bannerHeading"></h3>
+          <p id="bannerDesc"></p>
         </div>
       </div>
-      <div class="form-actions">
-        <button class="btn btn-primary" id="calculateBtn" type="button">Calculate</button>
-        <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
-      </div>
-    </div>
 
-    <div class="result-panel" id="resultPanel">
-      <h3 id="resultLabel">Monthly Payment</h3>
-      <div class="result-main" id="resultMain">—</div>
-      <div class="result-grid">
-        <div class="result-item"><div class="label">Mortgage Balance</div><div class="value" id="loanAmountOut">—</div></div>
-        <div class="result-item"><div class="label">Total Payment</div><div class="value" id="totalPaymentOut">—</div></div>
-        <div class="result-item"><div class="label">Total Interest</div><div class="value negative" id="totalInterestOut">—</div></div>
-      </div>
-      <div class="payoff-note" id="payoffNote"></div>
-      <div class="result-actions">
-        <button id="downloadCsv" type="button">&#11015; Download CSV</button>
-      </div>
-    </div>
-
-    <div class="card">
-      <h2>Compare: With vs Without Extra Payments</h2>
-      <p>See exactly what extra payments do for your mortgage.</p>
-      <div class="compare-grid">
-        <div class="compare-card without">
-          <h3>Without Extra Payments</h3>
-          <div class="amount" id="cmpWithoutPayment">—</div>
-          <ul>
-            <li>Payoff time: <strong id="cmpWithoutMonths">—</strong></li>
-            <li>Total interest: <strong id="cmpWithoutInterest">—</strong></li>
-            <li>Total paid: <strong id="cmpWithoutTotal">—</strong></li>
-          </ul>
+      <!-- 4 Highlight Cards -->
+      <div class="payoff-stat-grid">
+        <div class="payoff-stat-card">
+          <div class="stat-label">Total Interest Saved</div>
+          <div class="stat-val positive" id="statInterestSaved">$0</div>
+          <div class="stat-sub">Direct reduction in finance charges</div>
         </div>
-        <div class="compare-card with">
-          <h3>With Extra Payments</h3>
-          <div class="amount" id="cmpWithPayment">—</div>
-          <ul>
-            <li>Payoff time: <strong id="cmpWithMonths">—</strong></li>
-            <li>Total interest: <strong id="cmpWithInterest">—</strong></li>
-            <li>Total paid: <strong id="cmpWithTotal">—</strong></li>
-          </ul>
+
+        <div class="payoff-stat-card">
+          <div class="stat-label">Time Saved</div>
+          <div class="stat-val positive" id="statTimeSaved">0 Months</div>
+          <div class="stat-sub">Shaved off original loan term</div>
+        </div>
+
+        <div class="payoff-stat-card">
+          <div class="stat-label">New Payoff Date</div>
+          <div class="stat-val" id="statNewPayoffDate">—</div>
+          <div class="stat-sub">Estimated 100% debt-free date</div>
+        </div>
+
+        <div class="payoff-stat-card">
+          <div class="stat-label">New Total Monthly</div>
+          <div class="stat-val" id="statNewMonthly">—</div>
+          <div class="stat-sub">Regular payment + extra</div>
         </div>
       </div>
-      <div class="save-banner" id="saveBanner">
-        <span id="saveBannerText"></span>
+
+      <!-- Side-by-Side Comparison Table -->
+      <div class="card" style="margin-bottom:24px;">
+        <h2>Mortgage Comparison: Original vs. Accelerated</h2>
+        <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:14px;">See side-by-side how extra payments impact every aspect of your home financing.</p>
+        
+        <div class="table-wrap">
+          <table class="mortgage-compare-table">
+            <thead>
+              <tr>
+                <th>Mortgage Metric</th>
+                <th>Original Schedule</th>
+                <th>With Extra Payments</th>
+                <th style="color:#10b981;">Your Savings / Difference</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Monthly Payment</strong></td>
+                <td id="cmpStdMonthly">—</td>
+                <td id="cmpAccMonthly" style="font-weight:700;">—</td>
+                <td id="cmpDiffMonthly" style="color:var(--text-muted);">—</td>
+              </tr>
+              <tr>
+                <td><strong>Payoff Time</strong></td>
+                <td id="cmpStdTerm">—</td>
+                <td id="cmpAccTerm" style="font-weight:700;">—</td>
+                <td id="cmpDiffTerm" class="highlight-savings">—</td>
+              </tr>
+              <tr>
+                <td><strong>Payoff Date</strong></td>
+                <td id="cmpStdPayoffDate">—</td>
+                <td id="cmpAccPayoffDate" style="font-weight:700;">—</td>
+                <td id="cmpDiffPayoffDate" class="highlight-savings">—</td>
+              </tr>
+              <tr>
+                <td><strong>Total Principal</strong></td>
+                <td id="cmpStdPrincipal">—</td>
+                <td id="cmpAccPrincipal">—</td>
+                <td id="cmpDiffPrincipal">$0</td>
+              </tr>
+              <tr>
+                <td><strong>Total Interest Paid</strong></td>
+                <td id="cmpStdInterest" style="color:#ef4444;">—</td>
+                <td id="cmpAccInterest" style="font-weight:700;">—</td>
+                <td id="cmpDiffInterest" class="highlight-savings">—</td>
+              </tr>
+              <tr style="background:rgba(15,23,42,0.03);font-weight:700;">
+                <td><strong>Total Cost of Mortgage</strong></td>
+                <td id="cmpStdTotal">—</td>
+                <td id="cmpAccTotal" style="color:var(--primary);">—</td>
+                <td id="cmpDiffTotal" class="highlight-savings">—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Visual Charts Section -->
+      <div class="card" style="margin-bottom:24px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:16px;">
+          <div>
+            <h2 style="margin-bottom:4px;">Visual Payoff Trajectory</h2>
+            <p style="font-size:0.86rem;color:var(--text-muted);margin-bottom:0;">Inspect the mortgage balance payoff curve and principal vs interest distributions.</p>
+          </div>
+          <div class="tab-switcher">
+            <button type="button" class="tab-btn chart-tab-btn active" data-chart="balance">&#128200; Balance Payoff Curve</button>
+            <button type="button" class="tab-btn chart-tab-btn" data-chart="donut">&#127849; Donut Breakdown</button>
+            <button type="button" class="tab-btn chart-tab-btn" data-chart="annual">&#128202; Annual Bar Chart</button>
+          </div>
+        </div>
+
+        <div class="mortgage-chart-canvas-wrap">
+          <canvas id="mortgagePayoffChart" aria-label="Mortgage payoff trajectory chart"></canvas>
+        </div>
+      </div>
+
+      <!-- Amortization Schedule Card -->
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:14px;">
+          <div>
+            <h2 style="margin-bottom:4px;">Amortization Schedule <span id="scheduleCount" style="font-size:0.95rem;font-weight:600;color:var(--primary);"></span></h2>
+            <p style="font-size:0.86rem;color:var(--text-muted);margin-bottom:0;">Complete breakdown of every payment, principal reduction, and remaining equity.</p>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+            <!-- Annual / Monthly switcher -->
+            <div class="tab-switcher" style="margin-bottom:0;">
+              <button type="button" class="tab-btn schedule-tab-btn active" data-schedule="annual">Annual Schedule</button>
+              <button type="button" class="tab-btn schedule-tab-btn" data-schedule="monthly">Monthly Schedule</button>
+            </div>
+
+            <!-- Search input -->
+            <div class="schedule-search-wrap">
+              <span class="schedule-search-icon">&#128269;</span>
+              <input type="text" id="scheduleSearchInput" class="schedule-search-input" placeholder="Search year or payment...">
+            </div>
+          </div>
+        </div>
+
+        <div class="table-wrap" style="max-height:480px;overflow-y:auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>Year / Payment</th>
+                <th class="num">Regular Payment</th>
+                <th class="num">Extra Payment</th>
+                <th class="num">Principal</th>
+                <th class="num">Interest</th>
+                <th class="num">Total Payment</th>
+                <th class="num">Ending Balance</th>
+              </tr>
+            </thead>
+            <tbody id="scheduleBody"></tbody>
+            <tfoot id="scheduleFoot"></tfoot>
+          </table>
+        </div>
+
+        <!-- Schedule Action Toolbar -->
+        <div class="result-actions" style="margin-top:16px;display:flex;flex-wrap:wrap;gap:10px;">
+          <button id="downloadCsv" class="btn btn-outline" type="button">&#11015; Export to CSV</button>
+          <button id="printSchedule" class="btn btn-outline" type="button">&#128424; Print Schedule</button>
+          <button id="copySummaryBtn" class="btn btn-outline" type="button">&#128203; Copy Summary</button>
+        </div>
       </div>
     </div>
 
-    <div class="chart-box">
-      <div class="chart-title">Interest by Year: Standard vs With Extras</div>
-      <canvas id="resultChart" aria-label="Result chart"></canvas>
-    </div>
-    <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
+    <div class="ad-slot ad-slot-responsive" style="margin:24px 0;"><span class="ad-slot-label">Advertisement</span></div>
 
-    <div class="card">
-      <h2>Mortgage Amortization Schedule</h2>
-      <p>Your payment plan with extra payments applied. <span id="scheduleCount" style="font-weight:700;color:var(--primary);"></span></p>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Month</th>
-              <th class="num">Payment</th>
-              <th class="num">Principal</th>
-              <th class="num">Interest</th>
-              <th class="num">Extra</th>
-              <th class="num">Balance</th>
-            </tr>
-          </thead>
-          <tbody id="scheduleBody"></tbody>
-          <tfoot id="scheduleFoot"></tfoot>
-        </table>
-      </div>
-    </div>
-
-    <div class="content-section">
-      <h2>Mortgage Payoff Calculator FAQ</h2>
-      <div class="faq-item">
-        <div class="faq-q">How much faster will extra payments pay off my mortgage?<span class="arrow">&#9654;</span></div>
-        <div class="faq-a">Every extra dollar reduces your principal, which cuts future interest. Even a small monthly extra payment can shave years off a long mortgage. The comparison above shows the exact effect.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Should I make extra payments or invest the money?<span class="arrow">&#9654;</span></div>
-        <div class="faq-a">If your mortgage rate is higher than the return you can earn safely on investments, paying down the mortgage is usually better. Otherwise, many people prefer to invest while keeping the lower mortgage payment.</div>
-      </div>
-    </div>
-  
 <!--SEO-CONTENT-START-->
 <!-- =====================================================
      SEO CONTENT (pre-rendered static) - do not remove
      ===================================================== -->
-<div class="content-section quick-facts"><div class="fact-chip"><strong>Extra payment:</strong> Beat the clock</div><div class="fact-chip"><strong>Biweekly:</strong> 26 payments = 13 EMIs/year</div><div class="fact-chip"><strong>Save:</strong> Thousands in interest</div><div class="fact-chip"><strong>Equity:</strong> Own the home sooner</div></div>
+<div class="content-section quick-facts"><div class="fact-chip"><strong>Extra payment:</strong> Beat the clock</div><div class="fact-chip"><strong>Biweekly:</strong> 26 payments = 13 payments/year</div><div class="fact-chip"><strong>Save:</strong> Thousands in interest</div><div class="fact-chip"><strong>Equity:</strong> Own the home sooner</div></div>
 <div class="content-section toc-card"><h2>On this page</h2><ol class="toc"><li><a href="#strategies-to-pay-off-early">Strategies to pay off early</a></li><li><a href="#should-you-pay-off-the-mortgage-early">Should you pay off the mortgage early?</a></li><li><a href="#how-to-use">How to use this calculator</a></li><li><a href="#faq">Frequently asked questions</a></li></ol></div>
-<div class="content-section"><h2>Mortgage Payoff Calculator — own your home years sooner</h2><p>Adding even a small amount to your monthly mortgage payment dramatically shortens the term and saves interest. This calculator shows exactly when you'll be mortgage-free with extra payments — and the interest you'll save.</p></div>
-<div class="content-section"><h2 id="strategies-to-pay-off-early">Strategies to pay off early</h2><p>Extra monthly payment: $200 extra/month on a $350,000 mortgage saves thousands and cuts years.</p><p>Biweekly payments: paying half the EMI every two weeks creates one extra full payment each year — a classic zero-pain accelerator.</p><p>Annual lump sums from bonuses: a $5,000 yearly tax refund or bonus applied to principal works like compounding in reverse.</p></div>
-<div class="content-section"><h2 id="should-you-pay-off-the-mortgage-early">Should you pay off the mortgage early?</h2><p>Mathematically, paying off cheap debt (5–7% home loan) could lose vs investing (10–12% equity) — but the guaranteed interest savings and peace of mind are real.</p><p>The sweet spot: keep the home loan tax deductions (80C/24b) but direct surplus to debt if the rate exceeds what you can earn risk-free.</p><p>Many choose 'debt-light': pay down to a comfortable 30% of income, invest the rest.</p></div>
-<div class="content-section"><h2 id="how-to-use">How to use this calculator</h2><ol><li>Enter your current mortgage balance and interest rate.</li><li>Enter your current monthly payment.</li><li>Optionally add an extra monthly payment and/or annual lump sum.</li><li>Read your payoff date, years saved and interest saved.</li></ol></div>
+<div class="content-section"><h2>Mortgage Payoff Calculator — Own Your Home Years Sooner</h2><p>Adding even a small amount to your monthly mortgage payment dramatically shortens the term and saves interest. This calculator shows exactly when you'll be mortgage-free with extra payments — and the interest you'll save.</p></div>
+<div class="content-section"><h2 id="strategies-to-pay-off-early">Strategies to pay off early</h2><p>Extra monthly payment: $200 extra/month on a $350,000 mortgage saves thousands and cuts years.</p><p>Biweekly payments: paying half the payment every two weeks creates one extra full payment each year — a classic zero-pain accelerator.</p><p>Annual lump sums from bonuses: a $5,000 yearly tax refund or bonus applied to principal works like compounding in reverse.</p></div>
+<div class="content-section"><h2 id="should-you-pay-off-the-mortgage-early">Should you pay off the mortgage early?</h2><p>Mathematically, paying off cheap debt (5–7% home loan) could lose vs investing (10–12% equity) — but the guaranteed interest savings and peace of mind are real.</p><p>The sweet spot: keep mortgage interest deductions where eligible, but direct surplus to debt if the rate exceeds what you can earn risk-free.</p><p>Many choose 'debt-light': pay down to a comfortable debt level, then invest the rest.</p></div>
+<div class="content-section"><h2 id="how-to-use">How to use this calculator</h2><ol><li>Enter your current mortgage balance and interest rate.</li><li>Enter your remaining loan term and start date.</li><li>Optionally add an extra monthly payment, annual lump sum, or select target payoff years.</li><li>Read your payoff date, years saved and interest saved.</li></ol></div>
 <div class="content-section tips-box"><h2>Pro tips</h2><ul><li>Verify the lender applies extra payments to principal — not 'next month's payment'.</li><li>Keep emergency cash before making accelerated payments.</li><li>Consider recasting to lower the monthly bill instead if cash flow is the goal.</li></ul></div>
 <div class="content-section"><h2 id="faq">Frequently asked questions</h2><div class="faq-item"><div class="faq-q">How much does an extra payment per year help?<span class="arrow">&#9654;</span></div><div class="faq-a">One extra full payment per year (biweekly schedule) typically cuts a 30-year mortgage to about 25.5 years and saves roughly 10–12% of total interest.</div></div><div class="faq-item"><div class="faq-q">Should I invest instead of paying off my mortgage?<span class="arrow">&#9654;</span></div><div class="faq-a">If your mortgage rate is below 6–7% and you have a long horizon, investing in equity may return more. The guaranteed savings from prepaying, however, carry zero risk. Balance based on your risk tolerance.</div></div></div>
 <div class="content-section"><h2>Related calculators</h2><div class="related-grid"><a class="related-card" href="amortization-calculator.html"><span class="related-icon">📊</span><span>Amortization</span></a><a class="related-card" href="mortgage-calculator.html"><span class="related-icon">🏡</span><span>Mortgage</span></a><a class="related-card" href="refinance-calculator.html"><span class="related-icon">🔄</span><span>Refinance</span></a><a class="related-card" href="loan-payoff.html"><span class="related-icon">⏱️</span><span>Loan Payoff</span></a></div></div>
@@ -286,16 +501,9 @@
   </footer>
 </div>
 
-<script>
-  window.calcConfig = {
-    type: 'loan',
-    defaults: { amount: 3000000, rate: 6.5, term: 20 }
-  };
-</script>
 <script src="js/currency.js"></script>
-<script src="js/chart.js"></script>
 <script src="js/seo-content.js"></script>
 <script src="js/common.js"></script>
-<script src="js/emi.js"></script>
+<script src="js/mortgage-payoff.js"></script>
 </body>
 </html>

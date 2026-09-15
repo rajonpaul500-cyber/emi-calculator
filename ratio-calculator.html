@@ -47,29 +47,80 @@
     <h1 class="page-title">Ratio Calculator</h1>
     <p class="page-subtitle">Simplify a ratio to its lowest terms, or solve a missing value in a proportion like a:b = c:d.</p>
 
-<div class="card">
-<h2>Simplify a ratio</h2>
-<div class="form-grid">
-<div class="form-group"><label>Ratio A</label><input type="number" id="a" value="12" step="any"></div>
-<div class="form-group"><label>Ratio B</label><input type="number" id="b" value="18" step="any"></div>
-</div>
-<div class="form-actions"><button class="btn btn-primary" id="simpBtn" type="button">Simplify</button></div>
-</div>
+    <!-- Quick Presets -->
+    <div class="preset-chips" id="presetChips" style="margin-bottom:16px;">
+      <span class="preset-label" style="font-size:0.85rem; font-weight:600; color:var(--text-muted);">Quick Presets:</span>
+      <button type="button" class="preset-chip active" data-type="simp" data-a="12" data-b="18">12 : 18 (Simplify)</button>
+      <button type="button" class="preset-chip" data-type="simp" data-a="1920" data-b="1080">1920 : 1080 (16:9)</button>
+      <button type="button" class="preset-chip" data-type="simp" data-a="250" data-b="750">1 : 3 Ratio</button>
+      <button type="button" class="preset-chip" data-type="prop" data-pa="2" data-pb="3" data-pc="8">2:3 = 8:? (Solve)</button>
+      <button type="button" class="preset-chip" data-type="prop" data-pa="16" data-pb="9" data-pc="1280">16:9 = 1280:? (720p)</button>
+    </div>
 
-<div class="card">
-<h2>Solve a proportion: a : b = c : ?</h2>
-<div class="form-grid">
-<div class="form-group"><label>a</label><input type="number" id="pa" value="2" step="any"></div>
-<div class="form-group"><label>b</label><input type="number" id="pb" value="3" step="any"></div>
-<div class="form-group"><label>c</label><input type="number" id="pc" value="8" step="any"></div>
-</div>
-<div class="form-actions"><button class="btn btn-outline" id="solveBtn" type="button">Solve for missing value</button></div>
-</div>
+    <!-- Mode Selector Tabs -->
+    <div class="calc-tabs" id="ratioTabs" style="display:flex; gap:8px; margin-bottom:20px;">
+      <button type="button" class="btn btn-sm btn-primary tab-btn active" id="tabSimp">1. Simplify Ratio (A : B)</button>
+      <button type="button" class="btn btn-sm btn-outline tab-btn" id="tabProp">2. Solve Proportion (A : B = C : D)</button>
+    </div>
 
-    <div class="result-panel" id="resultPanel">
-      <h3>Result</h3>
-      <div class="result-main" id="resultMain">&mdash;</div>
-      <div class="result-grid" id="resultGrid"></div>
+    <!-- Section 1: Simplify Ratio -->
+    <div class="card" id="cardSimp">
+      <h2>Simplify Ratio (A : B)</h2>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="a">Ratio Part A</label>
+          <input type="number" id="a" value="12" step="any">
+        </div>
+        <div class="form-group">
+          <label for="b">Ratio Part B</label>
+          <input type="number" id="b" value="18" step="any">
+        </div>
+      </div>
+      <div class="form-actions" style="display:flex; gap:12px; margin-top:16px;">
+        <button class="btn btn-primary" id="simpBtn" type="button" style="flex:1;">Simplify Ratio</button>
+        <button class="btn btn-outline" id="resetSimpBtn" type="button">Reset</button>
+      </div>
+    </div>
+
+    <!-- Section 2: Solve Proportion -->
+    <div class="card" id="cardProp" style="display:none;">
+      <h2>Solve Proportion: A : B = C : D</h2>
+      <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:16px;">Given A : B = C : D, solve for the missing term D using cross-multiplication.</p>
+      <div class="form-grid" style="grid-template-columns:repeat(auto-fit, minmax(130px, 1fr));">
+        <div class="form-group">
+          <label for="pa">A</label>
+          <input type="number" id="pa" value="2" step="any">
+        </div>
+        <div class="form-group">
+          <label for="pb">B</label>
+          <input type="number" id="pb" value="3" step="any">
+        </div>
+        <div class="form-group">
+          <label for="pc">C</label>
+          <input type="number" id="pc" value="8" step="any">
+        </div>
+        <div class="form-group">
+          <label for="pd" style="color:var(--primary); font-weight:700;">D (Missing ?)</label>
+          <input type="text" id="pd" value="12" readonly style="background:var(--bg-alt); font-weight:700;">
+        </div>
+      </div>
+      <div class="form-actions" style="display:flex; gap:12px; margin-top:16px;">
+        <button class="btn btn-primary" id="solveBtn" type="button" style="flex:1;">Solve Proportion</button>
+        <button class="btn btn-outline" id="resetPropBtn" type="button">Reset</button>
+      </div>
+    </div>
+
+    <div class="result-panel" id="resultPanel" style="margin-top:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:12px; margin-bottom:16px;">
+        <h3 style="margin:0; font-size:1.15rem;">Ratio Analysis</h3>
+        <button type="button" class="btn btn-sm btn-outline" id="copyResultBtn" title="Copy result text">📋 Copy</button>
+      </div>
+      <div class="result-main" id="resultMain" style="font-size:1.8rem; font-weight:800; color:var(--primary); text-align:center; padding:12px 0;">&mdash;</div>
+      <div class="result-grid" id="resultGrid" style="margin-top:16px;"></div>
+      <div id="stepContainer" style="margin-top:20px; padding:16px; background:var(--bg-alt); border-radius:8px; border:1px solid var(--border); display:none;">
+        <h4 style="margin:0 0 10px; font-size:1rem; color:var(--primary);">Step-by-Step Breakdown</h4>
+        <div id="stepContent" style="font-size:0.92rem; line-height:1.7;"></div>
+      </div>
     </div>
 
     <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
@@ -96,28 +147,229 @@
   </main>
 </div>
 
-<div id="siteFooter"></div>
+<div id="siteFooter">
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>EMI Master</h4>
+        <p>Free, instant, and private online calculators for mortgages, loans, investments, retirement, and mathematics. Your inputs never leave your browser.</p>
+        <p><a href="sitemap.html"><strong>&rarr; All 50+ Calculators (Directory)</strong></a></p>
+      </div>
+      <div class="footer-col">
+        <h4>Popular Calculators</h4>
+        <ul>
+          <li><a href="mortgage-calculator.html">Mortgage Calculator</a></li>
+          <li><a href="amortization-calculator.html">Amortization Calculator</a></li>
+          <li><a href="emi-calculator.html">EMI Calculator</a></li>
+          <li><a href="home-loan.html">Home Loan Calculator</a></li>
+          <li><a href="car-loan.html">Car Loan Calculator</a></li>
+          <li><a href="personal-loan.html">Personal Loan Calculator</a></li>
+          <li><a href="compound-interest-calculator.html">Compound Interest</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Loans &amp; Real Estate</h4>
+        <ul>
+          <li><a href="refinance-calculator.html">Refinance Calculator</a></li>
+          <li><a href="fha-loan.html">FHA Loan Calculator</a></li>
+          <li><a href="va-loan.html">VA Mortgage Calculator</a></li>
+          <li><a href="home-equity-loan.html">Home Equity Loan</a></li>
+          <li><a href="heloc-calculator.html">HELOC Calculator</a></li>
+          <li><a href="loan-payoff.html">Loan Payoff Calculator</a></li>
+          <li><a href="house-affordability.html">House Affordability</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Investment &amp; Tools</h4>
+        <ul>
+          <li><a href="investment-calculator.html">Investment Calculator</a></li>
+          <li><a href="retirement-calculator.html">Retirement Calculator</a></li>
+          <li><a href="social-security-calculator.html">Social Security</a></li>
+          <li><a href="scientific-calculator.html">Scientific Calculator</a></li>
+          <li><a href="percentage-calculator.html">Percentage Calculator</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="sitemap.html"><strong>Complete HTML Sitemap</strong></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 EMI Master. All rights reserved. For educational and planning purposes only.
+    </div>
+  </footer>
+</div>
 
 <script src="js/math.js"></script>
 <script>
-function item(l,v){return '<div class="result-item"><div class="label">'+l+'</div><div class="value">'+v+'</div></div>';}
-document.getElementById("simpBtn").onclick=function(){
-var a=parseFloat(document.getElementById("a").value);
-var b=parseFloat(document.getElementById("b").value);
-if(isNaN(a)||isNaN(b)||a===0||b===0){document.getElementById("resultMain").textContent="Both values must be non-zero";document.getElementById("resultGrid").innerHTML="";return;}
-var r=MathCalc.ratioSimplify(a,b);
-var p1=MathCalc.ratioToPercent(a,b).value;
-var p2=100-p1;
-document.getElementById("resultMain").textContent=r.value;
-document.getElementById("resultGrid").innerHTML=item("Original",r.original)+item("Simplified",r.value)+item("A as % of total",MathCalc.fmt(p1,2)+"%")+item("B as % of total",MathCalc.fmt(p2,2)+"%");};
-document.getElementById("solveBtn").onclick=function(){
-var a=parseFloat(document.getElementById("pa").value);
-var b=parseFloat(document.getElementById("pb").value);
-var c=parseFloat(document.getElementById("pc").value);
-if(isNaN(a)||isNaN(b)||isNaN(c)||a===0){document.getElementById("resultMain").textContent="Enter valid values (a cannot be zero)";document.getElementById("resultGrid").innerHTML="";return;}
-var d=MathCalc.ratioSolve(a,b,c).value;
-document.getElementById("resultMain").textContent=MathCalc.fmt(d,4);
-document.getElementById("resultGrid").innerHTML=item("Proportion",a+" : "+b+" = "+c+" : "+MathCalc.fmt(d,4))+item("Check","("+a+" × "+MathCalc.fmt(d,4)+") = ("+b+" × "+c+")")+item("Verified","("+MathCalc.fmt(a*d,4)+" = "+MathCalc.fmt(b*c,4)+")");};
+(function () {
+  var activeMode = "simp";
+
+  function item(l, v) {
+    return '<div class="result-item"><div class="label">' + l + '</div><div class="value">' + v + '</div></div>';
+  }
+
+  function setMode(mode) {
+    activeMode = mode;
+    if (mode === "simp") {
+      document.getElementById("tabSimp").className = "btn btn-sm btn-primary tab-btn active";
+      document.getElementById("tabProp").className = "btn btn-sm btn-outline tab-btn";
+      document.getElementById("cardSimp").style.display = "block";
+      document.getElementById("cardProp").style.display = "none";
+      calcSimplify();
+    } else {
+      document.getElementById("tabSimp").className = "btn btn-sm btn-outline tab-btn";
+      document.getElementById("tabProp").className = "btn btn-sm btn-primary tab-btn active";
+      document.getElementById("cardSimp").style.display = "none";
+      document.getElementById("cardProp").style.display = "block";
+      calcProportion();
+    }
+  }
+
+  function calcSimplify() {
+    var a = parseFloat(document.getElementById("a").value);
+    var b = parseFloat(document.getElementById("b").value);
+
+    if (isNaN(a) || isNaN(b)) {
+      document.getElementById("resultMain").textContent = "\u2014";
+      document.getElementById("resultGrid").innerHTML = "";
+      document.getElementById("stepContainer").style.display = "none";
+      return;
+    }
+
+    if (a === 0 || b === 0) {
+      document.getElementById("resultMain").textContent = "Ratio components must be non-zero";
+      document.getElementById("resultGrid").innerHTML = "";
+      document.getElementById("stepContainer").style.display = "none";
+      return;
+    }
+
+    var r = MathCalc.ratioSimplify(a, b);
+    var p1 = MathCalc.ratioToPercent(a, b).value;
+    var p2 = 100 - p1;
+    var gcf = MathCalc.gcd(Math.round(Math.abs(a)), Math.round(Math.abs(b)));
+
+    document.getElementById("resultMain").textContent = r.value;
+    var grid = item("Simplified Ratio", r.value) +
+               item("Original Ratio", r.original) +
+               item("Part A Percentage", MathCalc.fmt(p1, 2) + "%") +
+               item("Part B Percentage", MathCalc.fmt(p2, 2) + "%") +
+               item("Decimal Ratio (A &divide; B)", MathCalc.fmt(a / b, 4));
+    document.getElementById("resultGrid").innerHTML = grid;
+
+    var stepHtml = "<strong>1. Original Ratio:</strong> " + a + " : " + b + "<br>" +
+                   "<strong>2. Total Units:</strong> " + a + " + " + b + " = " + (a + b) + "<br>" +
+                   "<strong>3. Greatest Common Divisor (GCD):</strong> " + gcf + "<br>" +
+                   "&bull; A / GCD = " + a + " / " + gcf + " = " + Math.round(a / gcf) + "<br>" +
+                   "&bull; B / GCD = " + b + " / " + gcf + " = " + Math.round(b / gcf) + "<br>" +
+                   "&rarr; <strong>Simplified Form = " + r.value + "</strong><br><br>" +
+                   "<strong>4. Percentage Shares:</strong><br>" +
+                   "&bull; A = (" + a + " / " + (a + b) + ") &times; 100% = <strong>" + MathCalc.fmt(p1, 2) + "%</strong><br>" +
+                   "&bull; B = (" + b + " / " + (a + b) + ") &times; 100% = <strong>" + MathCalc.fmt(p2, 2) + "%</strong>";
+    document.getElementById("stepContent").innerHTML = stepHtml;
+    document.getElementById("stepContainer").style.display = "block";
+  }
+
+  function calcProportion() {
+    var a = parseFloat(document.getElementById("pa").value);
+    var b = parseFloat(document.getElementById("pb").value);
+    var c = parseFloat(document.getElementById("pc").value);
+
+    if (isNaN(a) || isNaN(b) || isNaN(c)) {
+      document.getElementById("resultMain").textContent = "\u2014";
+      document.getElementById("resultGrid").innerHTML = "";
+      document.getElementById("stepContainer").style.display = "none";
+      return;
+    }
+
+    if (a === 0) {
+      document.getElementById("resultMain").textContent = "First term 'A' cannot be 0 in proportion";
+      document.getElementById("resultGrid").innerHTML = "";
+      document.getElementById("stepContainer").style.display = "none";
+      return;
+    }
+
+    var d = MathCalc.ratioSolve(a, b, c).value;
+    document.getElementById("pd").value = MathCalc.fmt(d, 4);
+    document.getElementById("resultMain").textContent = "D = " + MathCalc.fmt(d, 4);
+
+    var grid = item("Solved Term D", MathCalc.fmt(d, 4)) +
+               item("Complete Proportion", a + " : " + b + " = " + c + " : " + MathCalc.fmt(d, 4)) +
+               item("Cross Product 1 (A &times; D)", MathCalc.fmt(a * d, 4)) +
+               item("Cross Product 2 (B &times; C)", MathCalc.fmt(b * c, 4));
+    document.getElementById("resultGrid").innerHTML = grid;
+
+    var stepHtml = "<strong>1. Proportion Formula:</strong><br>" +
+                   "A / B = C / D &rarr; A &times; D = B &times; C<br><br>" +
+                   "<strong>2. Solve for D:</strong><br>" +
+                   "D = (B &times; C) / A<br>" +
+                   "D = (" + b + " &times; " + c + ") / " + a + "<br>" +
+                   "D = " + (b * c) + " / " + a + " = <strong>" + MathCalc.fmt(d, 4) + "</strong><br><br>" +
+                   "<strong>3. Cross-Multiplication Verification:</strong><br>" +
+                   a + " &times; " + MathCalc.fmt(d, 4) + " = " + MathCalc.fmt(a * d, 4) + "<br>" +
+                   b + " &times; " + c + " = " + MathCalc.fmt(b * c, 4) + " &check; (Equal)";
+    document.getElementById("stepContent").innerHTML = stepHtml;
+    document.getElementById("stepContainer").style.display = "block";
+  }
+
+  // Bind tabs
+  document.getElementById("tabSimp").onclick = function () { setMode("simp"); };
+  document.getElementById("tabProp").onclick = function () { setMode("prop"); };
+
+  // Bind inputs
+  document.getElementById("a").oninput = calcSimplify;
+  document.getElementById("b").oninput = calcSimplify;
+  document.getElementById("simpBtn").onclick = calcSimplify;
+
+  document.getElementById("pa").oninput = calcProportion;
+  document.getElementById("pb").oninput = calcProportion;
+  document.getElementById("pc").oninput = calcProportion;
+  document.getElementById("solveBtn").onclick = calcProportion;
+
+  document.getElementById("resetSimpBtn").onclick = function () {
+    document.getElementById("a").value = "12";
+    document.getElementById("b").value = "18";
+    calcSimplify();
+  };
+
+  document.getElementById("resetPropBtn").onclick = function () {
+    document.getElementById("pa").value = "2";
+    document.getElementById("pb").value = "3";
+    document.getElementById("pc").value = "8";
+    calcProportion();
+  };
+
+  // Presets
+  document.querySelectorAll("#presetChips .preset-chip").forEach(function (btn) {
+    btn.onclick = function () {
+      document.querySelectorAll("#presetChips .preset-chip").forEach(function (b) { b.classList.remove("active"); });
+      this.classList.add("active");
+      var type = this.getAttribute("data-type");
+      if (type === "simp") {
+        document.getElementById("a").value = this.getAttribute("data-a") || "12";
+        document.getElementById("b").value = this.getAttribute("data-b") || "18";
+        setMode("simp");
+      } else {
+        document.getElementById("pa").value = this.getAttribute("data-pa") || "2";
+        document.getElementById("pb").value = this.getAttribute("data-pb") || "3";
+        document.getElementById("pc").value = this.getAttribute("data-pc") || "8";
+        setMode("prop");
+      }
+    };
+  });
+
+  // Copy Result
+  document.getElementById("copyResultBtn").onclick = function () {
+    var text = document.getElementById("resultMain").textContent;
+    if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).catch(function () {});
+    }
+    this.textContent = "✓ Copied";
+    var btn = this;
+    setTimeout(function () { btn.textContent = "📋 Copy"; }, 1500);
+  };
+
+  // Initial run
+  calcSimplify();
+})();
 </script>
 <script src="js/currency.js"></script>
 <script src="js/seo-content.js"></script>

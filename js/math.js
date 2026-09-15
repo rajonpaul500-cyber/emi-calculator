@@ -587,6 +587,29 @@ window.MathCalc = (function () {
         return (neg ? 'negative ' : '') + parts.join(' ');
     }
 
+    function numberToWordsIndian(num) {
+        if (num === null || num === undefined || isNaN(num)) return '—';
+        var neg = num < 0;
+        var n = Math.abs(Math.trunc(num));
+        if (n === 0) return 'zero';
+        var parts = [];
+        var rem = n % 1000;
+        if (rem) parts.unshift(threeToWords(rem));
+        n = Math.floor(n / 1000);
+        var indianScales = ['thousand', 'lakh', 'crore', 'arab', 'kharab', 'nil', 'padma', 'shankh'];
+        var idx = 0;
+        while (n > 0 && idx < indianScales.length) {
+            var chunk = n % 100;
+            if (chunk) {
+                var chunkWords = chunk < 20 ? ONES[chunk] : (TENS[Math.floor(chunk / 10)] + (chunk % 10 ? '-' + ONES[chunk % 10] : ''));
+                parts.unshift(chunkWords + ' ' + indianScales[idx]);
+            }
+            n = Math.floor(n / 100);
+            idx++;
+        }
+        return (neg ? 'negative ' : '') + parts.join(' ');
+    }
+
     function digitCount(s) {
         return String(s).replace(/[^0-9]/g, '').length;
     }
@@ -634,7 +657,7 @@ window.MathCalc = (function () {
         ratioSimplify: ratioSimplify, ratioSolve: ratioSolve, ratioToPercent: ratioToPercent,
         rootCalc: nthRoot, simplifyNthRoot: simplifyNthRoot,
         lcm: lcm, lcmMulti: lcmMulti,
-        gcf: gcf, gcfMulti: gcfMulti,
+        gcd: gcd, gcf: gcf, gcfMulti: gcfMulti,
         factor: factor, primeFactors: primeFactors,
         roundTo: roundTo, roundToNearest: roundToNearest, roundSig: roundSig,
         matrixAdd: matrixAdd, matrixSub: matrixSub, matrixMul: matrixMul,
@@ -642,6 +665,7 @@ window.MathCalc = (function () {
         matrixTranspose: matrixTranspose, matrixInverse2: matrixInverse2, matrixInverse3: matrixInverse3,
         toScientific: toScientific, fromScientific: fromScientific,
         sciAdd: sciAdd, sciSub: sciSub, sciMul: sciMul, sciDiv: sciDiv,
-        bigNumber: bigNumber, bigArith: bigArith, numberToWords: numberToWords, digitCount: digitCount
+        bigNumber: bigNumber, bigArith: bigArith, numberToWords: numberToWords,
+        numberToWordsIndian: numberToWordsIndian, digitCount: digitCount
     };
 })();

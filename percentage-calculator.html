@@ -12,21 +12,20 @@
 <script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Percentage Calculator - Percent of a Value, Change &amp; More</title>
-<meta name="description" content="Free percentage calculator. Find X% of Y, what percent A is of B, percentage change, and add or subtract a percentage from any value.">
-<meta name="keywords" content="percentage calculator, percent calculator, percent change calculator, percentage increase calculator">
+<title>Percentage Calculator - Percent of a Value, Change, Increase &amp; Difference</title>
+<meta name="description" content="Free professional percentage calculator. Calculate percent of a number, percentage change, increase, decrease, discount, markup, and reverse percentages with step-by-step solutions.">
+<meta name="keywords" content="percentage calculator, percent calculator, percent change calculator, percentage increase calculator, discount calculator, markup calculator, reverse percentage">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://emimaster.com/percentage-calculator.html">
-<meta property="og:title" content="Percentage Calculator - Percent of a Value, Change &amp; More">
-<meta property="og:description" content="Free percentage calculator. Find X% of Y, what percent A is of B, percentage change, and add or subtract a percentage from any value.">
+<meta property="og:title" content="Percentage Calculator - Percent of a Value, Change, Increase &amp; Difference">
+<meta property="og:description" content="Free professional percentage calculator. Calculate percent of a number, percentage change, increase, decrease, discount, markup, and reverse percentages with step-by-step solutions.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://emimaster.com/percentage-calculator.html">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Percentage Calculator","url":"https://emimaster.com/percentage-calculator.html","description":"Free percentage calculator. Find X% of Y, what percent A is of B, percentage change, and add or subtract a percentage from any value.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I calculate a percentage of a number?","acceptedAnswer":{"@type":"Answer","text":"Multiply the number by the percentage divided by 100. For example 20% of 250 = 250 × 20/100 = 50."}},{"@type":"Question","name":"How do I calculate percentage change?","acceptedAnswer":{"@type":"Answer","text":"Use the formula (new - old) / old × 100. From 50 to 60 that is (60-50)/50 × 100 = 20%, an increase."}},{"@type":"Question","name":"What percent is 25 of 200?","acceptedAnswer":{"@type":"Answer","text":"Divide 25 by 200 and multiply by 100: 25/200 × 100 = 12.5%."}},{"@type":"Question","name":"How do I add a percentage to a number?","acceptedAnswer":{"@type":"Answer","text":"Multiply the number by (1 + percentage/100). Adding 15% to 80 gives 80 × 1.15 = 92."}},{"@type":"Question","name":"Is the percentage calculator free?","acceptedAnswer":{"@type":"Answer","text":"Yes, it is completely free, runs in your browser, and requires no registration."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Percentage Calculator","url":"https://emimaster.com/percentage-calculator.html","description":"Free percentage calculator with step-by-step solutions for percentage change, discounts, taxes, and parts.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I calculate a percentage of a number?","acceptedAnswer":{"@type":"Answer","text":"Multiply the number by the percentage divided by 100. For example 20% of 250 = 250 × 20/100 = 50."}},{"@type":"Question","name":"How do I calculate percentage change?","acceptedAnswer":{"@type":"Answer","text":"Use the formula (New - Old) / Old × 100. From 50 to 65 that is (65 - 50)/50 × 100 = +30% increase."}},{"@type":"Question","name":"What percent is 25 of 200?","acceptedAnswer":{"@type":"Answer","text":"Divide 25 by 200 and multiply by 100: (25 / 200) × 100 = 12.5%."}},{"@type":"Question","name":"How does reverse percentage work?","acceptedAnswer":{"@type":"Answer","text":"If an item costs $120 after a 20% discount, the original price was $120 / (1 - 0.20) = $150."}}]}</script>
 <script type="application/json" id="relatedData">[{"href":"fraction-calculator.html","label":"Fraction Calculator","icon":"⅙"},{"href":"ratio-calculator.html","label":"Ratio Calculator","icon":"∶"},{"href":"percent-error-calculator.html","label":"Percent Error Calculator","icon":"⚠"},{"href":"rounding-calculator.html","label":"Rounding Calculator","icon":"±"}]</script>
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-
 </head>
 <body>
 
@@ -35,7 +34,7 @@
 <section class="hero hero-compact">
   <div class="container">
     <h1>Percentage Calculator</h1>
-    <p>Percent of a value, percent change, and add/subtract percentages in one tool.</p>
+    <p>Calculate percent of a number, percentage change, increase &amp; decrease, discounts, markups, and reverse percentages instantly.</p>
   </div>
 </section>
 
@@ -44,75 +43,394 @@
 
   <main class="main-content">
     <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="index.html#math">Math Calculators</a> &rsaquo; Percentage Calculator</div>
-    <h1 class="page-title">Percentage Calculator</h1>
-    <p class="page-subtitle">Pick the calculation you need, enter the two numbers, and get the exact percentage result with a short explanation.</p>
+    <h1 class="page-title">Percentage Calculator Pro</h1>
+    <p class="page-subtitle">Choose the percentage problem you need to solve, enter your values, and view the precise mathematical result with full algebraic step-by-step explanations.</p>
 
-<div class="card">
-<h2>Percentage calculation</h2>
-<div class="form-grid">
-<div class="form-group"><label>Calculation type</label>
-<select id="type">
-<option value="pof">What is X% of Y?</option>
-<option value="what">X is what percent of Y?</option>
-<option value="change">Percentage change from X to Y</option>
-<option value="add">Increase Y by X%</option>
-<option value="sub">Decrease Y by X%</option>
-</select>
-</div>
-<div class="form-group"><label>Value X</label><input type="number" id="a" value="20" step="any"></div>
-<div class="form-group"><label>Value Y</label><input type="number" id="b" value="250" step="any"></div>
-</div>
-<div class="form-actions"><button class="btn btn-primary" id="calcBtn" type="button">Calculate</button></div>
-</div>
+    <!-- Interactive Mode Tabs -->
+    <div class="calc-tabs" id="pctTabs" style="display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap;">
+      <button type="button" class="btn btn-sm btn-primary tab-btn active" data-mode="pof">Percent of Value (X% of Y)</button>
+      <button type="button" class="btn btn-sm btn-outline tab-btn" data-mode="what">What % is X of Y?</button>
+      <button type="button" class="btn btn-sm btn-outline tab-btn" data-mode="change">Percentage Change (% &plusmn;)</button>
+      <button type="button" class="btn btn-sm btn-outline tab-btn" data-mode="addsub">Increase / Decrease by %</button>
+      <button type="button" class="btn btn-sm btn-outline tab-btn" data-mode="reverse">Reverse Percentage</button>
+    </div>
 
-    <div class="result-panel" id="resultPanel">
-      <h3>Result</h3>
-      <div class="result-main" id="resultMain">&mdash;</div>
-      <div class="result-grid" id="resultGrid"></div>
+    <!-- Quick Presets -->
+    <div class="preset-chips" id="presetChips" style="margin-bottom:16px;">
+      <span class="preset-label" style="font-size:0.85rem; font-weight:600; color:var(--text-muted);">Quick Presets:</span>
+      <button type="button" class="preset-chip active" data-preset="tip">20% Tip on $85</button>
+      <button type="button" class="preset-chip" data-preset="discount">25% Discount on $120</button>
+      <button type="button" class="preset-chip" data-preset="raise">$50k to $65k Raise</button>
+      <button type="button" class="preset-chip" data-preset="grade">45 out of 60 on Exam</button>
+      <button type="button" class="preset-chip" data-preset="tax">8.5% Sales Tax on $240</button>
+    </div>
+
+    <div class="card">
+      <h2 id="calculatorTitle">1. What is X% of Y?</h2>
+      <div class="form-grid" id="inputContainer">
+        <div class="form-group" id="groupA">
+          <label id="labelA">Percentage (X %)</label>
+          <div style="position:relative;">
+            <input type="number" id="inpA" value="20" step="any" style="padding-right:32px;">
+            <span id="unitA" style="position:absolute; right:12px; top:50%; transform:translateY(-50%); font-weight:700; color:var(--text-muted);">%</span>
+          </div>
+        </div>
+        <div class="form-group" id="groupB">
+          <label id="labelB">Total / Base Value (Y)</label>
+          <input type="number" id="inpB" value="85" step="any">
+        </div>
+      </div>
+      <div class="form-actions" style="display:flex; gap:12px; margin-top:16px;">
+        <button class="btn btn-primary" id="calcBtn" type="button" style="flex:1;">Calculate Result</button>
+        <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
+      </div>
+    </div>
+
+    <!-- PRO RESULT PANEL -->
+    <div class="result-panel" id="resultPanel" style="margin-top:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:12px; margin-bottom:16px;">
+        <h3 style="margin:0; font-size:1.15rem;">Percentage Result</h3>
+        <button type="button" class="btn btn-sm btn-outline" id="copyResultBtn" title="Copy result text">📋 Copy</button>
+      </div>
+
+      <div class="result-main" id="resultMain" style="font-size:1.8rem; font-weight:800; color:var(--primary); text-align:center; padding:12px 0;">&mdash;</div>
+
+      <div class="result-grid" id="resultGrid" style="margin-top:16px;"></div>
+
+      <!-- Step by Step Math Box -->
+      <div class="step-card" id="stepBox" style="margin-top:20px; background:var(--bg, #f8fafc); border:1px solid var(--border, #e2e8f0); border-radius:10px; padding:16px;">
+        <div class="step-header" style="font-weight:700; color:var(--text); margin-bottom:8px; display:flex; align-items:center; gap:8px;">
+          <span>📝</span> Step-by-Step Mathematical Solution:
+        </div>
+        <div class="step-content" id="stepContent" style="font-family:monospace, sans-serif; line-height:1.7; color:var(--text); font-size:0.92rem;"></div>
+      </div>
+
+      <!-- Visual Percentage Meter -->
+      <div id="visualMeterBox" style="margin-top:20px;">
+        <div style="display:flex; justify-content:space-between; font-size:0.85rem; font-weight:700; color:var(--text-muted); margin-bottom:6px;">
+          <span>PROPORTION VISUALIZER:</span>
+          <span id="visualMeterText">0%</span>
+        </div>
+        <div style="height:24px; background:#e2e8f0; border-radius:6px; overflow:hidden; display:flex;">
+          <div id="visualMeterFill" style="background:linear-gradient(90deg, #1d4ed8, #3b82f6); height:100%; width:20%; transition:width 0.3s ease;"></div>
+        </div>
+      </div>
     </div>
 
     <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
 
     <div class="quick-facts">
-    <div class="fact-chip"><strong>Modes:</strong> Percent of, percent of Y, change, increase, decrease</div>
-    <div class="fact-chip"><strong>Percent change:</strong> (New - Old) / Old × 100</div>
-    <div class="fact-chip"><strong>Percent of:</strong> X/100 × Y</div>
-    <div class="fact-chip"><strong>Use case:</strong> Sales tax, discounts, grades, growth</div>
+      <div class="fact-chip"><strong>Standard Percent:</strong> (X / 100) &times; Y</div>
+      <div class="fact-chip"><strong>Percentage Change:</strong> ((New &minus; Old) / Old) &times; 100</div>
+      <div class="fact-chip"><strong>Discount Formula:</strong> Original &times; (1 &minus; %/100)</div>
+      <div class="fact-chip"><strong>Reverse Percent:</strong> Final / (1 &plusmn; %/100)</div>
     </div>
 
-<div class="content-section"><h2 id="understanding-percentages">Understanding percentages</h2><p>A percentage is a fraction with a denominator of 100. Saying 20% of 250 means 20/100 of 250, which equals 50. Percentages make comparisons easy because they put every quantity on the same 100-point scale.</p>
-      <p>There are three classic percentage questions: finding a part of a whole (what is 15% of 80), finding a share (what percent of 80 is 12), and measuring change (from 50 to 60 is a 20% increase). This calculator answers all three, plus increase and decrease.</p></div>
-    <div class="content-section"><h2 id="percentage-change-explained">Percentage change explained</h2><p>Percentage change measures how much a value moved relative to its starting point: (new - old) / old × 100. A positive result is an increase, a negative result is a decrease.</p>
-      <p>For example, if a price rises from $50 to $65, the change is (65 - 50)/50 × 100 = 30%. If it falls from $65 back to $50, the change is (50 - 65)/65 × 100 = -23.1%. Notice the percentages differ because the starting points differ.</p></div>
-<div class="content-section"><h2 id="how-to-use">How to use this calculator</h2><ol><li>Choose the type of percentage calculation from the dropdown.</li><li>Enter the two values (X and Y).</li><li>Press Calculate and read the result plus the formula used.</li><li>Switch modes to compare different percentage questions on the same numbers.</li></ol></div>
-<div class="content-section tips-box"><h2>Pro tips</h2><ul><li>To add sales tax to a price, use the 'Increase by %' mode with the tax rate.</li><li>Remember that a 50% increase followed by a 50% decrease does not return to the original value.</li><li>For reverse calculations (the original before a percentage), subtract the percent instead.</li></ul></div>
-<div class="content-section"><h2>Advantages &amp; considerations</h2><div class="pros-cons"><div class="pros"><h3>&#9989; Advantages</h3><ul><li>Five common percentage modes in one page</li><li>Shows the formula for every result</li><li>Handles decimals precisely</li></ul></div><div class="cons"><h3>&#9888;&#65039; Considerations</h3><ul><li>Does not support reverse percentage lookups directly</li><li>Percentage change assumes the first value is the base</li></ul></div></div></div>
-<div class="content-section"><h2 id="faq">Frequently asked questions</h2><div class="faq-item"><div class="faq-q">How do I calculate a percentage of a number?<span class="arrow">&#9654;</span></div><div class="faq-a">Multiply the number by the percentage divided by 100. For example 20% of 250 = 250 × 20/100 = 50.</div></div>
-      <div class="faq-item"><div class="faq-q">How do I calculate percentage change?<span class="arrow">&#9654;</span></div><div class="faq-a">Use the formula (new - old) / old × 100. From 50 to 60 that is (60-50)/50 × 100 = 20%, an increase.</div></div>
-      <div class="faq-item"><div class="faq-q">What percent is 25 of 200?<span class="arrow">&#9654;</span></div><div class="faq-a">Divide 25 by 200 and multiply by 100: 25/200 × 100 = 12.5%.</div></div>
-      <div class="faq-item"><div class="faq-q">How do I add a percentage to a number?<span class="arrow">&#9654;</span></div><div class="faq-a">Multiply the number by (1 + percentage/100). Adding 15% to 80 gives 80 × 1.15 = 92.</div></div>
-      <div class="faq-item"><div class="faq-q">Is the percentage calculator free?<span class="arrow">&#9654;</span></div><div class="faq-a">Yes, it is completely free, runs in your browser, and requires no registration.</div></div></div>
+    <div class="content-section">
+      <h2 id="understanding-percentages">Understanding percentages</h2>
+      <p>A percentage is a dimensionless ratio expressed as a fraction of 100 (from the Latin <em>per centum</em> meaning "by the hundred"). Saying 20% of $85 means taking 20 parts out of 100 equal parts of $85, giving $17.00. Percentages allow standard comparisons across different baselines.</p>
+    </div>
+
+    <div class="content-section">
+      <h2 id="percentage-change-explained">Percentage change explained</h2>
+      <p>Percentage change measures relative growth or reduction compared to the initial baseline: <code>% Change = ((New Value &minus; Initial Value) / Initial Value) &times; 100</code>.</p>
+      <p>A positive percentage indicates an increase (growth/markup), whereas a negative percentage represents a decrease (decline/discount). Notice that a 50% increase followed by a 50% decrease does not return to the starting number (e.g. 100 + 50% = 150; 150 &minus; 50% = 75).</p>
+    </div>
+
+    <div class="content-section">
+      <h2 id="faq">Frequently asked questions</h2>
+      <div class="faq-item"><div class="faq-q">How do I calculate a percentage of a number?<span class="arrow">&#9654;</span></div><div class="faq-a">Multiply the number by the percentage divided by 100. For example 20% of 250 = 250 × 20/100 = 50.</div></div>
+      <div class="faq-item"><div class="faq-q">How do I calculate percentage change?<span class="arrow">&#9654;</span></div><div class="faq-a">Use the formula (New - Old) / Old × 100. From 50 to 65 that is (65 - 50)/50 × 100 = +30% increase.</div></div>
+      <div class="faq-item"><div class="faq-q">What percent is 25 of 200?<span class="arrow">&#9654;</span></div><div class="faq-a">Divide 25 by 200 and multiply by 100: (25 / 200) × 100 = 12.5%.</div></div>
+      <div class="faq-item"><div class="faq-q">How does reverse percentage work?<span class="arrow">&#9654;</span></div><div class="faq-a">If an item costs $120 after a 20% discount, the original price was $120 / (1 - 0.20) = $150.</div></div>
+    </div>
   </main>
 </div>
 
-<div id="siteFooter"></div>
+<div id="siteFooter">
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>EMI Master</h4>
+        <p>Free, instant, and private online calculators for mortgages, loans, investments, retirement, and mathematics. Your inputs never leave your browser.</p>
+        <p><a href="sitemap.html"><strong>&rarr; All 50+ Calculators (Directory)</strong></a></p>
+      </div>
+      <div class="footer-col">
+        <h4>Popular Calculators</h4>
+        <ul>
+          <li><a href="mortgage-calculator.html">Mortgage Calculator</a></li>
+          <li><a href="amortization-calculator.html">Amortization Calculator</a></li>
+          <li><a href="emi-calculator.html">EMI Calculator</a></li>
+          <li><a href="home-loan.html">Home Loan Calculator</a></li>
+          <li><a href="car-loan.html">Car Loan Calculator</a></li>
+          <li><a href="personal-loan.html">Personal Loan Calculator</a></li>
+          <li><a href="compound-interest-calculator.html">Compound Interest</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Loans &amp; Real Estate</h4>
+        <ul>
+          <li><a href="refinance-calculator.html">Refinance Calculator</a></li>
+          <li><a href="fha-loan.html">FHA Loan Calculator</a></li>
+          <li><a href="va-loan.html">VA Mortgage Calculator</a></li>
+          <li><a href="home-equity-loan.html">Home Equity Loan</a></li>
+          <li><a href="heloc-calculator.html">HELOC Calculator</a></li>
+          <li><a href="loan-payoff.html">Loan Payoff Calculator</a></li>
+          <li><a href="house-affordability.html">House Affordability</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Investment &amp; Tools</h4>
+        <ul>
+          <li><a href="investment-calculator.html">Investment Calculator</a></li>
+          <li><a href="retirement-calculator.html">Retirement Calculator</a></li>
+          <li><a href="social-security-calculator.html">Social Security</a></li>
+          <li><a href="scientific-calculator.html">Scientific Calculator</a></li>
+          <li><a href="percentage-calculator.html">Percentage Calculator</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="sitemap.html"><strong>Complete HTML Sitemap</strong></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 EMI Master. All rights reserved. For educational and planning purposes only.
+    </div>
+  </footer>
+</div>
 
 <script src="js/math.js"></script>
 <script>
-function item(l,v){return '<div class="result-item"><div class="label">'+l+'</div><div class="value">'+v+'</div></div>';}
-document.getElementById("calcBtn").onclick=function(){
-var type=document.getElementById("type").value;
-var x=parseFloat(document.getElementById("a").value);
-var y=parseFloat(document.getElementById("b").value);
-var out,grid="",main;
-if(isNaN(x)||isNaN(y)){document.getElementById("resultMain").textContent="Enter valid numbers";document.getElementById("resultGrid").innerHTML="";return;}
-if(type==="pof"){out=MathCalc.percentOfPart(y,x).value;main=x+"% of "+MathCalc.fmt(y,4)+" = "+MathCalc.fmt(out,4);grid=item("Formula","("+x+"/100) × "+y)+item("Result",MathCalc.fmt(out,4));}
-else if(type==="what"){if(y===0){document.getElementById("resultMain").textContent="Y cannot be zero";return;}out=MathCalc.whatPercent(x,y).value;main=x+" is "+MathCalc.fmt(out,2)+"% of "+y;grid=item("Formula","("+x+"/"+y+") × 100")+item("Result",MathCalc.fmt(out,2)+"%");}
-else if(type==="change"){if(y===0){document.getElementById("resultMain").textContent="Starting value cannot be zero";return;}out=MathCalc.percentChange(x,y).value;var abs=y-x;main="Change from "+x+" to "+y+" = "+MathCalc.fmt(out,2)+"%";grid=item("Formula","(("+y+"-"+x+")/"+x+") × 100")+item("Absolute change",(abs>=0?"+":"")+MathCalc.fmt(abs,4))+item("Direction",out>=0?"Increase":"Decrease");}
-else if(type==="add"){out=MathCalc.addPercent(y,x).value;main=y+" increased by "+x+"% = "+MathCalc.fmt(out,4);grid=item("Formula",y+" × (1 + "+x+"/100)")+item("Result",MathCalc.fmt(out,4));}
-else{out=MathCalc.subtractPercent(y,x).value;main=y+" decreased by "+x+"% = "+MathCalc.fmt(out,4);grid=item("Formula",y+" × (1 - "+x+"/100)")+item("Result",MathCalc.fmt(out,4));}
-document.getElementById("resultMain").textContent=main;
-document.getElementById("resultGrid").innerHTML=grid;};
+(function(){
+  function item(l,v){return '<div class="result-item"><div class="label">'+l+'</div><div class="value">'+v+'</div></div>';}
+
+  var mode = "pof";
+
+  var modesConfig = {
+    pof: {
+      title: "What is X% of Y?",
+      labelA: "Percentage (X %)",
+      unitA: "%",
+      labelB: "Total / Base Value (Y)",
+      defA: 20, defB: 85
+    },
+    what: {
+      title: "What Percentage is X of Y?",
+      labelA: "Part Value (X)",
+      unitA: "",
+      labelB: "Whole / Total Value (Y)",
+      defA: 45, defB: 60
+    },
+    change: {
+      title: "Percentage Change from Old (X) to New (Y)",
+      labelA: "Initial / Old Value (X)",
+      unitA: "",
+      labelB: "Final / New Value (Y)",
+      defA: 50000, defB: 65000
+    },
+    addsub: {
+      title: "Increase / Decrease Y by X%",
+      labelA: "Percentage Rate (X %)",
+      unitA: "%",
+      labelB: "Starting Base Value (Y)",
+      defA: 15, defB: 120
+    },
+    reverse: {
+      title: "Reverse Percentage (Find Original Price)",
+      labelA: "Discount / Markup Rate (X %)",
+      unitA: "%",
+      labelB: "Final Price After Discount/Tax (Y)",
+      defA: 25, defB: 90
+    }
+  };
+
+  // Tab switching
+  document.querySelectorAll("#pctTabs .tab-btn").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      document.querySelectorAll("#pctTabs .tab-btn").forEach(function(b){
+        b.classList.remove("active", "btn-primary");
+        b.classList.add("btn-outline");
+      });
+      btn.classList.add("active", "btn-primary");
+      btn.classList.remove("btn-outline");
+
+      mode = btn.getAttribute("data-mode");
+      setupModeUI(mode);
+      calculate();
+    });
+  });
+
+  // Presets
+  document.querySelectorAll("#presetChips .preset-chip").forEach(function(chip){
+    chip.addEventListener("click", function(){
+      document.querySelectorAll("#presetChips .preset-chip").forEach(function(c){ c.classList.remove("active"); });
+      chip.classList.add("active");
+
+      var p = chip.getAttribute("data-preset");
+      if (p === "tip") {
+        setMode("pof", 20, 85);
+      } else if (p === "discount") {
+        setMode("addsub", 25, 120);
+      } else if (p === "raise") {
+        setMode("change", 50000, 65000);
+      } else if (p === "grade") {
+        setMode("what", 45, 60);
+      } else if (p === "tax") {
+        setMode("pof", 8.5, 240);
+      }
+      calculate();
+    });
+  });
+
+  function setMode(m, a, b) {
+    var btn = document.querySelector('#pctTabs [data-mode="' + m + '"]');
+    if (btn) {
+      document.querySelectorAll("#pctTabs .tab-btn").forEach(function(x){
+        x.classList.remove("active", "btn-primary");
+        x.classList.add("btn-outline");
+      });
+      btn.classList.add("active", "btn-primary");
+      btn.classList.remove("btn-outline");
+    }
+    mode = m;
+    setupModeUI(m);
+    document.getElementById("inpA").value = a;
+    document.getElementById("inpB").value = b;
+  }
+
+  function setupModeUI(m) {
+    var conf = modesConfig[m];
+    document.getElementById("calculatorTitle").textContent = conf.title;
+    document.getElementById("labelA").textContent = conf.labelA;
+    document.getElementById("labelB").textContent = conf.labelB;
+    document.getElementById("unitA").textContent = conf.unitA;
+    document.getElementById("unitA").style.display = conf.unitA ? "block" : "none";
+  }
+
+  function calculate() {
+    var a = parseFloat(document.getElementById("inpA").value);
+    var b = parseFloat(document.getElementById("inpB").value);
+
+    if (isNaN(a) || isNaN(b)) {
+      document.getElementById("resultMain").textContent = "Please enter valid numbers";
+      document.getElementById("resultGrid").innerHTML = "";
+      document.getElementById("stepContent").textContent = "Waiting for valid numerical inputs...";
+      return;
+    }
+
+    var mainText = "", gridHtml = "", stepText = "", visualPct = 0;
+
+    if (mode === "pof") {
+      var result = (a / 100) * b;
+      mainText = a + "% of " + MathCalc.fmt(b, 4) + " = " + MathCalc.fmt(result, 4);
+      gridHtml += item("Result Value", MathCalc.fmt(result, 4));
+      gridHtml += item("Formula", "(" + a + " ÷ 100) × " + b);
+      gridHtml += item("Remaining (100% − " + a + "%)", MathCalc.fmt(b - result, 4));
+      gridHtml += item("Multiplier", (a / 100).toFixed(4));
+
+      stepText = "1. Convert percentage to decimal:\n   " + a + "% = " + a + " / 100 = " + (a / 100) + "\n\n" +
+                 "2. Multiply decimal by base value:\n   " + (a / 100) + " × " + b + " = " + MathCalc.fmt(result, 4);
+      visualPct = Math.min(100, Math.max(0, a));
+    } else if (mode === "what") {
+      if (b === 0) {
+        showError("Total / Base value cannot be zero in division.");
+        return;
+      }
+      var pct = (a / b) * 100;
+      mainText = MathCalc.fmt(a, 4) + " is " + MathCalc.fmt(pct, 2) + "% of " + MathCalc.fmt(b, 4);
+      gridHtml += item("Percentage", MathCalc.fmt(pct, 4) + "%");
+      gridHtml += item("Formula", "(" + a + " ÷ " + b + ") × 100");
+      gridHtml += item("Ratio (Fraction)", a + " / " + b);
+      gridHtml += item("Decimal Form", MathCalc.fmt(a / b, 6));
+
+      stepText = "1. Divide part by whole:\n   " + a + " ÷ " + b + " = " + MathCalc.fmt(a / b, 6) + "\n\n" +
+                 "2. Multiply by 100 for percentage:\n   " + MathCalc.fmt(a / b, 6) + " × 100 = " + MathCalc.fmt(pct, 4) + "%";
+      visualPct = Math.min(100, Math.max(0, pct));
+    } else if (mode === "change") {
+      if (a === 0) {
+        showError("Starting initial value cannot be zero.");
+        return;
+      }
+      var diff = b - a;
+      var chgPct = (diff / a) * 100;
+      var direction = chgPct >= 0 ? "Increase" : "Decrease";
+      mainText = (chgPct >= 0 ? "+" : "") + MathCalc.fmt(chgPct, 2) + "% (" + direction + ")";
+      gridHtml += item("Percentage Change", (chgPct >= 0 ? "+" : "") + MathCalc.fmt(chgPct, 4) + "%");
+      gridHtml += item("Absolute Difference", (diff >= 0 ? "+" : "") + MathCalc.fmt(diff, 4));
+      gridHtml += item("Growth Factor", MathCalc.fmt(b / a, 4) + "x");
+      gridHtml += item("Direction", direction);
+
+      stepText = "1. Calculate absolute change:\n   " + b + " − " + a + " = " + MathCalc.fmt(diff, 4) + "\n\n" +
+                 "2. Divide by initial starting value:\n   " + MathCalc.fmt(diff, 4) + " ÷ " + a + " = " + MathCalc.fmt(diff / a, 6) + "\n\n" +
+                 "3. Convert to percentage:\n   " + MathCalc.fmt(diff / a, 6) + " × 100 = " + (chgPct >= 0 ? "+" : "") + MathCalc.fmt(chgPct, 4) + "%";
+      visualPct = Math.min(100, Math.max(0, Math.abs(chgPct)));
+    } else if (mode === "addsub") {
+      var incVal = b * (1 + a / 100);
+      var decVal = b * (1 - a / 100);
+      var delta = b * (a / 100);
+      mainText = "+" + a + "%: " + MathCalc.fmt(incVal, 2) + "  |  −" + a + "%: " + MathCalc.fmt(decVal, 2);
+      gridHtml += item("Increased (+ " + a + "%)", MathCalc.fmt(incVal, 4));
+      gridHtml += item("Decreased (− " + a + "%)", MathCalc.fmt(decVal, 4));
+      gridHtml += item("Amount Added/Subtracted", "± " + MathCalc.fmt(delta, 4));
+      gridHtml += item("Base Value", MathCalc.fmt(b, 4));
+
+      stepText = "• To Increase by " + a + "%:\n  " + b + " × (1 + " + a + "/100) = " + b + " × " + (1 + a / 100).toFixed(4) + " = " + MathCalc.fmt(incVal, 4) + "\n\n" +
+                 "• To Decrease (Discount) by " + a + "%:\n  " + b + " × (1 − " + a + "/100) = " + b + " × " + (1 - a / 100).toFixed(4) + " = " + MathCalc.fmt(decVal, 4);
+      visualPct = Math.min(100, Math.max(0, a));
+    } else if (mode === "reverse") {
+      var origAfterDisc = b / (1 - a / 100);
+      var origAfterTax = b / (1 + a / 100);
+      mainText = "Original (Pre-Discount): " + MathCalc.fmt(origAfterDisc, 2);
+      gridHtml += item("Original (If " + a + "% Discount)", MathCalc.fmt(origAfterDisc, 4));
+      gridHtml += item("Original (If " + a + "% Tax/Markup)", MathCalc.fmt(origAfterTax, 4));
+      gridHtml += item("Discount Saved", MathCalc.fmt(origAfterDisc - b, 4));
+      gridHtml += item("Final Given Price", MathCalc.fmt(b, 4));
+
+      stepText = "• If Final Price " + b + " was AFTER a " + a + "% DISCOUNT:\n  Original = " + b + " ÷ (1 − " + (a / 100) + ") = " + MathCalc.fmt(origAfterDisc, 4) + "\n\n" +
+                 "• If Final Price " + b + " was AFTER a " + a + "% TAX / MARKUP:\n  Original = " + b + " ÷ (1 + " + (a / 100) + ") = " + MathCalc.fmt(origAfterTax, 4);
+      visualPct = Math.min(100, Math.max(0, a));
+    }
+
+    document.getElementById("resultMain").textContent = mainText;
+    document.getElementById("resultGrid").innerHTML = gridHtml;
+    document.getElementById("stepContent").innerText = stepText;
+
+    var fill = document.getElementById("visualMeterFill");
+    var txt = document.getElementById("visualMeterText");
+    if (fill) fill.style.width = visualPct + "%";
+    if (txt) txt.textContent = visualPct.toFixed(1) + "%";
+  }
+
+  function showError(msg) {
+    document.getElementById("resultMain").innerHTML = '<span style="color:#dc2626; font-size:1.2rem;">⚠️ ' + msg + '</span>';
+    document.getElementById("resultGrid").innerHTML = "";
+    document.getElementById("stepContent").textContent = msg;
+  }
+
+  document.getElementById("calcBtn").addEventListener("click", calculate);
+  document.getElementById("resetBtn").addEventListener("click", function(){
+    var conf = modesConfig[mode];
+    document.getElementById("inpA").value = conf.defA;
+    document.getElementById("inpB").value = conf.defB;
+    calculate();
+  });
+
+  document.querySelectorAll("input").forEach(function(inp){
+    inp.addEventListener("input", calculate);
+  });
+
+  document.getElementById("copyResultBtn").addEventListener("click", function(){
+    var txt = document.getElementById("resultGrid").innerText;
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(txt).then(function(){
+        if (window.EMIMaster && window.EMIMaster.showToast) window.EMIMaster.showToast("Copied to clipboard!");
+      });
+    }
+  });
+
+  // Initialize on page load
+  setupModeUI(mode);
+  calculate();
+})();
 </script>
 <script src="js/currency.js"></script>
 <script src="js/seo-content.js"></script>

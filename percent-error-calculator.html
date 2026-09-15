@@ -12,21 +12,20 @@
 <script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Percent Error Calculator - Compare Observed vs True Values</title>
-<meta name="description" content="Free percent error calculator. Measure how far an observed value is from the true value with absolute error, relative error and percent error.">
-<meta name="keywords" content="percent error calculator, percentage error, relative error calculator, absolute error">
+<title>Percent Error &amp; Percent Difference Calculator - Step-by-Step</title>
+<meta name="description" content="Free percent error and percent difference calculator. Calculate absolute error, relative error, precision rating, and step-by-step lab formulas.">
+<meta name="keywords" content="percent error calculator, percentage error, relative error calculator, absolute error, percent difference, experimental error">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://emimaster.com/percent-error-calculator.html">
-<meta property="og:title" content="Percent Error Calculator - Compare Observed vs True Values">
-<meta property="og:description" content="Free percent error calculator. Measure how far an observed value is from the true value with absolute error, relative error and percent error.">
+<meta property="og:title" content="Percent Error &amp; Percent Difference Calculator - Step-by-Step">
+<meta property="og:description" content="Free percent error and percent difference calculator. Calculate absolute error, relative error, precision rating, and step-by-step lab formulas.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://emimaster.com/percent-error-calculator.html">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Percent Error Calculator","url":"https://emimaster.com/percent-error-calculator.html","description":"Free percent error calculator. Measure how far an observed value is from the true value with absolute error, relative error and percent error.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the percent error formula?","acceptedAnswer":{"@type":"Answer","text":"Percent error = |observed - true| / true × 100. The absolute value keeps the result positive regardless of direction."}},{"@type":"Question","name":"Why is percent error always positive?","acceptedAnswer":{"@type":"Answer","text":"Percent error uses absolute value because it measures the magnitude of the error. If you need direction, use the signed error shown alongside."}},{"@type":"Question","name":"What is a good percent error?","acceptedAnswer":{"@type":"Answer","text":"In many school experiments, errors under 5% are considered acceptable, but the threshold depends on the field and the precision of the equipment."}},{"@type":"Question","name":"What is the difference between absolute and percent error?","acceptedAnswer":{"@type":"Answer","text":"Absolute error is the raw difference between observed and true values. Percent error divides that difference by the true value and multiplies by 100, putting it on a comparable scale."}},{"@type":"Question","name":"Can percent error be used for negative values?","acceptedAnswer":{"@type":"Answer","text":"Yes, but the true value must not be zero. The calculator handles negative numbers correctly using absolute values."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Percent Error Calculator","url":"https://emimaster.com/percent-error-calculator.html","description":"Calculate percent error, signed deviation, absolute and relative error with step-by-step lab solutions.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the percent error formula?","acceptedAnswer":{"@type":"Answer","text":"Percent error = (|Observed - True| / True) × 100. The absolute value keeps the result positive."}},{"@type":"Question","name":"What is the difference between percent error and percent difference?","acceptedAnswer":{"@type":"Answer","text":"Percent error compares an experimental measurement to an accepted standard true value. Percent difference compares two experimental measurements against their average."}},{"@type":"Question","name":"What is considered an acceptable percent error?","acceptedAnswer":{"@type":"Answer","text":"In general science and school laboratories, errors under 5% are considered excellent/acceptable. In industrial manufacturing, thresholds are typically below 0.1% to 1%."}}]}</script>
 <script type="application/json" id="relatedData">[{"href":"percentage-calculator.html","label":"Percentage Calculator","icon":"%"},{"href":"fraction-calculator.html","label":"Fraction Calculator","icon":"⅙"},{"href":"rounding-calculator.html","label":"Rounding Calculator","icon":"±"}]</script>
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-
 </head>
 <body>
 
@@ -35,7 +34,7 @@
 <section class="hero hero-compact">
   <div class="container">
     <h1>Percent Error Calculator</h1>
-    <p>Find percent error, absolute error and relative error between two values.</p>
+    <p>Calculate percentage error, percentage difference, absolute error, and relative precision with step-by-step lab explanations.</p>
   </div>
 </section>
 
@@ -44,64 +43,348 @@
 
   <main class="main-content">
     <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="index.html#math">Math Calculators</a> &rsaquo; Percent Error Calculator</div>
-    <h1 class="page-title">Percent Error Calculator</h1>
-    <p class="page-subtitle">Enter an observed (measured) value and the true or expected value to see how accurate the measurement is.</p>
+    <h1 class="page-title">Percent Error &amp; Precision Calculator</h1>
+    <p class="page-subtitle">Compare experimental observations with theoretical true reference values, or measure percent difference between two laboratory trials.</p>
 
-<div class="card">
-<h2>Percent error</h2>
-<div class="form-grid">
-<div class="form-group"><label>Observed value</label><input type="number" id="observed" value="105" step="any"></div>
-<div class="form-group"><label>True / expected value</label><input type="number" id="true" value="100" step="any"></div>
-</div>
-<div class="form-actions"><button class="btn btn-primary" id="calcBtn" type="button">Calculate</button></div>
-</div>
+    <!-- Interactive Mode Tabs -->
+    <div class="calc-tabs" id="errorTabs" style="display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap;">
+      <button type="button" class="btn btn-sm btn-primary tab-btn active" data-mode="error">Percent Error (Observed vs True)</button>
+      <button type="button" class="btn btn-sm btn-outline tab-btn" data-mode="diff">Percent Difference (Trial 1 vs Trial 2)</button>
+    </div>
 
-    <div class="result-panel" id="resultPanel">
-      <h3>Result</h3>
-      <div class="result-main" id="resultMain">&mdash;</div>
+    <!-- Quick Presets -->
+    <div class="preset-chips" id="presetChips" style="margin-bottom:16px;">
+      <span class="preset-label" style="font-size:0.85rem; font-weight:600; color:var(--text-muted);">Lab Presets:</span>
+      <button type="button" class="preset-chip active" data-preset="gravity">Gravity g (9.60 vs 9.81 m/s²)</button>
+      <button type="button" class="preset-chip" data-preset="boil">Boiling Point (98.8 vs 100 °C)</button>
+      <button type="button" class="preset-chip" data-preset="molar">Molar Mass (56.8 vs 58.44 g/mol)</button>
+      <button type="button" class="preset-chip" data-preset="trials">Two Trials (4.25 vs 4.40)</button>
+    </div>
+
+    <div class="card">
+      <h2 id="calcTitle">Percent Error Calculation</h2>
+      <div class="form-grid">
+        <div class="form-group" id="groupObs">
+          <label id="labelObs">Observed / Experimental Value (V<sub>obs</sub>)</label>
+          <input type="number" id="observed" value="9.60" step="any">
+        </div>
+        <div class="form-group" id="groupTrue">
+          <label id="labelTrue">Theoretical / Accepted True Value (V<sub>true</sub>)</label>
+          <input type="number" id="trueVal" value="9.81" step="any">
+        </div>
+      </div>
+      <div class="form-actions" style="display:flex; gap:12px; margin-top:16px;">
+        <button class="btn btn-primary" id="calcBtn" type="button" style="flex:1;">Calculate Error</button>
+        <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
+      </div>
+    </div>
+
+    <!-- PRO RESULT PANEL -->
+    <div class="result-panel" id="resultPanel" style="margin-top:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:12px; margin-bottom:16px;">
+        <h3 style="margin:0; font-size:1.15rem;">Measurement Analysis</h3>
+        <button type="button" class="btn btn-sm btn-outline" id="copyResultBtn" title="Copy result text">📋 Copy</button>
+      </div>
+
+      <div class="result-main" id="resultMain" style="font-size:2rem; font-weight:800; color:var(--primary); text-align:center; padding:8px 0;">&mdash;</div>
+
+      <!-- Precision Quality Rating Badge -->
+      <div style="text-align:center; margin-bottom:16px;">
+        <span id="qualityBadge" style="display:inline-block; padding:4px 14px; border-radius:20px; font-size:0.88rem; font-weight:700; background:#dcfce7; color:#15803d;">
+          High Accuracy (&lt; 5%)
+        </span>
+      </div>
+
       <div class="result-grid" id="resultGrid"></div>
+
+      <!-- Step-by-Step Math Box -->
+      <div class="step-card" id="stepBox" style="margin-top:20px; background:var(--bg, #f8fafc); border:1px solid var(--border, #e2e8f0); border-radius:10px; padding:16px;">
+        <div class="step-header" style="font-weight:700; color:var(--text); margin-bottom:8px; display:flex; align-items:center; gap:8px;">
+          <span>📝</span> Step-by-Step Mathematical Derivation:
+        </div>
+        <div class="step-content" id="stepContent" style="font-family:monospace, sans-serif; line-height:1.7; color:var(--text); font-size:0.92rem;"></div>
+      </div>
     </div>
 
     <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
 
     <div class="quick-facts">
-    <div class="fact-chip"><strong>Formula:</strong> |observed - true| / true × 100</div>
-    <div class="fact-chip"><strong>Always positive:</strong> Percent error uses absolute value</div>
-    <div class="fact-chip"><strong>Also shows:</strong> Signed, absolute and relative error</div>
-    <div class="fact-chip"><strong>Use case:</strong> Lab experiments, measurements, surveys</div>
+      <div class="fact-chip"><strong>Percent Error:</strong> (|V<sub>obs</sub> &minus; V<sub>true</sub>| / V<sub>true</sub>) &times; 100</div>
+      <div class="fact-chip"><strong>Percent Difference:</strong> (|V<sub>1</sub> &minus; V<sub>2</sub>| / Average) &times; 100</div>
+      <div class="fact-chip"><strong>Absolute Error:</strong> |V<sub>obs</sub> &minus; V<sub>true</sub>|</div>
+      <div class="fact-chip"><strong>Relative Error:</strong> Absolute Error / |V<sub>true</sub>|</div>
     </div>
 
-<div class="content-section"><h2 id="what-is-percent-error">What is percent error?</h2><p>Percent error compares a measured or observed value with a true or accepted value. The formula is |observed - true| / true × 100. It tells you how large the mistake is relative to the correct value.</p>
-      <p>Because of the absolute value, percent error is always zero or positive. It measures the size of the error, not its direction. A result close to 0% means the measurement was very accurate.</p></div>
-    <div class="content-section"><h2 id="when-is-percent-error-used">When is percent error used?</h2><p>Students use it in chemistry and physics experiments to compare experimental results with textbook values. Surveyors and engineers use it to check how well a measurement or prediction matches reality.</p>
-      <p>A related but different measure is percent difference, which compares two measured values using their average as the base. This calculator focuses on the observed-vs-true comparison, the most common form.</p></div>
-<div class="content-section"><h2 id="how-to-use">How to use this calculator</h2><ol><li>Enter the observed (measured) value.</li><li>Enter the true or expected value.</li><li>Press Calculate to see percent error and supporting measures.</li><li>A result near 0% means high accuracy.</li></ol></div>
-<div class="content-section tips-box"><h2>Pro tips</h2><ul><li>Use the true value as the accepted/reference value, not your measurement.</li><li>A negative signed error means the observation was below the true value.</li><li>For comparing two measurements, consider percent difference instead.</li></ul></div>
-<div class="content-section"><h2>Advantages &amp; considerations</h2><div class="pros-cons"><div class="pros"><h3>&#9989; Advantages</h3><ul><li>Shows four related error measures at once</li><li>Explains the calculation with clear labels</li><li>Useful for lab reports and quality checks</li></ul></div><div class="cons"><h3>&#9888;&#65039; Considerations</h3><ul><li>Requires a non-zero true value</li><li>Does not distinguish over- and under-estimates by default</li></ul></div></div></div>
-<div class="content-section"><h2 id="faq">Frequently asked questions</h2><div class="faq-item"><div class="faq-q">What is the percent error formula?<span class="arrow">&#9654;</span></div><div class="faq-a">Percent error = |observed - true| / true × 100. The absolute value keeps the result positive regardless of direction.</div></div>
-      <div class="faq-item"><div class="faq-q">Why is percent error always positive?<span class="arrow">&#9654;</span></div><div class="faq-a">Percent error uses absolute value because it measures the magnitude of the error. If you need direction, use the signed error shown alongside.</div></div>
-      <div class="faq-item"><div class="faq-q">What is a good percent error?<span class="arrow">&#9654;</span></div><div class="faq-a">In many school experiments, errors under 5% are considered acceptable, but the threshold depends on the field and the precision of the equipment.</div></div>
-      <div class="faq-item"><div class="faq-q">What is the difference between absolute and percent error?<span class="arrow">&#9654;</span></div><div class="faq-a">Absolute error is the raw difference between observed and true values. Percent error divides that difference by the true value and multiplies by 100, putting it on a comparable scale.</div></div>
-      <div class="faq-item"><div class="faq-q">Can percent error be used for negative values?<span class="arrow">&#9654;</span></div><div class="faq-a">Yes, but the true value must not be zero. The calculator handles negative numbers correctly using absolute values.</div></div></div>
+    <div class="content-section">
+      <h2 id="what-is-percent-error">What is percent error?</h2>
+      <p>Percent error measures the accuracy of an experimental measurement against an accepted, established standard true value. By computing the ratio of absolute discrepancy relative to the true quantity and multiplying by 100, scientists eliminate scale differences to benchmark precision across disparate scientific fields.</p>
+    </div>
+
+    <div class="content-section">
+      <h2 id="when-is-percent-error-used">Percent Error vs Percent Difference</h2>
+      <p>Use <strong>Percent Error</strong> when you have a definitive theoretical reference standard (e.g. gravitational constant, published boiling point). Use <strong>Percent Difference</strong> when comparing two experimental trials where neither measurement can claim definitive authority.</p>
+    </div>
+
+    <div class="content-section">
+      <h2 id="faq">Frequently asked questions</h2>
+      <div class="faq-item"><div class="faq-q">What is the percent error formula?<span class="arrow">&#9654;</span></div><div class="faq-a">Percent error = (|Observed - True| / True) × 100. The absolute value keeps the result positive.</div></div>
+      <div class="faq-item"><div class="faq-q">What is the difference between percent error and percent difference?<span class="arrow">&#9654;</span></div><div class="faq-a">Percent error compares an experimental measurement to an accepted standard true value. Percent difference compares two experimental measurements against their average.</div></div>
+      <div class="faq-item"><div class="faq-q">What is considered an acceptable percent error?<span class="arrow">&#9654;</span></div><div class="faq-a">In general science and school laboratories, errors under 5% are considered excellent/acceptable. In industrial manufacturing, thresholds are typically below 0.1% to 1%.</div></div>
+    </div>
   </main>
 </div>
 
-<div id="siteFooter"></div>
+<div id="siteFooter">
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>EMI Master</h4>
+        <p>Free, instant, and private online calculators for mortgages, loans, investments, retirement, and mathematics. Your inputs never leave your browser.</p>
+        <p><a href="sitemap.html"><strong>&rarr; All 50+ Calculators (Directory)</strong></a></p>
+      </div>
+      <div class="footer-col">
+        <h4>Popular Calculators</h4>
+        <ul>
+          <li><a href="mortgage-calculator.html">Mortgage Calculator</a></li>
+          <li><a href="amortization-calculator.html">Amortization Calculator</a></li>
+          <li><a href="emi-calculator.html">EMI Calculator</a></li>
+          <li><a href="home-loan.html">Home Loan Calculator</a></li>
+          <li><a href="car-loan.html">Car Loan Calculator</a></li>
+          <li><a href="personal-loan.html">Personal Loan Calculator</a></li>
+          <li><a href="compound-interest-calculator.html">Compound Interest</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Loans &amp; Real Estate</h4>
+        <ul>
+          <li><a href="refinance-calculator.html">Refinance Calculator</a></li>
+          <li><a href="fha-loan.html">FHA Loan Calculator</a></li>
+          <li><a href="va-loan.html">VA Mortgage Calculator</a></li>
+          <li><a href="home-equity-loan.html">Home Equity Loan</a></li>
+          <li><a href="heloc-calculator.html">HELOC Calculator</a></li>
+          <li><a href="loan-payoff.html">Loan Payoff Calculator</a></li>
+          <li><a href="house-affordability.html">House Affordability</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Investment &amp; Tools</h4>
+        <ul>
+          <li><a href="investment-calculator.html">Investment Calculator</a></li>
+          <li><a href="retirement-calculator.html">Retirement Calculator</a></li>
+          <li><a href="social-security-calculator.html">Social Security</a></li>
+          <li><a href="scientific-calculator.html">Scientific Calculator</a></li>
+          <li><a href="percentage-calculator.html">Percentage Calculator</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="sitemap.html"><strong>Complete HTML Sitemap</strong></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 EMI Master. All rights reserved. For educational and planning purposes only.
+    </div>
+  </footer>
+</div>
 
 <script src="js/math.js"></script>
 <script>
-function item(l,v){return '<div class="result-item"><div class="label">'+l+'</div><div class="value">'+v+'</div></div>';}
-document.getElementById("calcBtn").onclick=function(){
-var o=parseFloat(document.getElementById("observed").value);
-var t=parseFloat(document.getElementById("true").value);
-if(isNaN(o)||isNaN(t)){document.getElementById("resultMain").textContent="Enter valid numbers";document.getElementById("resultGrid").innerHTML="";return;}
-if(t===0){document.getElementById("resultMain").textContent="True value cannot be zero";return;}
-var pe=Math.abs((o-t)/t)*100;
-var signed=(o-t)/t*100;
-var abs=Math.abs(o-t);
-var rel=abs/Math.abs(t);
-document.getElementById("resultMain").textContent=MathCalc.fmt(pe,4)+"%";
-document.getElementById("resultGrid").innerHTML=item("Percent error",MathCalc.fmt(pe,4)+"%")+item("Signed error",(signed>=0?"+":"")+MathCalc.fmt(signed,4)+"%")+item("Absolute error",MathCalc.fmt(abs,6))+item("Relative error",MathCalc.fmt(rel,6));};
+(function(){
+  function item(l,v){return '<div class="result-item"><div class="label">'+l+'</div><div class="value">'+v+'</div></div>';}
+
+  var currentMode = "error";
+
+  // Tab switching
+  document.querySelectorAll("#errorTabs .tab-btn").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      document.querySelectorAll("#errorTabs .tab-btn").forEach(function(b){
+        b.classList.remove("active", "btn-primary");
+        b.classList.add("btn-outline");
+      });
+      btn.classList.add("active", "btn-primary");
+      btn.classList.remove("btn-outline");
+
+      currentMode = btn.getAttribute("data-mode");
+      if (currentMode === "error") {
+        document.getElementById("calcTitle").textContent = "Percent Error (Observed vs True)";
+        document.getElementById("labelObs").innerHTML = "Observed / Experimental Value (V<sub>obs</sub>)";
+        document.getElementById("labelTrue").innerHTML = "Theoretical / Accepted True Value (V<sub>true</sub>)";
+      } else {
+        document.getElementById("calcTitle").textContent = "Percent Difference (Trial 1 vs Trial 2)";
+        document.getElementById("labelObs").innerHTML = "First Measured Value (V<sub>1</sub>)";
+        document.getElementById("labelTrue").innerHTML = "Second Measured Value (V<sub>2</sub>)";
+      }
+      calculate();
+    });
+  });
+
+  // Presets
+  document.querySelectorAll("#presetChips .preset-chip").forEach(function(chip){
+    chip.addEventListener("click", function(){
+      document.querySelectorAll("#presetChips .preset-chip").forEach(function(c){ c.classList.remove("active"); });
+      chip.classList.add("active");
+
+      var p = chip.getAttribute("data-preset");
+      if (p === "gravity") {
+        setMode("error", 9.60, 9.81);
+      } else if (p === "boil") {
+        setMode("error", 98.8, 100);
+      } else if (p === "molar") {
+        setMode("error", 56.8, 58.44);
+      } else if (p === "trials") {
+        setMode("diff", 4.25, 4.40);
+      }
+      calculate();
+    });
+  });
+
+  function setMode(m, v1, v2) {
+    currentMode = m;
+    var btn = document.querySelector('#errorTabs [data-mode="' + m + '"]');
+    if (btn) {
+      document.querySelectorAll("#errorTabs .tab-btn").forEach(function(x){
+        x.classList.remove("active", "btn-primary");
+        x.classList.add("btn-outline");
+      });
+      btn.classList.add("active", "btn-primary");
+      btn.classList.remove("btn-outline");
+    }
+    if (m === "error") {
+      document.getElementById("calcTitle").textContent = "Percent Error (Observed vs True)";
+      document.getElementById("labelObs").innerHTML = "Observed / Experimental Value (V<sub>obs</sub>)";
+      document.getElementById("labelTrue").innerHTML = "Theoretical / Accepted True Value (V<sub>true</sub>)";
+    } else {
+      document.getElementById("calcTitle").textContent = "Percent Difference (Trial 1 vs Trial 2)";
+      document.getElementById("labelObs").innerHTML = "First Measured Value (V<sub>1</sub>)";
+      document.getElementById("labelTrue").innerHTML = "Second Measured Value (V<sub>2</sub>)";
+    }
+    document.getElementById("observed").value = v1;
+    document.getElementById("trueVal").value = v2;
+  }
+
+  function calculate() {
+    var v1 = parseFloat(document.getElementById("observed").value);
+    var v2 = parseFloat(document.getElementById("trueVal").value);
+
+    if (isNaN(v1) || isNaN(v2)) {
+      document.getElementById("resultMain").textContent = "Enter valid numbers";
+      document.getElementById("resultGrid").innerHTML = "";
+      document.getElementById("stepContent").textContent = "Waiting for valid inputs...";
+      return;
+    }
+
+    if (currentMode === "error") {
+      if (v2 === 0) {
+        document.getElementById("resultMain").innerHTML = '<span style="color:#dc2626;">True value cannot be zero</span>';
+        document.getElementById("resultGrid").innerHTML = "";
+        return;
+      }
+
+      var diff = v1 - v2;
+      var absDiff = Math.abs(diff);
+      var percentError = (absDiff / Math.abs(v2)) * 100;
+      var signedError = (diff / v2) * 100;
+      var relError = absDiff / Math.abs(v2);
+
+      document.getElementById("resultMain").textContent = MathCalc.fmt(percentError, 4) + "%";
+
+      var badge = document.getElementById("qualityBadge");
+      if (percentError < 1) {
+        badge.style.background = "#dcfce7"; badge.style.color = "#15803d";
+        badge.textContent = "🌟 Exceptional Accuracy (< 1% Error)";
+      } else if (percentError <= 5) {
+        badge.style.background = "#e0f2fe"; badge.style.color = "#0369a1";
+        badge.textContent = "✅ Standard Lab Precision (< 5% Error)";
+      } else if (percentError <= 10) {
+        badge.style.background = "#fef3c7"; badge.style.color = "#b45309";
+        badge.textContent = "⚠️ Moderate Deviation (5% - 10% Error)";
+      } else {
+        badge.style.background = "#fee2e2"; badge.style.color = "#b91c1c";
+        badge.textContent = "❌ Significant Experimental Discrepancy (> 10%)";
+      }
+
+      var gridHtml = item("Percent Error", MathCalc.fmt(percentError, 4) + "%") +
+                     item("Signed Error", (signedError >= 0 ? "+" : "") + MathCalc.fmt(signedError, 4) + "%") +
+                     item("Absolute Error", MathCalc.fmt(absDiff, 6)) +
+                     item("Relative Error", MathCalc.fmt(relError, 6)) +
+                     item("Direction", diff >= 0 ? "Overestimation (+)" : "Underestimation (−)");
+      document.getElementById("resultGrid").innerHTML = gridHtml;
+
+      var stepText = "1. Calculate absolute error:\n" +
+                     "   |Observed − True| = |" + v1 + " − " + v2 + "| = " + MathCalc.fmt(absDiff, 6) + "\n\n" +
+                     "2. Divide by accepted true value:\n" +
+                     "   Relative Error = " + MathCalc.fmt(absDiff, 6) + " ÷ " + v2 + " = " + MathCalc.fmt(relError, 6) + "\n\n" +
+                     "3. Multiply by 100 for percentage:\n" +
+                     "   Percent Error = " + MathCalc.fmt(relError, 6) + " × 100 = " + MathCalc.fmt(percentError, 4) + "%";
+      document.getElementById("stepContent").innerText = stepText;
+
+    } else {
+      // Percent Difference: |V1 - V2| / ((V1 + V2)/2) * 100
+      var avg = (v1 + v2) / 2;
+      if (avg === 0) {
+        document.getElementById("resultMain").innerHTML = '<span style="color:#dc2626;">Average of values cannot be zero</span>';
+        document.getElementById("resultGrid").innerHTML = "";
+        return;
+      }
+      var absDiff = Math.abs(v1 - v2);
+      var pctDiff = (absDiff / Math.abs(avg)) * 100;
+
+      document.getElementById("resultMain").textContent = MathCalc.fmt(pctDiff, 4) + "%";
+
+      var badge = document.getElementById("qualityBadge");
+      if (pctDiff < 2) {
+        badge.style.background = "#dcfce7"; badge.style.color = "#15803d";
+        badge.textContent = "🌟 Very High Reproducibility (< 2% Diff)";
+      } else if (pctDiff <= 5) {
+        badge.style.background = "#e0f2fe"; badge.style.color = "#0369a1";
+        badge.textContent = "✅ Good Consistency (< 5% Diff)";
+      } else {
+        badge.style.background = "#fef3c7"; badge.style.color = "#b45309";
+        badge.textContent = "⚠️ Observable Variance (> 5% Diff)";
+      }
+
+      var gridHtml = item("Percent Difference", MathCalc.fmt(pctDiff, 4) + "%") +
+                     item("Absolute Difference", MathCalc.fmt(absDiff, 6)) +
+                     item("Average Baseline", MathCalc.fmt(avg, 6)) +
+                     item("Ratio (V1 / V2)", MathCalc.fmt(v1 / v2, 6));
+      document.getElementById("resultGrid").innerHTML = gridHtml;
+
+      var stepText = "1. Calculate absolute difference:\n" +
+                     "   |V₁ − V₂| = |" + v1 + " − " + v2 + "| = " + MathCalc.fmt(absDiff, 6) + "\n\n" +
+                     "2. Compute average baseline:\n" +
+                     "   (V₁ + V₂) ÷ 2 = (" + v1 + " + " + v2 + ") ÷ 2 = " + MathCalc.fmt(avg, 6) + "\n\n" +
+                     "3. Calculate percent difference:\n" +
+                     "   (" + MathCalc.fmt(absDiff, 6) + " ÷ " + MathCalc.fmt(avg, 6) + ") × 100 = " + MathCalc.fmt(pctDiff, 4) + "%";
+      document.getElementById("stepContent").innerText = stepText;
+    }
+  }
+
+  document.getElementById("calcBtn").addEventListener("click", calculate);
+  document.getElementById("resetBtn").addEventListener("click", function(){
+    if (currentMode === "error") {
+      document.getElementById("observed").value = 9.60;
+      document.getElementById("trueVal").value = 9.81;
+    } else {
+      document.getElementById("observed").value = 4.25;
+      document.getElementById("trueVal").value = 4.40;
+    }
+    calculate();
+  });
+
+  document.querySelectorAll("input").forEach(function(inp){
+    inp.addEventListener("input", calculate);
+  });
+
+  document.getElementById("copyResultBtn").addEventListener("click", function(){
+    var txt = document.getElementById("resultGrid").innerText;
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(txt).then(function(){
+        if (window.EMIMaster && window.EMIMaster.showToast) window.EMIMaster.showToast("Copied to clipboard!");
+      });
+    }
+  });
+
+  // Init
+  calculate();
+})();
 </script>
 <script src="js/currency.js"></script>
 <script src="js/seo-content.js"></script>

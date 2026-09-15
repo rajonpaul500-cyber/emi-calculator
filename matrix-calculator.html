@@ -47,40 +47,75 @@
     <h1 class="page-title">Matrix Calculator</h1>
     <p class="page-subtitle">Choose 2x2 or 3x3 matrices, fill in the entries of A and B, pick an operation, and get the exact result.</p>
 
-<div class="card">
-<h2>Matrix operations</h2>
-<div class="form-grid">
-<div class="form-group"><label>Matrix size</label><select id="dim"><option value="2">2 x 2</option><option value="3">3 x 3</option></select></div>
-<div class="form-group"><label>Operation</label>
-<select id="op">
-<option value="add">A + B</option>
-<option value="sub">A - B</option>
-<option value="mul">A × B</option>
-<option value="detA">Determinant of A</option>
-<option value="detB">Determinant of B</option>
-<option value="tA">Transpose of A</option>
-<option value="invA">Inverse of A</option>
-<option value="invB">Inverse of B</option>
-</select>
-</div>
-</div>
-<div class="matrix-grid">
-<div class="matrix-box">
-<label>Matrix A</label>
-<div id="mA"></div>
-</div>
-<div class="matrix-box">
-<label>Matrix B</label>
-<div id="mB"></div>
-</div>
-</div>
-<div class="form-actions"><button class="btn btn-primary" id="calcBtn" type="button">Calculate</button></div>
-</div>
+    <!-- Quick Presets -->
+    <div class="preset-chips" id="presetChips" style="margin-bottom:16px;">
+      <span class="preset-label" style="font-size:0.85rem; font-weight:600; color:var(--text-muted);">Quick Presets:</span>
+      <button type="button" class="preset-chip active" data-dim="2" data-a="1,2,3,4" data-b="5,6,7,8" data-op="mul">2&times;2 Product (A &times; B)</button>
+      <button type="button" class="preset-chip" data-dim="2" data-a="4,7,2,6" data-b="1,0,0,1" data-op="invA">2&times;2 Inverse (A⁻¹)</button>
+      <button type="button" class="preset-chip" data-dim="3" data-a="1,2,3,0,1,4,5,6,0" data-b="1,0,0,0,1,0,0,0,1" data-op="detA">3&times;3 Determinant |A|</button>
+      <button type="button" class="preset-chip" data-dim="3" data-a="1,2,3,0,1,4,5,6,0" data-b="2,0,-1,1,3,2,0,-2,1" data-op="mul">3&times;3 Product (A &times; B)</button>
+      <button type="button" class="preset-chip" data-dim="3" data-a="1,2,3,2,4,6,1,1,1" data-b="1,0,0,0,1,0,0,0,1" data-op="invA">Singular Matrix (Det = 0)</button>
+    </div>
 
-    <div class="result-panel" id="resultPanel">
-      <h3>Result</h3>
-      <div class="result-main" id="resultMain">&mdash;</div>
-      <div class="result-grid" id="resultGrid"></div>
+    <div class="card">
+      <h2>Matrix Dimensions &amp; Operations</h2>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="dim">Matrix Dimensions</label>
+          <select id="dim">
+            <option value="2">2 &times; 2 Matrix</option>
+            <option value="3">3 &times; 3 Matrix</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="op">Operation</label>
+          <select id="op">
+            <option value="mul">A &times; B (Matrix Multiplication)</option>
+            <option value="add">A + B (Matrix Addition)</option>
+            <option value="sub">A &minus; B (Matrix Subtraction)</option>
+            <option value="detA">det(A) &mdash; Determinant of A</option>
+            <option value="detB">det(B) &mdash; Determinant of B</option>
+            <option value="invA">A⁻¹ &mdash; Inverse of Matrix A</option>
+            <option value="invB">B⁻¹ &mdash; Inverse of Matrix B</option>
+            <option value="tA">Aᵀ &mdash; Transpose of A</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="matrix-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:20px; margin-top:16px;">
+        <div class="matrix-box" style="background:var(--bg-alt); padding:16px; border-radius:8px; border:1px solid var(--border);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <label style="font-weight:700; margin:0;">Matrix A</label>
+            <button type="button" class="btn btn-sm btn-outline" id="clearABtn" style="padding:2px 8px; font-size:0.75rem;">Clear A</button>
+          </div>
+          <div id="mA" style="display:flex; flex-direction:column; gap:8px; align-items:center;"></div>
+        </div>
+        <div class="matrix-box" id="boxB" style="background:var(--bg-alt); padding:16px; border-radius:8px; border:1px solid var(--border);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <label style="font-weight:700; margin:0;">Matrix B</label>
+            <button type="button" class="btn btn-sm btn-outline" id="clearBBtn" style="padding:2px 8px; font-size:0.75rem;">Clear B</button>
+          </div>
+          <div id="mB" style="display:flex; flex-direction:column; gap:8px; align-items:center;"></div>
+        </div>
+      </div>
+
+      <div class="form-actions" style="display:flex; gap:12px; margin-top:20px;">
+        <button class="btn btn-primary" id="calcBtn" type="button" style="flex:1;">Calculate Matrix Result</button>
+        <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
+      </div>
+    </div>
+
+    <div class="result-panel" id="resultPanel" style="margin-top:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:12px; margin-bottom:16px;">
+        <h3 style="margin:0; font-size:1.15rem;">Matrix Solution</h3>
+        <button type="button" class="btn btn-sm btn-outline" id="copyResultBtn" title="Copy result text">📋 Copy</button>
+      </div>
+      <div class="result-main" id="resultMain" style="text-align:center; padding:12px 0;">&mdash;</div>
+      <div class="result-grid" id="resultGrid" style="margin-top:16px;"></div>
+      <div id="stepContainer" style="margin-top:20px; padding:16px; background:var(--bg-alt); border-radius:8px; border:1px solid var(--border); display:none;">
+        <h4 style="margin:0 0 10px; font-size:1rem; color:var(--primary);">Step-by-Step Matrix Derivation</h4>
+        <div id="stepContent" style="font-size:0.92rem; line-height:1.7;"></div>
+      </div>
     </div>
 
     <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
@@ -160,39 +195,240 @@
 
 <script src="js/math.js"></script>
 <script>
-function item(l,v){return '<div class="result-item"><div class="label">'+l+'</div><div class="value">'+v+'</div></div>';}
-function buildMats(){
-var dim=parseInt(document.getElementById("dim").value,10);
-var a="",b="";
-for(var i=0;i<dim;i++){
-a+='<div class="matrix-row">';b+='<div class="matrix-row">';
-for(var j=0;j<dim;j++){a+='<input type="number" class="ai" data-i="'+i+'" data-j="'+j+'" value="'+(i===j?1:0)+'">';b+='<input type="number" class="bi" data-i="'+i+'" data-j="'+j+'" value="'+(i===j?1:0)+'">';}
-a+='</div>';b+='</div>';}
-document.getElementById("mA").innerHTML=a;
-document.getElementById("mB").innerHTML=b;}
-buildMats();
-document.getElementById("dim").onchange=buildMats;
-function readMats(){
-var dim=parseInt(document.getElementById("dim").value,10);
-var A=[],B=[];
-for(var i=0;i<dim;i++){A[i]=[];B[i]=[];for(var j=0;j<dim;j++){A[i][j]=parseFloat(document.querySelector('#mA .ai[data-i="'+i+'"][data-j="'+j+'"]').value)||0;B[i][j]=parseFloat(document.querySelector('#mB .bi[data-i="'+i+'"][data-j="'+j+'"]').value)||0;}}
-return {A:A,B:B,dim:dim};}
-function matHtml(m){return '<div class="frac-display" style="display:inline-block;vertical-align:middle;padding:8px;">'+m.map(function(row){return '<div class="matrix-row" style="justify-content:center;">'+row.map(function(v){return '<span style="min-width:44px;display:inline-block;text-align:center;padding:2px 6px;">'+v+'</span>';}).join("")+'</div>';}).join("")+'</div>';}
-document.getElementById("calcBtn").onclick=function(){
-var inpt=readMats();
-var op=document.getElementById("op").value;
-var out="",grid="";
-if(op==="add"){out=MathCalc.matrixAdd(inpt.A,inpt.B);}
-else if(op==="sub"){out=MathCalc.matrixSub(inpt.A,inpt.B);}
-else if(op==="mul"){out=MathCalc.matrixMul(inpt.A,inpt.B);}
-else if(op==="detA"){var d=inpt.dim===2?MathCalc.matrixDet2(inpt.A):MathCalc.matrixDet3(inpt.A);document.getElementById("resultMain").textContent=MathCalc.fmt(d,6);document.getElementById("resultGrid").innerHTML=item("Determinant of A",MathCalc.fmt(d,6));return;}
-else if(op==="detB"){var d2=inpt.dim===2?MathCalc.matrixDet2(inpt.B):MathCalc.matrixDet3(inpt.B);document.getElementById("resultMain").textContent=MathCalc.fmt(d2,6);document.getElementById("resultGrid").innerHTML=item("Determinant of B",MathCalc.fmt(d2,6));return;}
-else if(op==="tA"){out=MathCalc.matrixTranspose(inpt.A);}
-else if(op==="invA"){var inv=inpt.dim===2?MathCalc.matrixInverse2(inpt.A):MathCalc.matrixInverse3(inpt.A);if(inv.error){document.getElementById("resultMain").textContent=inv.error;return;}out=inv.value;}
-else{var inv2=inpt.dim===2?MathCalc.matrixInverse2(inpt.B):MathCalc.matrixInverse3(inpt.B);if(inv2.error){document.getElementById("resultMain").textContent=inv2.error;return;}out=inv2.value;}
-var clean=out.map(function(row){return row.map(function(v){return Math.round(v*1e6)/1e6;});});
-document.getElementById("resultMain").innerHTML=matHtml(clean);
-document.getElementById("resultGrid").innerHTML=item("Operation",op)+item("Size",inpt.dim+" x "+inpt.dim);};
+(function () {
+  function item(l, v) {
+    return '<div class="result-item"><div class="label">' + l + '</div><div class="value">' + v + '</div></div>';
+  }
+
+  function buildMats() {
+    var dim = parseInt(document.getElementById("dim").value, 10);
+    var a = "", b = "";
+    for (var i = 0; i < dim; i++) {
+      a += '<div class="matrix-row" style="display:flex; gap:8px; justify-content:center;">';
+      b += '<div class="matrix-row" style="display:flex; gap:8px; justify-content:center;">';
+      for (var j = 0; j < dim; j++) {
+        var defaultVal = (i === j ? 1 : 0);
+        a += '<input type="number" class="ai" data-i="' + i + '" data-j="' + j + '" value="' + defaultVal + '" style="width:54px; text-align:center; padding:6px; font-weight:600;" step="any">';
+        b += '<input type="number" class="bi" data-i="' + i + '" data-j="' + j + '" value="' + defaultVal + '" style="width:54px; text-align:center; padding:6px; font-weight:600;" step="any">';
+      }
+      a += '</div>';
+      b += '</div>';
+    }
+    document.getElementById("mA").innerHTML = a;
+    document.getElementById("mB").innerHTML = b;
+
+    // Bind inputs
+    document.querySelectorAll(".ai, .bi").forEach(function (inp) {
+      inp.oninput = calcMatrix;
+    });
+
+    updateMatrixBVisibility();
+    calcMatrix();
+  }
+
+  function updateMatrixBVisibility() {
+    var op = document.getElementById("op").value;
+    var needsB = (op === "add" || op === "sub" || op === "mul");
+    document.getElementById("boxB").style.opacity = needsB ? "1" : "0.45";
+    document.getElementById("boxB").style.pointerEvents = needsB ? "auto" : "none";
+  }
+
+  function readMats() {
+    var dim = parseInt(document.getElementById("dim").value, 10);
+    var A = [], B = [];
+    for (var i = 0; i < dim; i++) {
+      A[i] = [];
+      B[i] = [];
+      for (var j = 0; j < dim; j++) {
+        var elA = document.querySelector('#mA .ai[data-i="' + i + '"][data-j="' + j + '"]');
+        var elB = document.querySelector('#mB .bi[data-i="' + i + '"][data-j="' + j + '"]');
+        A[i][j] = elA ? (parseFloat(elA.value) || 0) : 0;
+        B[i][j] = elB ? (parseFloat(elB.value) || 0) : 0;
+      }
+    }
+    return { A: A, B: B, dim: dim };
+  }
+
+  function matHtml(m) {
+    return '<div style="display:inline-flex; align-items:center; border-left:3px solid var(--primary); border-right:3px solid var(--primary); border-radius:6px; padding:6px 12px; background:var(--card-bg);">' +
+           '<table style="border-collapse:collapse; margin:0;">' +
+           m.map(function (row) {
+             return '<tr>' + row.map(function (v) {
+               return '<td style="padding:4px 8px; text-align:center; font-family:monospace; font-size:1.05rem; font-weight:700;">' + v + '</td>';
+             }).join("") + '</tr>';
+           }).join("") +
+           '</table></div>';
+  }
+
+  function calcMatrix() {
+    var inpt = readMats();
+    var op = document.getElementById("op").value;
+    var out = null;
+    var stepHtml = "";
+
+    updateMatrixBVisibility();
+
+    var opNames = {
+      mul: "Multiplication (A &times; B)",
+      add: "Addition (A + B)",
+      sub: "Subtraction (A &minus; B)",
+      detA: "Determinant det(A)",
+      detB: "Determinant det(B)",
+      invA: "Matrix Inverse A⁻¹",
+      invB: "Matrix Inverse B⁻¹",
+      tA: "Transpose Aᵀ"
+    };
+
+    if (op === "add") {
+      out = MathCalc.matrixAdd(inpt.A, inpt.B);
+      stepHtml = "<strong>1. Entry-by-Entry Addition:</strong><br><code>C[i][j] = A[i][j] + B[i][j]</code><br>";
+      for (var i = 0; i < inpt.dim; i++) {
+        for (var j = 0; j < inpt.dim; j++) {
+          stepHtml += "&bull; C[" + (i + 1) + "][" + (j + 1) + "] = " + inpt.A[i][j] + " + " + inpt.B[i][j] + " = <strong>" + out[i][j] + "</strong><br>";
+        }
+      }
+    } else if (op === "sub") {
+      out = MathCalc.matrixSub(inpt.A, inpt.B);
+      stepHtml = "<strong>1. Entry-by-Entry Subtraction:</strong><br><code>C[i][j] = A[i][j] - B[i][j]</code><br>";
+      for (var i2 = 0; i2 < inpt.dim; i2++) {
+        for (var j2 = 0; j2 < inpt.dim; j2++) {
+          stepHtml += "&bull; C[" + (i2 + 1) + "][" + (j2 + 1) + "] = " + inpt.A[i2][j2] + " - " + inpt.B[i2][j2] + " = <strong>" + out[i2][j2] + "</strong><br>";
+        }
+      }
+    } else if (op === "mul") {
+      out = MathCalc.matrixMul(inpt.A, inpt.B);
+      stepHtml = "<strong>1. Row &times; Column Dot Product:</strong><br><code>C[i][j] = &sum; (A[i][k] &times; B[k][j])</code><br>";
+      for (var r = 0; r < inpt.dim; r++) {
+        for (var c = 0; c < inpt.dim; c++) {
+          var terms = [];
+          for (var k = 0; k < inpt.dim; k++) {
+            terms.push("(" + inpt.A[r][k] + " &times; " + inpt.B[k][c] + ")");
+          }
+          stepHtml += "&bull; C[" + (r + 1) + "][" + (c + 1) + "] = " + terms.join(" + ") + " = <strong>" + MathCalc.fmt(out[r][c], 4) + "</strong><br>";
+        }
+      }
+    } else if (op === "detA" || op === "detB") {
+      var targetMat = (op === "detA") ? inpt.A : inpt.B;
+      var targetName = (op === "detA") ? "A" : "B";
+      var d = (inpt.dim === 2) ? MathCalc.matrixDet2(targetMat) : MathCalc.matrixDet3(targetMat);
+
+      document.getElementById("resultMain").innerHTML = "<div style='font-size:1.8rem; font-weight:800; color:var(--primary);'>det(" + targetName + ") = " + MathCalc.fmt(d, 6) + "</div>";
+      document.getElementById("resultGrid").innerHTML = item("Matrix", targetName) +
+                                                       item("Determinant", MathCalc.fmt(d, 6)) +
+                                                       item("Invertibility", d !== 0 ? "<span style='color:var(--success); font-weight:600;'>Invertible (Non-singular)</span>" : "<span style='color:var(--danger); font-weight:600;'>Singular (Non-invertible)</span>");
+
+      if (inpt.dim === 2) {
+        stepHtml = "<strong>1. 2&times;2 Determinant Formula:</strong><br>" +
+                   "<code>|M| = (a &times; d) - (b &times; c)</code><br>" +
+                   "&bull; |" + targetName + "| = (" + targetMat[0][0] + " &times; " + targetMat[1][1] + ") - (" + targetMat[0][1] + " &times; " + targetMat[1][0] + ") = " + (targetMat[0][0] * targetMat[1][1]) + " - " + (targetMat[0][1] * targetMat[1][0]) + " = <strong>" + d + "</strong>";
+      } else {
+        stepHtml = "<strong>1. 3&times;3 Cofactor Expansion along Row 1:</strong><br>" +
+                   "<code>|M| = a(ei - fh) - b(di - fg) + c(dh - eg)</code><br>" +
+                   "&bull; |" + targetName + "| = " + targetMat[0][0] + "(" + targetMat[1][1] + "&times;" + targetMat[2][2] + " - " + targetMat[1][2] + "&times;" + targetMat[2][1] + ") " +
+                   "- " + targetMat[0][1] + "(" + targetMat[1][0] + "&times;" + targetMat[2][2] + " - " + targetMat[1][2] + "&times;" + targetMat[2][0] + ") " +
+                   "+ " + targetMat[0][2] + "(" + targetMat[1][0] + "&times;" + targetMat[2][1] + " - " + targetMat[1][1] + "&times;" + targetMat[2][0] + ") = <strong>" + d + "</strong>";
+      }
+
+      document.getElementById("stepContent").innerHTML = stepHtml;
+      document.getElementById("stepContainer").style.display = "block";
+      return;
+    } else if (op === "tA") {
+      out = MathCalc.matrixTranspose(inpt.A);
+      stepHtml = "<strong>1. Transpose Reflection along Diagonal:</strong><br><code>Aᵀ[i][j] = A[j][i]</code>";
+    } else if (op === "invA" || op === "invB") {
+      var tM = (op === "invA") ? inpt.A : inpt.B;
+      var tN = (op === "invA") ? "A" : "B";
+      var invRes = (inpt.dim === 2) ? MathCalc.matrixInverse2(tM) : MathCalc.matrixInverse3(tM);
+      if (invRes.error) {
+        document.getElementById("resultMain").innerHTML = "<div style='color:var(--danger); font-weight:700;'>" + invRes.error + "</div>";
+        document.getElementById("resultGrid").innerHTML = item("Status", "Singular matrix cannot be inverted");
+        document.getElementById("stepContainer").style.display = "none";
+        return;
+      }
+      out = invRes.value;
+      stepHtml = "<strong>1. Inverse Formula:</strong><br><code>" + tN + "⁻¹ = adj(" + tN + ") / det(" + tN + ")</code><br>" +
+                 "&bull; Condition check: det(" + tN + ") &ne; 0 &rarr; valid inverse exists.";
+    }
+
+    if (out) {
+      var clean = out.map(function (row) {
+        return row.map(function (v) { return Math.abs(v) < 1e-10 ? 0 : MathCalc.fmt(v, 4); });
+      });
+
+      document.getElementById("resultMain").innerHTML = matHtml(clean);
+      document.getElementById("resultGrid").innerHTML = item("Operation", opNames[op]) +
+                                                       item("Matrix Dimensions", inpt.dim + " &times; " + inpt.dim) +
+                                                       item("Result Type", "Square Matrix (" + inpt.dim + "&times;" + inpt.dim + ")");
+
+      document.getElementById("stepContent").innerHTML = stepHtml;
+      document.getElementById("stepContainer").style.display = "block";
+    }
+  }
+
+  // Bind controls
+  document.getElementById("dim").onchange = buildMats;
+  document.getElementById("op").onchange = calcMatrix;
+  document.getElementById("calcBtn").onclick = calcMatrix;
+
+  document.getElementById("clearABtn").onclick = function () {
+    document.querySelectorAll("#mA .ai").forEach(function (inp) { inp.value = "0"; });
+    calcMatrix();
+  };
+
+  document.getElementById("clearBBtn").onclick = function () {
+    document.querySelectorAll("#mB .bi").forEach(function (inp) { inp.value = "0"; });
+    calcMatrix();
+  };
+
+  document.getElementById("resetBtn").onclick = function () {
+    document.getElementById("dim").value = "2";
+    document.getElementById("op").value = "mul";
+    buildMats();
+  };
+
+  // Presets
+  document.querySelectorAll("#presetChips .preset-chip").forEach(function (btn) {
+    btn.onclick = function () {
+      document.querySelectorAll("#presetChips .preset-chip").forEach(function (b) { b.classList.remove("active"); });
+      this.classList.add("active");
+
+      var dim = this.getAttribute("data-dim");
+      document.getElementById("dim").value = dim;
+      document.getElementById("op").value = this.getAttribute("data-op");
+
+      buildMats();
+
+      var aVals = this.getAttribute("data-a").split(",");
+      var bVals = this.getAttribute("data-b").split(",");
+
+      var aInputs = document.querySelectorAll("#mA .ai");
+      var bInputs = document.querySelectorAll("#mB .bi");
+
+      aInputs.forEach(function (inp, idx) {
+        if (aVals[idx] !== undefined) inp.value = aVals[idx];
+      });
+
+      bInputs.forEach(function (inp, idx) {
+        if (bVals[idx] !== undefined) inp.value = bVals[idx];
+      });
+
+      calcMatrix();
+    };
+  });
+
+  // Copy
+  document.getElementById("copyResultBtn").onclick = function () {
+    var text = document.getElementById("resultMain").innerText || document.getElementById("resultMain").textContent;
+    if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).catch(function () {});
+    }
+    this.textContent = "✓ Copied";
+    var btn = this;
+    setTimeout(function () { btn.textContent = "📋 Copy"; }, 1500);
+  };
+
+  buildMats();
+})();
 </script>
 <script src="js/currency.js"></script>
 <script src="js/seo-content.js"></script>

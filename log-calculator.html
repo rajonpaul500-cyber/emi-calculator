@@ -47,21 +47,61 @@
     <h1 class="page-title">Log Calculator</h1>
     <p class="page-subtitle">Choose logarithm or antilogarithm, enter a number and base, and get the exact result. Common, natural and base-2 shortcuts are included.</p>
 
-<div class="card">
-<h2>Logarithm</h2>
-<div class="form-grid">
-<div class="form-group"><label>Mode</label><select id="mode"><option value="log">Logarithm</option><option value="anti">Antilogarithm</option></select></div>
-<div class="form-group"><label>Number / value</label><input type="number" id="num" value="1000" step="any"></div>
-<div class="form-group"><label>Base</label><select id="baseSel"><option value="10">10 (common)</option><option value="e">e (natural)</option><option value="2">2</option><option value="custom">Custom</option></select></div>
-<div class="form-group"><label>Custom base</label><input type="number" id="baseCustom" value="5" min="0.0001" step="any"></div>
-</div>
-<div class="form-actions"><button class="btn btn-primary" id="calcBtn" type="button">Calculate</button></div>
-</div>
+    <!-- Quick Presets -->
+    <div class="preset-chips" id="presetChips" style="margin-bottom:16px;">
+      <span class="preset-label" style="font-size:0.85rem; font-weight:600; color:var(--text-muted);">Quick Presets:</span>
+      <button type="button" class="preset-chip active" data-mode="log" data-num="1000" data-base="10">log&#8321;&#8320;(1000)</button>
+      <button type="button" class="preset-chip" data-mode="log" data-num="2.71828" data-base="e">ln(e)</button>
+      <button type="button" class="preset-chip" data-mode="log" data-num="1024" data-base="2">log&#8322;(1024)</button>
+      <button type="button" class="preset-chip" data-mode="log" data-num="125" data-base="custom" data-cbase="5">log&#8325;(125)</button>
+      <button type="button" class="preset-chip" data-mode="anti" data-num="3" data-base="10">Antilog&#8321;&#8320;(3)</button>
+    </div>
 
-    <div class="result-panel" id="resultPanel">
-      <h3>Result</h3>
-      <div class="result-main" id="resultMain">&mdash;</div>
-      <div class="result-grid" id="resultGrid"></div>
+    <div class="card">
+      <h2 id="calcTitle">Logarithmic &amp; Exponential Calculations</h2>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="mode">Calculation Type</label>
+          <select id="mode">
+            <option value="log" selected>Logarithm: log&#7522;(x)</option>
+            <option value="anti">Antilogarithm / Exponent: b&#739;</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="num" id="labelNum">Argument / Input Value (x)</label>
+          <input type="number" id="num" value="1000" step="any">
+        </div>
+        <div class="form-group">
+          <label for="baseSel">Log Base (b)</label>
+          <select id="baseSel">
+            <option value="10" selected>Base 10 (Common Log &mdash; log&#8321;&#8320;)</option>
+            <option value="e">Base e (Natural Log &mdash; ln &asymp; 2.71828)</option>
+            <option value="2">Base 2 (Binary Log &mdash; log&#8322;)</option>
+            <option value="custom">Custom Base...</option>
+          </select>
+        </div>
+        <div class="form-group" id="groupCustom" style="display:none;">
+          <label for="baseCustom">Enter Custom Base</label>
+          <input type="number" id="baseCustom" value="5" min="0.0001" step="any">
+        </div>
+      </div>
+      <div class="form-actions" style="display:flex; gap:12px; margin-top:16px;">
+        <button class="btn btn-primary" id="calcBtn" type="button" style="flex:1;">Calculate Result</button>
+        <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
+      </div>
+    </div>
+
+    <div class="result-panel" id="resultPanel" style="margin-top:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:12px; margin-bottom:16px;">
+        <h3 style="margin:0; font-size:1.15rem;">Logarithm Result</h3>
+        <button type="button" class="btn btn-sm btn-outline" id="copyResultBtn" title="Copy result text">📋 Copy</button>
+      </div>
+      <div class="result-main" id="resultMain" style="font-size:1.8rem; font-weight:800; color:var(--primary); text-align:center; padding:12px 0;">&mdash;</div>
+      <div class="result-grid" id="resultGrid" style="margin-top:16px;"></div>
+      <div id="stepContainer" style="margin-top:20px; padding:16px; background:var(--bg-alt); border-radius:8px; border:1px solid var(--border); display:none;">
+        <h4 style="margin:0 0 10px; font-size:1rem; color:var(--primary);">Mathematical Breakdown</h4>
+        <div id="stepContent" style="font-size:0.92rem; line-height:1.7;"></div>
+      </div>
     </div>
 
     <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
@@ -141,30 +181,144 @@
 
 <script src="js/math.js"></script>
 <script>
-function item(l,v){return '<div class="result-item"><div class="label">'+l+'</div><div class="value">'+v+'</div></div>';}
-document.getElementById("calcBtn").onclick=function(){
-var mode=document.getElementById("mode").value;
-var n=parseFloat(document.getElementById("num").value);
-var sel=document.getElementById("baseSel").value;
-var base=sel==="e"?Math.E:sel==="2"?2:sel==="10"?10:parseFloat(document.getElementById("baseCustom").value);
-if(isNaN(n)||isNaN(base)){document.getElementById("resultMain").textContent="Enter valid numbers";document.getElementById("resultGrid").innerHTML="";return;}
-var grid="";
-if(mode==="log"){
-if(n<=0){document.getElementById("resultMain").textContent="Number must be positive";return;}
-if(base<=0||base===1){document.getElementById("resultMain").textContent="Base must be positive and not 1";return;}
-var r=MathCalc.logarithm(n,base).value;
-var name=sel==="e"?"ln":sel==="2"?"log₂":sel==="10"?"log₁₀":"log";
-document.getElementById("resultMain").textContent=MathCalc.fmt(r,8);
-grid=item(name+"("+n+")",MathCalc.fmt(r,8))+item("Meaning",""+base+"^"+MathCalc.fmt(r,6)+" = "+n);
-if(sel==="10"){grid+=item("Natural log",MathCalc.fmt(Math.log(n),8));}
-if(sel==="e"){grid+=item("Log base 10",MathCalc.fmt(Math.log10(n),8));}
-}else{
-if(base<=0||base===1){document.getElementById("resultMain").textContent="Base must be positive and not 1";return;}
-var v=MathCalc.antiLog(n,base).value;
-document.getElementById("resultMain").textContent=MathCalc.fmt(v,8);
-grid=item("Antilog",base+"^"+n+" = "+MathCalc.fmt(v,8))+item("Scientific notation",MathCalc.toScientific(v,6).value);
-}
-document.getElementById("resultGrid").innerHTML=grid;};
+(function () {
+  function item(l, v) {
+    return '<div class="result-item"><div class="label">' + l + '</div><div class="value">' + v + '</div></div>';
+  }
+
+  function updateBaseUi() {
+    var sel = document.getElementById("baseSel").value;
+    var mode = document.getElementById("mode").value;
+    document.getElementById("groupCustom").style.display = (sel === "custom") ? "block" : "none";
+    document.getElementById("labelNum").textContent = (mode === "log") ? "Argument / Input Value (x)" : "Exponent / Power (y)";
+  }
+
+  function calcLog() {
+    updateBaseUi();
+    var mode = document.getElementById("mode").value;
+    var n = parseFloat(document.getElementById("num").value);
+    var sel = document.getElementById("baseSel").value;
+    var base = sel === "e" ? Math.E : (sel === "2" ? 2 : (sel === "10" ? 10 : parseFloat(document.getElementById("baseCustom").value)));
+
+    if (isNaN(n) || isNaN(base)) {
+      document.getElementById("resultMain").textContent = "\u2014";
+      document.getElementById("resultGrid").innerHTML = "";
+      document.getElementById("stepContainer").style.display = "none";
+      return;
+    }
+
+    var grid = "";
+    var stepHtml = "";
+
+    if (mode === "log") {
+      if (n <= 0) {
+        document.getElementById("resultMain").textContent = "Log undefined for x \u2264 0";
+        document.getElementById("resultGrid").innerHTML = "";
+        document.getElementById("stepContainer").style.display = "none";
+        return;
+      }
+      if (base <= 0 || Math.abs(base - 1) < 1e-12) {
+        document.getElementById("resultMain").textContent = "Base must be > 0 and \u2260 1";
+        document.getElementById("resultGrid").innerHTML = "";
+        document.getElementById("stepContainer").style.display = "none";
+        return;
+      }
+
+      var r = MathCalc.logarithm(n, base).value;
+      var baseName = sel === "e" ? "e" : (sel === "2" ? "2" : (sel === "10" ? "10" : MathCalc.fmt(base, 4)));
+      var name = sel === "e" ? "ln" : (sel === "2" ? "log\u2082" : (sel === "10" ? "log\u2081\u2080" : "log<sub>" + baseName + "</sub>"));
+
+      document.getElementById("resultMain").textContent = MathCalc.fmt(r, 8);
+      grid = item(name + "(" + n + ")", MathCalc.fmt(r, 8)) +
+             item("Exponential Equivalence", baseName + "<sup>" + MathCalc.fmt(r, 6) + "</sup> = " + n) +
+             item("Natural Log ln(x)", MathCalc.fmt(Math.log(n), 8)) +
+             item("Common Log log\u2081\u2080(x)", MathCalc.fmt(Math.log10(n), 8)) +
+             item("Binary Log log\u2082(x)", MathCalc.fmt(Math.log2(n), 8));
+
+      stepHtml = "<strong>1. Change-of-Base Formula:</strong><br>" +
+                 "log<sub>b</sub>(x) = ln(x) / ln(b)<br><br>" +
+                 "<strong>2. Substitution:</strong><br>" +
+                 "ln(" + n + ") &asymp; " + MathCalc.fmt(Math.log(n), 8) + "<br>" +
+                 "ln(" + baseName + ") &asymp; " + MathCalc.fmt(Math.log(base), 8) + "<br><br>" +
+                 "<strong>3. Division:</strong><br>" +
+                 MathCalc.fmt(Math.log(n), 8) + " / " + MathCalc.fmt(Math.log(base), 8) + " = <strong>" + MathCalc.fmt(r, 8) + "</strong><br><br>" +
+                 "<strong>Check:</strong> (" + baseName + ")<sup>" + MathCalc.fmt(r, 6) + "</sup> &asymp; <strong>" + n + "</strong>";
+    } else {
+      if (base <= 0 || Math.abs(base - 1) < 1e-12) {
+        document.getElementById("resultMain").textContent = "Base must be > 0 and \u2260 1";
+        document.getElementById("resultGrid").innerHTML = "";
+        document.getElementById("stepContainer").style.display = "none";
+        return;
+      }
+
+      var v = MathCalc.antiLog(n, base).value;
+      var baseName = sel === "e" ? "e" : (sel === "2" ? "2" : (sel === "10" ? "10" : MathCalc.fmt(base, 4)));
+
+      document.getElementById("resultMain").textContent = MathCalc.fmt(v, 8);
+      grid = item("Antilog Result", baseName + "<sup>" + n + "</sup> = " + MathCalc.fmt(v, 8)) +
+             item("Scientific Notation", MathCalc.toScientific(v, 6).value) +
+             item("Base", baseName) +
+             item("Exponent", n);
+
+      stepHtml = "<strong>Antilogarithm / Exponentiation:</strong><br>" +
+                 "antilog<sub>b</sub>(" + n + ") = b<sup>" + n + "</sup><br><br>" +
+                 "= (" + baseName + ")<sup>" + n + "</sup><br>" +
+                 "= <strong>" + MathCalc.fmt(v, 8) + "</strong>";
+    }
+
+    document.getElementById("resultGrid").innerHTML = grid;
+    document.getElementById("stepContent").innerHTML = stepHtml;
+    document.getElementById("stepContainer").style.display = "block";
+  }
+
+  // Bind events
+  document.getElementById("calcBtn").onclick = calcLog;
+  document.getElementById("mode").onchange = function () { updateBaseUi(); calcLog(); };
+  document.getElementById("num").oninput = calcLog;
+  document.getElementById("baseSel").onchange = function () { updateBaseUi(); calcLog(); };
+  document.getElementById("baseCustom").oninput = calcLog;
+
+  document.getElementById("resetBtn").onclick = function () {
+    document.getElementById("mode").value = "log";
+    document.getElementById("num").value = "1000";
+    document.getElementById("baseSel").value = "10";
+    document.getElementById("baseCustom").value = "5";
+    updateBaseUi();
+    calcLog();
+  };
+
+  // Presets
+  document.querySelectorAll("#presetChips .preset-chip").forEach(function (btn) {
+    btn.onclick = function () {
+      document.querySelectorAll("#presetChips .preset-chip").forEach(function (b) { b.classList.remove("active"); });
+      this.classList.add("active");
+      document.getElementById("mode").value = this.getAttribute("data-mode") || "log";
+      document.getElementById("num").value = this.getAttribute("data-num") || "1000";
+      var base = this.getAttribute("data-base") || "10";
+      document.getElementById("baseSel").value = base;
+      if (base === "custom") {
+        document.getElementById("baseCustom").value = this.getAttribute("data-cbase") || "5";
+      }
+      updateBaseUi();
+      calcLog();
+    };
+  });
+
+  // Copy Result
+  document.getElementById("copyResultBtn").onclick = function () {
+    var text = document.getElementById("resultMain").textContent;
+    if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).catch(function () {});
+    }
+    this.textContent = "✓ Copied";
+    var btn = this;
+    setTimeout(function () { btn.textContent = "📋 Copy"; }, 1500);
+  };
+
+  // Initial run
+  updateBaseUi();
+  calcLog();
+})();
 </script>
 <script src="js/currency.js"></script>
 <script src="js/seo-content.js"></script>

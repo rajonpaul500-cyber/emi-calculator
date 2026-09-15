@@ -47,33 +47,66 @@
     <h1 class="page-title">Binary Calculator</h1>
     <p class="page-subtitle">Enter two binary numbers (0s and 1s) and choose an operation. Results appear in binary, decimal and hexadecimal.</p>
 
-<div class="card">
-<h2>Binary operations</h2>
-<div class="form-grid">
-<div class="form-group"><label>Binary A</label><input type="text" id="a" value="1010"></div>
-<div class="form-group"><label>Binary B</label><input type="text" id="b" value="1100"></div>
-<div class="form-group"><label>Operation</label>
-<select id="op">
-<option value="add">+ Add</option>
-<option value="sub">- Subtract</option>
-<option value="mul">* Multiply</option>
-<option value="div">/ Divide</option>
-<option value="and">AND (bitwise)</option>
-<option value="or">OR (bitwise)</option>
-<option value="xor">XOR (bitwise)</option>
-<option value="not">NOT A</option>
-<option value="a2d">A to decimal</option>
-<option value="b2d">B to decimal</option>
-</select>
-</div>
-</div>
-<div class="form-actions"><button class="btn btn-primary" id="calcBtn" type="button">Calculate</button></div>
-</div>
+    <!-- Quick Presets -->
+    <div class="preset-chips" id="presetChips" style="margin-bottom:16px;">
+      <span class="preset-label" style="font-size:0.85rem; font-weight:600; color:var(--text-muted);">Quick Presets:</span>
+      <button type="button" class="preset-chip active" data-a="1010" data-b="1100" data-op="add">1010 + 1100 (Add)</button>
+      <button type="button" class="preset-chip" data-a="11111111" data-b="00001111" data-op="and">8-bit AND Mask</button>
+      <button type="button" class="preset-chip" data-a="1101" data-b="1011" data-op="mul">1101 &times; 1011</button>
+      <button type="button" class="preset-chip" data-a="10000000" data-b="10" data-op="div">128 &divide; 2 (Div)</button>
+      <button type="button" class="preset-chip" data-a="10110110" data-b="" data-op="a2d">Byte to Dec</button>
+    </div>
 
-    <div class="result-panel" id="resultPanel">
-      <h3>Result</h3>
-      <div class="result-main" id="resultMain">&mdash;</div>
-      <div class="result-grid" id="resultGrid"></div>
+    <div class="card">
+      <h2>Binary Operations</h2>
+      <div class="form-grid">
+        <div class="form-group" id="groupA">
+          <label for="a">Binary Number A <small style="color:var(--text-muted);">(0s and 1s)</small></label>
+          <input type="text" id="a" value="1010" placeholder="e.g. 1010" style="font-family:monospace; font-size:1.1rem; letter-spacing:1px;">
+        </div>
+        <div class="form-group" id="groupB">
+          <label for="b" id="labelB">Binary Number B <small style="color:var(--text-muted);">(0s and 1s)</small></label>
+          <input type="text" id="b" value="1100" placeholder="e.g. 1100" style="font-family:monospace; font-size:1.1rem; letter-spacing:1px;">
+        </div>
+        <div class="form-group" style="grid-column: 1 / -1;">
+          <label for="op">Operation</label>
+          <select id="op">
+            <optgroup label="Arithmetic">
+              <option value="add" selected>+ Addition (A + B)</option>
+              <option value="sub">- Subtraction (A - B)</option>
+              <option value="mul">&times; Multiplication (A &times; B)</option>
+              <option value="div">&divide; Division (A &divide; B with remainder)</option>
+            </optgroup>
+            <optgroup label="Bitwise Logic">
+              <option value="and">AND (A &amp; B)</option>
+              <option value="or">OR (A | B)</option>
+              <option value="xor">XOR (A ^ B)</option>
+              <option value="not">NOT (~A bitwise complement)</option>
+            </optgroup>
+            <optgroup label="Radix Conversion">
+              <option value="a2d">A &rarr; Decimal &amp; Hexadecimal</option>
+              <option value="b2d">B &rarr; Decimal &amp; Hexadecimal</option>
+            </optgroup>
+          </select>
+        </div>
+      </div>
+      <div class="form-actions" style="display:flex; gap:12px; margin-top:16px;">
+        <button class="btn btn-primary" id="calcBtn" type="button" style="flex:1;">Calculate Result</button>
+        <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
+      </div>
+    </div>
+
+    <div class="result-panel" id="resultPanel" style="margin-top:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:12px; margin-bottom:16px;">
+        <h3 style="margin:0; font-size:1.15rem;">Binary Result</h3>
+        <button type="button" class="btn btn-sm btn-outline" id="copyResultBtn" title="Copy result text">📋 Copy</button>
+      </div>
+      <div class="result-main" id="resultMain" style="font-family:monospace; font-size:1.8rem; font-weight:800; color:var(--primary); text-align:center; padding:12px 0;">&mdash;</div>
+      <div class="result-grid" id="resultGrid" style="margin-top:16px;"></div>
+      <div id="stepContainer" style="margin-top:20px; padding:16px; background:var(--bg-alt); border-radius:8px; border:1px solid var(--border); display:none;">
+        <h4 style="margin:0 0 10px; font-size:1rem; color:var(--primary);">Step-by-Step Explanation</h4>
+        <div id="stepContent" style="font-size:0.92rem; line-height:1.6; font-family:monospace;"></div>
+      </div>
     </div>
 
     <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
@@ -153,30 +186,217 @@
 
 <script src="js/math.js"></script>
 <script>
-function item(l,v){return '<div class="result-item"><div class="label">'+l+'</div><div class="value">'+v+'</div></div>';}
-document.getElementById("calcBtn").onclick=function(){
-var a=document.getElementById("a").value.trim();
-var b=document.getElementById("b").value.trim();
-var op=document.getElementById("op").value;
-if(!/^[01]+$/.test(a)||(op!=="not"&&op!=="a2d"&&op!=="b2d"&&!/^[01]+$/.test(b))){document.getElementById("resultMain").textContent="Binary numbers can only contain 0 and 1";document.getElementById("resultGrid").innerHTML="";return;}
-var A=parseInt(a,2),B=b?parseInt(b,2):0,res,label="Result";
-switch(op){
-case "add":res=MathCalc.binaryAdd(a,b).value;label="Sum (binary)";break;
-case "sub":res=MathCalc.binarySub(a,b).value;label="Difference (binary)";break;
-case "mul":res=MathCalc.binaryMul(a,b).value;label="Product (binary)";break;
-case "div":var d=MathCalc.binaryDiv(a,b);if(d.error){document.getElementById("resultMain").textContent=d.error;return;}res=d.value.quotient+" remainder "+d.value.remainder;label="Division";break;
-case "and":res=MathCalc.binaryAnd(a,b).value;label="AND (binary)";break;
-case "or":res=MathCalc.binaryOr(a,b).value;label="OR (binary)";break;
-case "xor":res=MathCalc.binaryXor(a,b).value;label="XOR (binary)";break;
-case "not":res=MathCalc.binaryNot(a).value;label="NOT A (binary)";break;
-case "a2d":res=A;label="A in decimal";break;
-case "b2d":res=B;label="B in decimal";break;
-}
-document.getElementById("resultMain").textContent=String(res);
-var grid=item(label,String(res));
-if(op!=="a2d"&&op!=="b2d"){var decVal=(op==="not")?A:(op==="div"?Math.floor(A/B):parseInt(String(res),2));grid+=item("Decimal",decVal)+item("Hex",(decVal>=0?decVal:decVal>>>0).toString(16).toUpperCase());}
-else{grid+=item("Decimal",String(res));}
-document.getElementById("resultGrid").innerHTML=grid;};
+(function () {
+  function item(l, v) {
+    return '<div class="result-item"><div class="label">' + l + '</div><div class="value">' + v + '</div></div>';
+  }
+
+  function updateUiState() {
+    var op = document.getElementById("op").value;
+    var groupB = document.getElementById("groupB");
+    if (op === "not" || op === "a2d") {
+      groupB.style.opacity = "0.4";
+      document.getElementById("b").disabled = true;
+    } else {
+      groupB.style.opacity = "1";
+      document.getElementById("b").disabled = false;
+    }
+  }
+
+  function calcBinary() {
+    updateUiState();
+    var a = document.getElementById("a").value.trim();
+    var b = document.getElementById("b").value.trim();
+    var op = document.getElementById("op").value;
+
+    if (!a) {
+      document.getElementById("resultMain").textContent = "\u2014";
+      document.getElementById("resultGrid").innerHTML = "";
+      document.getElementById("stepContainer").style.display = "none";
+      return;
+    }
+
+    if (!/^[01]+$/.test(a) || (op !== "not" && op !== "a2d" && op !== "b2d" && (!b || !/^[01]+$/.test(b)))) {
+      document.getElementById("resultMain").textContent = "Invalid binary (digits 0 and 1 only)";
+      document.getElementById("resultGrid").innerHTML = "";
+      document.getElementById("stepContainer").style.display = "none";
+      return;
+    }
+
+    var A = parseInt(a, 2);
+    var B = b ? parseInt(b, 2) : 0;
+    var res, label = "Result (Binary)", stepHtml = "";
+
+    switch (op) {
+      case "add":
+        var addRes = MathCalc.binaryAdd(a, b);
+        res = addRes.value;
+        label = "Sum (Binary)";
+        stepHtml = "<strong>1. Binary Addition:</strong><br>" +
+                   "&nbsp;&nbsp;" + a + "<sub>2</sub> (" + A + "<sub>10</sub>)<br>" +
+                   "+ " + b + "<sub>2</sub> (" + B + "<sub>10</sub>)<br>" +
+                   "--------------------<br>" +
+                   "= <strong>" + res + "<sub>2</sub></strong> (" + (A + B) + "<sub>10</sub>)";
+        break;
+
+      case "sub":
+        var subRes = MathCalc.binarySub(a, b);
+        res = subRes.value;
+        label = "Difference (Binary)";
+        stepHtml = "<strong>1. Binary Subtraction:</strong><br>" +
+                   "&nbsp;&nbsp;" + a + "<sub>2</sub> (" + A + "<sub>10</sub>)<br>" +
+                   "- " + b + "<sub>2</sub> (" + B + "<sub>10</sub>)<br>" +
+                   "--------------------<br>" +
+                   "= <strong>" + res + "<sub>2</sub></strong> (" + (A - B) + "<sub>10</sub>)";
+        break;
+
+      case "mul":
+        var mulRes = MathCalc.binaryMul(a, b);
+        res = mulRes.value;
+        label = "Product (Binary)";
+        stepHtml = "<strong>1. Binary Multiplication:</strong><br>" +
+                   a + "<sub>2</sub> &times; " + b + "<sub>2</sub> = " + A + " &times; " + B + " = " + (A * B) + "<sub>10</sub><br>" +
+                   "= <strong>" + res + "<sub>2</sub></strong>";
+        break;
+
+      case "div":
+        if (B === 0) {
+          document.getElementById("resultMain").textContent = "Division by zero";
+          document.getElementById("resultGrid").innerHTML = "";
+          document.getElementById("stepContainer").style.display = "none";
+          return;
+        }
+        var d = MathCalc.binaryDiv(a, b);
+        if (d.error) {
+          document.getElementById("resultMain").textContent = d.error;
+          document.getElementById("resultGrid").innerHTML = "";
+          document.getElementById("stepContainer").style.display = "none";
+          return;
+        }
+        res = d.value.quotient + " R " + d.value.remainder;
+        label = "Quotient & Remainder";
+        stepHtml = "<strong>1. Binary Division:</strong><br>" +
+                   a + "<sub>2</sub> (" + A + "<sub>10</sub>) &divide; " + b + "<sub>2</sub> (" + B + "<sub>10</sub>)<br>" +
+                   "= Quotient: <strong>" + d.value.quotient + "<sub>2</sub></strong> (" + parseInt(d.value.quotient, 2) + "<sub>10</sub>)<br>" +
+                   "= Remainder: <strong>" + d.value.remainder + "<sub>2</sub></strong> (" + parseInt(d.value.remainder, 2) + "<sub>10</sub>)";
+        break;
+
+      case "and":
+        res = MathCalc.binaryAnd(a, b).value;
+        label = "Bitwise AND";
+        stepHtml = "<strong>1. Bitwise AND (1 only if both bits are 1):</strong><br>" +
+                   a + "<br>" + b + "<br>--------<br><strong>" + res + "</strong>";
+        break;
+
+      case "or":
+        res = MathCalc.binaryOr(a, b).value;
+        label = "Bitwise OR";
+        stepHtml = "<strong>1. Bitwise OR (1 if either bit is 1):</strong><br>" +
+                   a + "<br>" + b + "<br>--------<br><strong>" + res + "</strong>";
+        break;
+
+      case "xor":
+        res = MathCalc.binaryXor(a, b).value;
+        label = "Bitwise XOR";
+        stepHtml = "<strong>1. Bitwise XOR (1 if bits are different):</strong><br>" +
+                   a + "<br>" + b + "<br>--------<br><strong>" + res + "</strong>";
+        break;
+
+      case "not":
+        res = MathCalc.binaryNot(a).value;
+        label = "Bitwise NOT (~A)";
+        stepHtml = "<strong>1. Bitwise Inversion:</strong><br>" +
+                   "Inverting all bits of " + a + "<sub>2</sub> (32-bit unsigned):<br>" +
+                   "= <strong>" + res + "<sub>2</sub></strong>";
+        break;
+
+      case "a2d":
+        res = A;
+        label = "Decimal Value";
+        stepHtml = "<strong>1. Radix Conversion (Base 2 &rarr; Base 10):</strong><br>" +
+                   a.split("").reverse().map(function (bit, idx) {
+                     return bit + " &times; 2<sup>" + idx + "</sup> (" + (bit * Math.pow(2, idx)) + ")";
+                   }).reverse().join(" + ") + "<br>" +
+                   "= <strong>" + A + "<sub>10</sub></strong>";
+        break;
+
+      case "b2d":
+        res = B;
+        label = "Decimal Value";
+        stepHtml = "<strong>1. Radix Conversion (Base 2 &rarr; Base 10):</strong><br>" +
+                   b.split("").reverse().map(function (bit, idx) {
+                     return bit + " &times; 2<sup>" + idx + "</sup> (" + (bit * Math.pow(2, idx)) + ")";
+                   }).reverse().join(" + ") + "<br>" +
+                   "= <strong>" + B + "<sub>10</sub></strong>";
+        break;
+    }
+
+    document.getElementById("resultMain").textContent = String(res);
+    var grid = item(label, String(res));
+
+    if (op !== "a2d" && op !== "b2d") {
+      var decVal = (op === "not") ? (parseInt(res, 2) || 0) : (op === "div" ? Math.floor(A / B) : (parseInt(String(res).replace(/[^01]/g, ''), 2) || 0));
+      grid += item("Decimal (Base 10)", decVal);
+      grid += item("Hexadecimal (Base 16)", "0x" + (decVal >= 0 ? decVal : decVal >>> 0).toString(16).toUpperCase());
+      grid += item("Octal (Base 8)", (decVal >= 0 ? decVal : decVal >>> 0).toString(8));
+    } else {
+      var targetNum = (op === "a2d") ? A : B;
+      grid += item("Hexadecimal", "0x" + targetNum.toString(16).toUpperCase());
+      grid += item("Octal", targetNum.toString(8));
+      grid += item("Byte Width", ((op === "a2d" ? a : b).length) + " bits");
+    }
+
+    document.getElementById("resultGrid").innerHTML = grid;
+    if (stepHtml) {
+      document.getElementById("stepContent").innerHTML = stepHtml;
+      document.getElementById("stepContainer").style.display = "block";
+    } else {
+      document.getElementById("stepContainer").style.display = "none";
+    }
+  }
+
+  // Events
+  document.getElementById("calcBtn").onclick = calcBinary;
+  document.getElementById("a").oninput = calcBinary;
+  document.getElementById("b").oninput = calcBinary;
+  document.getElementById("op").onchange = function () {
+    updateUiState();
+    calcBinary();
+  };
+
+  document.getElementById("resetBtn").onclick = function () {
+    document.getElementById("a").value = "1010";
+    document.getElementById("b").value = "1100";
+    document.getElementById("op").value = "add";
+    calcBinary();
+  };
+
+  // Presets
+  document.querySelectorAll("#presetChips .preset-chip").forEach(function (btn) {
+    btn.onclick = function () {
+      document.querySelectorAll("#presetChips .preset-chip").forEach(function (b) { b.classList.remove("active"); });
+      this.classList.add("active");
+      document.getElementById("a").value = this.getAttribute("data-a") || "";
+      document.getElementById("b").value = this.getAttribute("data-b") || "";
+      document.getElementById("op").value = this.getAttribute("data-op") || "add";
+      calcBinary();
+    };
+  });
+
+  // Copy Result
+  document.getElementById("copyResultBtn").onclick = function () {
+    var text = document.getElementById("resultMain").textContent;
+    if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).catch(function () {});
+    }
+    this.textContent = "✓ Copied";
+    var btn = this;
+    setTimeout(function () { btn.textContent = "📋 Copy"; }, 1500);
+  };
+
+  // Initial calculation on load
+  calcBinary();
+})();
 </script>
 <script src="js/currency.js"></script>
 <script src="js/seo-content.js"></script>
