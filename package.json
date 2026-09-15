@@ -1,0 +1,14 @@
+{
+  "name": "emi-master",
+  "version": "1.0.0",
+  "description": "50+ Free Online Calculators for Loans, EMI, DPS, FDR, Mortgage & Investment",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
+    "build": "echo \"Build complete\""
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

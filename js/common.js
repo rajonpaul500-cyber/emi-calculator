@@ -153,15 +153,15 @@
       '<header class="site-header">' +
       '<div class="header-inner">' +
       '<a href="index.html" class="brand">' +
-      '<img src="logo.svg" class="brand-logo" alt="EMI Master logo" width="36" height="36">' +
+      '<img src="logo.svg" class="brand-logo" alt="EMI Master logo" width="34" height="34">' +
       '<span>' + SITE_NAME + '</span>' +
       '</a>' +
       '<nav class="main-nav" id="mainNav">' + nav + '</nav>' +
       '<div class="header-tools">' +
       '<select class="lang-select" id="currencySelect" aria-label="Currency">' + buildCurrencyOptions() + '</select>' +
       '<button class="theme-toggle" id="themeToggle" title="Switch theme" aria-label="Toggle dark mode">&#127769;</button>' +
-      '</div>' +
       '<button class="nav-toggle" id="navToggle" aria-label="Menu">&#9776;</button>' +
+      '</div>' +
       '</div>' +
       '</header>'
     );
@@ -191,7 +191,7 @@
   function buildSidebar() {
     var current = currentPage();
     var html = '<aside class="sidebar">';
-    html += '<div class="sidebar-card"><h3>Math Calculator</h3><ul class="calc-nav">';
+    html += '<div class="sidebar-card"><h3>All Calculators</h3><ul class="calc-nav">';
     html += '<li><a href="index.html"' + (current === "index.html" ? ' class="active"' : "") + '>' +
       '<span class="sidebar-icon">&#127968;</span>' + tr('sidebar.all') + '</a></li>';
 
@@ -324,9 +324,21 @@
     if (headerSlot) {
       headerSlot.innerHTML = buildHeader();
       var toggle = document.getElementById("navToggle");
-      if (toggle) {
-        toggle.addEventListener("click", function () {
-          document.getElementById("mainNav").classList.toggle("open");
+      var mainNav = document.getElementById("mainNav");
+      if (toggle && mainNav) {
+        toggle.addEventListener("click", function (e) {
+          e.stopPropagation();
+          mainNav.classList.toggle("open");
+        });
+        document.addEventListener("click", function (e) {
+          if (mainNav.classList.contains("open") && !mainNav.contains(e.target) && !toggle.contains(e.target)) {
+            mainNav.classList.remove("open");
+          }
+        });
+        mainNav.addEventListener("click", function (e) {
+          if (e.target.tagName === "A") {
+            mainNav.classList.remove("open");
+          }
         });
       }
       var sel = document.getElementById("currencySelect");
@@ -359,6 +371,7 @@
     initBackToTop();
     initFaqs();
     initHomeSearch();
+    initIndexCategoryPills();
     initToolbox();
     initPageTools();
     initSeoContent();
@@ -402,6 +415,50 @@
           document.body.removeChild(tmp);
           showToast("Link copied to clipboard!");
         });
+      }
+    }
+
+    var resultPanel = document.querySelector(".result-panel");
+    if (resultPanel && !resultPanel.querySelector(".copy-result-btn")) {
+      var copyBtn = document.createElement("button");
+      copyBtn.className = "btn btn-outline copy-result-btn";
+      copyBtn.type = "button";
+      copyBtn.style.margin = "10px 0 0";
+      copyBtn.style.padding = "7px 14px";
+      copyBtn.style.fontSize = "0.82rem";
+      copyBtn.style.borderRadius = "20px";
+      copyBtn.innerHTML = "&#128203; Copy calculation summary";
+      copyBtn.addEventListener("click", function () {
+        var mainVal = resultPanel.querySelector(".result-main");
+        var title = document.querySelector(".page-title");
+        var text = (title ? title.textContent.trim() : document.title) + "\n";
+        if (mainVal) text += "Result: " + mainVal.textContent.trim() + "\n";
+        var items = resultPanel.querySelectorAll(".result-item");
+        items.forEach(function (it) {
+          var l = it.querySelector(".label");
+          var v = it.querySelector(".value");
+          if (l && v) text += l.textContent.trim() + ": " + v.textContent.trim() + "\n";
+        });
+        text += "\nCalculated at: " + window.location.href;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(function () {
+            showToast("Results copied to clipboard!");
+          });
+        } else {
+          var tmp = document.createElement("textarea");
+          tmp.value = text;
+          document.body.appendChild(tmp);
+          tmp.select();
+          document.execCommand("copy");
+          document.body.removeChild(tmp);
+          showToast("Results copied to clipboard!");
+        }
+      });
+      var actions = resultPanel.querySelector(".result-actions");
+      if (actions) {
+        actions.appendChild(copyBtn);
+      } else {
+        resultPanel.appendChild(copyBtn);
       }
     }
   }
@@ -551,10 +608,37 @@
 
   function initHomeSearch() {
     var form = document.getElementById("heroSearchForm");
+    var input = document.getElementById("heroSearchInput");
+
+    // Real-time live filtering on index.html
+    if (input && (currentPage() === "index.html" || currentPage() === "")) {
+      input.addEventListener("input", function () {
+        var query = input.value.toLowerCase().trim();
+        var cards = document.querySelectorAll(".calc-card");
+        cards.forEach(function (card) {
+          var text = card.textContent.toLowerCase();
+          if (!query || text.indexOf(query) !== -1) {
+            card.style.display = "";
+          } else {
+            card.style.display = "none";
+          }
+        });
+
+        // Hide section headers if all cards inside are hidden
+        var grids = document.querySelectorAll(".calc-grid");
+        grids.forEach(function (grid) {
+          var visibleCards = grid.querySelectorAll('.calc-card:not([style*="display: none"])');
+          var sec = grid.closest(".calc-section") || grid.parentElement;
+          if (sec && sec !== document.querySelector(".main-content")) {
+            sec.style.display = (query && visibleCards.length === 0) ? "none" : "";
+          }
+        });
+      });
+    }
+
     if (!form) return;
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      var input = document.getElementById("heroSearchInput");
       var q = (input ? input.value : "").toLowerCase().trim();
       if (!q) return;
       var map = {
@@ -674,6 +758,31 @@
         window.location.href = dest;
       } else {
         showToast("Try searching for 'EMI', 'DPS', 'FDR' or 'Loan'");
+      }
+    });
+  }
+
+  function initIndexCategoryPills() {
+    var pillBar = document.getElementById("catPills");
+    if (!pillBar) return;
+    pillBar.addEventListener("click", function (e) {
+      var btn = e.target.closest(".cat-pill");
+      if (!btn) return;
+      pillBar.querySelectorAll(".cat-pill").forEach(function (p) { p.classList.remove("active"); });
+      btn.classList.add("active");
+      var filter = btn.getAttribute("data-filter");
+
+      var sections = document.querySelectorAll(".calc-section");
+      if (filter === "all") {
+        sections.forEach(function (sec) { sec.style.display = ""; });
+      } else {
+        sections.forEach(function (sec) {
+          if (sec.getAttribute("data-cat") === filter) {
+            sec.style.display = "";
+          } else {
+            sec.style.display = "none";
+          }
+        });
       }
     });
   }

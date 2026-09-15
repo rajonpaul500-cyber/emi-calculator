@@ -27,7 +27,7 @@
     var dpr = window.devicePixelRatio || 1;
     var w = canvas.clientWidth || (canvas.parentElement ? canvas.parentElement.clientWidth : 0) || 600;
     if (w <= 0) return;
-    var h = 240;
+    var h = canvas.clientHeight || (w < 480 ? 180 : 220);
     canvas.width = w * dpr;
     canvas.height = h * dpr;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -47,7 +47,7 @@
     });
     if (max <= 0 && min >= 0) max = 1;
 
-    var padL = 58, padR = 12, padT = 34, padB = 34;
+    var padL = w < 480 ? 46 : 58, padR = 12, padT = 30, padB = 30;
     var plotW = w - padL - padR;
     var plotH = h - padT - padB;
     var range = max - min || 1;

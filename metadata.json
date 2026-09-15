@@ -1,0 +1,8 @@
+{
+  "name": "EMI Master",
+  "description": "50+ Free Online Calculators for Loans, EMI, DPS, FDR, Mortgage & Investment",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
