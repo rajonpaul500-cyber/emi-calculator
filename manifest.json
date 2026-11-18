@@ -1,7 +1,7 @@
 {
-  "name": "EMI Master - 50+ Free Online Calculators",
+  "name": "EMI Master - 65+ Free Online Calculators",
   "short_name": "EMI Master",
-  "description": "50+ free financial calculators: EMI, home loan, car loan, mortgage, DPS, FDR, compound interest, retirement, ROI and more.",
+  "description": "65+ free financial & math calculators: EMI, home loan, car loan, mortgage, DPS, FDR, compound interest, retirement, scientific calculator, and more.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

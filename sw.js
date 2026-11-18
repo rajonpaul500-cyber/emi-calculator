@@ -1,5 +1,5 @@
 /* EMI Master Service Worker - Offline-first PWA */
-var CACHE_NAME = 'emimaster-v2';
+var CACHE_NAME = 'emimaster-v3';
 var OFFLINE_URL = 'index.html';
 
 var PRECACHE = [

@@ -10,9 +10,17 @@
   function shortNum(v) {
     var sign = v < 0 ? '-' : '';
     v = Math.abs(v);
-    if (v >= 1e7) return sign + (v / 1e7).toFixed(v >= 1e8 ? 0 : 1) + 'Cr';
-    if (v >= 1e5) return sign + (v / 1e5).toFixed(0) + 'L';
-    if (v >= 1e3) return sign + (v / 1e3).toFixed(0) + 'K';
+    var cur = window.I18N ? window.I18N.get() : 'USD';
+    var southAsian = (cur === 'INR' || cur === 'BDT' || cur === 'PKR' || cur === 'LKR' || cur === 'NPR');
+    if (southAsian) {
+      if (v >= 1e7) return sign + (v / 1e7).toFixed(v >= 1e8 ? 0 : 1) + 'Cr';
+      if (v >= 1e5) return sign + (v / 1e5).toFixed(0) + 'L';
+      if (v >= 1e3) return sign + (v / 1e3).toFixed(0) + 'K';
+    } else {
+      if (v >= 1e9) return sign + (v / 1e9).toFixed(v >= 1e10 ? 0 : 1) + 'B';
+      if (v >= 1e6) return sign + (v / 1e6).toFixed(v >= 1e7 ? 0 : 1) + 'M';
+      if (v >= 1e3) return sign + (v / 1e3).toFixed(0) + 'K';
+    }
     return sign + Math.round(v).toString();
   }
 

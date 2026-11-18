@@ -139,28 +139,25 @@
   function buildHeader() {
     var nav = "";
     nav += '<ul>';
-    nav += '<li><a href="index.html" data-nav="index.html">' + tr("nav.home") + '</a></li>';
-    nav += '<li><a href="emi-calculator.html" data-nav="emi-calculator.html">EMI</a></li>';
-    nav += '<li><a href="home-loan.html" data-nav="home-loan.html">Home Loan</a></li>';
-    nav += '<li><a href="car-loan.html" data-nav="car-loan.html">Car Loan</a></li>';
-    nav += '<li><a href="personal-loan.html" data-nav="personal-loan.html">Personal</a></li>';
-    nav += '<li><a href="dps.html" data-nav="dps.html">DPS</a></li>';
-    nav += '<li><a href="fdr.html" data-nav="fdr.html">FDR</a></li>';
-    nav += '<li><a href="retirement-calculator.html" data-nav="retirement-calculator.html">Retirement</a></li>';
+    nav += '<li><a href="index.html" data-nav="index.html">Home</a></li>';
+    nav += '<li><a href="mortgage-calculator.html" data-nav="mortgage-calculator.html">Mortgage</a></li>';
+    nav += '<li><a href="emi-calculator.html" data-nav="emi-calculator.html">EMI &amp; Loans</a></li>';
+    nav += '<li><a href="investment-calculator.html" data-nav="investment-calculator.html">Investment</a></li>';
+    nav += '<li><a href="scientific-calculator.html" data-nav="scientific-calculator.html">Math</a></li>';
     nav += '</ul>';
 
     return (
       '<header class="site-header">' +
       '<div class="header-inner">' +
       '<a href="index.html" class="brand">' +
-      '<img src="logo.svg" class="brand-logo" alt="EMI Master logo" width="34" height="34">' +
+      '<img src="logo.svg" class="brand-logo" alt="EMI Master logo" width="32" height="32">' +
       '<span>' + SITE_NAME + '</span>' +
       '</a>' +
-      '<nav class="main-nav" id="mainNav">' + nav + '</nav>' +
+      '<nav class="main-nav" id="mainNav" aria-label="Main navigation">' + nav + '</nav>' +
       '<div class="header-tools">' +
-      '<button type="button" class="header-search-btn" id="headerSearchBtn" title="Search Calculators (Ctrl+K)" aria-label="Search Calculators">' +
+      '<button type="button" class="header-search-btn" id="headerSearchBtn" title="Search 65+ Calculators (Ctrl+K)" aria-label="Search Calculators">' +
       '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>' +
-      '<span class="search-btn-text">Search...</span><span class="search-shortcut">⌘K</span>' +
+      '<span class="search-btn-text">Search 65+ tools</span><span class="search-shortcut">&#8984;K</span>' +
       '</button>' +
       '<select class="lang-select" id="currencySelect" aria-label="Currency">' + buildCurrencyOptions() + '</select>' +
       '<button class="theme-toggle" id="themeToggle" title="Switch theme" aria-label="Toggle dark mode">&#127769;</button>' +
@@ -217,12 +214,21 @@
     });
     html += '</ul></div>';
 
-    html += '<div class="sidebar-card"><h3>' + tr('sidebar.quicklinks') + '</h3><ul>';
-    html += '<li><a href="sitemap.html"><span class="sidebar-icon">&#128506;&#65039;</span>All Calculators (Sitemap)</a></li>';
-    html += '<li><a href="privacy-policy.html"><span class="sidebar-icon">&#128274;</span>' + tr('sidebar.privacy') + '</a></li>';
+    html += '<div class="sidebar-card"><h3>Quick Directory</h3><ul>';
+    html += '<li><a href="sitemap.html"><span class="sidebar-icon">&#128506;&#65039;</span>All 65+ Calculators</a></li>';
+    html += '<li><a href="privacy-policy.html"><span class="sidebar-icon">&#128274;</span>Privacy Policy</a></li>';
     html += '</ul></div>';
 
-    html += '<div class="ad-slot ad-slot-sidebar"><span class="ad-slot-label">' + tr('ad.label') + '</span></div>';
+    var recent = getRecentCalculators();
+    if (recent.length) {
+      html += '<div class="sidebar-card"><h3>Recently Used</h3><ul>';
+      recent.slice(0, 5).forEach(function (r) {
+        html += '<li><a href="' + r.url + '"' + (r.url === current ? ' class="active"' : '') + '>' +
+          '<span class="sidebar-icon">' + (r.icon || '&#128200;') + '</span>' + r.title + '</a></li>';
+      });
+      html += '</ul></div>';
+    }
+
     html += '</aside>';
     return html;
   }
@@ -235,8 +241,8 @@
     html += '<h4>' + SITE_NAME + '</h4>';
     html += '<p>' + SITE_TAGLINE + '. Fast, accurate and free tools for EMI, loans, ' +
       'savings and everyday calculations. Your data never leaves your device.</p>';
-    html += '<p><strong>50+ advanced calculators</strong> for loans, mortgages, savings, ' +
-      'investments, retirement and business finance.</p>';
+    html += '<p><strong>65+ advanced calculators</strong> for loans, mortgages, savings, ' +
+      'investments, retirement, mathematics and business finance.</p>';
     html += '</div>';
     html += '<div class="footer-col">';
     html += '<h4>' + tr('footer.popular') + '</h4><ul>';
@@ -272,7 +278,7 @@
     html += '<li><a href="amortization-calculator.html">Amortization Schedule</a></li>';
     html += '<li><a href="random-number-generator.html">Random Number Gen</a></li>';
     html += '<li><a href="binary-calculator.html">Binary Calculator</a></li>';
-    html += '<li><a href="sitemap.html">&rarr; View All 50+ Tools</a></li>';
+    html += '<li><a href="sitemap.html">&rarr; View All 65+ Tools</a></li>';
     html += '</ul></div>';
     html += '</div>';
     html += '<div class="footer-bottom">';
@@ -382,17 +388,133 @@
   }
 
   function init() {
+    trackRecentCalculator();
     renderChrome();
     window.addEventListener("localechange", renderChrome);
     initBackToTop();
+    initMobileBottomBar();
     initFaqs();
     initHomeSearch();
     initGlobalQuickSearchModal();
     initIndexCategoryPills();
+    renderHomeRecentTools();
     initToolbox();
     initPageTools();
     initSeoContent();
     initRelatedCalc();
+  }
+
+  var RECENT_KEY = "emimaster-recent";
+  var FAV_KEY = "emimaster-favs";
+
+  function getRecentCalculators() {
+    try {
+      var raw = localStorage.getItem(RECENT_KEY);
+      return raw ? JSON.parse(raw) : [];
+    } catch (e) { return []; }
+  }
+
+  function getFavoriteUrls() {
+    try {
+      var raw = localStorage.getItem(FAV_KEY);
+      return raw ? JSON.parse(raw) : [];
+    } catch (e) { return []; }
+  }
+
+  function toggleFavoriteUrl(url) {
+    var favs = getFavoriteUrls();
+    var idx = favs.indexOf(url);
+    var added = false;
+    if (idx === -1) {
+      favs.unshift(url);
+      added = true;
+    } else {
+      favs.splice(idx, 1);
+    }
+    try { localStorage.setItem(FAV_KEY, JSON.stringify(favs.slice(0, 12))); } catch (e) { /* ignore */ }
+    return added;
+  }
+
+  function trackRecentCalculator() {
+    var page = currentPage();
+    if (!page || page === "index.html" || page === "sitemap.html" || page === "privacy-policy.html" || page === "404.html") return;
+    var match = null;
+    for (var i = 0; i < CALCULATORS_REGISTRY.length; i++) {
+      if (CALCULATORS_REGISTRY[i].url === page) {
+        match = CALCULATORS_REGISTRY[i];
+        break;
+      }
+    }
+    if (!match) return;
+    var list = getRecentCalculators().filter(function (x) { return x.url !== page; });
+    list.unshift({ url: match.url, title: match.title, icon: match.icon, cat: match.cat });
+    try { localStorage.setItem(RECENT_KEY, JSON.stringify(list.slice(0, 8))); } catch (e) { /* ignore */ }
+  }
+
+  function renderHomeRecentTools() {
+    var host = document.getElementById("recentToolsSection");
+    if (!host) return;
+    var favUrls = getFavoriteUrls();
+    var recent = getRecentCalculators();
+    var items = [];
+    var seen = {};
+    favUrls.forEach(function (u) {
+      var found = CALCULATORS_REGISTRY.find(function (c) { return c.url === u; });
+      if (found && !seen[u]) {
+        seen[u] = true;
+        items.push({ item: found, isFav: true });
+      }
+    });
+    recent.forEach(function (r) {
+      if (!seen[r.url]) {
+        seen[r.url] = true;
+        items.push({ item: r, isFav: false });
+      }
+    });
+    if (!items.length) {
+      host.style.display = "none";
+      return;
+    }
+    host.style.display = "";
+    var grid = document.getElementById("recentToolsGrid");
+    if (!grid) return;
+    grid.innerHTML = items.slice(0, 4).map(function (entry) {
+      var c = entry.item;
+      return '<a class="recent-tool-link" href="' + c.url + '">' +
+        '<span class="recent-tool-icon">' + (c.icon || '&#128200;') + '</span>' +
+        '<span class="recent-tool-meta"><strong>' + c.title + '</strong><span>' + (entry.isFav ? 'Pinned favorite' : 'Recently used') + '</span></span>' +
+        '</a>';
+    }).join("");
+  }
+
+  function initMobileBottomBar() {
+    if (document.getElementById("mobileBottomNav")) return;
+    var cur = currentPage();
+    var bar = document.createElement("nav");
+    bar.id = "mobileBottomNav";
+    bar.className = "mobile-bottom-nav";
+    bar.setAttribute("aria-label", "Quick mobile navigation");
+    bar.innerHTML =
+      '<a href="index.html" class="mbn-item' + (cur === "index.html" ? " active" : "") + '">' +
+      '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>' +
+      '<span>Home</span></a>' +
+      '<button type="button" class="mbn-item" id="mbnSearchBtn">' +
+      '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>' +
+      '<span>Search</span></button>' +
+      '<a href="emi-calculator.html" class="mbn-item' + (cur === "emi-calculator.html" ? " active" : "") + '">' +
+      '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/></svg>' +
+      '<span>EMI</span></a>' +
+      '<a href="sitemap.html" class="mbn-item' + (cur === "sitemap.html" ? " active" : "") + '">' +
+      '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>' +
+      '<span>All Tools</span></a>';
+    document.body.appendChild(bar);
+    var sBtn = document.getElementById("mbnSearchBtn");
+    if (sBtn) {
+      sBtn.addEventListener("click", function () {
+        var headerSearch = document.getElementById("headerSearchBtn");
+        if (headerSearch) headerSearch.click();
+      });
+    }
   }
 
   /* ================================================================
@@ -402,13 +524,31 @@
   function initPageTools() {
     var main = document.querySelector(".main-content");
     if (!main || currentPage() === "index.html") return;
-    if (main.querySelector(".content-section")) {
+    var page = currentPage();
+    if (main.querySelector(".content-section") || main.querySelector(".card")) {
+      var isFav = getFavoriteUrls().indexOf(page) !== -1;
       var toolbar = document.createElement("div");
       toolbar.className = "page-tools";
       toolbar.innerHTML =
-        '<button class="page-tool" id="toolPrint" title="Print this page">&#128424; Print</button>' +
-        '<button class="page-tool" id="toolShare" title="Share this calculator">&#128279; Share</button>';
-      main.insertBefore(toolbar, main.firstChild);
+        '<button class="page-tool' + (isFav ? ' active' : '') + '" id="toolFav" type="button" title="Save to favorites">' + (isFav ? '&#9733; Saved' : '&#9734; Save') + '</button>' +
+        '<button class="page-tool" id="toolPrint" type="button" title="Print this page">&#128424; Print</button>' +
+        '<button class="page-tool" id="toolShare" type="button" title="Share this calculator">&#128279; Share</button>';
+      var breadcrumb = main.querySelector(".breadcrumb");
+      if (breadcrumb && breadcrumb.parentNode === main) {
+        breadcrumb.insertAdjacentElement("afterend", toolbar);
+      } else {
+        main.insertBefore(toolbar, main.firstChild);
+      }
+
+      var favBtn = document.getElementById("toolFav");
+      if (favBtn) {
+        favBtn.addEventListener("click", function () {
+          var added = toggleFavoriteUrl(page);
+          favBtn.classList.toggle("active", added);
+          favBtn.innerHTML = added ? "&#9733; Saved" : "&#9734; Save";
+          showToast(added ? "Pinned to your Saved Calculators!" : "Removed from Saved Calculators");
+        });
+      }
 
       var printBtn = document.getElementById("toolPrint");
       if (printBtn) printBtn.addEventListener("click", function () { window.print(); });
@@ -604,8 +744,7 @@
   /* Related calculators from page header metadata */
   function initRelatedCalc() {
     var main = document.querySelector(".main-content");
-    if (!main) return;
-    var page = currentPage();
+    if (!main || main.querySelector(".related-grid")) return;
     var meta = document.getElementById("relatedData");
     if (!meta) return;
     try {
@@ -648,6 +787,7 @@
 
     // Financial & Loan Category
     { title: "Mortgage Calculator", url: "mortgage-calculator.html", cat: "Financial", icon: "🏡", desc: "Complete home mortgage payment with principal, interest, taxes, and insurance", keywords: "mortgage home loan monthly payment pmi property tax interest housing" },
+    { title: "Mortgage Payoff Calculator", url: "mortgage-payoff.html", cat: "Financial", icon: "🏁", desc: "Calculate early mortgage payoff savings with extra monthly or lump-sum payments", keywords: "mortgage payoff early payoff extra principal biweekly savings amortization" },
     { title: "Amortization Calculator", url: "amortization-calculator.html", cat: "Financial", icon: "📊", desc: "Detailed month-by-month and annual amortization payment schedule", keywords: "amortization schedule payoff principal interest balance monthly table breakdown" },
     { title: "EMI Calculator", url: "emi-calculator.html", cat: "Financial", icon: "💳", desc: "Equal Monthly Installments for any loan with live payment schedule", keywords: "emi loan monthly payment installments interest calculator" },
     { title: "Home Loan Calculator", url: "home-loan.html", cat: "Financial", icon: "🏠", desc: "Home loan repayment estimator with prepayment and amortization", keywords: "home loan house finance mortgage loan emi property" },
@@ -738,13 +878,13 @@
         '<div class="search-modal">' +
         '<div class="search-modal-header">' +
         '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>' +
-        '<input type="text" class="search-modal-input" id="quickSearchModalInput" placeholder="Search 50+ calculators (e.g., fraction, quadratic, percentage, EMI)..." autocomplete="off">' +
+        '<input type="text" class="search-modal-input" id="quickSearchModalInput" placeholder="Search 65+ calculators (e.g., fraction, quadratic, percentage, EMI)..." autocomplete="off">' +
         '<button type="button" class="search-modal-close" id="quickSearchModalClose" aria-label="Close search">&times;</button>' +
         '</div>' +
         '<div class="search-modal-results" id="quickSearchModalResults"></div>' +
         '<div class="search-modal-footer">' +
         '<span><strong>ProTip:</strong> Press <kbd>ESC</kbd> to close &bull; <kbd>&uarr;</kbd><kbd>&darr;</kbd> to navigate</span>' +
-        '<span>50+ Free Calculators</span>' +
+        '<span>65+ Free Calculators</span>' +
         '</div>' +
         '</div>' +
         '</div>';
@@ -883,7 +1023,8 @@
         // Filter cards in grid
         cards.forEach(function (card) {
           var text = card.textContent.toLowerCase();
-          var href = card.getAttribute("href") || "";
+          var linkEl = card.querySelector("a");
+          var href = card.getAttribute("href") || (linkEl ? linkEl.getAttribute("href") : "") || "";
           var matchRegistry = CALCULATORS_REGISTRY.some(function (reg) {
             if (reg.url === href) {
               return reg.keywords.toLowerCase().indexOf(query) !== -1 || reg.title.toLowerCase().indexOf(query) !== -1;
@@ -1004,22 +1145,30 @@
   }
 
   /* ----- formatting helpers ----- */
+  function activeLocaleGroup() {
+    if (window.I18N && window.I18N.currencies && window.I18N.get) {
+      var c = window.I18N.currencies[window.I18N.get()];
+      if (c && c.group) return c.group;
+    }
+    return "en-US";
+  }
+
   function formatMoney(n) {
-    return Number(n).toLocaleString("en-IN", {
+    return Number(n).toLocaleString(activeLocaleGroup(), {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2
     });
   }
 
   function formatMoneyWhole(n) {
-    return Number(n).toLocaleString("en-IN", {
+    return Number(n).toLocaleString(activeLocaleGroup(), {
       minimumFractionDigits: 0,
       maximumFractionDigits: 2
     });
   }
 
   function formatNumber(n) {
-    return Number(n).toLocaleString("en-IN", {
+    return Number(n).toLocaleString(activeLocaleGroup(), {
       maximumFractionDigits: 2
     });
   }
@@ -1041,7 +1190,7 @@
     var display = document.getElementById(displayId);
     if (range && display) {
       range.addEventListener("input", function () {
-        display.textContent = Number(range.value).toLocaleString("en-IN");
+        display.textContent = Number(range.value).toLocaleString(activeLocaleGroup());
       });
     }
   }

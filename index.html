@@ -14,29 +14,89 @@
   <script>try { if (localStorage.getItem("emimaster-theme") === "dark") document.documentElement.setAttribute("data-theme", "dark") } catch (e) { }</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EMI Master - 50+ Free Online Calculators for Loans, EMI, DPS, FDR, Mortgage & Investment</title>
+  <title>EMI Master — 65+ Free Financial, Loan, Mortgage &amp; Math Calculators</title>
   <meta name="description"
-    content="EMI Master offers 50+ 100% free online calculators: EMI, home loan, car loan, personal loan, mortgage, DPS, FDR, compound interest, retirement, ROI and more. Fast, accurate, private — data never leaves your device.">
+    content="Calculate EMI, home loans, mortgages, compound interest, retirement, percentages, and scientific math with 65+ free online calculators. Fast, mobile-ready, and private.">
   <meta name="keywords"
-    content="EMI calculator, loan calculator, home loan calculator, car loan calculator, mortgage calculator, DPS calculator, FDR calculator, compound interest calculator, retirement calculator, ROI calculator, free online calculators">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://emimaster.com/index.html">
-  <meta property="og:title" content="EMI Master - 50+ Free Online Calculators">
+    content="online calculator, EMI calculator, loan calculator, mortgage calculator, home loan calculator, compound interest calculator, percentage calculator, scientific calculator, DPS calculator, FDR calculator">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <link rel="canonical" href="https://emimaster.com/">
+  <meta property="og:site_name" content="EMI Master">
+  <meta property="og:title" content="EMI Master — 65+ Free Financial, Loan, Mortgage &amp; Math Calculators">
   <meta property="og:description"
-    content="Free online EMI, loan, mortgage, DPS, FDR, investment and retirement calculators. Fast, accurate and private.">
+    content="65+ fast, accurate, and private online calculators for EMI, mortgages, loans, investments, retirement, and math. Works offline on mobile &amp; desktop.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://emimaster.com/">
+  <meta property="og:image" content="https://emimaster.com/icons/og-banner.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="EMI Master — 65+ Free Financial, Loan &amp; Math Calculators">
+  <meta name="twitter:description"
+    content="Calculate EMI, mortgages, investments, retirement, percentages &amp; scientific math instantly. 100% free and private.">
+  <meta name="twitter:image" content="https://emimaster.com/icons/og-banner.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "EMI Master",
     "url": "https://emimaster.com/",
+    "description": "Free online financial, mortgage, loan, investment, retirement, and math calculator suite.",
     "potentialAction": {
       "@type": "SearchAction",
       "target": "https://emimaster.com/?q={search_term_string}",
       "query-input": "required name=search_term_string"
     }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "EMI Master Calculator Suite",
+    "url": "https://emimaster.com/",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "All",
+    "browserRequirements": "Requires JavaScript",
+    "description": "65+ free online financial, mortgage, investment, retirement, and math calculators with charts and amortization schedules.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Are all calculators on EMI Master 100% free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. All 65+ financial, mortgage, loan, investment, retirement, and math calculators on EMI Master are completely free with no registration, paywalls, or usage limits."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my financial data private when using EMI Master?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Every calculation runs 100% locally inside your web browser. Your loan amounts, income, interest rates, and math expressions are never uploaded to any server."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does EMI Master support multiple currencies and offline mobile use?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. You can switch between 17 currencies including USD, EUR, GBP, INR, and BDT from the top bar, and install EMI Master as a Progressive Web App for offline mobile access."
+        }
+      }
+    ]
   }
   </script>
   <link rel="stylesheet" href="css/style.css">
@@ -47,17 +107,130 @@
 
   <div id="siteHeader"></div>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="container">
-      <h1>50+ Free Financial Calculators, One Place</h1>
-      <p>Plan loans, savings, investments and retirement with fast, accurate and 100% private tools. No signup, no data
-        leaving your device.</p>
-      <form class="hero-search" id="heroSearchForm">
-        <input type="text" id="heroSearchInput" placeholder="Search calculators e.g. EMI, Home Loan, DPS, FDR..."
-          aria-label="Search calculators">
-        <button type="submit">Search</button>
-      </form>
+  <!-- Split Hero + Instant 3-Tab Calculator Dock -->
+  <section class="hero home-hero">
+    <div class="home-hero-grid">
+      <div class="home-hero-copy">
+        <h1>65+ Free Financial, Loan &amp; Math Calculators</h1>
+        <p>Calculate EMI, mortgages, compound interest, retirement, and scientific math with instant charts and amortization schedules. Fast, accurate, and 100% private.</p>
+        <form class="hero-search" id="heroSearchForm">
+          <input type="text" id="heroSearchInput" placeholder="Search 65+ calculators (e.g. EMI, Mortgage, Percentage, Fraction)..."
+            aria-label="Search calculators">
+          <button type="submit">Find Tool</button>
+        </form>
+        <div class="hero-meta-strip">
+          <span>65+ Precision Tools</span>
+          <span aria-hidden="true">&middot;</span>
+          <span>17 Currencies</span>
+          <span aria-hidden="true">&middot;</span>
+          <span>Browser-Only Privacy</span>
+          <span aria-hidden="true">&middot;</span>
+          <span>Offline Ready</span>
+        </div>
+      </div>
+
+      <div class="instant-dock" aria-label="Instant Quick Calculator">
+        <div class="instant-dock-tabs" role="tablist">
+          <button type="button" class="dock-tab-btn active" data-dock="calc" role="tab" aria-selected="true">Quick Calc</button>
+          <button type="button" class="dock-tab-btn" data-dock="emi" role="tab" aria-selected="false">Quick EMI</button>
+          <button type="button" class="dock-tab-btn" data-dock="pct" role="tab" aria-selected="false">Percentage</button>
+        </div>
+        <div class="instant-dock-body">
+          <!-- Tab 1: Pocket Calculator -->
+          <div class="dock-panel active" id="dockPanelCalc">
+            <div class="dock-screen">
+              <div class="dock-screen-expr" id="dockCalcExpr">0</div>
+              <div class="dock-screen-val" id="dockCalcVal">0</div>
+            </div>
+            <div class="dock-pad">
+              <button type="button" class="dock-key clr" data-dk="C">AC</button>
+              <button type="button" class="dock-key op" data-dk="BS">&#9003;</button>
+              <button type="button" class="dock-key op" data-dk="%">%</button>
+              <button type="button" class="dock-key op" data-dk="/">/</button>
+              <button type="button" class="dock-key" data-dk="7">7</button>
+              <button type="button" class="dock-key" data-dk="8">8</button>
+              <button type="button" class="dock-key" data-dk="9">9</button>
+              <button type="button" class="dock-key op" data-dk="*">&times;</button>
+              <button type="button" class="dock-key" data-dk="4">4</button>
+              <button type="button" class="dock-key" data-dk="5">5</button>
+              <button type="button" class="dock-key" data-dk="6">6</button>
+              <button type="button" class="dock-key op" data-dk="-">&minus;</button>
+              <button type="button" class="dock-key" data-dk="1">1</button>
+              <button type="button" class="dock-key" data-dk="2">2</button>
+              <button type="button" class="dock-key" data-dk="3">3</button>
+              <button type="button" class="dock-key op" data-dk="+">+</button>
+              <button type="button" class="dock-key" data-dk="0">0</button>
+              <button type="button" class="dock-key" data-dk="00">00</button>
+              <button type="button" class="dock-key" data-dk=".">.</button>
+              <button type="button" class="dock-key eq" data-dk="=">=</button>
+            </div>
+            <div class="dock-footer-link">
+              <span>Need sin, cos, log, or roots?</span>
+              <a href="scientific-calculator.html">Full Scientific Calc &rarr;</a>
+            </div>
+          </div>
+
+          <!-- Tab 2: Quick EMI -->
+          <div class="dock-panel" id="dockPanelEmi">
+            <div class="dock-mini-form">
+              <div>
+                <label for="dockEmiAmt">Loan Amount</label>
+                <input type="number" id="dockEmiAmt" value="250000" min="0" step="5000">
+              </div>
+              <div class="dock-mini-row">
+                <div>
+                  <label for="dockEmiRate">Interest (% / yr)</label>
+                  <input type="number" id="dockEmiRate" value="7.5" min="0" max="50" step="0.1">
+                </div>
+                <div>
+                  <label for="dockEmiYears">Term (Years)</label>
+                  <input type="number" id="dockEmiYears" value="15" min="1" max="40" step="1">
+                </div>
+              </div>
+              <div class="dock-mini-result">
+                <div class="dock-mini-result-main" id="dockEmiOut">$2,317.53 / mo</div>
+                <div class="dock-mini-result-sub" id="dockEmiSub">Total Interest: $167,156 &middot; Total: $417,156</div>
+              </div>
+            </div>
+            <div class="dock-footer-link">
+              <span>Full amortization &amp; extra payments</span>
+              <a href="emi-calculator.html">Open EMI Pro &rarr;</a>
+            </div>
+          </div>
+
+          <!-- Tab 3: Quick Percentage -->
+          <div class="dock-panel" id="dockPanelPct">
+            <div class="dock-mini-form">
+              <div>
+                <label for="dockPctMode">Calculation Mode</label>
+                <select id="dockPctMode">
+                  <option value="pof">What is X% of Y?</option>
+                  <option value="what">X is what % of Y?</option>
+                  <option value="chg">% Change from X to Y</option>
+                </select>
+              </div>
+              <div class="dock-mini-row">
+                <div>
+                  <label for="dockPctX" id="dockPctXLabel">Percent (X%)</label>
+                  <input type="number" id="dockPctX" value="20" step="any">
+                </div>
+                <div>
+                  <label for="dockPctY" id="dockPctYLabel">Value (Y)</label>
+                  <input type="number" id="dockPctY" value="450" step="any">
+                </div>
+              </div>
+              <div class="dock-mini-result">
+                <div class="dock-mini-result-main" id="dockPctOut">90</div>
+                <div class="dock-mini-result-sub" id="dockPctSub">20% of 450 = 90.00</div>
+              </div>
+            </div>
+            <div class="dock-footer-link">
+              <span>Discounts, markups &amp; reverse %</span>
+              <a href="percentage-calculator.html">Open Percentage Pro &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -66,23 +239,21 @@
 
     <main class="main-content">
 
-      <!-- Category Filter Pills (Mobile & Desktop Friendly) -->
-      <div class="cat-pill-bar" id="catPills" role="tablist" aria-label="Calculator categories">
-        <button class="cat-pill active" data-filter="all" type="button">🌟 All Tools</button>
-        <button class="cat-pill" data-filter="popular" type="button">🔥 Popular</button>
-        <button class="cat-pill" data-filter="mortgage" type="button">🏠 Mortgage & Property</button>
-        <button class="cat-pill" data-filter="investment" type="button">📈 Investment & Savings</button>
-        <button class="cat-pill" data-filter="retirement" type="button">🏖️ Retirement & Pension</button>
-        <button class="cat-pill" data-filter="business" type="button">💼 Business</button>
-        <button class="cat-pill" data-filter="math" type="button">🔢 Math & Scientific</button>
-      </div>
+      <!-- Recently Used / Pinned Calculators (hidden when empty) -->
+      <section class="recent-tools-section" id="recentToolsSection" style="display:none;">
+        <h2 class="page-title" style="font-size:1.15rem; margin-bottom:10px;">Your Quick Access</h2>
+        <div class="recent-tools-grid" id="recentToolsGrid"></div>
+      </section>
 
-      <!-- Trust badges -->
-      <div class="quick-facts">
-        <div class="fact-chip"><strong>50+</strong> calculators</div>
-        <div class="fact-chip"><strong>100%</strong> free</div>
-        <div class="fact-chip"><strong>🔒</strong> private & fast</div>
-        <div class="fact-chip"><strong>📱</strong> mobile ready</div>
+      <!-- Category Filter Tabs -->
+      <div class="cat-pill-bar" id="catPills" role="tablist" aria-label="Calculator categories">
+        <button class="cat-pill active" data-filter="all" type="button">All 65+ Tools</button>
+        <button class="cat-pill" data-filter="popular" type="button">Popular</button>
+        <button class="cat-pill" data-filter="mortgage" type="button">Mortgage &amp; Property</button>
+        <button class="cat-pill" data-filter="investment" type="button">Investment &amp; Savings</button>
+        <button class="cat-pill" data-filter="retirement" type="button">Retirement &amp; Pension</button>
+        <button class="cat-pill" data-filter="business" type="button">Business</button>
+        <button class="cat-pill" data-filter="math" type="button">Math &amp; Scientific</button>
       </div>
 
       <section class="calc-section" data-cat="popular">
@@ -141,8 +312,6 @@
         </div>
       </div>
       </section>
-
-      <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
 
       <section class="calc-section" data-cat="mortgage">
         <h2 class="page-title" style="margin:8px 0 6px;">Mortgage & Real Estate Calculators</h2>
@@ -262,8 +431,6 @@
         </div>
       </div>
       </section>
-
-      <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
 
       <section class="calc-section" data-cat="investment">
         <h2 class="page-title" style="margin:8px 0 6px;">Investment Calculators</h2>
@@ -440,8 +607,6 @@
       </div>
       </section>
 
-      <div class="ad-slot ad-slot-responsive"><span class="ad-slot-label">Advertisement</span></div>
-
       <section class="calc-section" data-cat="math">
         <h2 class="page-title" id="math" style="margin:8px 0 6px;">Math Calculators</h2>
         <p class="page-subtitle">Free math tools for algebra, fractions, trigonometry, statistics and more.</p>
@@ -590,50 +755,59 @@
       </section>
 
       <div class="content-section">
-        <h2>Why Use EMI Master Calculators?</h2>
-        <p>EMI Master is built to make financial planning simple and accessible for everyone. Every calculator on this
-          site is free, requires no signup, and runs entirely in your browser &mdash; your data never leaves your
-          device.</p>
+        <h2>Why Choose EMI Master Calculators?</h2>
+        <p>EMI Master is engineered as a fast, distraction-free alternative to bloated calculator portals. Every tool loads instantaneously, formats numbers cleanly in your preferred currency, and runs 100% locally in your browser.</p>
         <ul>
-          <li><strong>100% Free:</strong> No hidden fees, no premium tiers, no downloads.</li>
-          <li><strong>Private & Secure:</strong> Calculations run on your device. Nothing is stored or transmitted.</li>
-          <li><strong>Fast & Accurate:</strong> Industry-standard formulas with precise results.</li>
-          <li><strong>Mobile Friendly:</strong> Works beautifully on phones, tablets and desktops.</li>
-          <li><strong>Advanced Insights:</strong> Smart analytics show interest split, break-even point and equity
-            milestones.</li>
+          <li><strong>65+ Specialized Calculators:</strong> Covering mortgages, EMI, auto &amp; personal loans, DPS, FDR, compound interest, retirement, and 20 scientific &amp; algebra math tools.</li>
+          <li><strong>100% Client-Side Privacy:</strong> Your income, loan balances, and calculations never leave your phone or computer.</li>
+          <li><strong>Interactive Visual Insights:</strong> Year-by-year charts, principal-vs-interest donuts, and exportable CSV amortization tables.</li>
+          <li><strong>Mobile-First Ergonomics:</strong> Touch-friendly controls, thumb-zone navigation, dark mode, and offline PWA support.</li>
         </ul>
+
+        <h3>Frequently Asked Questions</h3>
+        <div class="faq-item">
+          <div class="faq-q">Are all calculators on EMI Master 100% free?<span class="arrow">&#9654;</span></div>
+          <div class="faq-a">Yes. Every calculator on EMI Master is completely free with no account registration, hidden fees, or daily limits.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Is my financial data private when using EMI Master?<span class="arrow">&#9654;</span></div>
+          <div class="faq-a">Yes. Every calculation executes directly inside your browser using JavaScript. No personal or financial inputs are stored on external servers.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Does EMI Master support global currencies and offline use?<span class="arrow">&#9654;</span></div>
+          <div class="faq-a">Yes. Use the currency selector in the top bar to switch between USD, EUR, GBP, INR, BDT, and 12+ other currencies, or install EMI Master on your phone to calculate offline.</div>
+        </div>
 
         <h3>Popular Searches</h3>
         <p>
-          <a href="emi-calculator.html">EMI Calculator</a> &bull;
-          <a href="mortgage-calculator.html">Mortgage Calculator</a> &bull;
-          <a href="house-affordability.html">House Affordability</a> &bull;
-          <a href="refinance-calculator.html">Refinance Calculator</a> &bull;
-          <a href="rent-vs-buy.html">Rent vs Buy</a> &bull;
-          <a href="home-loan.html">Home Loan Calculator</a> &bull;
-          <a href="car-loan.html">Car Loan Calculator</a> &bull;
-          <a href="personal-loan.html">Personal Loan Calculator</a> &bull;
-          <a href="loan-payoff.html">Loan Payoff Calculator</a> &bull;
-          <a href="dps.html">DPS Calculator</a> &bull;
-          <a href="fdr.html">FDR Calculator</a> &bull;
-          <a href="compound-interest-calculator.html">Compound Interest</a> &bull;
-          <a href="mutual-fund-calculator.html">Mutual Fund Calculator</a> &bull;
-          <a href="retirement-calculator.html">Retirement Calculator</a> &bull;
-          <a href="roi-calculator.html">ROI Calculator</a> &bull;
-          <a href="depreciation-calculator.html">Depreciation Calculator</a>
+          <a href="emi-calculator.html">EMI Calculator</a> &middot;
+          <a href="mortgage-calculator.html">Mortgage Calculator</a> &middot;
+          <a href="house-affordability.html">House Affordability</a> &middot;
+          <a href="refinance-calculator.html">Refinance Calculator</a> &middot;
+          <a href="rent-vs-buy.html">Rent vs Buy</a> &middot;
+          <a href="home-loan.html">Home Loan Calculator</a> &middot;
+          <a href="car-loan.html">Car Loan Calculator</a> &middot;
+          <a href="personal-loan.html">Personal Loan Calculator</a> &middot;
+          <a href="loan-payoff.html">Loan Payoff Calculator</a> &middot;
+          <a href="dps.html">DPS Calculator</a> &middot;
+          <a href="fdr.html">FDR Calculator</a> &middot;
+          <a href="compound-interest-calculator.html">Compound Interest</a> &middot;
+          <a href="mutual-fund-calculator.html">Mutual Fund Calculator</a> &middot;
+          <a href="retirement-calculator.html">Retirement Calculator</a> &middot;
+          <a href="scientific-calculator.html">Scientific Calculator</a> &middot;
+          <a href="percentage-calculator.html">Percentage Calculator</a> &middot;
+          <a href="fraction-calculator.html">Fraction Calculator</a> &middot;
+          <a href="sitemap.html">All 65+ Calculators</a>
         </p>
       </div>
 
       <div class="content-section">
-        <h2>How to Calculate Home Loan EMI</h2>
-        <p>EMI (Equated Monthly Installment) is the fixed amount you pay your lender every month. It is calculated with
-          the formula:</p>
+        <h2>How to Calculate Loan &amp; Mortgage EMI</h2>
+        <p>EMI (Equated Monthly Installment) is the fixed payment made to a lender each month until a loan is repaid in full. It combines principal repayment and monthly interest using the standard amortization formula:</p>
         <div class="definition">
           <p><strong>EMI = P &times; r &times; (1 + r)<sup>n</sup> / ((1 + r)<sup>n</sup> &minus; 1)</strong></p>
         </div>
-        <p>Where <code>P</code> is the loan amount, <code>r</code> is the monthly interest rate (annual rate &divide; 12
-          &divide; 100), and <code>n</code> is the number of monthly payments. Try the <a href="emi-calculator.html">EMI
-            Calculator</a> and see the full amortization schedule with smart insights instantly.</p>
+        <p>Where <code>P</code> is the loan principal, <code>r</code> is the monthly interest rate (annual rate &divide; 12 &divide; 100), and <code>n</code> is the total number of monthly payments. Open the <a href="emi-calculator.html">EMI Calculator</a> or <a href="mortgage-calculator.html">Mortgage Calculator</a> to inspect your complete amortization schedule and extra-payment savings.</p>
       </div>
     </main>
   </div>
@@ -692,6 +866,156 @@
   <script src="js/currency.js"></script>
   <script src="js/seo-content.js"></script>
   <script src="js/common.js"></script>
+  <script>
+  (function () {
+    // 3-Tab Instant Calculator Dock on Homepage
+    var tabs = document.querySelectorAll(".dock-tab-btn");
+    var panels = {
+      calc: document.getElementById("dockPanelCalc"),
+      emi: document.getElementById("dockPanelEmi"),
+      pct: document.getElementById("dockPanelPct")
+    };
+    tabs.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var target = btn.getAttribute("data-dock");
+        tabs.forEach(function (t) {
+          var active = t === btn;
+          t.classList.toggle("active", active);
+          t.setAttribute("aria-selected", active ? "true" : "false");
+        });
+        Object.keys(panels).forEach(function (k) {
+          if (panels[k]) panels[k].classList.toggle("active", k === target);
+        });
+      });
+    });
+
+    // Quick Calc Keypad Logic
+    var exprEl = document.getElementById("dockCalcExpr");
+    var valEl = document.getElementById("dockCalcVal");
+    var calcStr = "";
+
+    function safeEvalCalc(s) {
+      var cleaned = s.replace(/[^0-9+\-*/.%() ]/g, "").replace(/(\d+(?:\.\d+)?)%/g, "($1/100)");
+      if (!cleaned) return 0;
+      return Function('"use strict";return (' + cleaned + ')')();
+    }
+
+    function updateDockCalc(finalEval) {
+      if (!exprEl || !valEl) return;
+      exprEl.textContent = calcStr || "0";
+      if (!calcStr) {
+        valEl.textContent = "0";
+        return;
+      }
+      try {
+        var res = safeEvalCalc(calcStr);
+        if (typeof res === "number" && isFinite(res)) {
+          var formatted = Math.abs(res) >= 1e12 || (Math.abs(res) > 0 && Math.abs(res) < 1e-6)
+            ? res.toExponential(6)
+            : Number(res.toFixed(10)).toString();
+          valEl.textContent = formatted;
+          if (finalEval) calcStr = formatted;
+        }
+      } catch (e) {
+        if (finalEval) valEl.textContent = "Error";
+      }
+    }
+
+    document.querySelectorAll(".dock-key").forEach(function (key) {
+      key.addEventListener("click", function () {
+        var dk = key.getAttribute("data-dk");
+        if (dk === "C") {
+          calcStr = "";
+          updateDockCalc(false);
+        } else if (dk === "BS") {
+          calcStr = calcStr.slice(0, -1);
+          updateDockCalc(false);
+        } else if (dk === "=") {
+          updateDockCalc(true);
+        } else {
+          calcStr += dk;
+          updateDockCalc(false);
+        }
+      });
+    });
+
+    // Quick EMI Logic
+    function updateDockEmi() {
+      var P = parseFloat(document.getElementById("dockEmiAmt").value) || 0;
+      var annual = parseFloat(document.getElementById("dockEmiRate").value) || 0;
+      var yrs = parseFloat(document.getElementById("dockEmiYears").value) || 0;
+      var out = document.getElementById("dockEmiOut");
+      var sub = document.getElementById("dockEmiSub");
+      if (!out || !sub) return;
+      var sym = window.I18N ? window.I18N.currencySymbol() : "$";
+      var grp = (window.I18N && window.I18N.currencies[window.I18N.get()]) ? window.I18N.currencies[window.I18N.get()].group : "en-US";
+      var n = Math.round(yrs * 12);
+      var r = annual / 100 / 12;
+      if (P <= 0 || n <= 0) {
+        out.textContent = sym + "0.00 / mo";
+        sub.textContent = "Enter loan amount and term";
+        return;
+      }
+      var emi = r === 0 ? P / n : (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+      var total = emi * n;
+      var interest = total - P;
+      out.textContent = sym + emi.toLocaleString(grp, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " / mo";
+      sub.textContent = "Total Interest: " + sym + Math.round(interest).toLocaleString(grp) + " \u00B7 Total: " + sym + Math.round(total).toLocaleString(grp);
+    }
+    ["dockEmiAmt", "dockEmiRate", "dockEmiYears"].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.addEventListener("input", updateDockEmi);
+    });
+    window.addEventListener("localechange", updateDockEmi);
+    updateDockEmi();
+
+    // Quick Percentage Logic
+    function updateDockPct() {
+      var mode = document.getElementById("dockPctMode").value;
+      var x = parseFloat(document.getElementById("dockPctX").value);
+      var y = parseFloat(document.getElementById("dockPctY").value);
+      var lx = document.getElementById("dockPctXLabel");
+      var ly = document.getElementById("dockPctYLabel");
+      var out = document.getElementById("dockPctOut");
+      var sub = document.getElementById("dockPctSub");
+      if (mode === "pof") {
+        lx.textContent = "Percent (X%)";
+        ly.textContent = "Value (Y)";
+      } else if (mode === "what") {
+        lx.textContent = "Part (X)";
+        ly.textContent = "Whole (Y)";
+      } else {
+        lx.textContent = "From (X)";
+        ly.textContent = "To (Y)";
+      }
+      if (isNaN(x) || isNaN(y)) {
+        out.textContent = "—";
+        sub.textContent = "Enter valid numbers";
+        return;
+      }
+      if (mode === "pof") {
+        var r = (x / 100) * y;
+        out.textContent = Number(r.toFixed(4)).toLocaleString("en-US");
+        sub.textContent = x + "% of " + y + " = " + Number(r.toFixed(4)).toLocaleString("en-US");
+      } else if (mode === "what") {
+        if (y === 0) { out.textContent = "—"; sub.textContent = "Whole cannot be 0"; return; }
+        var p = (x / y) * 100;
+        out.textContent = p.toFixed(2) + "%";
+        sub.textContent = x + " is " + p.toFixed(2) + "% of " + y;
+      } else {
+        if (x === 0) { out.textContent = "—"; sub.textContent = "Initial value cannot be 0"; return; }
+        var chg = ((y - x) / x) * 100;
+        out.textContent = (chg >= 0 ? "+" : "") + chg.toFixed(2) + "%";
+        sub.textContent = (chg >= 0 ? "Increase" : "Decrease") + " of " + Number((y - x).toFixed(4));
+      }
+    }
+    ["dockPctMode", "dockPctX", "dockPctY"].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.addEventListener(id === "dockPctMode" ? "change" : "input", updateDockPct);
+    });
+    updateDockPct();
+  })();
+  </script>
 </body>
 
 </html>

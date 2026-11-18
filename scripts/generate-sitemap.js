@@ -3,7 +3,7 @@ const path = require("path");
 
 const root = path.resolve(__dirname, "..");
 const domain = "https://emimaster.com";
-const today = "2026-09-15";
+const today = "2026-11-18";
 
 const files = fs.readdirSync(root).filter((f) => f.endsWith(".html") && f !== "404.html").sort();
 
