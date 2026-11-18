@@ -181,6 +181,7 @@
     nav += '<li><a href="bmi-calculator.html" data-nav="bmi-calculator.html">Health</a></li>';
     nav += '<li><a href="scientific-calculator.html" data-nav="scientific-calculator.html">Math</a></li>';
     nav += '<li><a href="blog.html" data-nav="blog.html">Blog</a></li>';
+    nav += '<li class="mobile-only-nav"><button type="button" class="nav-drawer-trigger" id="navOpenSidebarBtn">&#9776; Browse All 89+ Calculators</button></li>';
     nav += '</ul>';
 
     return (
@@ -229,6 +230,8 @@
   function buildSidebar() {
     var current = currentPage();
     var html = '<aside class="sidebar">';
+    html += '<div class="sidebar-drawer-header"><span>All 89+ Calculators</span>' +
+      '<button type="button" class="sidebar-drawer-close" id="sidebarDrawerClose" aria-label="Close calculators menu">&times;</button></div>';
     html += '<div class="sidebar-card"><h3>All Calculators</h3><ul class="calc-nav">';
     html += '<li><a href="index.html"' + (current === "index.html" ? ' class="active"' : "") + '>' +
       '<span class="sidebar-icon">&#127968;</span>' + tr('sidebar.all') + '</a></li>';
@@ -332,10 +335,47 @@
     }
   }
 
-  function initSidebarAccordion() {
+  function openSidebarDrawer() {
     var sidebar = document.getElementById("siteSidebar");
     if (!sidebar) return;
+    var backdrop = document.getElementById("sidebarBackdrop");
+    if (!backdrop) {
+      backdrop = document.createElement("div");
+      backdrop.id = "sidebarBackdrop";
+      backdrop.className = "sidebar-backdrop";
+      backdrop.addEventListener("click", closeSidebarDrawer);
+      document.body.appendChild(backdrop);
+    }
+    sidebar.classList.add("drawer-open");
+    sidebar.scrollTop = 0;
+    backdrop.classList.add("show");
+    document.body.style.overflow = "hidden";
+    var closeBtn = document.getElementById("sidebarDrawerClose");
+    if (closeBtn) closeBtn.focus();
+  }
+
+  function closeSidebarDrawer() {
+    var sidebar = document.getElementById("siteSidebar");
+    if (sidebar) sidebar.classList.remove("drawer-open");
+    var backdrop = document.getElementById("sidebarBackdrop");
+    if (backdrop) backdrop.classList.remove("show");
+    document.body.style.overflow = "";
+  }
+
+  function initSidebarAccordion() {
+    var sidebar = document.getElementById("siteSidebar");
+    if (!sidebar || sidebar.dataset.accordionBound) return;
+    sidebar.dataset.accordionBound = "1";
     sidebar.addEventListener("click", function (e) {
+      if (e.target.closest("#sidebarDrawerClose")) {
+        closeSidebarDrawer();
+        return;
+      }
+      var link = e.target.closest("a");
+      if (link && sidebar.classList.contains("drawer-open")) {
+        closeSidebarDrawer();
+        return;
+      }
       var btn = e.target.closest(".cat-toggle");
       if (!btn) return;
       var group = btn.closest(".cat-group");
@@ -394,6 +434,13 @@
           if (e.target.tagName === "A") {
             mainNav.classList.remove("open");
           }
+        });
+      }
+      var navSidebarBtn = document.getElementById("navOpenSidebarBtn");
+      if (navSidebarBtn) {
+        navSidebarBtn.addEventListener("click", function () {
+          if (mainNav) mainNav.classList.remove("open");
+          openSidebarDrawer();
         });
       }
       var sel = document.getElementById("currencySelect");
@@ -537,17 +584,32 @@
       '<a href="emi-calculator.html" class="mbn-item' + (cur === "emi-calculator.html" ? " active" : "") + '">' +
       '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/></svg>' +
       '<span>EMI</span></a>' +
-      '<a href="sitemap.html" class="mbn-item' + (cur === "sitemap.html" ? " active" : "") + '">' +
+      '<button type="button" class="mbn-item" id="mbnSidebarBtn">' +
       '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>' +
-      '<span>All Tools</span></a>';
+      '<span>All Tools</span></button>';
     document.body.appendChild(bar);
     var sBtn = document.getElementById("mbnSearchBtn");
     if (sBtn) {
       sBtn.addEventListener("click", function () {
+        closeSidebarDrawer();
         var headerSearch = document.getElementById("headerSearchBtn");
         if (headerSearch) headerSearch.click();
       });
     }
+    var sideBtn = document.getElementById("mbnSidebarBtn");
+    if (sideBtn) {
+      sideBtn.addEventListener("click", function () {
+        var sb = document.getElementById("siteSidebar");
+        if (sb && sb.classList.contains("drawer-open")) {
+          closeSidebarDrawer();
+        } else {
+          openSidebarDrawer();
+        }
+      });
+    }
+    window.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeSidebarDrawer();
+    });
   }
 
   /* ================================================================
@@ -563,6 +625,7 @@
       var toolbar = document.createElement("div");
       toolbar.className = "page-tools";
       toolbar.innerHTML =
+        '<button class="page-tool page-tool-sidebar" id="toolBrowseAll" type="button" title="Browse all calculator categories">&#9776; Calculators</button>' +
         '<button class="page-tool' + (isFav ? ' active' : '') + '" id="toolFav" type="button" title="Save to favorites">' + (isFav ? '&#9733; Saved' : '&#9734; Save') + '</button>' +
         '<button class="page-tool" id="toolPrint" type="button" title="Print this page">&#128424; Print</button>' +
         '<button class="page-tool" id="toolShare" type="button" title="Share this calculator">&#128279; Share</button>';
@@ -571,6 +634,11 @@
         breadcrumb.insertAdjacentElement("afterend", toolbar);
       } else {
         main.insertBefore(toolbar, main.firstChild);
+      }
+
+      var browseAllBtn = document.getElementById("toolBrowseAll");
+      if (browseAllBtn) {
+        browseAllBtn.addEventListener("click", openSidebarDrawer);
       }
 
       var favBtn = document.getElementById("toolFav");

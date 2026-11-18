@@ -1823,14 +1823,37 @@ tfoot td {
 @media (max-width: 1024px) {
   .layout {
     grid-template-columns: 1fr;
-    padding: 20px 16px 48px;
+    padding: 16px 16px 48px;
     gap: 24px;
+  }
+
+  .main-content {
+    order: 1;
+  }
+
+  #siteSidebar {
+    order: 2;
+    margin-top: 8px;
   }
 
   .sidebar {
     position: static;
-    order: 2;
-    margin-top: 8px;
+  }
+
+  #siteSidebar.drawer-open {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: min(320px, 86vw);
+    margin: 0;
+    padding: 12px 12px 84px;
+    background: var(--bg);
+    z-index: 1000;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    box-shadow: 12px 0 36px rgba(2, 6, 23, 0.35);
+    animation: slideInSidebar 0.2s ease;
   }
 
   .calc-grid {
@@ -4355,6 +4378,102 @@ table tfoot td {
   background: var(--primary-light);
   border-color: var(--primary);
   color: var(--primary);
+}
+
+.page-tool-sidebar {
+  display: none;
+  background: var(--primary-light);
+  border-color: rgba(30, 64, 175, 0.25);
+  color: var(--primary);
+}
+
+@media (max-width: 1024px) {
+  .page-tool-sidebar {
+    display: inline-flex;
+  }
+}
+
+/* Mobile Slide-Over Sidebar Drawer & Backdrop */
+.sidebar-drawer-header {
+  display: none;
+}
+
+#siteSidebar.drawer-open .sidebar-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 4px 12px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.sidebar-drawer-close {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-backdrop {
+  display: none;
+}
+
+.sidebar-backdrop.show {
+  display: block;
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 6, 23, 0.55);
+  backdrop-filter: blur(2px);
+  z-index: 999;
+}
+
+.mobile-only-nav {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-only-nav {
+    display: block;
+    grid-column: 1 / -1;
+  }
+
+  .nav-drawer-trigger {
+    width: 100%;
+    min-height: 42px;
+    padding: 9px 12px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.14);
+    color: #fff;
+    font-family: var(--font);
+    font-size: 0.88rem;
+    font-weight: 700;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}
+
+@keyframes slideInSidebar {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
 
 /* Homepage Split Hero + Instant 3-Mode Calculator Dock */
