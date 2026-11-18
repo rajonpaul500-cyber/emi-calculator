@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-M8XM9611FL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-M8XM9611FL');
+  </script>
+  <script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unit Converter - Length, Weight, Temperature, Area, Volume &amp; Data | EMI Master</title>
+  <meta name="description" content="Fast, free online unit converter for Length, Weight/Mass, Temperature, Area, Volume, Speed, Time, and Digital Data Storage with one-tap unit swap.">
+  <meta name="keywords" content="unit converter, length converter, weight converter, temperature converter, metric to imperial">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <link rel="canonical" href="https://emimaster.com/unit-converter.html">
+  <meta property="og:site_name" content="EMI Master">
+  <meta property="og:title" content="Unit Converter - Length, Weight, Temperature, Area, Volume &amp; Data | EMI Master">
+  <meta property="og:description" content="Fast, free online unit converter for Length, Weight/Mass, Temperature, Area, Volume, Speed, Time, and Digital Data Storage with one-tap unit swap.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://emimaster.com/unit-converter.html">
+  <meta property="og:image" content="https://emimaster.com/icons/og-banner.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Unit Converter - Length, Weight, Temperature, Area, Volume &amp; Data | EMI Master">
+  <meta name="twitter:description" content="Fast, free online unit converter for Length, Weight/Mass, Temperature, Area, Volume, Speed, Time, and Digital Data Storage with one-tap unit swap.">
+  <meta name="twitter:image" content="https://emimaster.com/icons/og-banner.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Universal Unit Converter","url":"https://emimaster.com/unit-converter.html","description":"Fast, free online unit converter for Length, Weight/Mass, Temperature, Area, Volume, Speed, Time, and Digital Data Storage with one-tap unit swap.","applicationCategory":"UtilitiesApplication","operatingSystem":"All","browserRequirements":"Requires JavaScript","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How accurate are the metric-to-imperial factors?","acceptedAnswer":{"@type":"Answer","text":"Exact international standards are used: 1 inch = 2.54 cm, 1 foot = 0.3048 m, 1 mile = 1,609.344 m, and 1 pound = 0.45359237 kg."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://emimaster.com/"},{"@type":"ListItem","position":2,"name":"Date, Time & Everyday","item":"https://emimaster.com/sitemap.html#everyday"},{"@type":"ListItem","position":3,"name":"Universal Unit Converter","item":"https://emimaster.com/unit-converter.html"}]}</script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+
+<div id="siteHeader"></div>
+
+<div class="layout">
+  <div id="siteSidebar"></div>
+
+  <main class="main-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="sitemap.html#everyday">Date, Time &amp; Everyday</a> &rsaquo; Universal Unit Converter</div>
+    <h1 class="page-title">Universal Unit Converter</h1>
+    <p class="page-subtitle">Convert instantly across Length, Weight/Mass, Temperature, Area, Volume, Speed, Time, and Digital Storage units.</p>
+
+    
+    <div class="unit-tabs" id="catTabs">
+      <button type="button" class="unit-tab active" data-c="length">Length</button>
+      <button type="button" class="unit-tab" data-c="weight">Weight</button>
+      <button type="button" class="unit-tab" data-c="temp">Temperature</button>
+      <button type="button" class="unit-tab" data-c="area">Area</button>
+      <button type="button" class="unit-tab" data-c="volume">Volume</button>
+      <button type="button" class="unit-tab" data-c="speed">Speed</button>
+      <button type="button" class="unit-tab" data-c="data">Digital Data</button>
+    </div>
+    <div class="card">
+      <h2>Convert Values</h2>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="uVal">Input Value</label>
+          <input type="number" id="uVal" value="10" step="any">
+        </div>
+        <div class="form-group">
+          <label for="uFrom">From Unit</label>
+          <select id="uFrom"></select>
+        </div>
+        <div class="form-group">
+          <label for="uTo">To Unit</label>
+          <select id="uTo"></select>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary" id="swapBtn" type="button">&#8646; Swap Units</button>
+        <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
+      </div>
+    </div>
+    <div class="result-panel show" id="resultPanel">
+      <h3>Converted Value</h3>
+      <div class="result-main" id="resultMain">—</div>
+      <div class="table-wrap" style="margin-top:14px;">
+        <table>
+          <thead><tr><th>Equivalent Unit</th><th class="num">Converted Value</th></tr></thead>
+          <tbody id="allUnitsBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    
+    <div class="quick-facts">
+      <div class="fact-chip"><strong>7 Unit Systems:</strong> Length, Weight, Temp, Area, Volume, Speed, Data</div>
+      <div class="fact-chip"><strong>Precision:</strong> High-precision IEEE double scientific factors</div>
+      <div class="fact-chip"><strong>Quick Matrix:</strong> Displays all equivalent units in one view</div>
+    </div>
+
+    
+    <div class="content-section">
+      <h2>Metric &amp; Imperial Conversion Factors</h2>
+      <p>All conversions map through an exact SI base unit (meters, kilograms, square meters, liters, meters per second, bytes) or exact temperature scale offsets for Celsius, Fahrenheit, and Kelvin.</p>
+    </div>
+
+    
+    <div class="content-section">
+      <h2 id="faq">Frequently asked questions</h2>
+      <div class="faq-item"><div class="faq-q">How accurate are the metric-to-imperial factors?<span class="arrow">&#9654;</span></div><div class="faq-a">Exact international standards are used: 1 inch = 2.54 cm, 1 foot = 0.3048 m, 1 mile = 1,609.344 m, and 1 pound = 0.45359237 kg.</div></div>
+    </div>
+
+    
+    <div class="content-section">
+      <h2>Related calculators</h2>
+      <div class="related-grid">
+        <a class="related-card" href="scientific-notation-calculator.html"><span class="related-icon">🔬</span><span>Scientific Notation</span></a><a class="related-card" href="pace-calculator.html"><span class="related-icon">🏃</span><span>Running Pace Calculator</span></a><a class="related-card" href="bmi-calculator.html"><span class="related-icon">⚖️</span><span>BMI Calculator</span></a>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div id="siteFooter">
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>EMI Master</h4>
+        <p>Free, instant, and private online calculators for finance, health, math, and everyday planning. Your inputs never leave your browser.</p>
+        <p><a href="sitemap.html"><strong>&rarr; All 89 Calculators (Directory)</strong></a></p>
+      </div>
+      <div class="footer-col">
+        <h4>Popular Calculators</h4>
+        <ul>
+          <li><a href="mortgage-calculator.html">Mortgage Calculator</a></li>
+          <li><a href="emi-calculator.html">EMI Calculator</a></li>
+          <li><a href="bmi-calculator.html">BMI Calculator</a></li>
+          <li><a href="calorie-calculator.html">Calorie Calculator</a></li>
+          <li><a href="age-calculator.html">Age Calculator</a></li>
+          <li><a href="percentage-calculator.html">Percentage Calculator</a></li>
+          <li><a href="scientific-calculator.html">Scientific Calculator</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Health &amp; Everyday</h4>
+        <ul>
+          <li><a href="bmr-calculator.html">BMR Calculator</a></li>
+          <li><a href="body-fat-calculator.html">Body Fat Calculator</a></li>
+          <li><a href="gpa-calculator.html">GPA Calculator</a></li>
+          <li><a href="salary-calculator.html">Salary Calculator</a></li>
+          <li><a href="date-calculator.html">Date Calculator</a></li>
+          <li><a href="unit-converter.html">Unit Converter</a></li>
+          <li><a href="password-generator.html">Password Generator</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Guides &amp; Info</h4>
+        <ul>
+          <li><a href="blog.html"><strong>Guides &amp; Blog</strong></a></li>
+          <li><a href="blog-how-to-reduce-home-loan-interest.html">Save Loan Interest</a></li>
+          <li><a href="blog-compound-interest-wealth-guide.html">Compound Interest Guide</a></li>
+          <li><a href="blog-bmi-vs-body-fat-guide.html">BMI vs Body Fat</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="sitemap.html"><strong>Complete HTML Sitemap</strong></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 EMI Master. All rights reserved. For educational and planning purposes only.
+    </div>
+  </footer>
+</div>
+
+<script>
+
+(function(){
+  var UNITS = {
+    length: { m: ["Meter (m)", 1], km: ["Kilometer (km)", 1000], cm: ["Centimeter (cm)", 0.01], mm: ["Millimeter (mm)", 0.001], mi: ["Mile (mi)", 1609.344], yd: ["Yard (yd)", 0.9144], ft: ["Foot (ft)", 0.3048], in: ["Inch (in)", 0.0254] },
+    weight: { kg: ["Kilogram (kg)", 1], g: ["Gram (g)", 0.001], mg: ["Milligram (mg)", 1e-6], lb: ["Pound (lb)", 0.45359237], oz: ["Ounce (oz)", 0.028349523125], t: ["Metric Ton (t)", 1000] },
+    temp: { c: ["Celsius (°C)", 1], f: ["Fahrenheit (°F)", 1], k: ["Kelvin (K)", 1] },
+    area: { sqm: ["Square Meter (m²)", 1], sqkm: ["Square Kilometer (km²)", 1e6], sqft: ["Square Foot (ft²)", 0.09290304], acre: ["Acre", 4046.8564224], ha: ["Hectare", 10000] },
+    volume: { l: ["Liter (L)", 1], ml: ["Milliliter (mL)", 0.001], gal: ["US Gallon", 3.785411784], qt: ["US Quart", 0.946352946], cup: ["US Cup", 0.2365882365], floz: ["US Fluid Oz", 0.02957352956] },
+    speed: { kmh: ["km/h", 1/3.6], mph: ["mph", 0.44704], ms: ["m/s", 1], kn: ["Knots", 0.514444444] },
+    data: { b: ["Byte (B)", 1], kb: ["Kilobyte (KB)", 1024], mb: ["Megabyte (MB)", 1048576], gb: ["Gigabyte (GB)", 1073741824], tb: ["Terabyte (TB)", 1099511627776] }
+  };
+  var cat = "length";
+  function populate() {
+    var map = UNITS[cat];
+    var keys = Object.keys(map);
+    var opts = keys.map(function(k){ return "<option value='" + k + "'>" + map[k][0] + "</option>"; }).join("");
+    document.getElementById("uFrom").innerHTML = opts;
+    document.getElementById("uTo").innerHTML = opts;
+    document.getElementById("uFrom").value = keys[0];
+    document.getElementById("uTo").value = keys[keys.length > 4 ? 4 : 1];
+    calc();
+  }
+  function fmt(v) {
+    if (!isFinite(v)) return "—";
+    if (Math.abs(v) !== 0 && (Math.abs(v) < 1e-4 || Math.abs(v) >= 1e9)) return v.toExponential(6);
+    return Number(v.toFixed(6)).toString();
+  }
+  function convertTemp(v, from, to) {
+    var c = from === "c" ? v : from === "f" ? (v - 32) * 5/9 : v - 273.15;
+    if (to === "c") return c;
+    if (to === "f") return c * 9/5 + 32;
+    return c + 273.15;
+  }
+  function calc() {
+    var v = parseFloat(document.getElementById("uVal").value);
+    var f = document.getElementById("uFrom").value;
+    var t = document.getElementById("uTo").value;
+    if (!isFinite(v)) return;
+    var map = UNITS[cat];
+    var out = cat === "temp" ? convertTemp(v, f, t) : (v * map[f][1]) / map[t][1];
+    document.getElementById("resultMain").textContent = fmt(out) + " " + map[t][0];
+    document.getElementById("allUnitsBody").innerHTML = Object.keys(map).map(function(k){
+      var val = cat === "temp" ? convertTemp(v, f, k) : (v * map[f][1]) / map[k][1];
+      return "<tr><td>" + map[k][0] + "</td><td class='num'><strong>" + fmt(val) + "</strong></td></tr>";
+    }).join("");
+  }
+  document.querySelectorAll("#catTabs .unit-tab").forEach(function(b){
+    b.addEventListener("click", function(){
+      document.querySelectorAll("#catTabs .unit-tab").forEach(function(x){ x.classList.remove("active"); });
+      b.classList.add("active");
+      cat = b.getAttribute("data-c");
+      populate();
+    });
+  });
+  document.getElementById("swapBtn").addEventListener("click", function(){
+    var f = document.getElementById("uFrom").value;
+    document.getElementById("uFrom").value = document.getElementById("uTo").value;
+    document.getElementById("uTo").value = f;
+    calc();
+  });
+  document.getElementById("resetBtn").addEventListener("click", function(){ document.getElementById("uVal").value = 10; calc(); });
+  ["uVal","uFrom","uTo"].forEach(function(id){
+    document.getElementById(id).addEventListener("input", calc);
+    document.getElementById(id).addEventListener("change", calc);
+  });
+  populate();
+})();
+</script>
+<script src="js/currency.js"></script>
+<script src="js/seo-content.js"></script>
+<script src="js/common.js"></script>
+</body>
+</html>

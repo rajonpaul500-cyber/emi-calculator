@@ -996,6 +996,8 @@ img {
 
 .form-group input[type="number"],
 .form-group input[type="text"],
+.form-group input[type="date"],
+.form-group input[type="time"],
 .form-group select {
   width: 100%;
   padding: 12px 14px;
@@ -1006,6 +1008,7 @@ img {
   transition: border-color 0.2s, box-shadow 0.2s;
   background: #f8fafc;
   font-family: var(--font);
+  color: var(--text);
 }
 
 .input-wrap .prefix+input {
@@ -1075,6 +1078,12 @@ img {
 
 .btn-outline:hover {
   background: var(--primary-light);
+}
+
+.btn-sm {
+  padding: 8px 14px;
+  font-size: 0.86rem;
+  min-height: 38px;
 }
 
 /* ===== Result panel ===== */
@@ -1644,10 +1653,13 @@ tfoot td {
 
 [data-theme="dark"] .form-group input[type="number"],
 [data-theme="dark"] .form-group input[type="text"],
+[data-theme="dark"] .form-group input[type="date"],
+[data-theme="dark"] .form-group input[type="time"],
 [data-theme="dark"] .form-group select {
   background: #0f172a;
   color: var(--text);
   border-color: #334155;
+  color-scheme: dark;
 }
 
 [data-theme="dark"] .form-group input:focus,
@@ -4680,6 +4692,8 @@ table tfoot td {
   /* Prevent iOS Safari input auto-zoom */
   input[type="number"],
   input[type="text"],
+  input[type="date"],
+  input[type="time"],
   select,
   textarea {
     font-size: 16px !important;
@@ -4729,8 +4743,379 @@ table tfoot td {
   }
 
   .back-top {
-    bottom: 66px;
+    bottom: 64px;
     right: 14px;
+  }
+
+  /* Bulletproof mobile containment: zero horizontal page overflow */
+  html, body {
+    overflow-x: clip;
+    max-width: 100%;
+  }
+
+  .layout > *,
+  .main-content,
+  .card,
+  .result-panel,
+  .content-section {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .result-main {
+    font-size: 1.55rem;
+    overflow-wrap: anywhere;
+  }
+
+  .table-wrap {
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .cat-pill-bar {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 4px;
+  }
+
+  .cat-pill-bar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .cat-pill {
+    flex-shrink: 0;
+    white-space: nowrap;
+    min-height: 40px;
+  }
+
+  .calc-tabs,
+  .preset-chips,
+  .rent-mode-tabs {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .sci-device {
+    padding: 12px 8px;
+  }
+
+  .sci-keypad {
+    gap: 5px;
+  }
+
+  .sci-key {
+    min-height: 44px;
+    padding: 4px 1px;
+    font-size: 0.78rem;
+  }
+
+  .sci-key-num {
+    font-size: 1.02rem;
+  }
+
+  .sci-key-sub {
+    font-size: 0.52rem;
+  }
+
+  .dock-pad {
+    gap: 5px;
+  }
+
+  .dock-key {
+    min-height: 44px;
+  }
+
+  .dock-mini-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== Segmented Unit / Mode Switchers & Dynamic Calculator Rows ===== */
+.unit-tabs {
+  display: inline-flex;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 4px;
+  gap: 4px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+.unit-tab {
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: var(--font);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 8px 14px;
+  min-height: 40px;
+  border-radius: 7px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.unit-tab.active {
+  background: var(--primary);
+  color: #fff;
+}
+
+.dynamic-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.dynamic-row {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr auto;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.dynamic-row input,
+.dynamic-row select {
+  width: 100%;
+  min-height: 42px;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--card-bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 0.92rem;
+}
+
+.row-remove-btn {
+  min-width: 40px;
+  min-height: 40px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--danger);
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.row-remove-btn:hover {
+  background: rgba(220, 38, 38, 0.08);
+  border-color: var(--danger);
+}
+
+@media (max-width: 640px) {
+  .dynamic-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .dynamic-row > :first-child {
+    grid-column: 1 / -1;
+  }
+
+  .dynamic-row .row-remove-btn {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+}
+
+/* Health Range Gauge & Macro Bars */
+.health-gauge-wrap {
+  margin-top: 18px;
+}
+
+.health-gauge-track {
+  position: relative;
+  height: 14px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #3b82f6 0%, #10b981 24%, #10b981 52%, #f59e0b 68%, #ef4444 100%);
+  margin: 12px 0 8px;
+}
+
+.health-gauge-marker {
+  position: absolute;
+  top: -5px;
+  width: 4px;
+  height: 24px;
+  background: var(--text);
+  border: 2px solid var(--card-bg);
+  border-radius: 4px;
+  transform: translateX(-50%);
+  transition: left 0.25s ease;
+}
+
+.health-gauge-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.macro-bar {
+  display: flex;
+  height: 14px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--border);
+  margin: 12px 0 8px;
+}
+
+.macro-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+/* ===== Blog Hub & Long-Form Editorial Guides ===== */
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 18px;
+  margin-top: 12px;
+}
+
+.blog-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+  box-shadow: var(--shadow);
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.blog-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.blog-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.blog-card h3 {
+  font-size: 1.08rem;
+  line-height: 1.32;
+  color: var(--text);
+  margin: 0;
+  text-wrap: balance;
+}
+
+.blog-card h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.blog-card h3 a:hover {
+  color: var(--primary);
+}
+
+.blog-card p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.blog-read-link {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--primary);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.blog-article {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow);
+  margin-bottom: 24px;
+}
+
+.blog-article h2 {
+  font-size: 1.35rem;
+  margin: 26px 0 10px;
+  color: var(--text);
+  text-wrap: balance;
+}
+
+.blog-article h3 {
+  font-size: 1.08rem;
+  margin: 18px 0 8px;
+  color: var(--text);
+}
+
+.blog-article p {
+  margin-bottom: 14px;
+  color: var(--text);
+  max-width: 72ch;
+  line-height: 1.72;
+}
+
+.blog-article ul,
+.blog-article ol {
+  margin: 0 0 16px 22px;
+  max-width: 70ch;
+  line-height: 1.68;
+}
+
+.blog-article li {
+  margin-bottom: 6px;
+}
+
+.article-callout {
+  background: var(--primary-light);
+  border: 1px solid rgba(30, 64, 175, 0.2);
+  border-radius: var(--radius-sm);
+  padding: 16px 18px;
+  margin: 18px 0;
+}
+
+.article-cta-box {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  margin: 22px 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+@media (max-width: 768px) {
+  .blog-article {
+    padding: 18px 16px;
+  }
+
+  .blog-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -4749,4 +5134,5 @@ table tfoot td {
     display: none !important;
   }
 }
+
 

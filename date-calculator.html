@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-M8XM9611FL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-M8XM9611FL');
+  </script>
+  <script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Date Calculator - Days Between Dates &amp; Add/Subtract Days | EMI Master</title>
+  <meta name="description" content="Free online date calculator. Count exact days, weeks, and business weekdays between two dates, or add and subtract days, weeks, months, and years from any date.">
+  <meta name="keywords" content="date calculator, days between dates, business days calculator, add days to date">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <link rel="canonical" href="https://emimaster.com/date-calculator.html">
+  <meta property="og:site_name" content="EMI Master">
+  <meta property="og:title" content="Date Calculator - Days Between Dates &amp; Add/Subtract Days | EMI Master">
+  <meta property="og:description" content="Free online date calculator. Count exact days, weeks, and business weekdays between two dates, or add and subtract days, weeks, months, and years from any date.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://emimaster.com/date-calculator.html">
+  <meta property="og:image" content="https://emimaster.com/icons/og-banner.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Date Calculator - Days Between Dates &amp; Add/Subtract Days | EMI Master">
+  <meta name="twitter:description" content="Free online date calculator. Count exact days, weeks, and business weekdays between two dates, or add and subtract days, weeks, months, and years from any date.">
+  <meta name="twitter:image" content="https://emimaster.com/icons/og-banner.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Date Calculator","url":"https://emimaster.com/date-calculator.html","description":"Free online date calculator. Count exact days, weeks, and business weekdays between two dates, or add and subtract days, weeks, months, and years from any date.","applicationCategory":"UtilitiesApplication","operatingSystem":"All","browserRequirements":"Requires JavaScript","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does the business day count exclude Saturdays and Sundays?","acceptedAnswer":{"@type":"Answer","text":"Yes. Weekdays Monday through Friday are counted as business days, while Saturdays and Sundays are tallied separately."}},{"@type":"Question","name":"How does adding months handle month ends like January 31 + 1 month?","acceptedAnswer":{"@type":"Answer","text":"JavaScript date rolling adjusts overflow automatically; for fixed-day deadlines, adding exact days or weeks avoids calendar ambiguity."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://emimaster.com/"},{"@type":"ListItem","position":2,"name":"Date, Time & Everyday","item":"https://emimaster.com/sitemap.html#everyday"},{"@type":"ListItem","position":3,"name":"Date Calculator","item":"https://emimaster.com/date-calculator.html"}]}</script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+
+<div id="siteHeader"></div>
+
+<div class="layout">
+  <div id="siteSidebar"></div>
+
+  <main class="main-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="sitemap.html#everyday">Date, Time &amp; Everyday</a> &rsaquo; Date Calculator</div>
+    <h1 class="page-title">Date Calculator</h1>
+    <p class="page-subtitle">Count calendar days and business weekdays between two dates, or add and subtract days, weeks, months, and years.</p>
+
+    
+    <div class="unit-tabs" id="modeTabs">
+      <button type="button" class="unit-tab active" data-mode="diff">Days Between Two Dates</button>
+      <button type="button" class="unit-tab" data-mode="add">Add / Subtract From Date</button>
+    </div>
+
+    <div class="card" id="diffCard">
+      <h2>Days Between Dates</h2>
+      <div class="form-grid">
+        <div class="form-group"><label for="startDate">Start Date</label><input type="date" id="startDate"></div>
+        <div class="form-group"><label for="endDate">End Date</label><input type="date" id="endDate"></div>
+      </div>
+      <div class="form-actions"><button class="btn btn-primary" id="calcDiffBtn" type="button">Calculate Duration</button></div>
+    </div>
+
+    <div class="card" id="addCard" style="display:none;">
+      <h2>Add or Subtract Time</h2>
+      <div class="form-grid">
+        <div class="form-group"><label for="baseDate">Start Date</label><input type="date" id="baseDate"></div>
+        <div class="form-group"><label for="opDir">Operation</label><select id="opDir"><option value="1" selected>+ Add</option><option value="-1">- Subtract</option></select></div>
+        <div class="form-group"><label for="addYears">Years</label><input type="number" id="addYears" value="0" min="0"></div>
+        <div class="form-group"><label for="addMonths">Months</label><input type="number" id="addMonths" value="3" min="0"></div>
+        <div class="form-group"><label for="addWeeks">Weeks</label><input type="number" id="addWeeks" value="0" min="0"></div>
+        <div class="form-group"><label for="addDays">Days</label><input type="number" id="addDays" value="15" min="0"></div>
+      </div>
+      <div class="form-actions"><button class="btn btn-primary" id="calcAddBtn" type="button">Calculate Resulting Date</button></div>
+    </div>
+
+    <div class="result-panel show" id="resultPanel">
+      <h3 id="resLabel">Duration Between Dates</h3>
+      <div class="result-main" id="resultMain">—</div>
+      <div class="result-grid" id="resGrid">
+        <div class="result-item"><div class="label">Weeks &amp; Remainder</div><div class="value" id="wksOut">—</div></div>
+        <div class="result-item"><div class="label">Business Weekdays (Mon–Fri)</div><div class="value positive" id="bizOut">—</div></div>
+        <div class="result-item"><div class="label">Weekend Days</div><div class="value" id="wkndOut">—</div></div>
+      </div>
+    </div>
+
+    
+    <div class="quick-facts">
+      <div class="fact-chip"><strong>Business Days:</strong> Counts Mon–Fri weekdays automatically</div>
+      <div class="fact-chip"><strong>Calendar Units:</strong> Exact leap-year &amp; month-end handling</div>
+      <div class="fact-chip"><strong>Modes:</strong> Date difference &amp; Date arithmetic</div>
+    </div>
+
+    
+    <div class="content-section">
+      <h2>Counting Business Days vs. Calendar Days</h2>
+      <p>Project deadlines, shipping estimates, and legal notice periods frequently specify either <strong>calendar days</strong> or <strong>business days (Monday through Friday)</strong>. Switching between both modes lets you calculate contract deadlines or travel itineraries in seconds.</p>
+    </div>
+
+    
+    <div class="content-section">
+      <h2 id="faq">Frequently asked questions</h2>
+      <div class="faq-item"><div class="faq-q">Does the business day count exclude Saturdays and Sundays?<span class="arrow">&#9654;</span></div><div class="faq-a">Yes. Weekdays Monday through Friday are counted as business days, while Saturdays and Sundays are tallied separately.</div></div>
+      <div class="faq-item"><div class="faq-q">How does adding months handle month ends like January 31 + 1 month?<span class="arrow">&#9654;</span></div><div class="faq-a">JavaScript date rolling adjusts overflow automatically; for fixed-day deadlines, adding exact days or weeks avoids calendar ambiguity.</div></div>
+    </div>
+
+    
+    <div class="content-section">
+      <h2>Related calculators</h2>
+      <div class="related-grid">
+        <a class="related-card" href="age-calculator.html"><span class="related-icon">🎂</span><span>Age Calculator</span></a><a class="related-card" href="time-calculator.html"><span class="related-icon">⏱️</span><span>Time Calculator</span></a><a class="related-card" href="hours-calculator.html"><span class="related-icon">🕒</span><span>Work Hours Calculator</span></a>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div id="siteFooter">
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>EMI Master</h4>
+        <p>Free, instant, and private online calculators for finance, health, math, and everyday planning. Your inputs never leave your browser.</p>
+        <p><a href="sitemap.html"><strong>&rarr; All 89 Calculators (Directory)</strong></a></p>
+      </div>
+      <div class="footer-col">
+        <h4>Popular Calculators</h4>
+        <ul>
+          <li><a href="mortgage-calculator.html">Mortgage Calculator</a></li>
+          <li><a href="emi-calculator.html">EMI Calculator</a></li>
+          <li><a href="bmi-calculator.html">BMI Calculator</a></li>
+          <li><a href="calorie-calculator.html">Calorie Calculator</a></li>
+          <li><a href="age-calculator.html">Age Calculator</a></li>
+          <li><a href="percentage-calculator.html">Percentage Calculator</a></li>
+          <li><a href="scientific-calculator.html">Scientific Calculator</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Health &amp; Everyday</h4>
+        <ul>
+          <li><a href="bmr-calculator.html">BMR Calculator</a></li>
+          <li><a href="body-fat-calculator.html">Body Fat Calculator</a></li>
+          <li><a href="gpa-calculator.html">GPA Calculator</a></li>
+          <li><a href="salary-calculator.html">Salary Calculator</a></li>
+          <li><a href="date-calculator.html">Date Calculator</a></li>
+          <li><a href="unit-converter.html">Unit Converter</a></li>
+          <li><a href="password-generator.html">Password Generator</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Guides &amp; Info</h4>
+        <ul>
+          <li><a href="blog.html"><strong>Guides &amp; Blog</strong></a></li>
+          <li><a href="blog-how-to-reduce-home-loan-interest.html">Save Loan Interest</a></li>
+          <li><a href="blog-compound-interest-wealth-guide.html">Compound Interest Guide</a></li>
+          <li><a href="blog-bmi-vs-body-fat-guide.html">BMI vs Body Fat</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="sitemap.html"><strong>Complete HTML Sitemap</strong></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 EMI Master. All rights reserved. For educational and planning purposes only.
+    </div>
+  </footer>
+</div>
+
+<script>
+
+(function(){
+  var mode = "diff";
+  var now = new Date();
+  var plus90 = new Date(now.getTime() + 90 * 86400000);
+  document.getElementById("startDate").value = now.toISOString().slice(0,10);
+  document.getElementById("endDate").value = plus90.toISOString().slice(0,10);
+  document.getElementById("baseDate").value = now.toISOString().slice(0,10);
+
+  document.querySelectorAll("#modeTabs .unit-tab").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      document.querySelectorAll("#modeTabs .unit-tab").forEach(function(b){ b.classList.remove("active"); });
+      btn.classList.add("active");
+      mode = btn.getAttribute("data-mode");
+      document.getElementById("diffCard").style.display = mode === "diff" ? "" : "none";
+      document.getElementById("addCard").style.display = mode === "add" ? "" : "none";
+      calc();
+    });
+  });
+
+  function calc() {
+    if (mode === "diff") {
+      var s = document.getElementById("startDate").value;
+      var e = document.getElementById("endDate").value;
+      if (!s || !e) return;
+      var d1 = new Date(s + "T00:00:00");
+      var d2 = new Date(e + "T00:00:00");
+      if (d2 < d1) { var tmp = d1; d1 = d2; d2 = tmp; }
+      var total = Math.round((d2 - d1) / 86400000);
+      var biz = 0, wknd = 0;
+      for (var i = 0; i < total; i++) {
+        var cur = new Date(d1.getTime() + i * 86400000);
+        var dow = cur.getDay();
+        if (dow === 0 || dow === 6) wknd++; else biz++;
+      }
+      document.getElementById("resLabel").textContent = "Duration Between Dates";
+      document.getElementById("resultMain").textContent = total.toLocaleString("en-US") + " Calendar Days";
+      document.getElementById("wksOut").textContent = Math.floor(total/7) + " weeks, " + (total%7) + " days";
+      document.getElementById("bizOut").textContent = biz.toLocaleString("en-US") + " weekdays";
+      document.getElementById("wkndOut").textContent = wknd.toLocaleString("en-US") + " weekend days";
+    } else {
+      var b = document.getElementById("baseDate").value;
+      if (!b) return;
+      var sign = parseInt(document.getElementById("opDir").value, 10) || 1;
+      var y = (parseInt(document.getElementById("addYears").value, 10)||0) * sign;
+      var m = (parseInt(document.getElementById("addMonths").value, 10)||0) * sign;
+      var w = (parseInt(document.getElementById("addWeeks").value, 10)||0) * sign;
+      var d = (parseInt(document.getElementById("addDays").value, 10)||0) * sign;
+      var dt = new Date(b + "T00:00:00");
+      dt.setFullYear(dt.getFullYear() + y);
+      dt.setMonth(dt.getMonth() + m);
+      dt.setDate(dt.getDate() + w * 7 + d);
+      document.getElementById("resLabel").textContent = "Resulting Calendar Date";
+      document.getElementById("resultMain").textContent = dt.toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" });
+      var dayDiff = Math.round((dt - new Date(b + "T00:00:00")) / 86400000);
+      document.getElementById("wksOut").textContent = (dayDiff >= 0 ? "+" : "") + dayDiff + " total days";
+      document.getElementById("bizOut").textContent = dt.toISOString().slice(0,10);
+      document.getElementById("wkndOut").textContent = (dt.getDay() === 0 || dt.getDay() === 6) ? "Weekend" : "Business Day";
+    }
+  }
+  document.getElementById("calcDiffBtn").addEventListener("click", calc);
+  document.getElementById("calcAddBtn").addEventListener("click", calc);
+  ["startDate","endDate","baseDate","opDir","addYears","addMonths","addWeeks","addDays"].forEach(function(id){
+    document.getElementById(id).addEventListener("input", calc);
+    document.getElementById(id).addEventListener("change", calc);
+  });
+  calc();
+})();
+</script>
+<script src="js/currency.js"></script>
+<script src="js/seo-content.js"></script>
+<script src="js/common.js"></script>
+</body>
+</html>

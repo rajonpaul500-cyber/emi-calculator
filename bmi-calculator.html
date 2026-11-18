@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-M8XM9611FL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-M8XM9611FL');
+  </script>
+  <script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BMI Calculator - Body Mass Index, Healthy Weight &amp; Prime Score | EMI Master</title>
+  <meta name="description" content="Free BMI calculator for adults and teens. Calculate your Body Mass Index using US or Metric units, see your healthy weight range, BMI Prime, and Ponderal Index.">
+  <meta name="keywords" content="bmi calculator, body mass index calculator, healthy weight range, bmi chart, bmi prime, ponderal index">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <link rel="canonical" href="https://emimaster.com/bmi-calculator.html">
+  <meta property="og:site_name" content="EMI Master">
+  <meta property="og:title" content="BMI Calculator - Body Mass Index, Healthy Weight &amp; Prime Score | EMI Master">
+  <meta property="og:description" content="Free BMI calculator for adults and teens. Calculate your Body Mass Index using US or Metric units, see your healthy weight range, BMI Prime, and Ponderal Index.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://emimaster.com/bmi-calculator.html">
+  <meta property="og:image" content="https://emimaster.com/icons/og-banner.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="BMI Calculator - Body Mass Index, Healthy Weight &amp; Prime Score | EMI Master">
+  <meta name="twitter:description" content="Free BMI calculator for adults and teens. Calculate your Body Mass Index using US or Metric units, see your healthy weight range, BMI Prime, and Ponderal Index.">
+  <meta name="twitter:image" content="https://emimaster.com/icons/og-banner.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"BMI Calculator","url":"https://emimaster.com/bmi-calculator.html","description":"Free BMI calculator for adults and teens. Calculate your Body Mass Index using US or Metric units, see your healthy weight range, BMI Prime, and Ponderal Index.","applicationCategory":"HealthApplication","operatingSystem":"All","browserRequirements":"Requires JavaScript","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a healthy BMI range for adults?","acceptedAnswer":{"@type":"Answer","text":"For most adults age 20 and older, the World Health Organization defines a healthy BMI as 18.5 to 24.9. Values below 18.5 are underweight, 25.0 to 29.9 are overweight, and 30.0 or higher fall in the obese range."}},{"@type":"Question","name":"What is BMI Prime?","acceptedAnswer":{"@type":"Answer","text":"BMI Prime is the ratio of your actual BMI to the upper limit of normal BMI (25.0). A BMI Prime below 0.74 indicates underweight, 0.74 to 1.00 is healthy, and values above 1.00 show how far above the normal threshold your weight sits."}},{"@type":"Question","name":"Why can athletes have a high BMI?","acceptedAnswer":{"@type":"Answer","text":"Muscle tissue is roughly 18% denser than fat tissue. Muscular athletes often score in the 25–28 BMI range despite having low body fat. Combining BMI with waist-to-height ratio or the U.S. Navy body fat test gives a clearer picture."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://emimaster.com/"},{"@type":"ListItem","position":2,"name":"Fitness & Health","item":"https://emimaster.com/sitemap.html#fitness"},{"@type":"ListItem","position":3,"name":"BMI Calculator","item":"https://emimaster.com/bmi-calculator.html"}]}</script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+
+<div id="siteHeader"></div>
+
+<div class="layout">
+  <div id="siteSidebar"></div>
+
+  <main class="main-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="sitemap.html#fitness">Fitness &amp; Health</a> &rsaquo; BMI Calculator</div>
+    <h1 class="page-title">BMI Calculator</h1>
+    <p class="page-subtitle">Calculate your Body Mass Index (BMI), healthy target weight range, BMI Prime, and Ponderal Index using US or Metric units.</p>
+
+    
+    <div class="unit-tabs" id="unitTabs">
+      <button type="button" class="unit-tab active" data-unit="us">US Units (ft, in, lbs)</button>
+      <button type="button" class="unit-tab" data-unit="metric">Metric (cm, kg)</button>
+    </div>
+
+    <div class="card">
+      <h2>Body Measurements</h2>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="age">Age (2 – 120 years)</label>
+          <input type="number" id="age" value="28" min="2" max="120" step="1">
+        </div>
+        <div class="form-group">
+          <label for="gender">Gender</label>
+          <select id="gender">
+            <option value="male" selected>Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
+        <div class="form-group us-only">
+          <label for="heightFt">Height (Feet &amp; Inches)</label>
+          <div class="form-duo">
+            <div class="input-wrap"><span class="suffix">ft</span><input type="number" id="heightFt" value="5" min="1" max="8" step="1"></div>
+            <div class="input-wrap"><span class="suffix">in</span><input type="number" id="heightIn" value="9" min="0" max="11" step="0.5"></div>
+          </div>
+        </div>
+        <div class="form-group us-only">
+          <label for="weightLb">Weight (lbs)</label>
+          <div class="input-wrap"><span class="suffix">lbs</span><input type="number" id="weightLb" value="165" min="10" max="1000" step="0.5"></div>
+        </div>
+        <div class="form-group metric-only" style="display:none;">
+          <label for="heightCm">Height (cm)</label>
+          <div class="input-wrap"><span class="suffix">cm</span><input type="number" id="heightCm" value="175" min="40" max="260" step="0.5"></div>
+        </div>
+        <div class="form-group metric-only" style="display:none;">
+          <label for="weightKg">Weight (kg)</label>
+          <div class="input-wrap"><span class="suffix">kg</span><input type="number" id="weightKg" value="75" min="5" max="450" step="0.5"></div>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary" id="calculateBtn" type="button">Calculate BMI</button>
+        <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
+      </div>
+    </div>
+
+    <div class="result-panel show" id="resultPanel">
+      <h3>Your Body Mass Index</h3>
+      <div class="result-main" id="resultMain">—</div>
+      <div class="result-grid">
+        <div class="result-item"><div class="label">Category</div><div class="value" id="bmiCatOut">—</div></div>
+        <div class="result-item"><div class="label">Healthy Weight Range</div><div class="value" id="healthyRangeOut">—</div></div>
+        <div class="result-item"><div class="label">BMI Prime / Ponderal</div><div class="value" id="bmiPrimeOut">—</div></div>
+      </div>
+      <div class="health-gauge-wrap">
+        <div class="health-gauge-track"><div class="health-gauge-marker" id="bmiMarker" style="left:40%;"></div></div>
+        <div class="health-gauge-labels">
+          <span>Underweight (&lt;18.5)</span>
+          <span>Normal (18.5–24.9)</span>
+          <span>Overweight (25–29.9)</span>
+          <span>Obese (30+)</span>
+        </div>
+      </div>
+      <div class="payoff-note show" id="bmiNote"></div>
+    </div>
+
+    <div class="card">
+      <h2>WHO Adult BMI Classification Table</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Classification</th><th class="num">BMI Range (kg/m&sup2;)</th><th>Health Risk Profile</th></tr></thead>
+          <tbody>
+            <tr><td>Severe Thinness</td><td class="num">&lt; 16.0</td><td>High nutritional deficiency risk</td></tr>
+            <tr><td>Moderate Thinness</td><td class="num">16.0 – 16.9</td><td>Elevated risk</td></tr>
+            <tr><td>Mild Thinness</td><td class="num">17.0 – 18.4</td><td>Below healthy band</td></tr>
+            <tr><td><strong>Normal / Healthy Weight</strong></td><td class="num"><strong>18.5 – 24.9</strong></td><td><strong>Lowest baseline weight-related risk</strong></td></tr>
+            <tr><td>Overweight (Pre-obese)</td><td class="num">25.0 – 29.9</td><td>Mild to moderate metabolic risk</td></tr>
+            <tr><td>Obese Class I</td><td class="num">30.0 – 34.9</td><td>Elevated cardiovascular &amp; metabolic risk</td></tr>
+            <tr><td>Obese Class II</td><td class="num">35.0 – 39.9</td><td>Severe clinical risk</td></tr>
+            <tr><td>Obese Class III</td><td class="num">&ge; 40.0</td><td>Very high clinical risk</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    
+    <div class="quick-facts">
+      <div class="fact-chip"><strong>Metric Formula:</strong> Weight (kg) / Height (m)^2</div>
+      <div class="fact-chip"><strong>US Formula:</strong> 703 x Weight (lb) / Height (in)^2</div>
+      <div class="fact-chip"><strong>Healthy Adult Range:</strong> 18.5 to 24.9 kg/m^2</div>
+      <div class="fact-chip"><strong>BMI Prime:</strong> BMI / 25.0 (ideal &lt;= 1.0)</div>
+    </div>
+
+    
+    <div class="content-section">
+      <h2>How Body Mass Index (BMI) Works</h2>
+      <p>Body Mass Index (BMI) is a rapid screening metric developed to estimate whether an adult's weight falls inside a healthy proportion relative to their height. Because tall people naturally carry more tissue mass than shorter individuals, squaring height in meters normalizes body weight across statures.</p>
+      <div class="definition">
+        <p><strong>BMI = weight (kg) &divide; [height (m)]&sup2;</strong> &nbsp;|&nbsp; <strong>US: BMI = 703 &times; weight (lbs) &divide; [height (in)]&sup2;</strong></p>
+      </div>
+      <p>While BMI is trusted worldwide by clinicians for population screening, it does not distinguish between dense skeletal muscle and body fat. For a deeper body composition check, combine your BMI with our <a href="body-fat-calculator.html">Body Fat Calculator</a> or read our <a href="blog-bmi-vs-body-fat-guide.html">BMI vs. Body Fat Guide</a>.</p>
+    </div>
+
+    
+    <div class="content-section">
+      <h2 id="faq">Frequently asked questions</h2>
+      <div class="faq-item"><div class="faq-q">What is a healthy BMI range for adults?<span class="arrow">&#9654;</span></div><div class="faq-a">For most adults age 20 and older, the World Health Organization defines a healthy BMI as 18.5 to 24.9. Values below 18.5 are underweight, 25.0 to 29.9 are overweight, and 30.0 or higher fall in the obese range.</div></div>
+      <div class="faq-item"><div class="faq-q">What is BMI Prime?<span class="arrow">&#9654;</span></div><div class="faq-a">BMI Prime is the ratio of your actual BMI to the upper limit of normal BMI (25.0). A BMI Prime below 0.74 indicates underweight, 0.74 to 1.00 is healthy, and values above 1.00 show how far above the normal threshold your weight sits.</div></div>
+      <div class="faq-item"><div class="faq-q">Why can athletes have a high BMI?<span class="arrow">&#9654;</span></div><div class="faq-a">Muscle tissue is roughly 18% denser than fat tissue. Muscular athletes often score in the 25–28 BMI range despite having low body fat. Combining BMI with waist-to-height ratio or the U.S. Navy body fat test gives a clearer picture.</div></div>
+    </div>
+
+    
+    <div class="content-section">
+      <h2>Related calculators</h2>
+      <div class="related-grid">
+        <a class="related-card" href="calorie-calculator.html"><span class="related-icon">🔥</span><span>Calorie &amp; TDEE Calculator</span></a><a class="related-card" href="body-fat-calculator.html"><span class="related-icon">📏</span><span>Body Fat Calculator</span></a><a class="related-card" href="ideal-weight-calculator.html"><span class="related-icon">⚖️</span><span>Ideal Weight Calculator</span></a><a class="related-card" href="bmr-calculator.html"><span class="related-icon">⚡</span><span>BMR Calculator</span></a><a class="related-card" href="blog-bmi-vs-body-fat-guide.html"><span class="related-icon">📘</span><span>Guide: BMI vs Body Fat</span></a>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div id="siteFooter">
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>EMI Master</h4>
+        <p>Free, instant, and private online calculators for finance, health, math, and everyday planning. Your inputs never leave your browser.</p>
+        <p><a href="sitemap.html"><strong>&rarr; All 89 Calculators (Directory)</strong></a></p>
+      </div>
+      <div class="footer-col">
+        <h4>Popular Calculators</h4>
+        <ul>
+          <li><a href="mortgage-calculator.html">Mortgage Calculator</a></li>
+          <li><a href="emi-calculator.html">EMI Calculator</a></li>
+          <li><a href="bmi-calculator.html">BMI Calculator</a></li>
+          <li><a href="calorie-calculator.html">Calorie Calculator</a></li>
+          <li><a href="age-calculator.html">Age Calculator</a></li>
+          <li><a href="percentage-calculator.html">Percentage Calculator</a></li>
+          <li><a href="scientific-calculator.html">Scientific Calculator</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Health &amp; Everyday</h4>
+        <ul>
+          <li><a href="bmr-calculator.html">BMR Calculator</a></li>
+          <li><a href="body-fat-calculator.html">Body Fat Calculator</a></li>
+          <li><a href="gpa-calculator.html">GPA Calculator</a></li>
+          <li><a href="salary-calculator.html">Salary Calculator</a></li>
+          <li><a href="date-calculator.html">Date Calculator</a></li>
+          <li><a href="unit-converter.html">Unit Converter</a></li>
+          <li><a href="password-generator.html">Password Generator</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Guides &amp; Info</h4>
+        <ul>
+          <li><a href="blog.html"><strong>Guides &amp; Blog</strong></a></li>
+          <li><a href="blog-how-to-reduce-home-loan-interest.html">Save Loan Interest</a></li>
+          <li><a href="blog-compound-interest-wealth-guide.html">Compound Interest Guide</a></li>
+          <li><a href="blog-bmi-vs-body-fat-guide.html">BMI vs Body Fat</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="sitemap.html"><strong>Complete HTML Sitemap</strong></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 EMI Master. All rights reserved. For educational and planning purposes only.
+    </div>
+  </footer>
+</div>
+
+<script>
+
+(function(){
+  var unit = "us";
+  document.querySelectorAll("#unitTabs .unit-tab").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      document.querySelectorAll("#unitTabs .unit-tab").forEach(function(b){ b.classList.remove("active"); });
+      btn.classList.add("active");
+      unit = btn.getAttribute("data-unit");
+      document.querySelectorAll(".us-only").forEach(function(el){ el.style.display = unit === "us" ? "" : "none"; });
+      document.querySelectorAll(".metric-only").forEach(function(el){ el.style.display = unit === "metric" ? "" : "none"; });
+      calc();
+    });
+  });
+
+  function calc() {
+    var hM = 0, wKg = 0;
+    if (unit === "us") {
+      var ft = parseFloat(document.getElementById("heightFt").value) || 0;
+      var inc = parseFloat(document.getElementById("heightIn").value) || 0;
+      var lb = parseFloat(document.getElementById("weightLb").value) || 0;
+      var totalIn = ft * 12 + inc;
+      hM = totalIn * 0.0254;
+      wKg = lb * 0.45359237;
+    } else {
+      var cm = parseFloat(document.getElementById("heightCm").value) || 0;
+      wKg = parseFloat(document.getElementById("weightKg").value) || 0;
+      hM = cm / 100;
+    }
+    if (hM <= 0 || wKg <= 0) {
+      document.getElementById("resultMain").textContent = "Enter valid height & weight";
+      return;
+    }
+    var bmi = wKg / (hM * hM);
+    var prime = bmi / 25;
+    var ponderal = wKg / Math.pow(hM, 3);
+    var cat = "Normal Weight", cls = "positive";
+    if (bmi < 16) { cat = "Severe Thinness"; cls = "negative"; }
+    else if (bmi < 18.5) { cat = "Underweight"; cls = ""; }
+    else if (bmi < 25) { cat = "Normal Weight"; cls = "positive"; }
+    else if (bmi < 30) { cat = "Overweight"; cls = ""; }
+    else if (bmi < 35) { cat = "Obese Class I"; cls = "negative"; }
+    else if (bmi < 40) { cat = "Obese Class II"; cls = "negative"; }
+    else { cat = "Obese Class III"; cls = "negative"; }
+
+    var minKg = 18.5 * hM * hM;
+    var maxKg = 24.9 * hM * hM;
+    var rangeText = unit === "us"
+      ? (minKg * 2.20462).toFixed(1) + " – " + (maxKg * 2.20462).toFixed(1) + " lbs"
+      : minKg.toFixed(1) + " – " + maxKg.toFixed(1) + " kg";
+
+    document.getElementById("resultMain").textContent = bmi.toFixed(1) + " kg/m² (" + cat + ")";
+    var catEl = document.getElementById("bmiCatOut");
+    catEl.textContent = cat;
+    catEl.className = "value " + cls;
+    document.getElementById("healthyRangeOut").textContent = rangeText;
+    document.getElementById("bmiPrimeOut").textContent = prime.toFixed(2) + " / " + ponderal.toFixed(1);
+
+    var pct = Math.min(98, Math.max(2, ((bmi - 13) / (40 - 13)) * 100));
+    document.getElementById("bmiMarker").style.left = pct.toFixed(1) + "%";
+
+    var diffNote = "";
+    if (wKg < minKg) {
+      var gain = minKg - wKg;
+      diffNote = "Gain roughly " + (unit === "us" ? (gain * 2.20462).toFixed(1) + " lbs" : gain.toFixed(1) + " kg") + " to enter the healthy BMI range.";
+    } else if (wKg > maxKg) {
+      var lose = wKg - maxKg;
+      diffNote = "Lose roughly " + (unit === "us" ? (lose * 2.20462).toFixed(1) + " lbs" : lose.toFixed(1) + " kg") + " to reach the upper healthy limit (BMI 24.9).";
+    } else {
+      diffNote = "Your weight is inside the standard healthy range for your height.";
+    }
+    document.getElementById("bmiNote").textContent = diffNote;
+  }
+
+  document.getElementById("calculateBtn").addEventListener("click", calc);
+  document.getElementById("resetBtn").addEventListener("click", function(){
+    document.getElementById("age").value = 28;
+    document.getElementById("heightFt").value = 5;
+    document.getElementById("heightIn").value = 9;
+    document.getElementById("weightLb").value = 165;
+    document.getElementById("heightCm").value = 175;
+    document.getElementById("weightKg").value = 75;
+    calc();
+  });
+  ["age","gender","heightFt","heightIn","weightLb","heightCm","weightKg"].forEach(function(id){
+    var el = document.getElementById(id);
+    if (el) { el.addEventListener("input", calc); el.addEventListener("change", calc); }
+  });
+  calc();
+})();
+</script>
+<script src="js/currency.js"></script>
+<script src="js/seo-content.js"></script>
+<script src="js/common.js"></script>
+</body>
+</html>

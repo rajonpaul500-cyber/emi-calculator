@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-M8XM9611FL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-M8XM9611FL');
+  </script>
+  <script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tip Calculator - Restaurant Tip &amp; Bill Splitter | EMI Master</title>
+  <meta name="description" content="Free tip calculator and bill splitter. Calculate exact tip amount, total bill, and fair per-person share in seconds on mobile or desktop.">
+  <meta name="keywords" content="tip calculator, bill split calculator, restaurant tip calculator, gratuity calculator">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <link rel="canonical" href="https://emimaster.com/tip-calculator.html">
+  <meta property="og:site_name" content="EMI Master">
+  <meta property="og:title" content="Tip Calculator - Restaurant Tip &amp; Bill Splitter | EMI Master">
+  <meta property="og:description" content="Free tip calculator and bill splitter. Calculate exact tip amount, total bill, and fair per-person share in seconds on mobile or desktop.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://emimaster.com/tip-calculator.html">
+  <meta property="og:image" content="https://emimaster.com/icons/og-banner.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Tip Calculator - Restaurant Tip &amp; Bill Splitter | EMI Master">
+  <meta name="twitter:description" content="Free tip calculator and bill splitter. Calculate exact tip amount, total bill, and fair per-person share in seconds on mobile or desktop.">
+  <meta name="twitter:image" content="https://emimaster.com/icons/og-banner.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Tip & Bill Split Calculator","url":"https://emimaster.com/tip-calculator.html","description":"Free tip calculator and bill splitter. Calculate exact tip amount, total bill, and fair per-person share in seconds on mobile or desktop.","applicationCategory":"FinanceApplication","operatingSystem":"All","browserRequirements":"Requires JavaScript","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Should tip be calculated before or after sales tax?","acceptedAnswer":{"@type":"Answer","text":"Traditionally, gratuity is calculated on the pre-tax subtotal of food and drinks, though many receipts print suggestions on the post-tax total."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://emimaster.com/"},{"@type":"ListItem","position":2,"name":"Date, Time & Everyday","item":"https://emimaster.com/sitemap.html#everyday"},{"@type":"ListItem","position":3,"name":"Tip & Bill Split Calculator","item":"https://emimaster.com/tip-calculator.html"}]}</script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+
+<div id="siteHeader"></div>
+
+<div class="layout">
+  <div id="siteSidebar"></div>
+
+  <main class="main-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="sitemap.html#everyday">Date, Time &amp; Everyday</a> &rsaquo; Tip &amp; Bill Split Calculator</div>
+    <h1 class="page-title">Tip &amp; Bill Split Calculator</h1>
+    <p class="page-subtitle">Instantly calculate gratuity, total bill, and exact per-person split amounts for dining or group expenses.</p>
+
+    
+    <div class="card">
+      <h2>Bill &amp; Gratuity</h2>
+      <div class="preset-chips" id="tipPresets" style="margin-bottom:14px;">
+        <span class="preset-label" style="font-size:0.84rem;font-weight:600;color:var(--text-muted);">Quick Tip:</span>
+        <button type="button" class="preset-chip" data-tip="10">10%</button>
+        <button type="button" class="preset-chip" data-tip="15">15%</button>
+        <button type="button" class="preset-chip active" data-tip="18">18%</button>
+        <button type="button" class="preset-chip" data-tip="20">20%</button>
+        <button type="button" class="preset-chip" data-tip="25">25%</button>
+      </div>
+      <div class="form-grid">
+        <div class="form-group"><label for="bill">Bill Amount ($)</label><input type="number" id="bill" value="120" min="0" step="0.5"></div>
+        <div class="form-group"><label for="tipPct">Tip Percentage (%)</label><input type="number" id="tipPct" value="18" min="0" max="100" step="0.5"></div>
+        <div class="form-group"><label for="people">Split Between (People)</label><input type="number" id="people" value="3" min="1" max="100" step="1"></div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary" id="calculateBtn" type="button">Calculate Split</button>
+        <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
+      </div>
+    </div>
+    <div class="result-panel show" id="resultPanel">
+      <h3>Total Per Person</h3>
+      <div class="result-main" id="resultMain">—</div>
+      <div class="result-grid">
+        <div class="result-item"><div class="label">Tip Amount</div><div class="value" id="tipOut">—</div></div>
+        <div class="result-item"><div class="label">Total Bill (Incl. Tip)</div><div class="value" id="totalOut">—</div></div>
+        <div class="result-item"><div class="label">Tip Per Person</div><div class="value" id="tipPersonOut">—</div></div>
+      </div>
+    </div>
+
+    
+    <div class="quick-facts">
+      <div class="fact-chip"><strong>Standard Dining Tip:</strong> 15% – 20% of pre-tax bill</div>
+      <div class="fact-chip"><strong>Group Split:</strong> Divides bill + gratuity evenly</div>
+    </div>
+
+    
+    <div class="content-section">
+      <h2>Tipping Etiquette &amp; Splitting Checks</h2>
+      <p>Use the one-tap preset buttons (10%, 15%, 18%, 20%, 25%) right at your table to verify gratuity and split the total fairly among everyone in your party.</p>
+    </div>
+
+    
+    <div class="content-section">
+      <h2 id="faq">Frequently asked questions</h2>
+      <div class="faq-item"><div class="faq-q">Should tip be calculated before or after sales tax?<span class="arrow">&#9654;</span></div><div class="faq-a">Traditionally, gratuity is calculated on the pre-tax subtotal of food and drinks, though many receipts print suggestions on the post-tax total.</div></div>
+    </div>
+
+    
+    <div class="content-section">
+      <h2>Related calculators</h2>
+      <div class="related-grid">
+        <a class="related-card" href="percentage-calculator.html"><span class="related-icon">%</span><span>Percentage Calculator</span></a><a class="related-card" href="discount-calculator.html"><span class="related-icon">🏷️</span><span>Discount Calculator</span></a><a class="related-card" href="sales-tax-calculator.html"><span class="related-icon">🧾</span><span>Sales Tax Calculator</span></a>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div id="siteFooter">
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>EMI Master</h4>
+        <p>Free, instant, and private online calculators for finance, health, math, and everyday planning. Your inputs never leave your browser.</p>
+        <p><a href="sitemap.html"><strong>&rarr; All 89 Calculators (Directory)</strong></a></p>
+      </div>
+      <div class="footer-col">
+        <h4>Popular Calculators</h4>
+        <ul>
+          <li><a href="mortgage-calculator.html">Mortgage Calculator</a></li>
+          <li><a href="emi-calculator.html">EMI Calculator</a></li>
+          <li><a href="bmi-calculator.html">BMI Calculator</a></li>
+          <li><a href="calorie-calculator.html">Calorie Calculator</a></li>
+          <li><a href="age-calculator.html">Age Calculator</a></li>
+          <li><a href="percentage-calculator.html">Percentage Calculator</a></li>
+          <li><a href="scientific-calculator.html">Scientific Calculator</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Health &amp; Everyday</h4>
+        <ul>
+          <li><a href="bmr-calculator.html">BMR Calculator</a></li>
+          <li><a href="body-fat-calculator.html">Body Fat Calculator</a></li>
+          <li><a href="gpa-calculator.html">GPA Calculator</a></li>
+          <li><a href="salary-calculator.html">Salary Calculator</a></li>
+          <li><a href="date-calculator.html">Date Calculator</a></li>
+          <li><a href="unit-converter.html">Unit Converter</a></li>
+          <li><a href="password-generator.html">Password Generator</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Guides &amp; Info</h4>
+        <ul>
+          <li><a href="blog.html"><strong>Guides &amp; Blog</strong></a></li>
+          <li><a href="blog-how-to-reduce-home-loan-interest.html">Save Loan Interest</a></li>
+          <li><a href="blog-compound-interest-wealth-guide.html">Compound Interest Guide</a></li>
+          <li><a href="blog-bmi-vs-body-fat-guide.html">BMI vs Body Fat</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="sitemap.html"><strong>Complete HTML Sitemap</strong></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 EMI Master. All rights reserved. For educational and planning purposes only.
+    </div>
+  </footer>
+</div>
+
+<script>
+
+(function(){
+  document.querySelectorAll("#tipPresets .preset-chip").forEach(function(ch){
+    ch.addEventListener("click", function(){
+      document.querySelectorAll("#tipPresets .preset-chip").forEach(function(c){ c.classList.remove("active"); });
+      ch.classList.add("active");
+      document.getElementById("tipPct").value = ch.getAttribute("data-tip");
+      calc();
+    });
+  });
+  function money(v){ return "$" + v.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+  function calc() {
+    var bill = parseFloat(document.getElementById("bill").value) || 0;
+    var pct = parseFloat(document.getElementById("tipPct").value) || 0;
+    var ppl = Math.max(1, parseInt(document.getElementById("people").value, 10) || 1);
+    var tip = bill * (pct / 100);
+    var total = bill + tip;
+    document.getElementById("resultMain").textContent = money(total / ppl) + " / person";
+    document.getElementById("tipOut").textContent = money(tip);
+    document.getElementById("totalOut").textContent = money(total);
+    document.getElementById("tipPersonOut").textContent = money(tip / ppl);
+  }
+  document.getElementById("calculateBtn").addEventListener("click", calc);
+  document.getElementById("resetBtn").addEventListener("click", function(){
+    document.getElementById("bill").value = 120;
+    document.getElementById("tipPct").value = 18;
+    document.getElementById("people").value = 3;
+    calc();
+  });
+  ["bill","tipPct","people"].forEach(function(id){ document.getElementById(id).addEventListener("input", calc); });
+  calc();
+})();
+</script>
+<script src="js/currency.js"></script>
+<script src="js/seo-content.js"></script>
+<script src="js/common.js"></script>
+</body>
+</html>

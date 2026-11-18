@@ -19,7 +19,8 @@
         { href: "home-loan.html", label: "Home Loan Calculator", page: "home-loan.html" },
         { href: "car-loan.html", label: "Car Loan Calculator", page: "car-loan.html" },
         { href: "personal-loan.html", label: "Personal Loan Calculator", page: "personal-loan.html" },
-        { href: "loan-payoff.html", label: "Loan Payoff Calculator", page: "loan-payoff.html" }
+        { href: "loan-payoff.html", label: "Loan Payoff Calculator", page: "loan-payoff.html" },
+        { href: "credit-card-payoff-calculator.html", label: "Credit Card Payoff Calculator", page: "credit-card-payoff-calculator.html" }
       ]
     },
     {
@@ -71,7 +72,10 @@
         { href: "roi-calculator.html", label: "ROI Calculator", page: "roi-calculator.html" },
         { href: "payback-period-calculator.html", label: "Payback Period Calculator", page: "payback-period-calculator.html" },
         { href: "present-value-calculator.html", label: "Present Value Calculator", page: "present-value-calculator.html" },
-        { href: "future-value-calculator.html", label: "Future Value Calculator", page: "future-value-calculator.html" }
+        { href: "future-value-calculator.html", label: "Future Value Calculator", page: "future-value-calculator.html" },
+        { href: "inflation-calculator.html", label: "Inflation Calculator", page: "inflation-calculator.html" },
+        { href: "sales-tax-calculator.html", label: "Sales Tax Calculator", page: "sales-tax-calculator.html" },
+        { href: "discount-calculator.html", label: "Discount Calculator", page: "discount-calculator.html" }
       ]
     },
     {
@@ -115,7 +119,39 @@
         { href: "rounding-calculator.html", label: "Rounding Calculator", page: "rounding-calculator.html" },
         { href: "matrix-calculator.html", label: "Matrix Calculator", page: "matrix-calculator.html" },
         { href: "scientific-notation-calculator.html", label: "Scientific Notation Calculator", page: "scientific-notation-calculator.html" },
-        { href: "big-number-calculator.html", label: "Big Number Calculator", page: "big-number-calculator.html" }
+        { href: "big-number-calculator.html", label: "Big Number Calculator", page: "big-number-calculator.html" },
+        { href: "standard-deviation-calculator.html", label: "Standard Deviation Calculator", page: "standard-deviation-calculator.html" },
+        { href: "triangle-calculator.html", label: "Triangle Calculator", page: "triangle-calculator.html" }
+      ]
+    },
+    {
+      name: "Fitness & Health",
+      icon: "\u2764\uFE0F",
+      items: [
+        { href: "bmi-calculator.html", label: "BMI Calculator", page: "bmi-calculator.html" },
+        { href: "calorie-calculator.html", label: "Calorie & TDEE Calculator", page: "calorie-calculator.html" },
+        { href: "bmr-calculator.html", label: "BMR Calculator", page: "bmr-calculator.html" },
+        { href: "body-fat-calculator.html", label: "Body Fat Calculator", page: "body-fat-calculator.html" },
+        { href: "ideal-weight-calculator.html", label: "Ideal Weight Calculator", page: "ideal-weight-calculator.html" },
+        { href: "pace-calculator.html", label: "Running Pace Calculator", page: "pace-calculator.html" },
+        { href: "pregnancy-calculator.html", label: "Pregnancy Due Date Calculator", page: "pregnancy-calculator.html" },
+        { href: "water-intake-calculator.html", label: "Daily Water Intake Calculator", page: "water-intake-calculator.html" }
+      ]
+    },
+    {
+      name: "Date, Time & Everyday",
+      icon: "\uD83D\uDCC5",
+      items: [
+        { href: "age-calculator.html", label: "Age Calculator", page: "age-calculator.html" },
+        { href: "date-calculator.html", label: "Date Calculator", page: "date-calculator.html" },
+        { href: "time-calculator.html", label: "Time Calculator", page: "time-calculator.html" },
+        { href: "hours-calculator.html", label: "Work Hours & Timesheet", page: "hours-calculator.html" },
+        { href: "gpa-calculator.html", label: "GPA Calculator", page: "gpa-calculator.html" },
+        { href: "grade-calculator.html", label: "Weighted Grade Calculator", page: "grade-calculator.html" },
+        { href: "tip-calculator.html", label: "Tip & Bill Split Calculator", page: "tip-calculator.html" },
+        { href: "salary-calculator.html", label: "Salary & Wage Converter", page: "salary-calculator.html" },
+        { href: "unit-converter.html", label: "Universal Unit Converter", page: "unit-converter.html" },
+        { href: "password-generator.html", label: "Strong Password Generator", page: "password-generator.html" }
       ]
     }
   ];
@@ -141,9 +177,10 @@
     nav += '<ul>';
     nav += '<li><a href="index.html" data-nav="index.html">Home</a></li>';
     nav += '<li><a href="mortgage-calculator.html" data-nav="mortgage-calculator.html">Mortgage</a></li>';
-    nav += '<li><a href="emi-calculator.html" data-nav="emi-calculator.html">EMI &amp; Loans</a></li>';
-    nav += '<li><a href="investment-calculator.html" data-nav="investment-calculator.html">Investment</a></li>';
+    nav += '<li><a href="emi-calculator.html" data-nav="emi-calculator.html">Loans</a></li>';
+    nav += '<li><a href="bmi-calculator.html" data-nav="bmi-calculator.html">Health</a></li>';
     nav += '<li><a href="scientific-calculator.html" data-nav="scientific-calculator.html">Math</a></li>';
+    nav += '<li><a href="blog.html" data-nav="blog.html">Blog</a></li>';
     nav += '</ul>';
 
     return (
@@ -155,9 +192,9 @@
       '</a>' +
       '<nav class="main-nav" id="mainNav" aria-label="Main navigation">' + nav + '</nav>' +
       '<div class="header-tools">' +
-      '<button type="button" class="header-search-btn" id="headerSearchBtn" title="Search 65+ Calculators (Ctrl+K)" aria-label="Search Calculators">' +
+      '<button type="button" class="header-search-btn" id="headerSearchBtn" title="Search 89+ Calculators (Ctrl+K)" aria-label="Search Calculators">' +
       '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>' +
-      '<span class="search-btn-text">Search 65+ tools</span><span class="search-shortcut">&#8984;K</span>' +
+      '<span class="search-btn-text">Search 89+ tools</span><span class="search-shortcut">&#8984;K</span>' +
       '</button>' +
       '<select class="lang-select" id="currencySelect" aria-label="Currency">' + buildCurrencyOptions() + '</select>' +
       '<button class="theme-toggle" id="themeToggle" title="Switch theme" aria-label="Toggle dark mode">&#127769;</button>' +
@@ -215,8 +252,9 @@
     html += '</ul></div>';
 
     html += '<div class="sidebar-card"><h3>Quick Directory</h3><ul>';
-    html += '<li><a href="sitemap.html"><span class="sidebar-icon">&#128506;&#65039;</span>All 65+ Calculators</a></li>';
-    html += '<li><a href="privacy-policy.html"><span class="sidebar-icon">&#128274;</span>Privacy Policy</a></li>';
+    html += '<li><a href="blog.html"' + (current.indexOf("blog") === 0 ? ' class="active"' : '') + '><span class="sidebar-icon">&#128218;</span>Guides &amp; Blog</a></li>';
+    html += '<li><a href="sitemap.html"' + (current === "sitemap.html" ? ' class="active"' : '') + '><span class="sidebar-icon">&#128506;&#65039;</span>All 89 Calculators</a></li>';
+    html += '<li><a href="privacy-policy.html"' + (current === "privacy-policy.html" ? ' class="active"' : '') + '><span class="sidebar-icon">&#128274;</span>Privacy Policy</a></li>';
     html += '</ul></div>';
 
     var recent = getRecentCalculators();
@@ -241,44 +279,39 @@
     html += '<h4>' + SITE_NAME + '</h4>';
     html += '<p>' + SITE_TAGLINE + '. Fast, accurate and free tools for EMI, loans, ' +
       'savings and everyday calculations. Your data never leaves your device.</p>';
-    html += '<p><strong>65+ advanced calculators</strong> for loans, mortgages, savings, ' +
-      'investments, retirement, mathematics and business finance.</p>';
+    html += '<p><strong>89+ advanced calculators</strong> for loans, mortgages, savings, ' +
+      'investments, fitness &amp; health, date/time, mathematics and everyday tools.</p>';
     html += '</div>';
     html += '<div class="footer-col">';
     html += '<h4>' + tr('footer.popular') + '</h4><ul>';
     html += '<li><a href="emi-calculator.html">EMI Calculator</a></li>';
     html += '<li><a href="mortgage-calculator.html">Mortgage Calculator</a></li>';
-    html += '<li><a href="home-loan.html">Home Loan Calculator</a></li>';
-    html += '<li><a href="house-affordability.html">House Affordability</a></li>';
-    html += '<li><a href="car-loan.html">Car Loan Calculator</a></li>';
+    html += '<li><a href="bmi-calculator.html">BMI Calculator</a></li>';
+    html += '<li><a href="calorie-calculator.html">Calorie Calculator</a></li>';
+    html += '<li><a href="age-calculator.html">Age Calculator</a></li>';
     html += '<li><a href="compound-interest-calculator.html">Compound Interest</a></li>';
-    html += '<li><a href="mutual-fund-calculator.html">Mutual Fund Calculator</a></li>';
-    html += '<li><a href="roi-calculator.html">ROI Calculator</a></li>';
-    html += '<li><a href="dps.html">DPS Calculator</a></li>';
-    html += '<li><a href="fdr.html">FDR Calculator</a></li>';
-    html += '<li><a href="retirement-calculator.html">Retirement Calculator</a></li>';
+    html += '<li><a href="salary-calculator.html">Salary Calculator</a></li>';
     html += '<li><a href="rent-vs-buy.html">Rent vs Buy</a></li>';
     html += '</ul></div>';
     html += '<div class="footer-col">';
-    html += '<h4>' + tr('footer.company') + '</h4><ul>';
-    html += '<li><a href="index.html">' + tr('nav.home') + '</a></li>';
-    html += '<li><a href="sitemap.html"><strong>All Calculators (Sitemap)</strong></a></li>';
-    html += '<li><a href="loan-payoff.html">Loan Payoff Calculator</a></li>';
-    html += '<li><a href="personal-loan.html">Personal Loan Calculator</a></li>';
-    html += '<li><a href="debt-to-income.html">Debt-to-Income Ratio</a></li>';
-    html += '<li><a href="apr-calculator.html">APR Calculator</a></li>';
-    html += '<li><a href="refinance-calculator.html">Refinance Calculator</a></li>';
+    html += '<h4>Guides &amp; Blog</h4><ul>';
+    html += '<li><a href="blog.html"><strong>All Financial &amp; Health Guides</strong></a></li>';
+    html += '<li><a href="blog-how-to-reduce-home-loan-interest.html">Save Loan Interest 30%+</a></li>';
+    html += '<li><a href="blog-compound-interest-wealth-guide.html">Compound Interest &amp; Rule of 72</a></li>';
+    html += '<li><a href="blog-bmi-vs-body-fat-guide.html">BMI vs Body Fat Percentage</a></li>';
+    html += '<li><a href="blog-calorie-deficit-macro-guide.html">Calorie Deficit &amp; Macros</a></li>';
+    html += '<li><a href="blog-rent-vs-buy-guide.html">Rent vs. Buy: 5% Rule</a></li>';
     html += '<li><a href="privacy-policy.html">' + tr('sidebar.privacy') + '</a></li>';
     html += '</ul></div>';
     html += '<div class="footer-col">';
-    html += '<h4>Math &amp; Tools</h4><ul>';
+    html += '<h4>Math &amp; Everyday</h4><ul>';
     html += '<li><a href="scientific-calculator.html">Scientific Calculator</a></li>';
     html += '<li><a href="percentage-calculator.html">Percentage Calculator</a></li>';
-    html += '<li><a href="fraction-calculator.html">Fraction Calculator</a></li>';
-    html += '<li><a href="amortization-calculator.html">Amortization Schedule</a></li>';
-    html += '<li><a href="random-number-generator.html">Random Number Gen</a></li>';
-    html += '<li><a href="binary-calculator.html">Binary Calculator</a></li>';
-    html += '<li><a href="sitemap.html">&rarr; View All 65+ Tools</a></li>';
+    html += '<li><a href="unit-converter.html">Unit Converter</a></li>';
+    html += '<li><a href="gpa-calculator.html">GPA Calculator</a></li>';
+    html += '<li><a href="date-calculator.html">Date Calculator</a></li>';
+    html += '<li><a href="password-generator.html">Password Generator</a></li>';
+    html += '<li><a href="sitemap.html"><strong>&rarr; View All 89 Calculators</strong></a></li>';
     html += '</ul></div>';
     html += '</div>';
     html += '<div class="footer-bottom">';
@@ -437,7 +470,7 @@
 
   function trackRecentCalculator() {
     var page = currentPage();
-    if (!page || page === "index.html" || page === "sitemap.html" || page === "privacy-policy.html" || page === "404.html") return;
+    if (!page || page === "index.html" || page === "sitemap.html" || page === "privacy-policy.html" || page === "404.html" || page.indexOf("blog") === 0) return;
     var match = null;
     for (var i = 0; i < CALCULATORS_REGISTRY.length; i++) {
       if (CALCULATORS_REGISTRY[i].url === page) {
@@ -832,7 +865,38 @@
     { title: "IRR Calculator", url: "irr-calculator.html", cat: "Investment", icon: "🎯", desc: "Internal Rate of Return for series of positive & negative cash flows", keywords: "irr internal rate return npv cash flows hurdle rate financial evaluation" },
     { title: "CD Calculator", url: "cd-calculator.html", cat: "Investment", icon: "💿", desc: "Certificate of Deposit earnings, APY compounding, and maturity value", keywords: "cd certificate deposit apy bank interest term deposit penalty" },
     { title: "Finance Calculator", url: "finance-calculator.html", cat: "Investment", icon: "💼", desc: "General TVM solver for N, I/Y, PV, PMT, and FV financial equations", keywords: "finance tvm time value money ba ii plus solver financial math" },
-    { title: "Depreciation Calculator", url: "depreciation-calculator.html", cat: "Investment", icon: "📉", desc: "Asset depreciation schedules: Straight-Line, Declining Balance, SYD, Units", keywords: "depreciation straight line slm wdv written down diminishing balance sum of years syd double declining" }
+    { title: "Depreciation Calculator", url: "depreciation-calculator.html", cat: "Investment", icon: "📉", desc: "Asset depreciation schedules: Straight-Line, Declining Balance, SYD, Units", keywords: "depreciation straight line slm wdv written down diminishing balance sum of years syd double declining" },
+    { title: "Credit Card Payoff Calculator", url: "credit-card-payoff-calculator.html", cat: "Financial", icon: "💳", desc: "Payoff timeline, total interest charges, and monthly credit card schedule", keywords: "credit card payoff apr debt snowball avalanche interest schedule minimum payment" },
+    { title: "Sales Tax Calculator", url: "sales-tax-calculator.html", cat: "Financial", icon: "🧾", desc: "Forward checkout tax and reverse pre-tax VAT/GST receipt solver", keywords: "sales tax vat gst reverse pre tax price receipt calculation" },
+    { title: "Discount Calculator", url: "discount-calculator.html", cat: "Financial", icon: "🏷️", desc: "Final sale price, savings amount, stacked clearance discounts, and tax", keywords: "discount percent off sale price clearance promo code double discount" },
+    { title: "Inflation Calculator", url: "inflation-calculator.html", cat: "Investment", icon: "🎈", desc: "Measure future cost growth, buying power erosion, and Rule of 70", keywords: "inflation cpi purchasing power buying power future cost rule of 70" },
+    { title: "Standard Deviation Calculator", url: "standard-deviation-calculator.html", cat: "Math", icon: "📊", desc: "Sample & population SD, variance, mean, median, and standard error", keywords: "standard deviation variance mean median sem statistics dataset bessel" },
+    { title: "Triangle Calculator", url: "triangle-calculator.html", cat: "Math", icon: "📐", desc: "SSS & SAS triangle solver for angles, perimeter, Heron area, and SVG plot", keywords: "triangle solver sss sas angles area perimeter heron law of cosines geometry" },
+
+    // Fitness & Health
+    { title: "BMI Calculator", url: "bmi-calculator.html", cat: "Health", icon: "⚖️", desc: "Body Mass Index, healthy weight range, BMI Prime, and Ponderal Index", keywords: "bmi body mass index weight height healthy weight prime ponderal who chart" },
+    { title: "Calorie & TDEE Calculator", url: "calorie-calculator.html", cat: "Health", icon: "🔥", desc: "Daily calorie burn (TDEE), weight loss deficit, and protein/carb/fat macros", keywords: "calorie tdee weight loss fat loss maintenance deficit macros diet protein" },
+    { title: "BMR Calculator", url: "bmr-calculator.html", cat: "Health", icon: "⚡", desc: "Basal Metabolic Rate across Mifflin-St Jeor, Harris-Benedict, and Katch-McArdle", keywords: "bmr basal metabolic rate resting calories metabolism mifflin harris benedict" },
+    { title: "Body Fat Calculator", url: "body-fat-calculator.html", cat: "Health", icon: "📏", desc: "U.S. Navy tape-measure body fat %, fat mass, and lean muscle mass", keywords: "body fat percentage navy formula waist neck lean mass ace fitness" },
+    { title: "Ideal Weight Calculator", url: "ideal-weight-calculator.html", cat: "Health", icon: "🎯", desc: "Ideal body weight via Devine, Robinson, Miller, Hamwi, and BMI band", keywords: "ideal weight ibw devine robinson miller hamwi target body weight" },
+    { title: "Running Pace Calculator", url: "pace-calculator.html", cat: "Health", icon: "🏃", desc: "Min/km & min/mile running pace, speed, and 5K/10K/Marathon splits", keywords: "running pace marathon half marathon 5k 10k min per km mile speed splits" },
+    { title: "Pregnancy Due Date Calculator", url: "pregnancy-calculator.html", cat: "Health", icon: "🤰", desc: "Due date, gestational week, conception window, and trimester milestones", keywords: "pregnancy due date lmp ivf gestational age trimester baby countdown" },
+    { title: "Daily Water Intake Calculator", url: "water-intake-calculator.html", cat: "Health", icon: "💧", desc: "Daily hydration target in liters, fl oz, glasses, and bottles", keywords: "water intake hydration drink liters oz daily water requirement" },
+
+    // Date, Time & Everyday
+    { title: "Age Calculator", url: "age-calculator.html", cat: "Everyday", icon: "🎂", desc: "Exact age in years, months, weeks, days, hours, and birthday countdown", keywords: "age birthday chronological age years months days born weekday" },
+    { title: "Date Calculator", url: "date-calculator.html", cat: "Everyday", icon: "📅", desc: "Days & business weekdays between dates plus add/subtract date math", keywords: "date days between dates business days weekdays add days calendar" },
+    { title: "Time Calculator", url: "time-calculator.html", cat: "Everyday", icon: "⏱️", desc: "Add and subtract days, hours, minutes, and seconds with decimal totals", keywords: "time calculator add hours subtract minutes seconds duration base 60" },
+    { title: "Work Hours & Timesheet Calculator", url: "hours-calculator.html", cat: "Everyday", icon: "🕒", desc: "Weekly Mon-Sun work hours, lunch breaks, 1.5x overtime, and gross pay", keywords: "hours timesheet work hours clock in out overtime payroll break" },
+    { title: "GPA Calculator", url: "gpa-calculator.html", cat: "Everyday", icon: "🎓", desc: "Semester & cumulative 4.0 GPA weighted by course credit hours", keywords: "gpa college high school grades credit hours cumulative grade point average" },
+    { title: "Weighted Grade Calculator", url: "grade-calculator.html", cat: "Everyday", icon: "📝", desc: "Current weighted class grade plus exact score needed on final exam", keywords: "grade final exam calculator weighted syllabus score needed" },
+    { title: "Tip & Bill Split Calculator", url: "tip-calculator.html", cat: "Everyday", icon: "🍽️", desc: "Quick restaurant tip percentages and even per-person bill splitting", keywords: "tip gratuity restaurant split bill check share per person" },
+    { title: "Salary & Wage Converter", url: "salary-calculator.html", cat: "Everyday", icon: "💵", desc: "Convert hourly, daily, weekly, biweekly, monthly, and annual pay", keywords: "salary hourly wage converter annual pay biweekly paycheck pto" },
+    { title: "Universal Unit Converter", url: "unit-converter.html", cat: "Everyday", icon: "📏", desc: "Convert Length, Weight, Temp, Area, Volume, Speed, and Digital Storage", keywords: "unit converter metric imperial length weight temperature celsius fahrenheit kg lbs" },
+    { title: "Strong Password Generator", url: "password-generator.html", cat: "Everyday", icon: "🔐", desc: "Cryptographic browser password generator with entropy bit strength", keywords: "password generator random secure strong cryptographic entropy" },
+
+    // Guides & Blog
+    { title: "Guides & Financial Blog", url: "blog.html", cat: "Blog", icon: "📘", desc: "In-depth guides on saving mortgage interest, compound wealth, BMI vs fat, and debt payoff", keywords: "blog guides articles tutorials mortgage interest compound fitness calorie rent buy debt" }
   ];
 
   function searchCalculators(query) {
@@ -878,13 +942,13 @@
         '<div class="search-modal">' +
         '<div class="search-modal-header">' +
         '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>' +
-        '<input type="text" class="search-modal-input" id="quickSearchModalInput" placeholder="Search 65+ calculators (e.g., fraction, quadratic, percentage, EMI)..." autocomplete="off">' +
+        '<input type="text" class="search-modal-input" id="quickSearchModalInput" placeholder="Search 89+ calculators (e.g., BMI, EMI, Mortgage, Age, GPA, Fraction)..." autocomplete="off">' +
         '<button type="button" class="search-modal-close" id="quickSearchModalClose" aria-label="Close search">&times;</button>' +
         '</div>' +
         '<div class="search-modal-results" id="quickSearchModalResults"></div>' +
         '<div class="search-modal-footer">' +
         '<span><strong>ProTip:</strong> Press <kbd>ESC</kbd> to close &bull; <kbd>&uarr;</kbd><kbd>&darr;</kbd> to navigate</span>' +
-        '<span>65+ Free Calculators</span>' +
+        '<span>89+ Free Calculators &amp; Guides</span>' +
         '</div>' +
         '</div>' +
         '</div>';

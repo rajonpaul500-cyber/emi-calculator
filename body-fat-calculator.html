@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-M8XM9611FL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-M8XM9611FL');
+  </script>
+  <script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Body Fat Calculator - U.S. Navy Method &amp; Lean Body Mass | EMI Master</title>
+  <meta name="description" content="Free body fat percentage calculator using the U.S. Navy circumference formula and BMI method. Find your fat mass, lean body mass, and ACE fitness category.">
+  <meta name="keywords" content="body fat calculator, navy body fat calculator, lean body mass calculator, body fat percentage">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <link rel="canonical" href="https://emimaster.com/body-fat-calculator.html">
+  <meta property="og:site_name" content="EMI Master">
+  <meta property="og:title" content="Body Fat Calculator - U.S. Navy Method &amp; Lean Body Mass | EMI Master">
+  <meta property="og:description" content="Free body fat percentage calculator using the U.S. Navy circumference formula and BMI method. Find your fat mass, lean body mass, and ACE fitness category.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://emimaster.com/body-fat-calculator.html">
+  <meta property="og:image" content="https://emimaster.com/icons/og-banner.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Body Fat Calculator - U.S. Navy Method &amp; Lean Body Mass | EMI Master">
+  <meta name="twitter:description" content="Free body fat percentage calculator using the U.S. Navy circumference formula and BMI method. Find your fat mass, lean body mass, and ACE fitness category.">
+  <meta name="twitter:image" content="https://emimaster.com/icons/og-banner.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Body Fat Calculator","url":"https://emimaster.com/body-fat-calculator.html","description":"Free body fat percentage calculator using the U.S. Navy circumference formula and BMI method. Find your fat mass, lean body mass, and ACE fitness category.","applicationCategory":"HealthApplication","operatingSystem":"All","browserRequirements":"Requires JavaScript","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Where should I measure my waist for the Navy formula?","acceptedAnswer":{"@type":"Answer","text":"Men should measure horizontally right across the belly button (navel). Women should measure at the narrowest natural waist point, plus the widest point around the hips and glutes."}},{"@type":"Question","name":"What is lean body mass?","acceptedAnswer":{"@type":"Answer","text":"Lean body mass equals total body weight minus fat weight—including skeletal muscle, bones, organs, and water."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://emimaster.com/"},{"@type":"ListItem","position":2,"name":"Fitness & Health","item":"https://emimaster.com/sitemap.html#fitness"},{"@type":"ListItem","position":3,"name":"Body Fat Calculator","item":"https://emimaster.com/body-fat-calculator.html"}]}</script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+
+<div id="siteHeader"></div>
+
+<div class="layout">
+  <div id="siteSidebar"></div>
+
+  <main class="main-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="sitemap.html#fitness">Fitness &amp; Health</a> &rsaquo; Body Fat Calculator</div>
+    <h1 class="page-title">Body Fat Calculator</h1>
+    <p class="page-subtitle">Estimate body fat percentage, fat mass, and lean muscle mass with the U.S. Navy tape-measure method.</p>
+
+    
+    <div class="unit-tabs" id="unitTabs">
+      <button type="button" class="unit-tab active" data-unit="us">US Units (in, lbs)</button>
+      <button type="button" class="unit-tab" data-unit="metric">Metric (cm, kg)</button>
+    </div>
+
+    <div class="card">
+      <h2>Circumference Measurements</h2>
+      <div class="form-grid">
+        <div class="form-group"><label for="gender">Gender</label><select id="gender"><option value="male" selected>Male</option><option value="female">Female</option></select></div>
+        <div class="form-group"><label for="age">Age</label><input type="number" id="age" value="28" min="15" max="90"></div>
+        <div class="form-group us-only"><label for="heightIn">Height (inches)</label><input type="number" id="heightIn" value="70" min="36" max="96" step="0.5"></div>
+        <div class="form-group us-only"><label for="weightLb">Weight (lbs)</label><input type="number" id="weightLb" value="175" min="60" max="600" step="0.5"></div>
+        <div class="form-group us-only"><label for="neckIn">Neck (inches)</label><input type="number" id="neckIn" value="15.5" min="8" max="30" step="0.1"></div>
+        <div class="form-group us-only"><label for="waistIn">Waist at navel (inches)</label><input type="number" id="waistIn" value="33" min="18" max="80" step="0.1"></div>
+        <div class="form-group us-only female-only" style="display:none;"><label for="hipIn">Hip widest point (inches)</label><input type="number" id="hipIn" value="38" min="20" max="80" step="0.1"></div>
+
+        <div class="form-group metric-only" style="display:none;"><label for="heightCm">Height (cm)</label><input type="number" id="heightCm" value="178" min="90" max="245" step="0.5"></div>
+        <div class="form-group metric-only" style="display:none;"><label for="weightKg">Weight (kg)</label><input type="number" id="weightKg" value="79" min="25" max="300" step="0.5"></div>
+        <div class="form-group metric-only" style="display:none;"><label for="neckCm">Neck (cm)</label><input type="number" id="neckCm" value="39" min="20" max="75" step="0.5"></div>
+        <div class="form-group metric-only" style="display:none;"><label for="waistCm">Waist (cm)</label><input type="number" id="waistCm" value="84" min="45" max="200" step="0.5"></div>
+        <div class="form-group metric-only female-only" style="display:none;"><label for="hipCm">Hip (cm)</label><input type="number" id="hipCm" value="96" min="50" max="200" step="0.5"></div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary" id="calculateBtn" type="button">Calculate Body Fat</button>
+        <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
+      </div>
+    </div>
+
+    <div class="result-panel show" id="resultPanel">
+      <h3>Estimated Body Fat (U.S. Navy Method)</h3>
+      <div class="result-main" id="resultMain">—</div>
+      <div class="result-grid">
+        <div class="result-item"><div class="label">ACE Category</div><div class="value" id="catOut">—</div></div>
+        <div class="result-item"><div class="label">Body Fat Mass</div><div class="value negative" id="fatMassOut">—</div></div>
+        <div class="result-item"><div class="label">Lean Body Mass</div><div class="value positive" id="leanMassOut">—</div></div>
+      </div>
+      <div class="payoff-note show" id="bfNote"></div>
+    </div>
+
+    
+    <div class="quick-facts">
+      <div class="fact-chip"><strong>Method:</strong> Hodgdon-Beckett U.S. Navy Equation</div>
+      <div class="fact-chip"><strong>Essential Fat:</strong> 2–5% (Men) / 10–13% (Women)</div>
+      <div class="fact-chip"><strong>Athletic Range:</strong> 6–13% (Men) / 14–20% (Women)</div>
+      <div class="fact-chip"><strong>Fitness Range:</strong> 14–17% (Men) / 21–24% (Women)</div>
+    </div>
+
+    
+    <div class="content-section">
+      <h2>How the U.S. Navy Body Fat Formula Works</h2>
+      <p>Unlike standard scale weight or <a href="bmi-calculator.html">BMI</a>, the U.S. Navy circumference formula isolates abdominal girth relative to neck circumference and height (plus hips for women). Because visceral and subcutaneous trunk fat expand the waist much faster than neck tissue, a single tape measure estimates body fat within roughly 3%–4% of DEXA scans.</p>
+      <p>See our <a href="blog-bmi-vs-body-fat-guide.html">BMI vs. Body Fat Guide</a> for practical measurement tips.</p>
+    </div>
+
+    
+    <div class="content-section">
+      <h2 id="faq">Frequently asked questions</h2>
+      <div class="faq-item"><div class="faq-q">Where should I measure my waist for the Navy formula?<span class="arrow">&#9654;</span></div><div class="faq-a">Men should measure horizontally right across the belly button (navel). Women should measure at the narrowest natural waist point, plus the widest point around the hips and glutes.</div></div>
+      <div class="faq-item"><div class="faq-q">What is lean body mass?<span class="arrow">&#9654;</span></div><div class="faq-a">Lean body mass equals total body weight minus fat weight—including skeletal muscle, bones, organs, and water.</div></div>
+    </div>
+
+    
+    <div class="content-section">
+      <h2>Related calculators</h2>
+      <div class="related-grid">
+        <a class="related-card" href="bmi-calculator.html"><span class="related-icon">⚖️</span><span>BMI Calculator</span></a><a class="related-card" href="calorie-calculator.html"><span class="related-icon">🔥</span><span>Calorie &amp; TDEE Calculator</span></a><a class="related-card" href="bmr-calculator.html"><span class="related-icon">⚡</span><span>BMR Calculator</span></a><a class="related-card" href="blog-bmi-vs-body-fat-guide.html"><span class="related-icon">📘</span><span>Guide: BMI vs Body Fat</span></a>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div id="siteFooter">
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>EMI Master</h4>
+        <p>Free, instant, and private online calculators for finance, health, math, and everyday planning. Your inputs never leave your browser.</p>
+        <p><a href="sitemap.html"><strong>&rarr; All 89 Calculators (Directory)</strong></a></p>
+      </div>
+      <div class="footer-col">
+        <h4>Popular Calculators</h4>
+        <ul>
+          <li><a href="mortgage-calculator.html">Mortgage Calculator</a></li>
+          <li><a href="emi-calculator.html">EMI Calculator</a></li>
+          <li><a href="bmi-calculator.html">BMI Calculator</a></li>
+          <li><a href="calorie-calculator.html">Calorie Calculator</a></li>
+          <li><a href="age-calculator.html">Age Calculator</a></li>
+          <li><a href="percentage-calculator.html">Percentage Calculator</a></li>
+          <li><a href="scientific-calculator.html">Scientific Calculator</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Health &amp; Everyday</h4>
+        <ul>
+          <li><a href="bmr-calculator.html">BMR Calculator</a></li>
+          <li><a href="body-fat-calculator.html">Body Fat Calculator</a></li>
+          <li><a href="gpa-calculator.html">GPA Calculator</a></li>
+          <li><a href="salary-calculator.html">Salary Calculator</a></li>
+          <li><a href="date-calculator.html">Date Calculator</a></li>
+          <li><a href="unit-converter.html">Unit Converter</a></li>
+          <li><a href="password-generator.html">Password Generator</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Guides &amp; Info</h4>
+        <ul>
+          <li><a href="blog.html"><strong>Guides &amp; Blog</strong></a></li>
+          <li><a href="blog-how-to-reduce-home-loan-interest.html">Save Loan Interest</a></li>
+          <li><a href="blog-compound-interest-wealth-guide.html">Compound Interest Guide</a></li>
+          <li><a href="blog-bmi-vs-body-fat-guide.html">BMI vs Body Fat</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="sitemap.html"><strong>Complete HTML Sitemap</strong></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 EMI Master. All rights reserved. For educational and planning purposes only.
+    </div>
+  </footer>
+</div>
+
+<script>
+
+(function(){
+  var unit = "us";
+  function syncVisibility() {
+    var g = document.getElementById("gender").value;
+    document.querySelectorAll(".us-only").forEach(function(el){
+      var isFem = el.classList.contains("female-only");
+      el.style.display = (unit === "us" && (!isFem || g === "female")) ? "" : "none";
+    });
+    document.querySelectorAll(".metric-only").forEach(function(el){
+      var isFem = el.classList.contains("female-only");
+      el.style.display = (unit === "metric" && (!isFem || g === "female")) ? "" : "none";
+    });
+  }
+  document.querySelectorAll("#unitTabs .unit-tab").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      document.querySelectorAll("#unitTabs .unit-tab").forEach(function(b){ b.classList.remove("active"); });
+      btn.classList.add("active");
+      unit = btn.getAttribute("data-unit");
+      syncVisibility();
+      calc();
+    });
+  });
+  function calc() {
+    syncVisibility();
+    var g = document.getElementById("gender").value;
+    var age = parseFloat(document.getElementById("age").value) || 28;
+    var hCm, wKg, neckCm, waistCm, hipCm;
+    if (unit === "us") {
+      hCm = (parseFloat(document.getElementById("heightIn").value) || 0) * 2.54;
+      wKg = (parseFloat(document.getElementById("weightLb").value) || 0) * 0.45359237;
+      neckCm = (parseFloat(document.getElementById("neckIn").value) || 0) * 2.54;
+      waistCm = (parseFloat(document.getElementById("waistIn").value) || 0) * 2.54;
+      hipCm = (parseFloat(document.getElementById("hipIn").value) || 0) * 2.54;
+    } else {
+      hCm = parseFloat(document.getElementById("heightCm").value) || 0;
+      wKg = parseFloat(document.getElementById("weightKg").value) || 0;
+      neckCm = parseFloat(document.getElementById("neckCm").value) || 0;
+      waistCm = parseFloat(document.getElementById("waistCm").value) || 0;
+      hipCm = parseFloat(document.getElementById("hipCm").value) || 0;
+    }
+    if (hCm <= 0 || wKg <= 0 || neckCm <= 0 || waistCm <= neckCm) return;
+    var bf;
+    if (g === "male") {
+      bf = 495 / (1.0324 - 0.19077 * Math.log10(waistCm - neckCm) + 0.15456 * Math.log10(hCm)) - 450;
+    } else {
+      if (waistCm + hipCm <= neckCm) return;
+      bf = 495 / (1.29579 - 0.35004 * Math.log10(waistCm + hipCm - neckCm) + 0.22100 * Math.log10(hCm)) - 450;
+    }
+    bf = Math.max(2, Math.min(60, bf));
+    var fatKg = wKg * (bf / 100);
+    var leanKg = wKg - fatKg;
+    var cat = "Fitness";
+    if (g === "male") {
+      if (bf < 6) cat = "Essential Fat";
+      else if (bf < 14) cat = "Athletes";
+      else if (bf < 18) cat = "Fitness";
+      else if (bf < 25) cat = "Average";
+      else cat = "Obese";
+    } else {
+      if (bf < 14) cat = "Essential Fat";
+      else if (bf < 21) cat = "Athletes";
+      else if (bf < 25) cat = "Fitness";
+      else if (bf < 32) cat = "Average";
+      else cat = "Obese";
+    }
+    var bmi = wKg / Math.pow(hCm / 100, 2);
+    var bmiBf = 1.2 * bmi + 0.23 * age - (g === "male" ? 16.2 : 5.4);
+    var suffix = unit === "us" ? " lbs" : " kg";
+    var conv = unit === "us" ? 2.20462 : 1;
+
+    document.getElementById("resultMain").textContent = bf.toFixed(1) + "% (" + cat + ")";
+    document.getElementById("catOut").textContent = cat;
+    document.getElementById("fatMassOut").textContent = (fatKg * conv).toFixed(1) + suffix;
+    document.getElementById("leanMassOut").textContent = (leanKg * conv).toFixed(1) + suffix;
+    document.getElementById("bfNote").textContent = "BMI-based Deurenberg estimate: " + bmiBf.toFixed(1) + "% body fat.";
+  }
+  document.getElementById("calculateBtn").addEventListener("click", calc);
+  document.getElementById("resetBtn").addEventListener("click", function(){
+    document.getElementById("heightIn").value = 70;
+    document.getElementById("weightLb").value = 175;
+    document.getElementById("neckIn").value = 15.5;
+    document.getElementById("waistIn").value = 33;
+    document.getElementById("hipIn").value = 38;
+    calc();
+  });
+  ["gender","age","heightIn","weightLb","neckIn","waistIn","hipIn","heightCm","weightKg","neckCm","waistCm","hipCm"].forEach(function(id){
+    var el = document.getElementById(id);
+    if (el) { el.addEventListener("input", calc); el.addEventListener("change", calc); }
+  });
+  calc();
+})();
+</script>
+<script src="js/currency.js"></script>
+<script src="js/seo-content.js"></script>
+<script src="js/common.js"></script>
+</body>
+</html>

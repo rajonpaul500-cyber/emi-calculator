@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-M8XM9611FL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-M8XM9611FL');
+  </script>
+  <script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Age Calculator - Exact Age in Years, Months, Weeks &amp; Days | EMI Master</title>
+  <meta name="description" content="Free exact age calculator. Find your chronological age in years, months, weeks, days, hours, and minutes, plus your birth weekday and next birthday countdown.">
+  <meta name="keywords" content="age calculator, birthday calculator, exact age calculator, chronological age, how old am i">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <link rel="canonical" href="https://emimaster.com/age-calculator.html">
+  <meta property="og:site_name" content="EMI Master">
+  <meta property="og:title" content="Age Calculator - Exact Age in Years, Months, Weeks &amp; Days | EMI Master">
+  <meta property="og:description" content="Free exact age calculator. Find your chronological age in years, months, weeks, days, hours, and minutes, plus your birth weekday and next birthday countdown.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://emimaster.com/age-calculator.html">
+  <meta property="og:image" content="https://emimaster.com/icons/og-banner.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Age Calculator - Exact Age in Years, Months, Weeks &amp; Days | EMI Master">
+  <meta name="twitter:description" content="Free exact age calculator. Find your chronological age in years, months, weeks, days, hours, and minutes, plus your birth weekday and next birthday countdown.">
+  <meta name="twitter:image" content="https://emimaster.com/icons/og-banner.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Age Calculator","url":"https://emimaster.com/age-calculator.html","description":"Free exact age calculator. Find your chronological age in years, months, weeks, days, hours, and minutes, plus your birth weekday and next birthday countdown.","applicationCategory":"UtilitiesApplication","operatingSystem":"All","browserRequirements":"Requires JavaScript","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does the age calculator include leap years?","acceptedAnswer":{"@type":"Answer","text":"Yes. Every February 29 between your birth date and target date is counted accurately in total days, weeks, and hours lived."}},{"@type":"Question","name":"Can I calculate someone's age on a past or future date?","acceptedAnswer":{"@type":"Answer","text":"Yes. Change the 'Age at the Date of' input to any historical or future calendar date."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://emimaster.com/"},{"@type":"ListItem","position":2,"name":"Date, Time & Everyday","item":"https://emimaster.com/sitemap.html#everyday"},{"@type":"ListItem","position":3,"name":"Age Calculator","item":"https://emimaster.com/age-calculator.html"}]}</script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+
+<div id="siteHeader"></div>
+
+<div class="layout">
+  <div id="siteSidebar"></div>
+
+  <main class="main-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="sitemap.html#everyday">Date, Time &amp; Everyday</a> &rsaquo; Age Calculator</div>
+    <h1 class="page-title">Age Calculator</h1>
+    <p class="page-subtitle">Calculate exact chronological age in years, months, weeks, days, hours, and see your next birthday countdown.</p>
+
+    
+    <div class="card">
+      <h2>Birth Date &amp; Target Date</h2>
+      <div class="form-grid">
+        <div class="form-group"><label for="dob">Date of Birth</label><input type="date" id="dob" value="1998-05-15"></div>
+        <div class="form-group"><label for="targetDate">Age at the Date of</label><input type="date" id="targetDate"></div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary" id="calculateBtn" type="button">Calculate Exact Age</button>
+        <button class="btn btn-outline" id="resetBtn" type="button">Reset to Today</button>
+      </div>
+    </div>
+
+    <div class="result-panel show" id="resultPanel">
+      <h3>Exact Chronological Age</h3>
+      <div class="result-main" id="resultMain">—</div>
+      <div class="result-grid">
+        <div class="result-item"><div class="label">Total Months &amp; Weeks</div><div class="value" id="mwOut">—</div></div>
+        <div class="result-item"><div class="label">Total Days Lived</div><div class="value" id="daysOut">—</div></div>
+        <div class="result-item"><div class="label">Next Birthday Countdown</div><div class="value positive" id="bdayOut">—</div></div>
+      </div>
+      <div class="payoff-note show" id="ageNote"></div>
+    </div>
+
+    
+    <div class="quick-facts">
+      <div class="fact-chip"><strong>Calendar Precision:</strong> Accounts for leap years &amp; 28–31 day months</div>
+      <div class="fact-chip"><strong>Outputs:</strong> Years, months, weeks, days, hours, minutes</div>
+      <div class="fact-chip"><strong>Extra:</strong> Day of week born &amp; next birthday timer</div>
+    </div>
+
+    
+    <div class="content-section">
+      <h2>How Exact Age Is Computed Across Leap Years</h2>
+      <p>Calendar months vary between 28, 29, 30, and 31 days. Rather than approximating a year as 365.25 days, this calculator steps month-by-month across actual Gregorian calendar boundaries while counting exact elapsed days (including every February 29 leap day) for total weeks, days, and hours.</p>
+    </div>
+
+    
+    <div class="content-section">
+      <h2 id="faq">Frequently asked questions</h2>
+      <div class="faq-item"><div class="faq-q">Does the age calculator include leap years?<span class="arrow">&#9654;</span></div><div class="faq-a">Yes. Every February 29 between your birth date and target date is counted accurately in total days, weeks, and hours lived.</div></div>
+      <div class="faq-item"><div class="faq-q">Can I calculate someone's age on a past or future date?<span class="arrow">&#9654;</span></div><div class="faq-a">Yes. Change the 'Age at the Date of' input to any historical or future calendar date.</div></div>
+    </div>
+
+    
+    <div class="content-section">
+      <h2>Related calculators</h2>
+      <div class="related-grid">
+        <a class="related-card" href="date-calculator.html"><span class="related-icon">📅</span><span>Date Calculator</span></a><a class="related-card" href="time-calculator.html"><span class="related-icon">⏱️</span><span>Time Calculator</span></a><a class="related-card" href="pregnancy-calculator.html"><span class="related-icon">🤰</span><span>Pregnancy Due Date</span></a>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div id="siteFooter">
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>EMI Master</h4>
+        <p>Free, instant, and private online calculators for finance, health, math, and everyday planning. Your inputs never leave your browser.</p>
+        <p><a href="sitemap.html"><strong>&rarr; All 89 Calculators (Directory)</strong></a></p>
+      </div>
+      <div class="footer-col">
+        <h4>Popular Calculators</h4>
+        <ul>
+          <li><a href="mortgage-calculator.html">Mortgage Calculator</a></li>
+          <li><a href="emi-calculator.html">EMI Calculator</a></li>
+          <li><a href="bmi-calculator.html">BMI Calculator</a></li>
+          <li><a href="calorie-calculator.html">Calorie Calculator</a></li>
+          <li><a href="age-calculator.html">Age Calculator</a></li>
+          <li><a href="percentage-calculator.html">Percentage Calculator</a></li>
+          <li><a href="scientific-calculator.html">Scientific Calculator</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Health &amp; Everyday</h4>
+        <ul>
+          <li><a href="bmr-calculator.html">BMR Calculator</a></li>
+          <li><a href="body-fat-calculator.html">Body Fat Calculator</a></li>
+          <li><a href="gpa-calculator.html">GPA Calculator</a></li>
+          <li><a href="salary-calculator.html">Salary Calculator</a></li>
+          <li><a href="date-calculator.html">Date Calculator</a></li>
+          <li><a href="unit-converter.html">Unit Converter</a></li>
+          <li><a href="password-generator.html">Password Generator</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Guides &amp; Info</h4>
+        <ul>
+          <li><a href="blog.html"><strong>Guides &amp; Blog</strong></a></li>
+          <li><a href="blog-how-to-reduce-home-loan-interest.html">Save Loan Interest</a></li>
+          <li><a href="blog-compound-interest-wealth-guide.html">Compound Interest Guide</a></li>
+          <li><a href="blog-bmi-vs-body-fat-guide.html">BMI vs Body Fat</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="sitemap.html"><strong>Complete HTML Sitemap</strong></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 EMI Master. All rights reserved. For educational and planning purposes only.
+    </div>
+  </footer>
+</div>
+
+<script>
+
+(function(){
+  function setToday() {
+    document.getElementById("targetDate").value = new Date().toISOString().slice(0, 10);
+  }
+  function calc() {
+    var d1 = document.getElementById("dob").value;
+    var d2 = document.getElementById("targetDate").value;
+    if (!d1 || !d2) return;
+    var birth = new Date(d1 + "T00:00:00");
+    var target = new Date(d2 + "T00:00:00");
+    if (target < birth) {
+      document.getElementById("resultMain").textContent = "Target date must be after birth date";
+      return;
+    }
+    var years = target.getFullYear() - birth.getFullYear();
+    var months = target.getMonth() - birth.getMonth();
+    var days = target.getDate() - birth.getDate();
+    if (days < 0) {
+      months -= 1;
+      var prevMonthDays = new Date(target.getFullYear(), target.getMonth(), 0).getDate();
+      days += prevMonthDays;
+    }
+    if (months < 0) {
+      years -= 1;
+      months += 12;
+    }
+    var totalDays = Math.round((target - birth) / 86400000);
+    var totalWeeks = Math.floor(totalDays / 7);
+    var totalMonths = years * 12 + months;
+    var totalHours = totalDays * 24;
+
+    var nextBday = new Date(target.getFullYear(), birth.getMonth(), birth.getDate());
+    if (nextBday <= target) nextBday.setFullYear(nextBday.getFullYear() + 1);
+    var daysUntil = Math.round((nextBday - target) / 86400000);
+    var bornDay = birth.toLocaleDateString("en-US", { weekday: "long" });
+
+    document.getElementById("resultMain").textContent = years + " years, " + months + " months, " + days + " days";
+    document.getElementById("mwOut").textContent = totalMonths.toLocaleString("en-US") + " mo (" + totalWeeks.toLocaleString("en-US") + " wks)";
+    document.getElementById("daysOut").textContent = totalDays.toLocaleString("en-US") + " days (" + totalHours.toLocaleString("en-US") + " hrs)";
+    document.getElementById("bdayOut").textContent = daysUntil === 365 || daysUntil === 366 ? "Happy Birthday!" : daysUntil + " days left";
+    document.getElementById("ageNote").textContent = "Born on a " + bornDay + " · Total minutes lived: ~" + (totalHours * 60).toLocaleString("en-US");
+  }
+  setToday();
+  document.getElementById("calculateBtn").addEventListener("click", calc);
+  document.getElementById("resetBtn").addEventListener("click", function(){
+    document.getElementById("dob").value = "1998-05-15";
+    setToday();
+    calc();
+  });
+  document.getElementById("dob").addEventListener("change", calc);
+  document.getElementById("targetDate").addEventListener("change", calc);
+  calc();
+})();
+</script>
+<script src="js/currency.js"></script>
+<script src="js/seo-content.js"></script>
+<script src="js/common.js"></script>
+</body>
+</html>

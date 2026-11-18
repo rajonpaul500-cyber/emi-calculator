@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-M8XM9611FL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-M8XM9611FL');
+  </script>
+  <script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ideal Weight Calculator - Devine, Robinson, Miller &amp; Hamwi | EMI Master</title>
+  <meta name="description" content="Calculate your ideal body weight (IBW) across four medical formulas (Devine, Robinson, Miller, Hamwi) and the WHO healthy BMI weight band.">
+  <meta name="keywords" content="ideal weight calculator, ideal body weight, devine formula, robinson formula, healthy weight by height">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <link rel="canonical" href="https://emimaster.com/ideal-weight-calculator.html">
+  <meta property="og:site_name" content="EMI Master">
+  <meta property="og:title" content="Ideal Weight Calculator - Devine, Robinson, Miller &amp; Hamwi | EMI Master">
+  <meta property="og:description" content="Calculate your ideal body weight (IBW) across four medical formulas (Devine, Robinson, Miller, Hamwi) and the WHO healthy BMI weight band.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://emimaster.com/ideal-weight-calculator.html">
+  <meta property="og:image" content="https://emimaster.com/icons/og-banner.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ideal Weight Calculator - Devine, Robinson, Miller &amp; Hamwi | EMI Master">
+  <meta name="twitter:description" content="Calculate your ideal body weight (IBW) across four medical formulas (Devine, Robinson, Miller, Hamwi) and the WHO healthy BMI weight band.">
+  <meta name="twitter:image" content="https://emimaster.com/icons/og-banner.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Ideal Weight Calculator","url":"https://emimaster.com/ideal-weight-calculator.html","description":"Calculate your ideal body weight (IBW) across four medical formulas (Devine, Robinson, Miller, Hamwi) and the WHO healthy BMI weight band.","applicationCategory":"HealthApplication","operatingSystem":"All","browserRequirements":"Requires JavaScript","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why do Devine, Robinson, Miller, and Hamwi give slightly different weights?","acceptedAnswer":{"@type":"Answer","text":"Each formula was calibrated on different clinical datasets between 1964 and 1983. Viewing all four together gives a realistic target band rather than a rigid single figure."}},{"@type":"Question","name":"Does ideal weight account for muscle frame?","acceptedAnswer":{"@type":"Answer","text":"Standard IBW formulas only take height and sex as inputs. Athletes with higher lean mass naturally sit near or above the upper end of the range."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://emimaster.com/"},{"@type":"ListItem","position":2,"name":"Fitness & Health","item":"https://emimaster.com/sitemap.html#fitness"},{"@type":"ListItem","position":3,"name":"Ideal Weight Calculator","item":"https://emimaster.com/ideal-weight-calculator.html"}]}</script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+
+<div id="siteHeader"></div>
+
+<div class="layout">
+  <div id="siteSidebar"></div>
+
+  <main class="main-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="sitemap.html#fitness">Fitness &amp; Health</a> &rsaquo; Ideal Weight Calculator</div>
+    <h1 class="page-title">Ideal Weight Calculator</h1>
+    <p class="page-subtitle">Compare ideal weight estimates across Devine, Robinson, Miller, and Hamwi clinical formulas plus the healthy BMI weight range.</p>
+
+    
+    <div class="unit-tabs" id="unitTabs">
+      <button type="button" class="unit-tab active" data-unit="us">US Units (ft, in)</button>
+      <button type="button" class="unit-tab" data-unit="metric">Metric (cm)</button>
+    </div>
+    <div class="card">
+      <h2>Height &amp; Gender</h2>
+      <div class="form-grid">
+        <div class="form-group"><label for="gender">Gender</label><select id="gender"><option value="male" selected>Male</option><option value="female">Female</option></select></div>
+        <div class="form-group us-only"><label>Height (ft / in)</label><div class="form-duo"><input type="number" id="heightFt" value="5" min="4" max="8"><input type="number" id="heightIn" value="10" min="0" max="11"></div></div>
+        <div class="form-group metric-only" style="display:none;"><label for="heightCm">Height (cm)</label><input type="number" id="heightCm" value="178" min="120" max="240"></div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary" id="calculateBtn" type="button">Calculate Ideal Weight</button>
+        <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
+      </div>
+    </div>
+    <div class="result-panel show" id="resultPanel">
+      <h3>Healthy BMI Weight Range</h3>
+      <div class="result-main" id="resultMain">—</div>
+      <div class="result-grid">
+        <div class="result-item"><div class="label">Devine (1974)</div><div class="value" id="devOut">—</div></div>
+        <div class="result-item"><div class="label">Robinson (1983)</div><div class="value" id="robOut">—</div></div>
+        <div class="result-item"><div class="label">Miller / Hamwi</div><div class="value" id="milOut">—</div></div>
+      </div>
+    </div>
+
+    
+    <div class="quick-facts">
+      <div class="fact-chip"><strong>Base Benchmark:</strong> 5 feet (60 inches) baseline</div>
+      <div class="fact-chip"><strong>Devine (Male):</strong> 50 kg + 2.3 kg per inch over 5 ft</div>
+      <div class="fact-chip"><strong>Devine (Female):</strong> 45.5 kg + 2.3 kg per inch over 5 ft</div>
+      <div class="fact-chip"><strong>BMI Range:</strong> 18.5 – 24.9 kg/m^2</div>
+    </div>
+
+    
+    <div class="content-section">
+      <h2>Comparing Clinical Ideal Weight Formulas</h2>
+      <p>The Devine formula remains the standard baseline used in hospitals for medical dosing, while Robinson and Miller adjusted coefficients to reflect modern healthy body frames. Rather than aiming for one exact pound or kilogram, most nutritionists recommend targeting a comfortable weight inside the <strong>WHO healthy BMI range</strong>.</p>
+    </div>
+
+    
+    <div class="content-section">
+      <h2 id="faq">Frequently asked questions</h2>
+      <div class="faq-item"><div class="faq-q">Why do Devine, Robinson, Miller, and Hamwi give slightly different weights?<span class="arrow">&#9654;</span></div><div class="faq-a">Each formula was calibrated on different clinical datasets between 1964 and 1983. Viewing all four together gives a realistic target band rather than a rigid single figure.</div></div>
+      <div class="faq-item"><div class="faq-q">Does ideal weight account for muscle frame?<span class="arrow">&#9654;</span></div><div class="faq-a">Standard IBW formulas only take height and sex as inputs. Athletes with higher lean mass naturally sit near or above the upper end of the range.</div></div>
+    </div>
+
+    
+    <div class="content-section">
+      <h2>Related calculators</h2>
+      <div class="related-grid">
+        <a class="related-card" href="bmi-calculator.html"><span class="related-icon">⚖️</span><span>BMI Calculator</span></a><a class="related-card" href="body-fat-calculator.html"><span class="related-icon">📏</span><span>Body Fat Calculator</span></a><a class="related-card" href="calorie-calculator.html"><span class="related-icon">🔥</span><span>Calorie &amp; TDEE Calculator</span></a>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div id="siteFooter">
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>EMI Master</h4>
+        <p>Free, instant, and private online calculators for finance, health, math, and everyday planning. Your inputs never leave your browser.</p>
+        <p><a href="sitemap.html"><strong>&rarr; All 89 Calculators (Directory)</strong></a></p>
+      </div>
+      <div class="footer-col">
+        <h4>Popular Calculators</h4>
+        <ul>
+          <li><a href="mortgage-calculator.html">Mortgage Calculator</a></li>
+          <li><a href="emi-calculator.html">EMI Calculator</a></li>
+          <li><a href="bmi-calculator.html">BMI Calculator</a></li>
+          <li><a href="calorie-calculator.html">Calorie Calculator</a></li>
+          <li><a href="age-calculator.html">Age Calculator</a></li>
+          <li><a href="percentage-calculator.html">Percentage Calculator</a></li>
+          <li><a href="scientific-calculator.html">Scientific Calculator</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Health &amp; Everyday</h4>
+        <ul>
+          <li><a href="bmr-calculator.html">BMR Calculator</a></li>
+          <li><a href="body-fat-calculator.html">Body Fat Calculator</a></li>
+          <li><a href="gpa-calculator.html">GPA Calculator</a></li>
+          <li><a href="salary-calculator.html">Salary Calculator</a></li>
+          <li><a href="date-calculator.html">Date Calculator</a></li>
+          <li><a href="unit-converter.html">Unit Converter</a></li>
+          <li><a href="password-generator.html">Password Generator</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Guides &amp; Info</h4>
+        <ul>
+          <li><a href="blog.html"><strong>Guides &amp; Blog</strong></a></li>
+          <li><a href="blog-how-to-reduce-home-loan-interest.html">Save Loan Interest</a></li>
+          <li><a href="blog-compound-interest-wealth-guide.html">Compound Interest Guide</a></li>
+          <li><a href="blog-bmi-vs-body-fat-guide.html">BMI vs Body Fat</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="sitemap.html"><strong>Complete HTML Sitemap</strong></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 EMI Master. All rights reserved. For educational and planning purposes only.
+    </div>
+  </footer>
+</div>
+
+<script>
+
+(function(){
+  var unit = "us";
+  document.querySelectorAll("#unitTabs .unit-tab").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      document.querySelectorAll("#unitTabs .unit-tab").forEach(function(b){ b.classList.remove("active"); });
+      btn.classList.add("active");
+      unit = btn.getAttribute("data-unit");
+      document.querySelectorAll(".us-only").forEach(function(el){ el.style.display = unit === "us" ? "" : "none"; });
+      document.querySelectorAll(".metric-only").forEach(function(el){ el.style.display = unit === "metric" ? "" : "none"; });
+      calc();
+    });
+  });
+  function fmt(kg) {
+    return unit === "us" ? (kg * 2.20462).toFixed(1) + " lbs" : kg.toFixed(1) + " kg";
+  }
+  function calc() {
+    var g = document.getElementById("gender").value;
+    var totalIn = unit === "us"
+      ? ((parseFloat(document.getElementById("heightFt").value)||0)*12 + (parseFloat(document.getElementById("heightIn").value)||0))
+      : (parseFloat(document.getElementById("heightCm").value)||0) / 2.54;
+    if (totalIn <= 0) return;
+    var over5 = Math.max(0, totalIn - 60);
+    var hM = totalIn * 0.0254;
+    var dev = g === "male" ? 50 + 2.3 * over5 : 45.5 + 2.3 * over5;
+    var rob = g === "male" ? 52 + 1.9 * over5 : 49 + 1.7 * over5;
+    var mil = g === "male" ? 56.2 + 1.41 * over5 : 53.1 + 1.36 * over5;
+    var ham = g === "male" ? 48 + 2.7 * over5 : 45.5 + 2.2 * over5;
+    var minBmi = 18.5 * hM * hM;
+    var maxBmi = 24.9 * hM * hM;
+    document.getElementById("resultMain").textContent = fmt(minBmi) + " – " + fmt(maxBmi);
+    document.getElementById("devOut").textContent = fmt(dev);
+    document.getElementById("robOut").textContent = fmt(rob);
+    document.getElementById("milOut").textContent = fmt(mil) + " / " + fmt(ham);
+  }
+  document.getElementById("calculateBtn").addEventListener("click", calc);
+  document.getElementById("resetBtn").addEventListener("click", function(){
+    document.getElementById("heightFt").value = 5;
+    document.getElementById("heightIn").value = 10;
+    document.getElementById("heightCm").value = 178;
+    calc();
+  });
+  ["gender","heightFt","heightIn","heightCm"].forEach(function(id){
+    var el = document.getElementById(id);
+    if (el) { el.addEventListener("input", calc); el.addEventListener("change", calc); }
+  });
+  calc();
+})();
+</script>
+<script src="js/currency.js"></script>
+<script src="js/seo-content.js"></script>
+<script src="js/common.js"></script>
+</body>
+</html>

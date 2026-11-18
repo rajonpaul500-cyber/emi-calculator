@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-M8XM9611FL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-M8XM9611FL');
+  </script>
+  <script>try{if(localStorage.getItem("emimaster-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weighted Grade &amp; Final Exam Calculator | EMI Master</title>
+  <meta name="description" content="Calculate your weighted class grade average across assignments, quizzes, and midterms, plus the exact score needed on your final exam to reach your target grade.">
+  <meta name="keywords" content="grade calculator, final grade calculator, weighted grade calculator, what do i need on my final">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <link rel="canonical" href="https://emimaster.com/grade-calculator.html">
+  <meta property="og:site_name" content="EMI Master">
+  <meta property="og:title" content="Weighted Grade &amp; Final Exam Calculator | EMI Master">
+  <meta property="og:description" content="Calculate your weighted class grade average across assignments, quizzes, and midterms, plus the exact score needed on your final exam to reach your target grade.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://emimaster.com/grade-calculator.html">
+  <meta property="og:image" content="https://emimaster.com/icons/og-banner.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Weighted Grade &amp; Final Exam Calculator | EMI Master">
+  <meta name="twitter:description" content="Calculate your weighted class grade average across assignments, quizzes, and midterms, plus the exact score needed on your final exam to reach your target grade.">
+  <meta name="twitter:image" content="https://emimaster.com/icons/og-banner.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Weighted Grade & Final Exam Calculator","url":"https://emimaster.com/grade-calculator.html","description":"Calculate your weighted class grade average across assignments, quizzes, and midterms, plus the exact score needed on your final exam to reach your target grade.","applicationCategory":"EducationalApplication","operatingSystem":"All","browserRequirements":"Requires JavaScript","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What if the final exam needed score is over 100%?","acceptedAnswer":{"@type":"Answer","text":"A required score above 100% indicates the target grade is mathematically unreachable without extra credit—adjust your target slightly to see what grade is realistic."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://emimaster.com/"},{"@type":"ListItem","position":2,"name":"Date, Time & Everyday","item":"https://emimaster.com/sitemap.html#everyday"},{"@type":"ListItem","position":3,"name":"Weighted Grade & Final Exam Calculator","item":"https://emimaster.com/grade-calculator.html"}]}</script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+
+<div id="siteHeader"></div>
+
+<div class="layout">
+  <div id="siteSidebar"></div>
+
+  <main class="main-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="sitemap.html#everyday">Date, Time &amp; Everyday</a> &rsaquo; Weighted Grade &amp; Final Exam Calculator</div>
+    <h1 class="page-title">Weighted Grade &amp; Final Exam Calculator</h1>
+    <p class="page-subtitle">Compute your current weighted class percentage and discover what score you need on the final exam to hit your target grade.</p>
+
+    
+    <div class="card">
+      <h2>Graded Course Components</h2>
+      <div class="dynamic-rows" id="gradeRows"></div>
+      <button class="btn btn-outline btn-sm" id="addRowBtn" type="button" style="margin-bottom:16px;">+ Add Assignment / Exam</button>
+      <h3>Final Exam Target Planner</h3>
+      <div class="form-grid" style="margin-top:8px;">
+        <div class="form-group"><label for="targetGrade">Target Overall Class Grade (%)</label><input type="number" id="targetGrade" value="90" min="0" max="100" step="0.5"></div>
+        <div class="form-group"><label for="finalWeight">Final Exam Weight (%)</label><input type="number" id="finalWeight" value="25" min="1" max="99" step="1"></div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary" id="calculateBtn" type="button">Calculate Grade</button>
+        <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
+      </div>
+    </div>
+    <div class="result-panel show" id="resultPanel">
+      <h3>Current Weighted Average</h3>
+      <div class="result-main" id="resultMain">—</div>
+      <div class="result-grid">
+        <div class="result-item"><div class="label">Score Needed on Final</div><div class="value" id="finalNeedOut">—</div></div>
+        <div class="result-item"><div class="label">Completed Weight</div><div class="value" id="wtDoneOut">—</div></div>
+        <div class="result-item"><div class="label">Current Letter Grade</div><div class="value positive" id="letterOut">—</div></div>
+      </div>
+    </div>
+
+    
+    <div class="quick-facts">
+      <div class="fact-chip"><strong>Weighted Average:</strong> Sum(Score x Weight) / Sum(Weights)</div>
+      <div class="fact-chip"><strong>Final Exam Solver:</strong> (Target - Current x (1 - w)) / w</div>
+      <div class="fact-chip"><strong>Supports:</strong> Arbitrary number of syllabus categories</div>
+    </div>
+
+    
+    <div class="content-section">
+      <h2>How Final Exam Targets Are Solved</h2>
+      <p>Before finals week, multiply each completed category score by its syllabus weight, divide by completed weight to get your standing average, and solve directly for the minimum final exam score needed for an A, B, or passing threshold.</p>
+    </div>
+
+    
+    <div class="content-section">
+      <h2 id="faq">Frequently asked questions</h2>
+      <div class="faq-item"><div class="faq-q">What if the final exam needed score is over 100%?<span class="arrow">&#9654;</span></div><div class="faq-a">A required score above 100% indicates the target grade is mathematically unreachable without extra credit—adjust your target slightly to see what grade is realistic.</div></div>
+    </div>
+
+    
+    <div class="content-section">
+      <h2>Related calculators</h2>
+      <div class="related-grid">
+        <a class="related-card" href="gpa-calculator.html"><span class="related-icon">🎓</span><span>GPA Calculator</span></a><a class="related-card" href="percentage-calculator.html"><span class="related-icon">%</span><span>Percentage Calculator</span></a><a class="related-card" href="rounding-calculator.html"><span class="related-icon">±</span><span>Rounding Calculator</span></a>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div id="siteFooter">
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>EMI Master</h4>
+        <p>Free, instant, and private online calculators for finance, health, math, and everyday planning. Your inputs never leave your browser.</p>
+        <p><a href="sitemap.html"><strong>&rarr; All 89 Calculators (Directory)</strong></a></p>
+      </div>
+      <div class="footer-col">
+        <h4>Popular Calculators</h4>
+        <ul>
+          <li><a href="mortgage-calculator.html">Mortgage Calculator</a></li>
+          <li><a href="emi-calculator.html">EMI Calculator</a></li>
+          <li><a href="bmi-calculator.html">BMI Calculator</a></li>
+          <li><a href="calorie-calculator.html">Calorie Calculator</a></li>
+          <li><a href="age-calculator.html">Age Calculator</a></li>
+          <li><a href="percentage-calculator.html">Percentage Calculator</a></li>
+          <li><a href="scientific-calculator.html">Scientific Calculator</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Health &amp; Everyday</h4>
+        <ul>
+          <li><a href="bmr-calculator.html">BMR Calculator</a></li>
+          <li><a href="body-fat-calculator.html">Body Fat Calculator</a></li>
+          <li><a href="gpa-calculator.html">GPA Calculator</a></li>
+          <li><a href="salary-calculator.html">Salary Calculator</a></li>
+          <li><a href="date-calculator.html">Date Calculator</a></li>
+          <li><a href="unit-converter.html">Unit Converter</a></li>
+          <li><a href="password-generator.html">Password Generator</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Guides &amp; Info</h4>
+        <ul>
+          <li><a href="blog.html"><strong>Guides &amp; Blog</strong></a></li>
+          <li><a href="blog-how-to-reduce-home-loan-interest.html">Save Loan Interest</a></li>
+          <li><a href="blog-compound-interest-wealth-guide.html">Compound Interest Guide</a></li>
+          <li><a href="blog-bmi-vs-body-fat-guide.html">BMI vs Body Fat</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="sitemap.html"><strong>Complete HTML Sitemap</strong></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 EMI Master. All rights reserved. For educational and planning purposes only.
+    </div>
+  </footer>
+</div>
+
+<script>
+
+(function(){
+  var defs = [
+    ["Homework & Labs", 94, 25],
+    ["Quizzes", 86, 20],
+    ["Midterm Exam", 84, 30]
+  ];
+  function toLetter(g) {
+    if (g >= 93) return "A"; if (g >= 90) return "A-"; if (g >= 87) return "B+";
+    if (g >= 83) return "B"; if (g >= 80) return "B-"; if (g >= 77) return "C+";
+    if (g >= 73) return "C"; if (g >= 70) return "C-"; if (g >= 60) return "D"; return "F";
+  }
+  function createRow(label, score, wt) {
+    var div = document.createElement("div");
+    div.className = "dynamic-row";
+    div.innerHTML =
+      "<input type='text' value='" + label + "' placeholder='Category'>" +
+      "<input type='number' class='g-score' value='" + score + "' step='0.1' placeholder='Score %'>" +
+      "<input type='number' class='g-wt' value='" + wt + "' step='0.5' min='0' placeholder='Weight %'>" +
+      "<button type='button' class='row-remove-btn' title='Remove'>&times;</button>";
+    div.querySelector(".row-remove-btn").addEventListener("click", function(){
+      if (document.querySelectorAll("#gradeRows .dynamic-row").length > 1) { div.remove(); calc(); }
+    });
+    div.querySelectorAll("input").forEach(function(inp){ inp.addEventListener("input", calc); });
+    return div;
+  }
+  function loadDefs() {
+    var box = document.getElementById("gradeRows");
+    box.innerHTML = "";
+    defs.forEach(function(r){ box.appendChild(createRow(r[0], r[1], r[2])); });
+  }
+  function calc() {
+    var sumSW = 0, sumW = 0;
+    document.querySelectorAll("#gradeRows .dynamic-row").forEach(function(r){
+      var sc = parseFloat(r.querySelector(".g-score").value);
+      var wt = parseFloat(r.querySelector(".g-wt").value);
+      if (isFinite(sc) && isFinite(wt) && wt > 0) {
+        sumSW += sc * wt;
+        sumW += wt;
+      }
+    });
+    var cur = sumW > 0 ? sumSW / sumW : 0;
+    var tgt = parseFloat(document.getElementById("targetGrade").value) || 90;
+    var fw = parseFloat(document.getElementById("finalWeight").value) || 25;
+    var needed = fw > 0 ? ((tgt * (sumW + fw) - sumSW) / fw) : 0;
+    document.getElementById("resultMain").textContent = cur.toFixed(2) + "% (" + toLetter(cur) + ")";
+    document.getElementById("finalNeedOut").textContent = needed.toFixed(1) + "%";
+    document.getElementById("wtDoneOut").textContent = sumW.toFixed(0) + "%";
+    document.getElementById("letterOut").textContent = toLetter(cur);
+  }
+  loadDefs();
+  document.getElementById("addRowBtn").addEventListener("click", function(){
+    document.getElementById("gradeRows").appendChild(createRow("Project", 90, 10));
+    calc();
+  });
+  document.getElementById("calculateBtn").addEventListener("click", calc);
+  document.getElementById("resetBtn").addEventListener("click", function(){
+    document.getElementById("targetGrade").value = 90;
+    document.getElementById("finalWeight").value = 25;
+    loadDefs();
+    calc();
+  });
+  ["targetGrade","finalWeight"].forEach(function(id){ document.getElementById(id).addEventListener("input", calc); });
+  calc();
+})();
+</script>
+<script src="js/currency.js"></script>
+<script src="js/seo-content.js"></script>
+<script src="js/common.js"></script>
+</body>
+</html>
