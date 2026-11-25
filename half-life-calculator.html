@@ -87,14 +87,14 @@
       </div>
     </div>
 
-    <div class="result-panel" id="resultPanel" style="margin-top:24px;">
-      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:12px; margin-bottom:16px;">
+    <div class="result-panel show" id="resultPanel" style="margin-top:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.2); padding-bottom:12px; margin-bottom:16px;">
         <h3 style="margin:0; font-size:1.15rem;">Decay Analysis Result</h3>
         <button type="button" class="btn btn-sm btn-outline" id="copyResultBtn" title="Copy result text">📋 Copy</button>
       </div>
-      <div class="result-main" id="resultMain" style="font-size:1.8rem; font-weight:800; color:var(--primary); text-align:center; padding:12px 0;">&mdash;</div>
+      <div class="result-main" id="resultMain" style="font-size:1.8rem; font-weight:800; text-align:center; padding:12px 0;">&mdash;</div>
       <div class="result-grid" id="resultGrid" style="margin-top:16px;"></div>
-      <div id="stepContainer" style="margin-top:20px; padding:16px; background:var(--bg-alt); border-radius:8px; border:1px solid var(--border); display:none;">
+      <div id="stepContainer" style="margin-top:20px; padding:16px; background:var(--card-bg); border-radius:8px; border:1px solid var(--border); display:none;">
         <h4 style="margin:0 0 10px; font-size:1rem; color:var(--primary);">Step-by-Step Derivation &amp; Decay Dynamics</h4>
         <div id="stepContent" style="font-size:0.92rem; line-height:1.7;"></div>
       </div>
@@ -194,8 +194,8 @@
     var hl = val("halfLife");
 
     var res = MathCalc.halfLifeSolve(i, r, t, hl);
-    if (res.error) {
-      document.getElementById("resultMain").textContent = res.error;
+    if (res.error || !isFinite(res.value)) {
+      document.getElementById("resultMain").innerHTML = '<span class="math-error-msg">⚠️ ' + (res.error || "Value out of range") + '</span>';
       document.getElementById("resultGrid").innerHTML = "";
       document.getElementById("stepContainer").style.display = "none";
       return;

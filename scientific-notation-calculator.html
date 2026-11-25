@@ -57,7 +57,7 @@
       <button type="button" class="preset-chip" data-mode="conv" data-val="6.02214076e23">Avogadro's Number (6.022e23)</button>
       <button type="button" class="preset-chip" data-mode="conv" data-val="0.0000000000000000001602">Electron Charge (1.602e-19)</button>
       <button type="button" class="preset-chip" data-mode="arith" data-ma="3.2" data-ea="4" data-mb="1.5" data-eb="3" data-op="mul">Multiply (3.2e4 &times; 1.5e3)</button>
-      <button type="button" class="preset-chip" data-mode="arith" data-ma="9.8" data-ea="6" data-mb="2.4" data-ea="6" data-op="add">Add (9.8e6 + 2.4e6)</button>
+      <button type="button" class="preset-chip" data-mode="arith" data-ma="9.8" data-ea="6" data-mb="2.4" data-eb="6" data-op="add">Add (9.8e6 + 2.4e6)</button>
     </div>
 
     <!-- Mode Tabs -->
@@ -113,14 +113,14 @@
       </div>
     </div>
 
-    <div class="result-panel" id="resultPanel" style="margin-top:24px;">
-      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:12px; margin-bottom:16px;">
+    <div class="result-panel show" id="resultPanel" style="margin-top:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.2); padding-bottom:12px; margin-bottom:16px;">
         <h3 style="margin:0; font-size:1.15rem;">Notation &amp; Calculation Result</h3>
         <button type="button" class="btn btn-sm btn-outline" id="copyResultBtn" title="Copy result text">📋 Copy</button>
       </div>
-      <div class="result-main" id="resultMain" style="font-size:1.8rem; font-weight:800; color:var(--primary); text-align:center; padding:12px 0;">&mdash;</div>
+      <div class="result-main" id="resultMain" style="font-size:1.8rem; font-weight:800; text-align:center; padding:12px 0;">&mdash;</div>
       <div class="result-grid" id="resultGrid" style="margin-top:16px;"></div>
-      <div id="stepContainer" style="margin-top:20px; padding:16px; background:var(--bg-alt); border-radius:8px; border:1px solid var(--border); display:none;">
+      <div id="stepContainer" style="margin-top:20px; padding:16px; background:var(--card-bg); border-radius:8px; border:1px solid var(--border); display:none;">
         <h4 style="margin:0 0 10px; font-size:1rem; color:var(--primary);">Step-by-Step Notation Breakdown</h4>
         <div id="stepContent" style="font-size:0.92rem; line-height:1.7;"></div>
       </div>
@@ -240,8 +240,8 @@
       return;
     }
     var n = Number(raw);
-    if (isNaN(n)) {
-      document.getElementById("resultMain").textContent = "Invalid Number";
+    if (!isFinite(n)) {
+      document.getElementById("resultMain").innerHTML = '<div class="math-error-msg">' + (isNaN(n) ? "Invalid Number" : "Number exceeds IEEE-754 finite range") + '</div>';
       document.getElementById("resultGrid").innerHTML = "";
       document.getElementById("stepContainer").style.display = "none";
       return;
@@ -316,7 +316,9 @@
                  "&bull; Normalized form: <strong>" + sciStr(r) + "</strong>";
     } else if (op === "div") {
       if (mb === 0) {
-        document.getElementById("resultMain").textContent = "Division by zero";
+        document.getElementById("resultMain").innerHTML = '<div class="math-error-msg">Division by zero is undefined</div>';
+        document.getElementById("resultGrid").innerHTML = "";
+        document.getElementById("stepContainer").style.display = "none";
         return;
       }
       r = MathCalc.sciDiv(A, B, 6);
@@ -339,8 +341,10 @@
                  "&bull; Normalized Difference: <strong>" + sciStr(r) + "</strong>";
     }
 
-    if (r.error) {
-      document.getElementById("resultMain").textContent = r.error;
+    if (!r || r.error || !isFinite(r.m) || !isFinite(r.e)) {
+      document.getElementById("resultMain").innerHTML = '<div class="math-error-msg">' + (r && r.error ? r.error : "Result out of range") + '</div>';
+      document.getElementById("resultGrid").innerHTML = "";
+      document.getElementById("stepContainer").style.display = "none";
       return;
     }
 

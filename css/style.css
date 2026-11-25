@@ -11,6 +11,7 @@
   --text: #0f172a;
   --text-muted: #475569;
   --bg: #f8fafc;
+  --bg-alt: #f1f5f9;
   --card-bg: #ffffff;
   --border: #e2e8f0;
   --success: #059669;
@@ -1170,6 +1171,53 @@ img {
   background: rgba(255, 255, 255, 0.25);
 }
 
+/* Scoped overrides so math result panels (dark-blue gradient) keep legible contrast in Light & Dark modes */
+.result-panel .result-main {
+  color: #ffffff;
+}
+
+.result-panel #copyResultBtn,
+.result-panel .btn-outline {
+  background: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+.result-panel #copyResultBtn:hover,
+.result-panel .btn-outline:hover {
+  background: rgba(255, 255, 255, 0.28);
+  color: #ffffff;
+}
+
+.result-panel #stepContainer,
+.result-panel .step-card {
+  background: var(--card-bg);
+  color: var(--text);
+  border-color: var(--border);
+}
+
+.result-panel #stepContainer h4,
+.result-panel .step-card h4 {
+  color: var(--primary);
+}
+
+.result-panel #stepContainer table th,
+.result-panel #stepContainer table td {
+  color: var(--text);
+  border-color: var(--border);
+}
+
+.math-error-msg {
+  display: inline-block;
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
 .payoff-note {
   margin-top: 14px;
   background: rgba(165, 214, 167, 0.18);
@@ -1612,6 +1660,7 @@ tfoot td {
   --text: #e2e8f0;
   --text-muted: #94a3b8;
   --bg: #0f172a;
+  --bg-alt: #1e293b;
   --card-bg: #1e293b;
   --border: #334155;
   --shadow: 0 2px 12px rgba(0, 0, 0, 0.45);

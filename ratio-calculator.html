@@ -113,14 +113,14 @@
       </div>
     </div>
 
-    <div class="result-panel" id="resultPanel" style="margin-top:24px;">
-      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:12px; margin-bottom:16px;">
+    <div class="result-panel show" id="resultPanel" style="margin-top:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.2); padding-bottom:12px; margin-bottom:16px;">
         <h3 style="margin:0; font-size:1.15rem;">Ratio Analysis</h3>
         <button type="button" class="btn btn-sm btn-outline" id="copyResultBtn" title="Copy result text">📋 Copy</button>
       </div>
-      <div class="result-main" id="resultMain" style="font-size:1.8rem; font-weight:800; color:var(--primary); text-align:center; padding:12px 0;">&mdash;</div>
+      <div class="result-main" id="resultMain" style="font-size:1.8rem; font-weight:800; text-align:center; padding:12px 0;">&mdash;</div>
       <div class="result-grid" id="resultGrid" style="margin-top:16px;"></div>
-      <div id="stepContainer" style="margin-top:20px; padding:16px; background:var(--bg-alt); border-radius:8px; border:1px solid var(--border); display:none;">
+      <div id="stepContainer" style="margin-top:20px; padding:16px; background:var(--card-bg); border-radius:8px; border:1px solid var(--border); display:none;">
         <h4 style="margin:0 0 10px; font-size:1rem; color:var(--primary);">Step-by-Step Breakdown</h4>
         <div id="stepContent" style="font-size:0.92rem; line-height:1.7;"></div>
       </div>
@@ -239,34 +239,47 @@
     }
 
     if (a === 0 || b === 0) {
-      document.getElementById("resultMain").textContent = "Ratio components must be non-zero";
+      document.getElementById("resultMain").innerHTML = '<span class="math-error-msg">⚠️ Ratio components must be non-zero</span>';
       document.getElementById("resultGrid").innerHTML = "";
       document.getElementById("stepContainer").style.display = "none";
       return;
     }
 
     var r = MathCalc.ratioSimplify(a, b);
-    var p1 = MathCalc.ratioToPercent(a, b).value;
-    var p2 = 100 - p1;
-    var gcf = MathCalc.gcd(Math.round(Math.abs(a)), Math.round(Math.abs(b)));
+    if (r.error) {
+      document.getElementById("resultMain").innerHTML = '<span class="math-error-msg">⚠️ ' + r.error + '</span>';
+      document.getElementById("resultGrid").innerHTML = "";
+      document.getElementById("stepContainer").style.display = "none";
+      return;
+    }
+
+    var pRes = MathCalc.ratioToPercent(a, b);
+    var hasPct = !pRes.error;
+    var p1 = hasPct ? pRes.value : 0;
+    var p2 = hasPct ? (100 - p1) : 0;
+    var simpParts = r.value.split(":");
+    var sa = simpParts[0], sb = simpParts[1];
+    var scaleFactor = MathCalc.fmt(a / parseFloat(sa), 6);
 
     document.getElementById("resultMain").textContent = r.value;
     var grid = item("Simplified Ratio", r.value) +
                item("Original Ratio", r.original) +
-               item("Part A Percentage", MathCalc.fmt(p1, 2) + "%") +
-               item("Part B Percentage", MathCalc.fmt(p2, 2) + "%") +
+               item("Part A Percentage", hasPct ? MathCalc.fmt(p1, 2) + "%" : "N/A (A + B = 0)") +
+               item("Part B Percentage", hasPct ? MathCalc.fmt(p2, 2) + "%" : "N/A (A + B = 0)") +
                item("Decimal Ratio (A &divide; B)", MathCalc.fmt(a / b, 4));
     document.getElementById("resultGrid").innerHTML = grid;
 
     var stepHtml = "<strong>1. Original Ratio:</strong> " + a + " : " + b + "<br>" +
-                   "<strong>2. Total Units:</strong> " + a + " + " + b + " = " + (a + b) + "<br>" +
-                   "<strong>3. Greatest Common Divisor (GCD):</strong> " + gcf + "<br>" +
-                   "&bull; A / GCD = " + a + " / " + gcf + " = " + Math.round(a / gcf) + "<br>" +
-                   "&bull; B / GCD = " + b + " / " + gcf + " = " + Math.round(b / gcf) + "<br>" +
-                   "&rarr; <strong>Simplified Form = " + r.value + "</strong><br><br>" +
-                   "<strong>4. Percentage Shares:</strong><br>" +
-                   "&bull; A = (" + a + " / " + (a + b) + ") &times; 100% = <strong>" + MathCalc.fmt(p1, 2) + "%</strong><br>" +
-                   "&bull; B = (" + b + " / " + (a + b) + ") &times; 100% = <strong>" + MathCalc.fmt(p2, 2) + "%</strong>";
+                   "<strong>2. Sum of Terms:</strong> " + a + " + " + b + " = " + MathCalc.fmt(a + b, 6) + "<br>" +
+                   "<strong>3. Common Scale Divisor:</strong> " + scaleFactor + "<br>" +
+                   "&bull; A &divide; " + scaleFactor + " = " + sa + "<br>" +
+                   "&bull; B &divide; " + scaleFactor + " = " + sb + "<br>" +
+                   "&rarr; <strong>Simplified Form = " + r.value + "</strong>";
+    if (hasPct) {
+      stepHtml += "<br><br><strong>4. Percentage Shares:</strong><br>" +
+                  "&bull; A = (" + a + " / " + MathCalc.fmt(a + b, 6) + ") &times; 100% = <strong>" + MathCalc.fmt(p1, 2) + "%</strong><br>" +
+                  "&bull; B = (" + b + " / " + MathCalc.fmt(a + b, 6) + ") &times; 100% = <strong>" + MathCalc.fmt(p2, 2) + "%</strong>";
+    }
     document.getElementById("stepContent").innerHTML = stepHtml;
     document.getElementById("stepContainer").style.display = "block";
   }
@@ -284,7 +297,8 @@
     }
 
     if (a === 0) {
-      document.getElementById("resultMain").textContent = "First term 'A' cannot be 0 in proportion";
+      document.getElementById("pd").value = "—";
+      document.getElementById("resultMain").innerHTML = '<span class="math-error-msg">⚠️ First term \'A\' cannot be 0 in proportion</span>';
       document.getElementById("resultGrid").innerHTML = "";
       document.getElementById("stepContainer").style.display = "none";
       return;

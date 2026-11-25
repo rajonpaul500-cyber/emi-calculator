@@ -254,9 +254,11 @@
     });
     html += '</ul></div>';
 
-    html += '<div class="sidebar-card"><h3>Quick Directory</h3><ul>';
-    html += '<li><a href="blog.html"' + (current.indexOf("blog") === 0 ? ' class="active"' : '') + '><span class="sidebar-icon">&#128218;</span>Guides &amp; Blog</a></li>';
-    html += '<li><a href="sitemap.html"' + (current === "sitemap.html" ? ' class="active"' : '') + '><span class="sidebar-icon">&#128506;&#65039;</span>All 89 Calculators</a></li>';
+    html += '<div class="sidebar-card"><h3>Quick Directory &amp; Apps</h3><ul>';
+    html += '<li><a href="emi-calculator-mortgage-android-app.html"' + (current === "emi-calculator-mortgage-android-app.html" ? ' class="active"' : '') + '><span class="sidebar-icon">&#128241;</span>EMI Calculator Android App</a></li>';
+    html += '<li><a href="hsc-guide-all-android-app.html"' + (current === "hsc-guide-all-android-app.html" ? ' class="active"' : '') + '><span class="sidebar-icon">&#128218;</span>HSC Guide All (এইচএসসি গাইড)</a></li>';
+    html += '<li><a href="blog.html"' + (current.indexOf("blog") === 0 ? ' class="active"' : '') + '><span class="sidebar-icon">&#128214;</span>Guides &amp; Blog</a></li>';
+    html += '<li><a href="sitemap.html"' + (current === "sitemap.html" ? ' class="active"' : '') + '><span class="sidebar-icon">&#128506;&#65039;</span>All 89+ Calculators</a></li>';
     html += '<li><a href="privacy-policy.html"' + (current === "privacy-policy.html" ? ' class="active"' : '') + '><span class="sidebar-icon">&#128274;</span>Privacy Policy</a></li>';
     html += '</ul></div>';
 
@@ -297,13 +299,14 @@
     html += '<li><a href="rent-vs-buy.html">Rent vs Buy</a></li>';
     html += '</ul></div>';
     html += '<div class="footer-col">';
-    html += '<h4>Guides &amp; Blog</h4><ul>';
-    html += '<li><a href="blog.html"><strong>All Financial &amp; Health Guides</strong></a></li>';
+    html += '<h4>Guides &amp; Official Apps</h4><ul>';
+    html += '<li><a href="emi-calculator-mortgage-android-app.html"><strong>EMI Calculator &amp; Mortgage App</strong></a></li>';
+    html += '<li><a href="hsc-guide-all-android-app.html"><strong>HSC Guide All (এইচএসসি গাইড) App</strong></a></li>';
+    html += '<li><a href="https://play.google.com/store/apps/details?id=com.gyansohayota.emicalculatormortgage" target="_blank" rel="noopener noreferrer">EMI Calculator on Google Play &nearr;</a></li>';
+    html += '<li><a href="https://play.google.com/store/apps/details?id=com.gyansohayota.hscguideall" target="_blank" rel="noopener noreferrer">HSC Guide All on Google Play &nearr;</a></li>';
+    html += '<li><a href="blog.html">All Financial &amp; Health Guides</a></li>';
     html += '<li><a href="blog-how-to-reduce-home-loan-interest.html">Save Loan Interest 30%+</a></li>';
     html += '<li><a href="blog-compound-interest-wealth-guide.html">Compound Interest &amp; Rule of 72</a></li>';
-    html += '<li><a href="blog-bmi-vs-body-fat-guide.html">BMI vs Body Fat Percentage</a></li>';
-    html += '<li><a href="blog-calorie-deficit-macro-guide.html">Calorie Deficit &amp; Macros</a></li>';
-    html += '<li><a href="blog-rent-vs-buy-guide.html">Rent vs. Buy: 5% Rule</a></li>';
     html += '<li><a href="privacy-policy.html">' + tr('sidebar.privacy') + '</a></li>';
     html += '</ul></div>';
     html += '<div class="footer-col">';
@@ -963,8 +966,10 @@
     { title: "Universal Unit Converter", url: "unit-converter.html", cat: "Everyday", icon: "📏", desc: "Convert Length, Weight, Temp, Area, Volume, Speed, and Digital Storage", keywords: "unit converter metric imperial length weight temperature celsius fahrenheit kg lbs" },
     { title: "Strong Password Generator", url: "password-generator.html", cat: "Everyday", icon: "🔐", desc: "Cryptographic browser password generator with entropy bit strength", keywords: "password generator random secure strong cryptographic entropy" },
 
-    // Guides & Blog
-    { title: "Guides & Financial Blog", url: "blog.html", cat: "Blog", icon: "📘", desc: "In-depth guides on saving mortgage interest, compound wealth, BMI vs fat, and debt payoff", keywords: "blog guides articles tutorials mortgage interest compound fitness calorie rent buy debt" }
+    // Guides, Blog & Official Android Apps
+    { title: "EMI Calculator & Mortgage Android App", url: "emi-calculator-mortgage-android-app.html", cat: "Financial", icon: "📱", desc: "Official Google Play Android app for offline Loan EMI, Mortgage amortization & bank loan comparison", keywords: "emi calculator app mortgage calculator app android google play store com.gyansohayota.emicalculatormortgage home loan car loan personal loan ইএমআই ক্যালকুলেটর অ্যাপ gyan sohayota" },
+    { title: "HSC Guide All (এইচএসসি গাইড / HAC Guide) Android App", url: "hsc-guide-all-android-app.html", cat: "Everyday", icon: "📚", desc: "Official Google Play Class 11-12 HSC All Subject Guide book, CQ/MCQ board solutions & HSC GPA 5.00 calculator", keywords: "hsc guide hac guide hsc guide all android app google play store com.gyansohayota.hscguideall এইচএসসি গাইড একাদশ দ্বাদশ শ্রেণির গাইড বই class 11 12 science arts humanities commerce business studies gpa calculator gyan sohayota" },
+    { title: "Guides & Financial Blog", url: "blog.html", cat: "Blog", icon: "📘", desc: "In-depth guides on EMI Calculator & Mortgage App, HSC Guide All App, saving mortgage interest, and compound wealth", keywords: "blog guides articles tutorials mortgage interest compound fitness calorie rent buy debt hsc guide hac guide emi calculator app" }
   ];
 
   function searchCalculators(query) {

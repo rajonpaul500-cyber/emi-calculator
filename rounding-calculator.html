@@ -82,14 +82,14 @@
       </div>
     </div>
 
-    <div class="result-panel" id="resultPanel" style="margin-top:24px;">
-      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:12px; margin-bottom:16px;">
+    <div class="result-panel show" id="resultPanel" style="margin-top:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.2); padding-bottom:12px; margin-bottom:16px;">
         <h3 style="margin:0; font-size:1.15rem;">Rounded Values</h3>
         <button type="button" class="btn btn-sm btn-outline" id="copyResultBtn" title="Copy result text">📋 Copy</button>
       </div>
-      <div class="result-main" id="resultMain" style="font-size:1.8rem; font-weight:800; color:var(--primary); text-align:center; padding:12px 0;">&mdash;</div>
+      <div class="result-main" id="resultMain" style="font-size:1.8rem; font-weight:800; text-align:center; padding:12px 0;">&mdash;</div>
       <div class="result-grid" id="resultGrid" style="margin-top:16px;"></div>
-      <div id="stepContainer" style="margin-top:20px; padding:16px; background:var(--bg-alt); border-radius:8px; border:1px solid var(--border); display:none;">
+      <div id="stepContainer" style="margin-top:20px; padding:16px; background:var(--card-bg); border-radius:8px; border:1px solid var(--border); display:none;">
         <h4 style="margin:0 0 10px; font-size:1rem; color:var(--primary);">Rounding Decision &amp; Digit Analysis</h4>
         <div id="stepContent" style="font-size:0.92rem; line-height:1.7;"></div>
       </div>
@@ -178,28 +178,40 @@
   }
 
   function calcRounding() {
-    var n = parseFloat(document.getElementById("num").value);
+    var rawNum = document.getElementById("num").value.trim();
+    var n = parseFloat(rawNum);
     var dp = parseInt(document.getElementById("dp").value, 10);
     var sig = parseInt(document.getElementById("sig").value, 10);
 
-    if (isNaN(n)) {
-      document.getElementById("resultMain").textContent = "\u2014";
+    if (rawNum === "" || !isFinite(n)) {
+      document.getElementById("resultMain").innerHTML = rawNum === "" ? "&mdash;" : '<div class="math-error-msg">Enter a valid finite number</div>';
       document.getElementById("resultGrid").innerHTML = "";
       document.getElementById("stepContainer").style.display = "none";
       return;
     }
 
-    if (isNaN(dp) || dp < 0 || dp > 10) dp = 2;
-    if (isNaN(sig) || sig < 1 || sig > 10) sig = 4;
+    if (isNaN(dp) || dp < 0) dp = 2;
+    if (dp > 10) dp = 10;
+    if (isNaN(sig) || sig < 1) sig = 4;
+    if (sig > 10) sig = 10;
 
-    var rDp = MathCalc.roundTo(n, dp).value;
-    var rSig = MathCalc.roundSig(n, sig).value;
+    var rDpObj = MathCalc.roundTo(n, dp);
+    var rSig = MathCalc.roundSig(n, sig);
+    if (rDpObj.error || !isFinite(rDpObj.value) || !isFinite(rSig)) {
+      document.getElementById("resultMain").innerHTML = '<div class="math-error-msg">' + (rDpObj.error || "Value out of range") + '</div>';
+      document.getElementById("resultGrid").innerHTML = "";
+      document.getElementById("stepContainer").style.display = "none";
+      return;
+    }
+
+    var rDp = rDpObj.value;
+    var rSigStr = Number(rSig).toLocaleString("en-US", { maximumFractionDigits: 12 });
 
     document.getElementById("resultMain").textContent = MathCalc.fmt(rDp, dp);
 
     var grid = item("Original Input", n) +
                item("Rounded to " + dp + " Decimal Places", MathCalc.fmt(rDp, dp)) +
-               item("Rounded to " + sig + " Significant Figures", MathCalc.fmt(rSig, sig));
+               item("Rounded to " + sig + " Significant Figures", rSigStr);
 
     var nearestTargets = [
       [0.001, "Nearest Thousandth (0.001)"],
@@ -219,19 +231,24 @@
 
     // Step-by-step breakdown
     var stepHtml = "<strong>1. Decimal Places Rounding (DP = " + dp + "):</strong><br>";
-    var sStr = n.toString();
-    var dotIdx = sStr.indexOf(".");
+    var absStr = Math.abs(n).toString();
+    if (absStr.indexOf("e") !== -1 && Math.abs(n) < 1e15) {
+      absStr = Math.abs(n).toFixed(12).replace(/0+$/, "").replace(/\.$/, "");
+    }
+    var dotIdx = absStr.indexOf(".");
     if (dotIdx === -1) {
       stepHtml += "&bull; " + n + " is already an integer with no fractional digits &rarr; <strong>" + MathCalc.fmt(rDp, dp) + "</strong><br><br>";
     } else {
-      var decPart = sStr.slice(dotIdx + 1);
+      var intPart = absStr.slice(0, dotIdx);
+      var decPart = absStr.slice(dotIdx + 1);
       if (decPart.length <= dp) {
-        stepHtml += "&bull; Decimal part length (" + decPart.length + ") &le; target DP (" + dp + ") &rarr; padded with zeros: <strong>" + MathCalc.fmt(rDp, dp) + "</strong><br><br>";
+        stepHtml += "&bull; Decimal part length (" + decPart.length + ") &le; target DP (" + dp + ") &rarr; <strong>" + MathCalc.fmt(rDp, dp) + "</strong><br><br>";
       } else {
-        var keepDigit = decPart[dp - 1] || "0";
+        var keepDigit = dp === 0 ? intPart.slice(-1) : decPart[dp - 1];
         var nextDigit = parseInt(decPart[dp], 10);
-        var decision = nextDigit >= 5 ? "Round UP (next digit " + nextDigit + " &ge; 5)" : "Round DOWN / TRUNCATE (next digit " + nextDigit + " < 5)";
-        stepHtml += "&bull; Target position: " + dp + "-th decimal digit = <code>" + keepDigit + "</code><br>" +
+        var posLabel = dp === 0 ? "Target position: ones (units) digit" : ("Target position: " + dp + "-th decimal digit");
+        var decision = nextDigit >= 5 ? "Round magnitude UP (next digit " + nextDigit + " &ge; 5)" : "Keep magnitude / truncate tail (next digit " + nextDigit + " < 5)";
+        stepHtml += "&bull; " + posLabel + " = <code>" + keepDigit + "</code><br>" +
                     "&bull; Next deciding digit: <code>" + nextDigit + "</code><br>" +
                     "&bull; Decision rule: <strong>" + decision + "</strong> &rarr; <strong>" + MathCalc.fmt(rDp, dp) + "</strong><br><br>";
       }
@@ -239,7 +256,7 @@
 
     stepHtml += "<strong>2. Significant Figures Rounding (SigFig = " + sig + "):</strong><br>" +
                 "&bull; First non-zero digit determines the most significant digit.<br>" +
-                "&bull; Keeping the first " + sig + " meaningful digits &rarr; <strong>" + MathCalc.fmt(rSig, sig) + "</strong>";
+                "&bull; Keeping the first " + sig + " meaningful digits &rarr; <strong>" + rSigStr + "</strong>";
 
     document.getElementById("resultGrid").innerHTML = grid;
     document.getElementById("stepContent").innerHTML = stepHtml;
@@ -256,6 +273,9 @@
     document.getElementById("num").value = "1234.5678";
     document.getElementById("dp").value = "2";
     document.getElementById("sig").value = "4";
+    document.querySelectorAll("#presetChips .preset-chip").forEach(function (b, idx) {
+      b.classList.toggle("active", idx === 0);
+    });
     calcRounding();
   };
 

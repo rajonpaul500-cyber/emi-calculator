@@ -78,14 +78,14 @@
       </div>
     </div>
 
-    <div class="result-panel" id="resultPanel" style="margin-top:24px;">
-      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:12px; margin-bottom:16px;">
+    <div class="result-panel show" id="resultPanel" style="margin-top:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.2); padding-bottom:12px; margin-bottom:16px;">
         <h3 style="margin:0; font-size:1.15rem;">Root &amp; Radical Result</h3>
         <button type="button" class="btn btn-sm btn-outline" id="copyResultBtn" title="Copy result text">📋 Copy</button>
       </div>
-      <div class="result-main" id="resultMain" style="font-size:1.8rem; font-weight:800; color:var(--primary); text-align:center; padding:12px 0;">&mdash;</div>
+      <div class="result-main" id="resultMain" style="font-size:1.8rem; font-weight:800; text-align:center; padding:12px 0;">&mdash;</div>
       <div class="result-grid" id="resultGrid" style="margin-top:16px;"></div>
-      <div id="stepContainer" style="margin-top:20px; padding:16px; background:var(--bg-alt); border-radius:8px; border:1px solid var(--border); display:none;">
+      <div id="stepContainer" style="margin-top:20px; padding:16px; background:var(--card-bg); border-radius:8px; border:1px solid var(--border); display:none;">
         <h4 style="margin:0 0 10px; font-size:1rem; color:var(--primary);">Radical Simplification Breakdown</h4>
         <div id="stepContent" style="font-size:0.92rem; line-height:1.7;"></div>
       </div>
@@ -185,15 +185,15 @@
     }
 
     if (r <= 0) {
-      document.getElementById("resultMain").textContent = "Root degree (n) must be positive";
+      document.getElementById("resultMain").innerHTML = '<span class="math-error-msg">⚠️ Root degree (n) must be positive</span>';
       document.getElementById("resultGrid").innerHTML = "";
       document.getElementById("stepContainer").style.display = "none";
       return;
     }
 
     var res = MathCalc.rootCalc(n, r);
-    if (res.error) {
-      document.getElementById("resultMain").textContent = res.error;
+    if (res.error || !isFinite(res.value) || isNaN(res.value)) {
+      document.getElementById("resultMain").innerHTML = '<span class="math-error-msg">⚠️ ' + (res.error || "Invalid root result") + '</span>';
       document.getElementById("resultGrid").innerHTML = "";
       document.getElementById("stepContainer").style.display = "none";
       return;
@@ -207,17 +207,18 @@
                item("Exponential Notation", "(" + n + ")<sup>1/" + r + "</sup>") +
                item("Verification Check", "(" + MathCalc.fmt(res.value, 6) + ")<sup>" + r + "</sup> &asymp; " + n);
 
-    var simp = MathCalc.simplifyNthRoot(n, Math.round(r));
+    var simp = (Number.isInteger(r) && Number.isInteger(n) && r >= 2) ? MathCalc.simplifyNthRoot(n, r) : null;
     var radStr = "";
-    if (simp.radicand === 1) {
-      radStr = String(simp.coeff);
-    } else {
-      var coeffPart = (Math.abs(simp.coeff) === 1) ? (simp.coeff < 0 ? "-" : "") : String(simp.coeff);
-      radStr = coeffPart + rootSymbol + "(" + simp.radicand + ")";
-    }
-
-    if (simp.radicand !== Math.abs(n) || Math.abs(simp.coeff) !== 1) {
-      grid = item("Simplified Radical Form", "<strong>" + radStr + "</strong>") + grid;
+    if (simp && !simp.error && n !== 0) {
+      if (simp.radicand === 1) {
+        radStr = String(simp.coeff);
+      } else {
+        var coeffPart = (Math.abs(simp.coeff) === 1) ? (simp.coeff < 0 ? "-" : "") : String(simp.coeff);
+        radStr = coeffPart + rootSymbol + "(" + simp.radicand + ")";
+      }
+      if (simp.radicand !== Math.abs(n) || Math.abs(simp.coeff) !== 1) {
+        grid = item("Simplified Radical Form", "<strong>" + radStr + "</strong>") + grid;
+      }
     }
 
     document.getElementById("resultGrid").innerHTML = grid;
@@ -225,7 +226,7 @@
     var stepHtml = "<strong>1. Radical Expression:</strong><br>" +
                    rootSymbol + "(" + n + ") = (" + n + ")<sup>1/" + r + "</sup><br><br>";
 
-    if (Number.isInteger(r) && Number.isInteger(n) && n > 0) {
+    if (simp && !simp.error && n > 0) {
       var k = Math.abs(simp.coeff);
       var m = simp.radicand;
       var perfectPower = Math.pow(k, r);

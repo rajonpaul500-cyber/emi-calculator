@@ -135,19 +135,19 @@
     </div>
 
     <!-- PRO RESULT PANEL -->
-    <div class="result-panel" id="resultPanel" style="margin-top:24px;">
-      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:12px; margin-bottom:16px;">
+    <div class="result-panel show" id="resultPanel" style="margin-top:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.2); padding-bottom:12px; margin-bottom:16px;">
         <h3 style="margin:0; font-size:1.15rem;">Generated Random Outcome</h3>
         <button type="button" class="btn btn-sm btn-outline" id="copyResultBtn" title="Copy numbers to clipboard">📋 Copy Numbers</button>
       </div>
 
       <!-- Tokenized Numbers Box -->
-      <div id="tokensContainer" style="display:flex; flex-wrap:wrap; gap:10px; justify-content:center; padding:16px; background:var(--bg, #f8fafc); border-radius:10px; border:1px solid var(--border, #e2e8f0); min-height:70px; align-items:center;">
+      <div id="tokensContainer" style="display:flex; flex-wrap:wrap; gap:10px; justify-content:center; padding:16px; background:var(--card-bg, #ffffff); color:var(--text, #0f172a); border-radius:10px; border:1px solid var(--border, #e2e8f0); min-height:70px; align-items:center;">
         <div style="color:var(--text-muted);">Press "Generate Numbers" to begin...</div>
       </div>
 
       <!-- Summary String -->
-      <div class="result-main" id="resultMain" style="font-size:1.4rem; font-weight:800; color:var(--primary); text-align:center; padding:12px 0;">&mdash;</div>
+      <div class="result-main" id="resultMain" style="font-size:1.4rem; font-weight:800; text-align:center; padding:12px 0;">&mdash;</div>
 
       <!-- Statistical Breakdown Grid -->
       <div class="result-grid" id="resultGrid"></div>
@@ -338,27 +338,41 @@
     var tokensBox = document.getElementById("tokensContainer");
     tokensBox.innerHTML = "";
 
+    function showError(msg) {
+      lastGeneratedList = [];
+      tokensBox.innerHTML = '<div style="color:var(--text-muted);">No numbers generated</div>';
+      document.getElementById("resultMain").innerHTML = '<span class="math-error-msg">⚠️ ' + msg + '</span>';
+      document.getElementById("resultGrid").innerHTML = "";
+    }
+
     if (currentMode === "range") {
       var min = parseFloat(document.getElementById("min").value);
       var max = parseFloat(document.getElementById("max").value);
       var count = parseInt(document.getElementById("count").value, 10);
       var type = document.getElementById("type").value;
-      var dec = parseInt(document.getElementById("decimals").value, 10) || 2;
+      var decRaw = parseInt(document.getElementById("decimals").value, 10);
+      var dec = isNaN(decRaw) ? 2 : Math.max(0, Math.min(8, decRaw));
       var uniq = document.getElementById("unique").checked;
       var sort = document.getElementById("sort").checked;
 
-      if (isNaN(min) || isNaN(max) || isNaN(count) || count < 1 || count > 500) {
-        document.getElementById("resultMain").textContent = "Please enter valid range parameters";
-        document.getElementById("resultGrid").innerHTML = "";
+      if (isNaN(min) || isNaN(max) || !isFinite(min) || !isFinite(max) || isNaN(count) || count < 1 || count > 500) {
+        showError("Please enter valid range bounds and quantity (1–500).");
         return;
       }
 
       if (min > max) { var temp = min; min = max; max = temp; }
 
-      if (uniq && type === "int" && (max - min + 1) < count) {
-        document.getElementById("resultMain").innerHTML = '<span style="color:#dc2626;">Range is too small to produce ' + count + ' unique integers.</span>';
-        document.getElementById("resultGrid").innerHTML = "";
-        return;
+      var iMin = Math.ceil(min);
+      var iMax = Math.floor(max);
+      if (type === "int") {
+        if (iMin > iMax) {
+          showError("No whole integers exist between " + min + " and " + max + ".");
+          return;
+        }
+        if (uniq && (iMax - iMin + 1) < count) {
+          showError("Range [" + iMin + "–" + iMax + "] only has " + (iMax - iMin + 1) + " unique integers (need " + count + ").");
+          return;
+        }
       }
 
       var nums = [], seen = {};
@@ -368,7 +382,7 @@
         var val;
         var r = getCryptoRandomFloat();
         if (type === "int") {
-          val = Math.floor(r * (max - min + 1)) + min;
+          val = Math.floor(r * (iMax - iMin + 1)) + iMin;
         } else {
           val = parseFloat((r * (max - min) + min).toFixed(dec));
         }
@@ -391,11 +405,11 @@
       nums.forEach(function(n){
         var token = document.createElement("span");
         token.style.cssText = "display:inline-flex; align-items:center; justify-content:center; min-width:44px; height:44px; padding:0 12px; background:var(--primary, #2563eb); color:#ffffff; font-weight:700; border-radius:8px; font-size:1.1rem; box-shadow:0 2px 4px rgba(0,0,0,0.1);";
-        token.textContent = n;
+        token.textContent = type === "float" ? n.toFixed(dec) : n;
         tokensBox.appendChild(token);
       });
 
-      document.getElementById("resultMain").textContent = nums.join(", ");
+      document.getElementById("resultMain").textContent = nums.map(function(n){ return type === "float" ? n.toFixed(dec) : n; }).join(", ");
 
       // Stats
       var sum = nums.reduce(function(a, b){ return a + b; }, 0);
@@ -409,7 +423,7 @@
       var median = sorted.length % 2 !== 0 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
 
       // Even / Odd counts
-      var evens = nums.filter(function(n){ return Math.floor(n) % 2 === 0; }).length;
+      var evens = nums.filter(function(n){ return Math.abs(Math.floor(n)) % 2 === 0; }).length;
       var odds = nums.length - evens;
 
       var gridHtml = item("Total Generated", nums.length) +
@@ -422,9 +436,16 @@
       document.getElementById("resultGrid").innerHTML = gridHtml;
 
     } else if (currentMode === "dice") {
-      var dCount = parseInt(document.getElementById("diceCount").value, 10) || 1;
-      var dSides = parseInt(document.getElementById("diceSides").value, 10) || 6;
-      var dMod = parseInt(document.getElementById("diceMod").value, 10) || 0;
+      var dCountRaw = parseInt(document.getElementById("diceCount").value, 10);
+      var dSidesRaw = parseInt(document.getElementById("diceSides").value, 10);
+      var dModRaw = parseInt(document.getElementById("diceMod").value, 10);
+      if (isNaN(dCountRaw) || dCountRaw < 1 || dCountRaw > 50) {
+        showError("Enter a valid number of dice (1–50).");
+        return;
+      }
+      var dCount = dCountRaw;
+      var dSides = isNaN(dSidesRaw) || dSidesRaw < 2 ? 6 : dSidesRaw;
+      var dMod = isNaN(dModRaw) ? 0 : dModRaw;
 
       var diceRolls = [];
       for (var i = 0; i < dCount; i++) {
@@ -450,7 +471,12 @@
       document.getElementById("resultGrid").innerHTML = gridHtml;
 
     } else if (currentMode === "coin") {
-      var cCount = parseInt(document.getElementById("coinCount").value, 10) || 10;
+      var cCountRaw = parseInt(document.getElementById("coinCount").value, 10);
+      if (isNaN(cCountRaw) || cCountRaw < 1 || cCountRaw > 500) {
+        showError("Enter a valid number of coin flips (1–500).");
+        return;
+      }
+      var cCount = cCountRaw;
       var flips = [];
       var heads = 0, tails = 0;
 
@@ -471,15 +497,19 @@
       var gridHtml = item("Total Flips", cCount) +
                      item("Heads Count", heads + " (" + ((heads / cCount)*100).toFixed(1) + "%)") +
                      item("Tails Count", tails + " (" + ((tails / cCount)*100).toFixed(1) + "%)") +
-                     item("Ratio H:T", (heads / Math.max(1, tails)).toFixed(2) + " : 1");
+                     item("Ratio H:T", tails > 0 ? (heads / tails).toFixed(2) + " : 1" : heads + " : 0");
       document.getElementById("resultGrid").innerHTML = gridHtml;
 
     } else if (currentMode === "lottery") {
-      var lPick = parseInt(document.getElementById("lotteryPick").value, 10) || 6;
-      var lPool = parseInt(document.getElementById("lotteryPool").value, 10) || 49;
+      var lPick = parseInt(document.getElementById("lotteryPick").value, 10);
+      var lPool = parseInt(document.getElementById("lotteryPool").value, 10);
 
+      if (isNaN(lPick) || isNaN(lPool) || lPick < 1 || lPool < 2 || lPool > 1000) {
+        showError("Enter valid pick count (>=1) and pool size (2–1000).");
+        return;
+      }
       if (lPick > lPool) {
-        document.getElementById("resultMain").textContent = "Cannot pick more numbers than the pool size.";
+        showError("Cannot pick more numbers (" + lPick + ") than the pool size (" + lPool + ").");
         return;
       }
 
@@ -518,15 +548,41 @@
     document.getElementById("min").value = 1;
     document.getElementById("max").value = 100;
     document.getElementById("count").value = 5;
+    document.getElementById("type").value = "int";
+    document.getElementById("decimals").value = 2;
+    document.getElementById("groupDec").style.display = "none";
+    document.getElementById("unique").checked = true;
+    document.getElementById("sort").checked = false;
+    document.getElementById("diceCount").value = 2;
+    document.getElementById("diceSides").value = "6";
+    document.getElementById("diceMod").value = 0;
+    document.getElementById("coinCount").value = 10;
+    document.getElementById("lotteryPick").value = 6;
+    document.getElementById("lotteryPool").value = 49;
+    document.querySelectorAll("#presetChips .preset-chip").forEach(function(c){ c.classList.remove("active"); });
+    setMode("range");
     generate();
   });
 
+  document.getElementById("decimals").addEventListener("input", generate);
+  document.getElementById("unique").addEventListener("change", generate);
+  document.getElementById("sort").addEventListener("change", generate);
+  document.getElementById("diceSides").addEventListener("change", generate);
+
   document.getElementById("copyResultBtn").addEventListener("click", function(){
     var txt = lastGeneratedList.join(", ");
-    if (navigator.clipboard) {
+    if (!txt) return;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(txt).then(function(){
         if (window.EMIMaster && window.EMIMaster.showToast) window.EMIMaster.showToast("Copied random numbers to clipboard!");
-      });
+      }).catch(function(){});
+    } else {
+      var ta = document.createElement("textarea");
+      ta.value = txt;
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand("copy"); } catch(e){}
+      document.body.removeChild(ta);
     }
   });
 

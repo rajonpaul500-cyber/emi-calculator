@@ -83,13 +83,13 @@
     </div>
 
     <!-- PRO RESULT PANEL -->
-    <div class="result-panel" id="resultPanel" style="margin-top:24px;">
-      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:12px; margin-bottom:16px;">
+    <div class="result-panel show" id="resultPanel" style="margin-top:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.2); padding-bottom:12px; margin-bottom:16px;">
         <h3 style="margin:0; font-size:1.15rem;">Measurement Analysis</h3>
         <button type="button" class="btn btn-sm btn-outline" id="copyResultBtn" title="Copy result text">📋 Copy</button>
       </div>
 
-      <div class="result-main" id="resultMain" style="font-size:2rem; font-weight:800; color:var(--primary); text-align:center; padding:8px 0;">&mdash;</div>
+      <div class="result-main" id="resultMain" style="font-size:2rem; font-weight:800; text-align:center; padding:8px 0;">&mdash;</div>
 
       <!-- Precision Quality Rating Badge -->
       <div style="text-align:center; margin-bottom:16px;">
@@ -101,7 +101,7 @@
       <div class="result-grid" id="resultGrid"></div>
 
       <!-- Step-by-Step Math Box -->
-      <div class="step-card" id="stepBox" style="margin-top:20px; background:var(--bg, #f8fafc); border:1px solid var(--border, #e2e8f0); border-radius:10px; padding:16px;">
+      <div class="step-card" id="stepBox" style="margin-top:20px; background:var(--card-bg, #ffffff); border:1px solid var(--border, #e2e8f0); border-radius:10px; padding:16px;">
         <div class="step-header" style="font-weight:700; color:var(--text); margin-bottom:8px; display:flex; align-items:center; gap:8px;">
           <span>📝</span> Step-by-Step Mathematical Derivation:
         </div>
@@ -266,18 +266,22 @@
   function calculate() {
     var v1 = parseFloat(document.getElementById("observed").value);
     var v2 = parseFloat(document.getElementById("trueVal").value);
+    var badge = document.getElementById("qualityBadge");
 
     if (isNaN(v1) || isNaN(v2)) {
-      document.getElementById("resultMain").textContent = "Enter valid numbers";
+      document.getElementById("resultMain").innerHTML = '<span class="math-error-msg">Enter valid numbers</span>';
       document.getElementById("resultGrid").innerHTML = "";
       document.getElementById("stepContent").textContent = "Waiting for valid inputs...";
+      if (badge) badge.style.display = "none";
       return;
     }
 
     if (currentMode === "error") {
       if (v2 === 0) {
-        document.getElementById("resultMain").innerHTML = '<span style="color:#dc2626;">True value cannot be zero</span>';
+        document.getElementById("resultMain").innerHTML = '<span class="math-error-msg">⚠️ True value cannot be zero</span>';
         document.getElementById("resultGrid").innerHTML = "";
+        document.getElementById("stepContent").textContent = "Percent error divides by the accepted true value, so True Value cannot be zero.";
+        if (badge) badge.style.display = "none";
         return;
       }
 
@@ -289,7 +293,7 @@
 
       document.getElementById("resultMain").textContent = MathCalc.fmt(percentError, 4) + "%";
 
-      var badge = document.getElementById("qualityBadge");
+      if (badge) badge.style.display = "inline-block";
       if (percentError < 1) {
         badge.style.background = "#dcfce7"; badge.style.color = "#15803d";
         badge.textContent = "🌟 Exceptional Accuracy (< 1% Error)";
@@ -323,8 +327,10 @@
       // Percent Difference: |V1 - V2| / ((V1 + V2)/2) * 100
       var avg = (v1 + v2) / 2;
       if (avg === 0) {
-        document.getElementById("resultMain").innerHTML = '<span style="color:#dc2626;">Average of values cannot be zero</span>';
+        document.getElementById("resultMain").innerHTML = '<span class="math-error-msg">⚠️ Average of values cannot be zero</span>';
         document.getElementById("resultGrid").innerHTML = "";
+        document.getElementById("stepContent").textContent = "Percent difference divides by the average baseline (V₁ + V₂)/2, which cannot be zero.";
+        if (badge) badge.style.display = "none";
         return;
       }
       var absDiff = Math.abs(v1 - v2);
@@ -332,7 +338,7 @@
 
       document.getElementById("resultMain").textContent = MathCalc.fmt(pctDiff, 4) + "%";
 
-      var badge = document.getElementById("qualityBadge");
+      if (badge) badge.style.display = "inline-block";
       if (pctDiff < 2) {
         badge.style.background = "#dcfce7"; badge.style.color = "#15803d";
         badge.textContent = "🌟 Very High Reproducibility (< 2% Diff)";
@@ -347,7 +353,7 @@
       var gridHtml = item("Percent Difference", MathCalc.fmt(pctDiff, 4) + "%") +
                      item("Absolute Difference", MathCalc.fmt(absDiff, 6)) +
                      item("Average Baseline", MathCalc.fmt(avg, 6)) +
-                     item("Ratio (V1 / V2)", MathCalc.fmt(v1 / v2, 6));
+                     item("Ratio (V1 / V2)", v2 !== 0 ? MathCalc.fmt(v1 / v2, 6) : "N/A");
       document.getElementById("resultGrid").innerHTML = gridHtml;
 
       var stepText = "1. Calculate absolute difference:\n" +

@@ -90,18 +90,18 @@
     </div>
 
     <!-- PRO RESULT PANEL -->
-    <div class="result-panel" id="resultPanel" style="margin-top:24px;">
-      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:12px; margin-bottom:16px;">
+    <div class="result-panel show" id="resultPanel" style="margin-top:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.2); padding-bottom:12px; margin-bottom:16px;">
         <h3 style="margin:0; font-size:1.15rem;">Percentage Result</h3>
         <button type="button" class="btn btn-sm btn-outline" id="copyResultBtn" title="Copy result text">📋 Copy</button>
       </div>
 
-      <div class="result-main" id="resultMain" style="font-size:1.8rem; font-weight:800; color:var(--primary); text-align:center; padding:12px 0;">&mdash;</div>
+      <div class="result-main" id="resultMain" style="font-size:1.8rem; font-weight:800; text-align:center; padding:12px 0;">&mdash;</div>
 
       <div class="result-grid" id="resultGrid" style="margin-top:16px;"></div>
 
       <!-- Step by Step Math Box -->
-      <div class="step-card" id="stepBox" style="margin-top:20px; background:var(--bg, #f8fafc); border:1px solid var(--border, #e2e8f0); border-radius:10px; padding:16px;">
+      <div class="step-card" id="stepBox" style="margin-top:20px; background:var(--card-bg, #ffffff); border:1px solid var(--border, #e2e8f0); border-radius:10px; padding:16px;">
         <div class="step-header" style="font-weight:700; color:var(--text); margin-bottom:8px; display:flex; align-items:center; gap:8px;">
           <span>📝</span> Step-by-Step Mathematical Solution:
         </div>
@@ -110,12 +110,12 @@
 
       <!-- Visual Percentage Meter -->
       <div id="visualMeterBox" style="margin-top:20px;">
-        <div style="display:flex; justify-content:space-between; font-size:0.85rem; font-weight:700; color:var(--text-muted); margin-bottom:6px;">
+        <div style="display:flex; justify-content:space-between; font-size:0.85rem; font-weight:700; color:rgba(255,255,255,0.9); margin-bottom:6px;">
           <span>PROPORTION VISUALIZER:</span>
           <span id="visualMeterText">0%</span>
         </div>
-        <div style="height:24px; background:#e2e8f0; border-radius:6px; overflow:hidden; display:flex;">
-          <div id="visualMeterFill" style="background:linear-gradient(90deg, #1d4ed8, #3b82f6); height:100%; width:20%; transition:width 0.3s ease;"></div>
+        <div style="height:24px; background:rgba(255,255,255,0.2); border-radius:6px; overflow:hidden; display:flex;">
+          <div id="visualMeterFill" style="background:linear-gradient(90deg, #60a5fa, #93c5fd); height:100%; width:20%; transition:width 0.3s ease;"></div>
         </div>
       </div>
     </div>
@@ -380,17 +380,28 @@
                  "• To Decrease (Discount) by " + a + "%:\n  " + b + " × (1 − " + a + "/100) = " + b + " × " + (1 - a / 100).toFixed(4) + " = " + MathCalc.fmt(decVal, 4);
       visualPct = Math.min(100, Math.max(0, a));
     } else if (mode === "reverse") {
-      var origAfterDisc = b / (1 - a / 100);
-      var origAfterTax = b / (1 + a / 100);
-      mainText = "Original (Pre-Discount): " + MathCalc.fmt(origAfterDisc, 2);
-      gridHtml += item("Original (If " + a + "% Discount)", MathCalc.fmt(origAfterDisc, 4));
-      gridHtml += item("Original (If " + a + "% Tax/Markup)", MathCalc.fmt(origAfterTax, 4));
-      gridHtml += item("Discount Saved", MathCalc.fmt(origAfterDisc - b, 4));
+      if (a === 100 && a === -100) { showError("Invalid rate."); return; }
+      var discDen = 1 - a / 100;
+      var taxDen = 1 + a / 100;
+      if (discDen === 0 && taxDen === 0) {
+        showError("Rate cannot be ±100%.");
+        return;
+      }
+      var origAfterDisc = discDen !== 0 ? (b / discDen) : null;
+      var origAfterTax = taxDen !== 0 ? (b / taxDen) : null;
+      if (origAfterDisc === null) {
+        mainText = "Original (Pre-Tax/Markup): " + MathCalc.fmt(origAfterTax, 2);
+      } else {
+        mainText = "Original (Pre-Discount): " + MathCalc.fmt(origAfterDisc, 2);
+      }
+      gridHtml += item("Original (If " + a + "% Discount)", origAfterDisc !== null ? MathCalc.fmt(origAfterDisc, 4) : "Undefined (100% off)");
+      gridHtml += item("Original (If " + a + "% Tax/Markup)", origAfterTax !== null ? MathCalc.fmt(origAfterTax, 4) : "Undefined (-100%)");
+      gridHtml += item("Discount Saved", origAfterDisc !== null ? MathCalc.fmt(origAfterDisc - b, 4) : "N/A");
       gridHtml += item("Final Given Price", MathCalc.fmt(b, 4));
 
-      stepText = "• If Final Price " + b + " was AFTER a " + a + "% DISCOUNT:\n  Original = " + b + " ÷ (1 − " + (a / 100) + ") = " + MathCalc.fmt(origAfterDisc, 4) + "\n\n" +
-                 "• If Final Price " + b + " was AFTER a " + a + "% TAX / MARKUP:\n  Original = " + b + " ÷ (1 + " + (a / 100) + ") = " + MathCalc.fmt(origAfterTax, 4);
-      visualPct = Math.min(100, Math.max(0, a));
+      stepText = "• If Final Price " + b + " was AFTER a " + a + "% DISCOUNT:\n  Original = " + (origAfterDisc !== null ? (b + " ÷ (1 − " + (a / 100) + ") = " + MathCalc.fmt(origAfterDisc, 4)) : "Undefined (1 − 1 = 0)") + "\n\n" +
+                 "• If Final Price " + b + " was AFTER a " + a + "% TAX / MARKUP:\n  Original = " + (origAfterTax !== null ? (b + " ÷ (1 + " + (a / 100) + ") = " + MathCalc.fmt(origAfterTax, 4)) : "Undefined (1 − 1 = 0)");
+      visualPct = Math.min(100, Math.max(0, Math.abs(a)));
     }
 
     document.getElementById("resultMain").textContent = mainText;
@@ -404,9 +415,13 @@
   }
 
   function showError(msg) {
-    document.getElementById("resultMain").innerHTML = '<span style="color:#dc2626; font-size:1.2rem;">⚠️ ' + msg + '</span>';
+    document.getElementById("resultMain").innerHTML = '<span class="math-error-msg">⚠️ ' + msg + '</span>';
     document.getElementById("resultGrid").innerHTML = "";
     document.getElementById("stepContent").textContent = msg;
+    var fill = document.getElementById("visualMeterFill");
+    var txt = document.getElementById("visualMeterText");
+    if (fill) fill.style.width = "0%";
+    if (txt) txt.textContent = "0.0%";
   }
 
   document.getElementById("calcBtn").addEventListener("click", calculate);

@@ -72,14 +72,14 @@
       </div>
     </div>
 
-    <div class="result-panel" id="resultPanel" style="margin-top:24px;">
-      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:12px; margin-bottom:16px;">
+    <div class="result-panel show" id="resultPanel" style="margin-top:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.2); padding-bottom:12px; margin-bottom:16px;">
         <h3 style="margin:0; font-size:1.15rem;">LCM &amp; Factorization Result</h3>
         <button type="button" class="btn btn-sm btn-outline" id="copyResultBtn" title="Copy result text">📋 Copy</button>
       </div>
-      <div class="result-main" id="resultMain" style="font-size:1.8rem; font-weight:800; color:var(--primary); text-align:center; padding:12px 0;">&mdash;</div>
+      <div class="result-main" id="resultMain" style="font-size:1.8rem; font-weight:800; text-align:center; padding:12px 0;">&mdash;</div>
       <div class="result-grid" id="resultGrid" style="margin-top:16px;"></div>
-      <div id="stepContainer" style="margin-top:20px; padding:16px; background:var(--bg-alt); border-radius:8px; border:1px solid var(--border); display:none;">
+      <div id="stepContainer" style="margin-top:20px; padding:16px; background:var(--card-bg); border-radius:8px; border:1px solid var(--border); display:none;">
         <h4 style="margin:0 0 10px; font-size:1rem; color:var(--primary);">Step-by-Step Prime Factor Analysis</h4>
         <div id="stepContent" style="font-size:0.92rem; line-height:1.7;"></div>
       </div>
@@ -173,14 +173,22 @@
     var nums = raw.filter(function (n) { return !isNaN(n) && n > 0; });
 
     if (nums.length < 2) {
-      document.getElementById("resultMain").textContent = "\u2014";
+      document.getElementById("resultMain").innerHTML = '<span class="math-error-msg">Enter at least 2 positive integers</span>';
       document.getElementById("resultGrid").innerHTML = "";
       document.getElementById("stepContainer").style.display = "none";
       return;
     }
 
-    var l = MathCalc.lcmMulti(nums).value;
-    var g = MathCalc.gcfMulti(nums).value;
+    var lRes = MathCalc.lcmMulti(nums);
+    var gRes = MathCalc.gcfMulti(nums);
+    if (lRes.error || !isFinite(lRes.value)) {
+      document.getElementById("resultMain").innerHTML = '<span class="math-error-msg">⚠️ ' + (lRes.error || "LCM exceeds safe integer range") + '</span>';
+      document.getElementById("resultGrid").innerHTML = "";
+      document.getElementById("stepContainer").style.display = "none";
+      return;
+    }
+    var l = lRes.value;
+    var g = gRes.value;
 
     document.getElementById("resultMain").textContent = "LCM = " + MathCalc.fmt(l, 0);
 
@@ -201,11 +209,16 @@
       });
       primeMaps.push(counts);
 
-      var factorParts = Object.keys(counts).map(function (p) {
-        return counts[p] > 1 ? p + "<sup>" + counts[p] + "</sup>" : p;
-      });
-      stepHtml += "&bull; " + n + " = " + factorParts.join(" &times; ") + " (" + factors.join(" &times; ") + ")<br>";
-      grid += item("Prime Factors of " + n, factorParts.join(" &times; "));
+      if (n === 1) {
+        stepHtml += "&bull; 1 = 1 (Unit — no prime factors)<br>";
+        grid += item("Prime Factors of 1", "1 (Unit)");
+      } else {
+        var factorParts = Object.keys(counts).map(function (p) {
+          return counts[p] > 1 ? p + "<sup>" + counts[p] + "</sup>" : p;
+        });
+        stepHtml += "&bull; " + n + " = " + factorParts.join(" &times; ") + " (" + factors.join(" &times; ") + ")<br>";
+        grid += item("Prime Factors of " + n, factorParts.join(" &times; "));
+      }
     });
 
     stepHtml += "<br><strong>2. Take Maximum Exponents for LCM:</strong><br>";
@@ -220,7 +233,7 @@
     });
 
     stepHtml += "<br><strong>3. Multiply Highest Prime Powers:</strong><br>" +
-                "LCM(" + nums.join(", ") + ") = " + lcmFactors.join(" &times; ") + " = <strong>" + MathCalc.fmt(l, 0) + "</strong>";
+                "LCM(" + nums.join(", ") + ") = " + (lcmFactors.length ? lcmFactors.join(" &times; ") + " = " : "") + "<strong>" + MathCalc.fmt(l, 0) + "</strong>";
 
     if (nums.length === 2) {
       stepHtml += "<br><br><strong>4. Verification via Formula:</strong><br>" +

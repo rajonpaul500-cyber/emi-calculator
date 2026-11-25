@@ -154,10 +154,17 @@
 
 (function(){
   function calc() {
-    var raw = document.getElementById("dataset").value;
-    var nums = raw.split(/[s,;]+/).map(Number).filter(function(x){ return isFinite(x) && raw.trim() !== ""; });
-    if (nums.length < 1) {
-      document.getElementById("resultMain").textContent = "Enter at least 1 number";
+    var raw = document.getElementById("dataset").value.trim();
+    var tokens = raw ? raw.split(/[\s,;]+/).filter(Boolean) : [];
+    var nums = tokens.map(Number);
+    if (tokens.length < 1 || nums.some(function(x){ return !isFinite(x); })) {
+      document.getElementById("resultMain").innerHTML = tokens.length < 1
+        ? '<span class="math-error-msg">Enter at least 1 number</span>'
+        : '<span class="math-error-msg">Invalid entry detected &mdash; enter numbers separated by commas or spaces</span>';
+      document.getElementById("popOut").textContent = "\u2014";
+      document.getElementById("meanOut").textContent = "\u2014";
+      document.getElementById("varOut").textContent = "\u2014";
+      document.getElementById("statExtra").textContent = "";
       return;
     }
     var n = nums.length;
@@ -173,9 +180,9 @@
     var sem = samSd / Math.sqrt(n);
     document.getElementById("resultMain").textContent = samSd.toFixed(6).replace(/\.?0+$/,"");
     document.getElementById("popOut").textContent = popSd.toFixed(6).replace(/\.?0+$/,"");
-    document.getElementById("meanOut").textContent = mean.toFixed(4).replace(/\.?0+$/,"") + " / " + median;
+    document.getElementById("meanOut").textContent = mean.toFixed(4).replace(/\.?0+$/,"") + " / " + Number(median.toFixed(4));
     document.getElementById("varOut").textContent = samVar.toFixed(4).replace(/\.?0+$/,"");
-    document.getElementById("statExtra").textContent = "Count: " + n + " · Sum: " + sum + " · Min/Max: " + sorted[0] + " / " + sorted[n-1] + " · Std Error (SEM): " + sem.toFixed(4);
+    document.getElementById("statExtra").textContent = "Count: " + n + " · Sum: " + Number(sum.toFixed(6)) + " · Min/Max: " + sorted[0] + " / " + sorted[n-1] + " · Std Error (SEM): " + sem.toFixed(4);
   }
   document.getElementById("calculateBtn").addEventListener("click", calc);
   document.getElementById("resetBtn").addEventListener("click", function(){

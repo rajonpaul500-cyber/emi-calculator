@@ -98,18 +98,18 @@
     </div>
 
     <!-- PRO RESULT PANEL -->
-    <div class="result-panel" id="resultPanel" style="margin-top:24px;">
-      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:12px; margin-bottom:16px;">
+    <div class="result-panel show" id="resultPanel" style="margin-top:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.2); padding-bottom:12px; margin-bottom:16px;">
         <h3 style="margin:0; font-size:1.15rem;">Power Evaluation</h3>
         <button type="button" class="btn btn-sm btn-outline" id="copyResultBtn" title="Copy result text">📋 Copy</button>
       </div>
 
-      <div class="result-main" id="resultMain" style="font-size:1.9rem; font-weight:800; color:var(--primary); text-align:center; padding:12px 0;">&mdash;</div>
+      <div class="result-main" id="resultMain" style="font-size:1.9rem; font-weight:800; text-align:center; padding:12px 0;">&mdash;</div>
 
       <div class="result-grid" id="resultGrid"></div>
 
       <!-- Step-by-Step Math Box -->
-      <div class="step-card" id="stepBox" style="margin-top:20px; background:var(--bg, #f8fafc); border:1px solid var(--border, #e2e8f0); border-radius:10px; padding:16px;">
+      <div class="step-card" id="stepBox" style="margin-top:20px; background:var(--card-bg, #ffffff); border:1px solid var(--border, #e2e8f0); border-radius:10px; padding:16px;">
         <div class="step-header" style="font-weight:700; color:var(--text); margin-bottom:8px; display:flex; align-items:center; gap:8px;">
           <span>📝</span> Step-by-Step Mathematical Derivation:
         </div>
@@ -280,8 +280,19 @@
       return;
     }
 
+    function showErr(msg) {
+      document.getElementById("resultMain").innerHTML = '<span class="math-error-msg">⚠️ ' + msg + '</span>';
+      document.getElementById("resultGrid").innerHTML = "";
+      document.getElementById("stepContent").textContent = msg;
+    }
+
     if (currentMode === "single") {
-      var r = MathCalc.exponent(b, x).value;
+      var expObj = MathCalc.exponent(b, x);
+      if (expObj.error) {
+        showErr(expObj.error);
+        return;
+      }
+      var r = expObj.value;
       var display = (Math.abs(r) > 1e15 || (Math.abs(r) < 1e-6 && r !== 0)) ? MathCalc.fmt(r, 10) : MathCalc.fmt(r, 8);
       document.getElementById("resultMain").textContent = b + "^" + MathCalc.fmt(x, 4) + " = " + display;
 
@@ -297,7 +308,7 @@
           grid += item("Expanded Form", x >= 0 ? parts.join(" × ") : "1 / (" + parts.join(" × ") + ")");
         }
       }
-      if (x < 0) {
+      if (x < 0 && b !== 0) {
         grid += item("Reciprocal Form", "1 / (" + b + "^" + Math.abs(x) + ") = 1 / " + MathCalc.fmt(Math.pow(b, Math.abs(x)), 6));
       }
       document.getElementById("resultGrid").innerHTML = grid;
@@ -305,7 +316,7 @@
       var stepText = "• Formula: y = b^x\n\n" +
                      "1. Identify base b = " + b + " and exponent x = " + x + "\n";
       if (x === 0) {
-        stepText += "2. Any non-zero number to power 0 equals 1:\n   " + b + "^0 = 1\n";
+        stepText += "2. Any number to power 0 equals 1:\n   " + b + "^0 = 1\n";
       } else if (x < 0) {
         stepText += "2. Invert using reciprocal rule:\n   " + b + "^(" + x + ") = 1 / (" + b + "^" + Math.abs(x) + ")\n" +
                     "3. Calculate denominator: " + b + "^" + Math.abs(x) + " = " + MathCalc.fmt(Math.pow(b, Math.abs(x)), 6) + "\n" +
@@ -316,17 +327,20 @@
       document.getElementById("stepContent").innerText = stepText;
 
     } else if (currentMode === "product") {
-      if (isNaN(y)) return;
+      if (isNaN(y)) { showErr("Enter second exponent y."); return; }
       var sumExp = x + y;
-      var rProd = Math.pow(b, sumExp);
+      var prodObj = MathCalc.exponent(b, sumExp);
+      if (prodObj.error) { showErr(prodObj.error); return; }
+      var rProd = prodObj.value;
       var dispProd = (Math.abs(rProd) > 1e15 || (Math.abs(rProd) < 1e-6 && rProd !== 0)) ? MathCalc.fmt(rProd, 8) : MathCalc.fmt(rProd, 6);
 
       document.getElementById("resultMain").textContent = b + "^(" + x + " + " + y + ") = " + b + "^" + sumExp + " = " + dispProd;
 
+      var t1 = MathCalc.exponent(b, x), t2 = MathCalc.exponent(b, y);
       var gridHtml = item("Combined Exponent", b + "^" + sumExp) +
                      item("Product Value", dispProd) +
-                     item("First Term (b^x)", MathCalc.fmt(Math.pow(b, x), 6)) +
-                     item("Second Term (b^y)", MathCalc.fmt(Math.pow(b, y), 6));
+                     item("First Term (b^x)", t1.error ? "Undefined" : MathCalc.fmt(t1.value, 6)) +
+                     item("Second Term (b^y)", t2.error ? "Undefined" : MathCalc.fmt(t2.value, 6));
       document.getElementById("resultGrid").innerHTML = gridHtml;
 
       var stepText = "• Product Law: b^x × b^y = b^(x + y)\n\n" +
@@ -336,17 +350,20 @@
       document.getElementById("stepContent").innerText = stepText;
 
     } else if (currentMode === "quotient") {
-      if (isNaN(y)) return;
+      if (isNaN(y)) { showErr("Enter second exponent y."); return; }
       var diffExp = x - y;
-      var rQuot = Math.pow(b, diffExp);
+      var quotObj = MathCalc.exponent(b, diffExp);
+      if (quotObj.error) { showErr(quotObj.error); return; }
+      var rQuot = quotObj.value;
       var dispQuot = (Math.abs(rQuot) > 1e15 || (Math.abs(rQuot) < 1e-6 && rQuot !== 0)) ? MathCalc.fmt(rQuot, 8) : MathCalc.fmt(rQuot, 6);
 
       document.getElementById("resultMain").textContent = b + "^(" + x + " − " + y + ") = " + b + "^" + diffExp + " = " + dispQuot;
 
+      var q1 = MathCalc.exponent(b, x), q2 = MathCalc.exponent(b, y);
       var gridHtml = item("Simplified Power", b + "^" + diffExp) +
                      item("Quotient Value", dispQuot) +
-                     item("Numerator (b^x)", MathCalc.fmt(Math.pow(b, x), 6)) +
-                     item("Denominator (b^y)", MathCalc.fmt(Math.pow(b, y), 6));
+                     item("Numerator (b^x)", q1.error ? "Undefined" : MathCalc.fmt(q1.value, 6)) +
+                     item("Denominator (b^y)", q2.error ? "Undefined" : MathCalc.fmt(q2.value, 6));
       document.getElementById("resultGrid").innerHTML = gridHtml;
 
       var stepText = "• Quotient Law: b^x ÷ b^y = b^(x − y)\n\n" +
@@ -356,16 +373,19 @@
       document.getElementById("stepContent").innerText = stepText;
 
     } else if (currentMode === "mod") {
-      if (isNaN(m) || m <= 0) {
-        document.getElementById("resultMain").textContent = "Modulus must be a positive integer";
+      if (isNaN(m) || m < 1 || !Number.isInteger(m)) {
+        showErr("Modulus m must be a positive integer (>= 1).");
         return;
       }
-      // Integer modular exponentiation
-      var baseInt = Math.floor(b);
       var expInt = Math.floor(x);
+      if (expInt < 0) {
+        showErr("Modular exponent x must be a non-negative integer (>= 0).");
+        return;
+      }
+      var baseInt = Math.floor(b);
       var modInt = Math.floor(m);
 
-      var modRes = 1;
+      var modRes = modInt === 1 ? 0 : 1;
       var curBase = ((baseInt % modInt) + modInt) % modInt;
       var eTmp = expInt;
 

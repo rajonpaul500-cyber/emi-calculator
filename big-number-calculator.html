@@ -88,14 +88,14 @@
       </div>
     </div>
 
-    <div class="result-panel" id="resultPanel" style="margin-top:24px;">
-      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:12px; margin-bottom:16px;">
+    <div class="result-panel show" id="resultPanel" style="margin-top:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.2); padding-bottom:12px; margin-bottom:16px;">
         <h3 style="margin:0; font-size:1.15rem;">Exact BigInt Result</h3>
         <button type="button" class="btn btn-sm btn-outline" id="copyResultBtn" title="Copy result text">📋 Copy</button>
       </div>
-      <div class="result-main" id="resultMain" style="font-size:1.4rem; font-weight:800; color:var(--primary); text-align:center; padding:12px 0; word-break:break-all;">&mdash;</div>
+      <div class="result-main" id="resultMain" style="font-size:1.4rem; font-weight:800; text-align:center; padding:12px 0; word-break:break-all;">&mdash;</div>
       <div class="result-grid" id="resultGrid" style="margin-top:16px;"></div>
-      <div id="stepContainer" style="margin-top:20px; padding:16px; background:var(--bg-alt); border-radius:8px; border:1px solid var(--border); display:none;">
+      <div id="stepContainer" style="margin-top:20px; padding:16px; background:var(--card-bg); border-radius:8px; border:1px solid var(--border); display:none;">
         <h4 style="margin:0 0 10px; font-size:1rem; color:var(--primary);">Scale &amp; Arithmetic Breakdown</h4>
         <div id="stepContent" style="font-size:0.92rem; line-height:1.7;"></div>
       </div>
@@ -190,12 +190,16 @@
   }
 
   function calcBig() {
-    var a = document.getElementById("a").value.trim().replace(/,/g, "");
-    var b = document.getElementById("b").value.trim().replace(/,/g, "");
+    var rawA = document.getElementById("a").value.trim();
+    var rawB = document.getElementById("b").value.trim();
+    var a = rawA.replace(/[\s,]+/g, "");
+    var b = rawB.replace(/[\s,]+/g, "");
     var op = document.getElementById("op").value;
 
     if (!/^-?\d+$/.test(a) || !/^-?\d+$/.test(b)) {
-      document.getElementById("resultMain").textContent = "\u2014";
+      document.getElementById("resultMain").innerHTML = (rawA === "" || rawB === "")
+        ? "&mdash;"
+        : '<div class="math-error-msg">Enter whole integers only (optional leading minus sign)</div>';
       document.getElementById("resultGrid").innerHTML = "";
       document.getElementById("stepContainer").style.display = "none";
       return;
@@ -203,7 +207,7 @@
 
     var r = MathCalc.bigArith(a, b, op);
     if (r.error) {
-      document.getElementById("resultMain").textContent = r.error;
+      document.getElementById("resultMain").innerHTML = '<div class="math-error-msg">' + r.error + '</div>';
       document.getElementById("resultGrid").innerHTML = "";
       document.getElementById("stepContainer").style.display = "none";
       return;
@@ -242,9 +246,17 @@
       stepHtml += "<code>" + a + " = (" + b + " &times; " + v + ") + " + remVal + "</code><br>";
     }
 
-    if (Math.abs(parseFloat(v.slice(0, 15))) < 1e66) {
-      stepHtml += "<br><strong>3. Approximate Scale Name:</strong><br>" +
-                  "&asymp; " + MathCalc.numberToWords(parseFloat(v.slice(0, 15))) + " (order of magnitude ~10<sup>" + (v.length - 1) + "</sup>)";
+    var absDigits = v.replace(/^-/, "");
+    var scaleNames = ["", "thousand", "million", "billion", "trillion", "quadrillion", "quintillion", "sextillion", "septillion", "octillion", "nonillion", "decillion", "undecillion", "duodecillion", "tredecillion", "quattuordecillion", "quindecillion", "sexdecillion", "septendecillion", "octodecillion", "novemdecillion", "vigintillion"];
+    var groupIdx = Math.floor((absDigits.length - 1) / 3);
+    var scaleLabel = groupIdx < scaleNames.length ? scaleNames[groupIdx] : ("10^" + (groupIdx * 3));
+    if (absDigits.length <= 12) {
+      stepHtml += "<br><strong>3. Scale &amp; Written Form:</strong><br>" +
+                  "&bull; " + (v[0] === "-" ? "negative " : "") + MathCalc.numberToWords(Number(absDigits)) + " (order ~10<sup>" + (absDigits.length - 1) + "</sup>)";
+    } else {
+      stepHtml += "<br><strong>3. Scale &amp; Order of Magnitude:</strong><br>" +
+                  "&bull; Total digits: <strong>" + absDigits.length + "</strong> (order of magnitude ~10<sup>" + (absDigits.length - 1) + "</sup>)" +
+                  (scaleLabel ? " &mdash; <strong>" + (v[0] === "-" ? "negative " : "") + absDigits.slice(0, 3) + "... (" + scaleLabel + " scale)</strong>" : "");
     }
 
     document.getElementById("resultGrid").innerHTML = grid;
@@ -263,6 +275,9 @@
     document.getElementById("a").value = "123456789012345678901234567890";
     document.getElementById("b").value = "987654321098765432109876543210";
     document.getElementById("op").value = "mul";
+    document.querySelectorAll("#presetChips .preset-chip").forEach(function (btn, idx) {
+      btn.classList.toggle("active", idx === 0);
+    });
     calcBig();
   };
 

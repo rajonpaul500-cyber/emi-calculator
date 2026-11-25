@@ -113,14 +113,14 @@
       </div>
     </div>
 
-    <div class="result-panel" id="resultPanel" style="margin-top:24px;">
-      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:12px; margin-bottom:16px;">
+    <div class="result-panel show" id="resultPanel" style="margin-top:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.2); padding-bottom:12px; margin-bottom:16px;">
         <h3 style="margin:0; font-size:1.15rem;">Hex Result</h3>
         <button type="button" class="btn btn-sm btn-outline" id="copyResultBtn" title="Copy result text">📋 Copy</button>
       </div>
-      <div class="result-main" id="resultMain" style="font-family:monospace; font-size:1.8rem; font-weight:800; color:var(--primary); text-align:center; padding:12px 0;">&mdash;</div>
+      <div class="result-main" id="resultMain" style="font-family:monospace; font-size:1.8rem; font-weight:800; text-align:center; padding:12px 0;">&mdash;</div>
       <div class="result-grid" id="resultGrid" style="margin-top:16px;"></div>
-      <div id="stepContainer" style="margin-top:20px; padding:16px; background:var(--bg-alt); border-radius:8px; border:1px solid var(--border); display:none;">
+      <div id="stepContainer" style="margin-top:20px; padding:16px; background:var(--card-bg); border-radius:8px; border:1px solid var(--border); display:none;">
         <h4 style="margin:0 0 10px; font-size:1rem; color:var(--primary);">Step-by-Step Breakdown</h4>
         <div id="stepContent" style="font-size:0.92rem; line-height:1.6; font-family:monospace;"></div>
       </div>
@@ -210,11 +210,15 @@
 
   var isSyncing = false;
 
+  function showHexErr(msg) {
+    document.getElementById("resultMain").innerHTML = msg ? '<span class="math-error-msg">⚠️ ' + msg + '</span>' : "\u2014";
+    document.getElementById("resultGrid").innerHTML = "";
+    document.getElementById("stepContainer").style.display = "none";
+  }
+
   function syncFromDecimal(d, source) {
     if (isNaN(d) || !isFinite(d)) {
-      document.getElementById("resultMain").textContent = "Invalid Number";
-      document.getElementById("resultGrid").innerHTML = "";
-      document.getElementById("stepContainer").style.display = "none";
+      showHexErr("Invalid Number");
       return;
     }
     isSyncing = true;
@@ -236,8 +240,9 @@
                item("ASCII Char", (d >= 32 && d <= 126) ? "'" + String.fromCharCode(d) + "'" : "Non-printable");
     document.getElementById("resultGrid").innerHTML = grid;
 
+    var absD = Math.abs(d);
     var stepHtml = "<strong>Radix Conversion Breakdown for " + d + " (Decimal):</strong><br>" +
-                   "&bull; <strong>Hexadecimal:</strong> " + d + " &divide; 16 = " + Math.floor(d / 16) + " remainder " + (d % 16) + " &rarr; <strong>0x" + hexStr + "</strong><br>" +
+                   "&bull; <strong>Hexadecimal:</strong> " + absD + " &divide; 16 = " + Math.floor(absD / 16) + " remainder " + (absD % 16) + " &rarr; <strong>0x" + hexStr + "</strong><br>" +
                    "&bull; <strong>Binary:</strong> " + d + " represented in powers of 2 &rarr; <strong>" + binStr + "<sub>2</sub></strong><br>" +
                    "&bull; <strong>Octal:</strong> " + d + " represented in powers of 8 &rarr; <strong>" + octStr + "<sub>8</sub></strong>";
     document.getElementById("stepContent").innerHTML = stepHtml;
@@ -247,7 +252,8 @@
   function handleDecInput() {
     if (isSyncing) return;
     var val = String(document.getElementById("dec").value || "").trim();
-    if (val === "") return;
+    if (val === "") { showHexErr(""); return; }
+    if (!/^-?\d+$/.test(val)) { showHexErr("Invalid Decimal integer"); return; }
     var d = parseInt(val, 10);
     syncFromDecimal(d, "dec");
   }
@@ -255,9 +261,9 @@
   function handleHexInput() {
     if (isSyncing) return;
     var val = String(document.getElementById("hex").value || "").trim().replace(/^0x/i, '');
-    if (val === "") return;
+    if (val === "") { showHexErr(""); return; }
     if (!/^[0-9A-Fa-f]+$/.test(val)) {
-      document.getElementById("resultMain").textContent = "Invalid Hex (0-9, A-F only)";
+      showHexErr("Invalid Hex (0-9, A-F only)");
       return;
     }
     var d = parseInt(val, 16);
@@ -267,9 +273,9 @@
   function handleBinInput() {
     if (isSyncing) return;
     var val = String(document.getElementById("bin").value || "").trim().replace(/^0b/i, '');
-    if (val === "") return;
+    if (val === "") { showHexErr(""); return; }
     if (!/^[01]+$/.test(val)) {
-      document.getElementById("resultMain").textContent = "Invalid Binary (0 and 1 only)";
+      showHexErr("Invalid Binary (0 and 1 only)");
       return;
     }
     var d = parseInt(val, 2);
@@ -279,9 +285,9 @@
   function handleOctInput() {
     if (isSyncing) return;
     var val = String(document.getElementById("oct").value || "").trim().replace(/^0o/i, '');
-    if (val === "") return;
+    if (val === "") { showHexErr(""); return; }
     if (!/^[0-7]+$/.test(val)) {
-      document.getElementById("resultMain").textContent = "Invalid Octal (0-7 only)";
+      showHexErr("Invalid Octal (0-7 only)");
       return;
     }
     var d = parseInt(val, 8);
@@ -294,9 +300,7 @@
     var op = document.getElementById("hop").value;
 
     if (!/^[0-9A-Fa-f]+$/.test(a) || !/^[0-9A-Fa-f]+$/.test(b)) {
-      document.getElementById("resultMain").textContent = "Invalid Hexadecimal inputs";
-      document.getElementById("resultGrid").innerHTML = "";
-      document.getElementById("stepContainer").style.display = "none";
+      showHexErr("Invalid Hexadecimal inputs (0-9, A-F only)");
       return;
     }
 
@@ -308,7 +312,7 @@
       case "mul": r = A * B; opSymbol = "&times;"; opName = "Multiplication"; break;
       case "div":
         if (B === 0) {
-          document.getElementById("resultMain").textContent = "Division by zero";
+          showHexErr("Cannot divide by zero");
           return;
         }
         r = Math.floor(A / B); opSymbol = "&divide;"; opName = "Division"; break;

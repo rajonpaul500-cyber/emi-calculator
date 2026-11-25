@@ -4,12 +4,13 @@ window.MathCalc = (function () {
 
     function fmt(n, dp) {
         if (n === null || n === undefined || isNaN(n)) return '—';
-        dp = dp || 4;
+        dp = (dp === undefined || dp === null) ? 4 : dp;
         return Number(n).toLocaleString('en-US', { maximumFractionDigits: dp });
     }
 
     function round(n, dp) {
-        var m = Math.pow(10, dp || 4);
+        dp = (dp === undefined || dp === null) ? 4 : dp;
+        var m = Math.pow(10, dp);
         return Math.round(n * m) / m;
     }
 
@@ -169,7 +170,13 @@ window.MathCalc = (function () {
 
     /* ---------- Exponent ---------- */
     function exponent(base, exp) {
-        return { value: Math.pow(base, exp) };
+        if (isNaN(base) || isNaN(exp)) return { error: 'Enter valid numbers' };
+        var r = Math.pow(base, exp);
+        if (isNaN(r) || !isFinite(r)) {
+            if (base < 0 && !Number.isInteger(exp)) return { error: 'Undefined / complex result for negative base with fractional exponent' };
+            return { error: 'Result overflows IEEE-754 floating-point range' };
+        }
+        return { value: r };
     }
 
     /* ---------- Binary ---------- */
@@ -185,8 +192,13 @@ window.MathCalc = (function () {
     function binarySub(a, b) { return { value: (parseInt(a, 2) - parseInt(b, 2)).toString(2) }; }
     function binaryMul(a, b) { return { value: (parseInt(a, 2) * parseInt(b, 2)).toString(2) }; }
     function binaryDiv(a, b) {
-        if (parseInt(b, 2) === 0) return { error: 'Cannot divide by zero' };
-        return { value: { quotient: (parseInt(a, 2) / parseInt(b, 2)) >> 0, remainder: parseInt(a, 2) % parseInt(b, 2) } };
+        if (!/^[01]+$/.test(a) || !/^[01]+$/.test(b)) return { error: 'Only 0 and 1 allowed' };
+        var numA = parseInt(a, 2);
+        var numB = parseInt(b, 2);
+        if (numB === 0) return { error: 'Cannot divide by zero' };
+        var q = Math.floor(numA / numB);
+        var r = numA % numB;
+        return { value: { quotient: q.toString(2), remainder: r.toString(2) } };
     }
 
     /* ---------- Hex ---------- */
@@ -217,8 +229,8 @@ window.MathCalc = (function () {
         if (a === 0) return { error: 'Coefficient a cannot be zero' };
         var disc = b * b - 4 * a * c;
         if (disc < 0) {
-            var realPart = -b / (2 * a);
-            var imagPart = Math.sqrt(-disc) / (2 * a);
+            var realPart = round(-b / (2 * a), 6);
+            var imagPart = Math.abs(round(Math.sqrt(-disc) / (2 * a), 6));
             return { roots: [realPart + ' + ' + imagPart + 'i', realPart + ' - ' + imagPart + 'i'], discriminant: disc, complex: true };
         }
         var r1 = (-b + Math.sqrt(disc)) / (2 * a);
@@ -245,9 +257,19 @@ window.MathCalc = (function () {
 
     /* ---------- Ratio ---------- */
     function ratioSimplify(a, b) {
+        if (isNaN(a) || isNaN(b) || !isFinite(a) || !isFinite(b)) return { error: 'Enter valid numbers' };
         if (a === 0 || b === 0) return { error: 'Zero not allowed' };
-        var g = gcd(a, b);
-        return { value: a / g + ':' + b / g, original: a + ':' + b };
+        var decLen = function (v) {
+            var s = String(v);
+            var idx = s.indexOf('.');
+            return idx === -1 ? 0 : Math.min(8, s.length - idx - 1);
+        };
+        var scale = Math.pow(10, Math.max(decLen(a), decLen(b)));
+        var ia = Math.round(a * scale);
+        var ib = Math.round(b * scale);
+        if (ia === 0 || ib === 0) return { error: 'Zero not allowed' };
+        var g = gcd(ia, ib) || 1;
+        return { value: (ia / g) + ':' + (ib / g), original: a + ':' + b };
     }
 
     /* ---------- Root (nth root) ---------- */
@@ -344,6 +366,7 @@ window.MathCalc = (function () {
 
     /* ---------- Scientific Notation ---------- */
     function toScientific(n, digits) {
+        if (n === null || n === undefined || isNaN(n) || !isFinite(n)) return { value: '—' };
         var d = digits || 6;
         if (n === 0) return { value: '0' };
         var exp = Math.floor(Math.log10(Math.abs(n)));
@@ -409,21 +432,37 @@ window.MathCalc = (function () {
             if (k !== missing && (!(vals[k] > 0))) return { error: 'All filled values must be positive' };
         }
         var decay = 0, result = 0;
+        var effI = initial, effR = remaining, effT = time, effH = halfLife;
         if (missing === 'halfLife') {
             if (remaining >= initial) return { error: 'Remaining must be less than initial' };
             result = time * Math.log(2) / Math.log(initial / remaining);
-            decay = Math.log(2) / result;
+            effH = result;
+            decay = Math.log(2) / effH;
         } else if (missing === 'time') {
             result = halfLife * Math.log(initial / remaining) / Math.log(2);
-            decay = Math.log(2) / halfLife;
+            effT = result;
+            decay = Math.log(2) / effH;
         } else if (missing === 'initial') {
             result = remaining * Math.pow(2, time / halfLife);
-            decay = Math.log(2) / halfLife;
+            effI = result;
+            decay = Math.log(2) / effH;
         } else {
             result = initial * Math.pow(0.5, time / halfLife);
-            decay = Math.log(2) / halfLife;
+            effR = result;
+            decay = Math.log(2) / effH;
         }
-        return { missing: missing, value: result, decayConstant: decay, remainingFraction: remaining / initial, meanLife: 1 / decay };
+        return {
+            missing: missing,
+            value: result,
+            decayConstant: decay,
+            remainingFraction: effR / effI,
+            elapsedHalfLives: effT / effH,
+            meanLife: 1 / decay,
+            initial: effI,
+            remaining: effR,
+            time: effT,
+            halfLife: effH
+        };
     }
 
     /* ---------- Quadratic extras ---------- */

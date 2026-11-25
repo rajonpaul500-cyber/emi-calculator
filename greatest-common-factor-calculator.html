@@ -72,14 +72,14 @@
       </div>
     </div>
 
-    <div class="result-panel" id="resultPanel" style="margin-top:24px;">
-      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:12px; margin-bottom:16px;">
+    <div class="result-panel show" id="resultPanel" style="margin-top:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.2); padding-bottom:12px; margin-bottom:16px;">
         <h3 style="margin:0; font-size:1.15rem;">GCF &amp; Divisor Result</h3>
         <button type="button" class="btn btn-sm btn-outline" id="copyResultBtn" title="Copy result text">📋 Copy</button>
       </div>
-      <div class="result-main" id="resultMain" style="font-size:1.8rem; font-weight:800; color:var(--primary); text-align:center; padding:12px 0;">&mdash;</div>
+      <div class="result-main" id="resultMain" style="font-size:1.8rem; font-weight:800; text-align:center; padding:12px 0;">&mdash;</div>
       <div class="result-grid" id="resultGrid" style="margin-top:16px;"></div>
-      <div id="stepContainer" style="margin-top:20px; padding:16px; background:var(--bg-alt); border-radius:8px; border:1px solid var(--border); display:none;">
+      <div id="stepContainer" style="margin-top:20px; padding:16px; background:var(--card-bg); border-radius:8px; border:1px solid var(--border); display:none;">
         <h4 style="margin:0 0 10px; font-size:1rem; color:var(--primary);">Step-by-Step GCF Breakdown</h4>
         <div id="stepContent" style="font-size:0.92rem; line-height:1.7;"></div>
       </div>
@@ -173,19 +173,20 @@
     var nums = raw.filter(function (n) { return !isNaN(n) && n > 0; });
 
     if (nums.length < 2) {
-      document.getElementById("resultMain").textContent = "\u2014";
+      document.getElementById("resultMain").innerHTML = '<span class="math-error-msg">Enter at least 2 positive integers</span>';
       document.getElementById("resultGrid").innerHTML = "";
       document.getElementById("stepContainer").style.display = "none";
       return;
     }
 
     var g = MathCalc.gcfMulti(nums).value;
-    var l = MathCalc.lcmMulti(nums).value;
+    var lObj = MathCalc.lcmMulti(nums);
+    var lStr = (!lObj.error && isFinite(lObj.value)) ? MathCalc.fmt(lObj.value, 0) : "Overflow";
 
     document.getElementById("resultMain").textContent = "GCF = " + MathCalc.fmt(g, 0);
 
     var grid = item("Greatest Common Factor (GCF)", MathCalc.fmt(g, 0)) +
-               item("Least Common Multiple (LCM)", MathCalc.fmt(l, 0)) +
+               item("Least Common Multiple (LCM)", lStr) +
                item("Numbers Evaluated", nums.join(", "));
 
     var stepHtml = "<strong>1. Prime Factorization of Each Number:</strong><br>";
@@ -201,11 +202,16 @@
       });
       primeMaps.push(counts);
 
-      var factorParts = Object.keys(counts).map(function (p) {
-        return counts[p] > 1 ? p + "<sup>" + counts[p] + "</sup>" : p;
-      });
-      stepHtml += "&bull; " + n + " = " + factorParts.join(" &times; ") + " (" + factors.join(" &times; ") + ")<br>";
-      grid += item("Prime Factors of " + n, factorParts.join(" &times; "));
+      if (n === 1) {
+        stepHtml += "&bull; 1 = 1 (Unit — no prime factors)<br>";
+        grid += item("Prime Factors of 1", "1 (Unit)");
+      } else {
+        var factorParts = Object.keys(counts).map(function (p) {
+          return counts[p] > 1 ? p + "<sup>" + counts[p] + "</sup>" : p;
+        });
+        stepHtml += "&bull; " + n + " = " + factorParts.join(" &times; ") + " (" + factors.join(" &times; ") + ")<br>";
+        grid += item("Prime Factors of " + n, factorParts.join(" &times; "));
+      }
     });
 
     stepHtml += "<br><strong>2. Take Minimum Shared Exponents for GCF:</strong><br>";

@@ -172,7 +172,7 @@
     s = s.replace(/(\))\s*(\()/g, '$1*$2');
     s = s.replace(/(\d+(\.\d+)?)\s*(\()/g, '$1*$3');
     s = s.replace(/(\))\s*(\d+(\.\d+)?)/g, '$1*$2');
-    s = s.replace(/(\))\s*(Math\.PI|Math\.E)/g, ')*$1');
+    s = s.replace(/(\))\s*(Math\.PI|Math\.E)/g, '$1*$2');
     s = s.replace(/(Math\.PI|Math\.E)\s*\(/g, '$1*(');
     s = s.replace(/(\d+(\.\d+)?)\s*([a-zA-Z]+)\(/g, '$1*$3(');
 
@@ -188,18 +188,18 @@
     var fnRegex = new RegExp('(^|[^a-zA-Z0-9_.])(' + FN_KEYS.join('|') + ')\\(', 'g');
     s = s.replace(fnRegex, '$1__fn.$2(');
 
-    // Handle modulo infix: a mod b => __fn.mod(a, b)
-    s = s.replace(/([0-9.]+|\))\s*mod\s*([0-9.]+|\()/g, '__fn.mod($1, $2)');
-
-    // Handle power operator ^ => **
+    // Handle power operator ^ => ** before mod so 2^3 mod 5 works cleanly
     s = s.replace(/\^/g, '**');
+
+    // Handle modulo infix: a mod b => __fn.mod(a, b)
+    s = s.replace(/([0-9.]+(?:\*\*[0-9.]+)?|\)|Math\.PI|Math\.E)\s+mod\s+(-?[0-9.]+(?:\*\*-?[0-9.]+)?|\(|Math\.PI|Math\.E)/g, '__fn.mod($1, $2)');
 
     // Handle percentage:
     // e.g. a + b% => a + (a * b / 100)
     // a - b% => a - (a * b / 100)
-    // a * b% => a * (b / 100)
-    // b% => (b / 100)
+    // (expr)% => ((expr)/100), b% => (b/100)
     s = s.replace(/(\d+(\.\d+)?)\s*([+-])\s*(\d+(\.\d+)?)%/g, '($1 $3 ($1 * $4 / 100))');
+    s = s.replace(/(\([^()]+\))%/g, '($1/100)');
     s = s.replace(/(\d+(\.\d+)?)%/g, '($1/100)');
 
     // Handle factorials: e.g. 5! => __fn.fact(5) or (3+2)! => __fn.fact((3+2))
@@ -357,11 +357,12 @@
     playClick();
     if (!raw) raw = disp;
 
-    // If starting fresh right after calculation, start new or chain operator
-    if (lastResult !== null && isArithmeticOp(raw)) {
-      displayExpr = 'Ans ' + disp;
-      expr = 'ANS ' + raw;
-      lastResult = null;
+    // Only chain onto Ans when displayExpr is currently empty right after pressing '='
+    if (lastResult !== null && !displayExpr && isArithmeticOp(raw)) {
+      var trimmedRaw = raw.trim();
+      var isPostfix = trimmedRaw === '^2' || trimmedRaw === '^3' || trimmedRaw === '!' || trimmedRaw === '%' || trimmedRaw === '^' || trimmedRaw === '^(1/';
+      displayExpr = 'Ans' + (isPostfix ? '' : ' ') + disp.replace(/^\s+/, '');
+      expr = 'ANS' + (isPostfix ? '' : ' ') + raw.replace(/^\s+/, '');
       updateDisplay(true);
       return;
     }
@@ -372,7 +373,9 @@
   }
 
   function isArithmeticOp(op) {
-    return op === '+' || op === '-' || op === '*' || op === '/' || op === '^' || op === 'mod';
+    var t = String(op || '').trim();
+    return t === '+' || t === '-' || t === '*' || t === '/' || t === '^' || t === '^(1/' ||
+      t === '^2' || t === '^3' || t === '%' || t === '!' || t === 'mod';
   }
 
   // Clear All (AC)
@@ -380,8 +383,12 @@
     playClick();
     displayExpr = '';
     expr = '';
+    lastResult = null;
     var resultEl = $('sciMainResult');
-    if (resultEl) resultEl.textContent = '0';
+    if (resultEl) {
+      resultEl.textContent = '0';
+      resultEl.classList.remove('error');
+    }
     var previewEl = $('sciPreviewResult');
     if (previewEl) previewEl.textContent = '';
     updateDisplay(false);
@@ -493,8 +500,6 @@
     playClick();
     isDeg = !isDeg;
     updateDisplay(true);
-    var modeBtn = $('btnToggleDeg');
-    if (modeBtn) modeBtn.textContent = isDeg ? 'RAD' : 'DEG';
     var pill = $('degModePill');
     if (pill) pill.textContent = isDeg ? 'DEG' : 'RAD';
   }
@@ -515,6 +520,18 @@
     updateDisplay(false);
   }
 
+  function setSciKeyLabel(btn, mainHtml, subHtml, fnVal, dispVal) {
+    if (!btn) return;
+    var mainEl = btn.querySelector('.sci-key-main');
+    var subEl = btn.querySelector('.sci-key-sub');
+    if (mainEl) mainEl.innerHTML = mainHtml;
+    else btn.innerHTML = mainHtml;
+    if (subEl && subHtml !== undefined) subEl.innerHTML = subHtml;
+    if (fnVal !== undefined) btn.dataset.fn = fnVal;
+    if (dispVal !== undefined) btn.dataset.disp = dispVal;
+    else delete btn.dataset.disp;
+  }
+
   // Update dynamic keypad labels for 2nd and HYP modes
   function updateKeyLabels() {
     var btnSin = $('btnSin');
@@ -533,60 +550,53 @@
     var btn2nd = $('btn2nd');
     var btnHyp = $('btnHyp');
 
-    if (btn2nd) {
-      if (isInv) btn2nd.classList.add('active');
-      else btn2nd.classList.remove('active');
-    }
-
-    if (btnHyp) {
-      if (isHyp) btnHyp.classList.add('active');
-      else btnHyp.classList.remove('active');
-    }
+    if (btn2nd) btn2nd.classList.toggle('active', isInv);
+    if (btnHyp) btnHyp.classList.toggle('active', isHyp);
 
     if (isHyp) {
       if (isInv) {
-        if (btnSin) { btnSin.innerHTML = 'sinh<sup>-1</sup>'; btnSin.dataset.fn = 'asinh('; }
-        if (btnCos) { btnCos.innerHTML = 'cosh<sup>-1</sup>'; btnCos.dataset.fn = 'acosh('; }
-        if (btnTan) { btnTan.innerHTML = 'tanh<sup>-1</sup>'; btnTan.dataset.fn = 'atanh('; }
+        setSciKeyLabel(btnSin, 'sinh<sup>-1</sup>', 'sinh', 'asinh(', 'asinh(');
+        setSciKeyLabel(btnCos, 'cosh<sup>-1</sup>', 'cosh', 'acosh(', 'acosh(');
+        setSciKeyLabel(btnTan, 'tanh<sup>-1</sup>', 'tanh', 'atanh(', 'atanh(');
       } else {
-        if (btnSin) { btnSin.textContent = 'sinh'; btnSin.dataset.fn = 'sinh('; }
-        if (btnCos) { btnCos.textContent = 'cosh'; btnCos.dataset.fn = 'cosh('; }
-        if (btnTan) { btnTan.textContent = 'tanh'; btnTan.dataset.fn = 'tanh('; }
+        setSciKeyLabel(btnSin, 'sinh', 'sinh<sup>-1</sup>', 'sinh(', 'sinh(');
+        setSciKeyLabel(btnCos, 'cosh', 'cosh<sup>-1</sup>', 'cosh(', 'cosh(');
+        setSciKeyLabel(btnTan, 'tanh', 'tanh<sup>-1</sup>', 'tanh(', 'tanh(');
       }
     } else {
       if (isInv) {
-        if (btnSin) { btnSin.innerHTML = 'sin<sup>-1</sup>'; btnSin.dataset.fn = 'asin('; }
-        if (btnCos) { btnCos.innerHTML = 'cos<sup>-1</sup>'; btnCos.dataset.fn = 'acos('; }
-        if (btnTan) { btnTan.innerHTML = 'tan<sup>-1</sup>'; btnTan.dataset.fn = 'atan('; }
+        setSciKeyLabel(btnSin, 'sin<sup>-1</sup>', 'sin', 'asin(', 'asin(');
+        setSciKeyLabel(btnCos, 'cos<sup>-1</sup>', 'cos', 'acos(', 'acos(');
+        setSciKeyLabel(btnTan, 'tan<sup>-1</sup>', 'tan', 'atan(', 'atan(');
       } else {
-        if (btnSin) { btnSin.textContent = 'sin'; btnSin.dataset.fn = 'sin('; }
-        if (btnCos) { btnCos.textContent = 'cos'; btnCos.dataset.fn = 'cos('; }
-        if (btnTan) { btnTan.textContent = 'tan'; btnTan.dataset.fn = 'tan('; }
+        setSciKeyLabel(btnSin, 'sin', 'sin<sup>-1</sup>', 'sin(', 'sin(');
+        setSciKeyLabel(btnCos, 'cos', 'cos<sup>-1</sup>', 'cos(', 'cos(');
+        setSciKeyLabel(btnTan, 'tan', 'tan<sup>-1</sup>', 'tan(', 'tan(');
       }
     }
 
     if (isInv) {
-      if (btnLn) { btnLn.innerHTML = 'e<sup>x</sup>'; btnLn.dataset.fn = 'exp('; }
-      if (btnLog) { btnLog.innerHTML = '10<sup>x</sup>'; btnLog.dataset.fn = '10^('; }
-      if (btnSqrt) { btnSqrt.innerHTML = '&#8731;'; btnSqrt.dataset.fn = 'cbrt('; }
-      if (btnPow) { btnPow.innerHTML = '<sup>y</sup>&radic;x'; btnPow.dataset.fn = 'root('; }
-      if (btnX2) { btnX2.innerHTML = 'x<sup>3</sup>'; btnX2.dataset.fn = '^3'; }
-      if (btnInvX) { btnInvX.textContent = '|x|'; btnInvX.dataset.fn = 'abs('; }
-      if (btnPct) { btnPct.textContent = 'EXP'; btnPct.dataset.fn = '*10^'; btnPct.dataset.disp = 'E'; }
-      if (btnFact) { btnFact.textContent = 'RND'; btnFact.dataset.fn = 'rnd'; }
-      if (btnMr) { btnMr.textContent = 'MS'; btnMr.dataset.fn = 'MS'; }
-      if (btnMPlus) { btnMPlus.textContent = 'M-'; btnMPlus.dataset.fn = 'M-'; }
+      setSciKeyLabel(btnLn, 'e<sup>x</sup>', 'ln', 'exp(', 'exp(');
+      setSciKeyLabel(btnLog, '10<sup>x</sup>', 'log', '10^(', '10^(');
+      setSciKeyLabel(btnSqrt, '&#8731;', '&radic;', 'cbrt(', 'cbrt(');
+      setSciKeyLabel(btnPow, '<sup>y</sup>&radic;x', 'x<sup>y</sup>', '^(1/', '^(1/');
+      setSciKeyLabel(btnX2, 'x<sup>3</sup>', 'x<sup>2</sup>', '^3', '^3');
+      setSciKeyLabel(btnInvX, '|x|', '1/x', 'abs(', 'abs(');
+      setSciKeyLabel(btnPct, 'EXP', '%', '*10^', '×10^');
+      setSciKeyLabel(btnFact, 'RND', 'n!', 'rnd', 'rnd');
+      setSciKeyLabel(btnMr, 'MS', 'MR', 'MS', 'MS');
+      setSciKeyLabel(btnMPlus, 'M-', 'M+', 'M-', 'M-');
     } else {
-      if (btnLn) { btnLn.textContent = 'ln'; btnLn.dataset.fn = 'ln('; }
-      if (btnLog) { btnLog.textContent = 'log'; btnLog.dataset.fn = 'log('; }
-      if (btnSqrt) { btnSqrt.innerHTML = '&radic;'; btnSqrt.dataset.fn = 'sqrt('; }
-      if (btnPow) { btnPow.innerHTML = 'x<sup>y</sup>'; btnPow.dataset.fn = '^'; }
-      if (btnX2) { btnX2.innerHTML = 'x<sup>2</sup>'; btnX2.dataset.fn = '^2'; }
-      if (btnInvX) { btnInvX.textContent = '1/x'; btnInvX.dataset.fn = '1/x'; }
-      if (btnPct) { btnPct.textContent = '%'; btnPct.dataset.fn = '%'; btnPct.dataset.disp = '%'; }
-      if (btnFact) { btnFact.textContent = 'n!'; btnFact.dataset.fn = '!'; }
-      if (btnMr) { btnMr.textContent = 'MR'; btnMr.dataset.fn = 'MR'; }
-      if (btnMPlus) { btnMPlus.textContent = 'M+'; btnMPlus.dataset.fn = 'M+'; }
+      setSciKeyLabel(btnLn, 'ln', 'e<sup>x</sup>', 'ln(', 'ln(');
+      setSciKeyLabel(btnLog, 'log', '10<sup>x</sup>', 'log(', 'log(');
+      setSciKeyLabel(btnSqrt, '&radic;', '&#8731;', 'sqrt(', 'sqrt(');
+      setSciKeyLabel(btnPow, 'x<sup>y</sup>', '<sup>y</sup>&radic;x', '^', '^');
+      setSciKeyLabel(btnX2, 'x<sup>2</sup>', 'x<sup>3</sup>', '^2', '^2');
+      setSciKeyLabel(btnInvX, '1/x', '|x|', '1/x', '1/x');
+      setSciKeyLabel(btnPct, '%', 'EXP', '%', '%');
+      setSciKeyLabel(btnFact, 'n!', 'RND', '!', '!');
+      setSciKeyLabel(btnMr, 'MR', 'MS', 'MR', 'MR');
+      setSciKeyLabel(btnMPlus, 'M+', 'M-', 'M+', 'M+');
     }
   }
 
@@ -722,24 +732,34 @@
       .replace(/>/g, '&gt;');
   }
 
-  // Copy result to clipboard
-  function copyResult() {
-    var resultEl = $('sciMainResult');
-    var text = resultEl ? resultEl.textContent : '';
-    if (!text || text === '0') return;
-
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(function () {
-        showNotice('Result copied to clipboard!');
-      });
-    } else {
+  function fallbackCopy(text) {
+    try {
       var ta = document.createElement('textarea');
       ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
       document.body.appendChild(ta);
       ta.select();
       document.execCommand('copy');
       document.body.removeChild(ta);
       showNotice('Result copied to clipboard!');
+    } catch (e) {}
+  }
+
+  // Copy result to clipboard
+  function copyResult() {
+    var resultEl = $('sciMainResult');
+    var text = resultEl ? resultEl.textContent : '';
+    if (!text) return;
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () {
+        showNotice('Result copied to clipboard!');
+      }).catch(function () {
+        fallbackCopy(text);
+      });
+    } else {
+      fallbackCopy(text);
     }
   }
 
@@ -862,6 +882,8 @@
           inputToken('^3', '^3');
         } else if (fn === '1/x') {
           inputToken('1/(', '1/(');
+        } else if (fn === '^(1/') {
+          inputToken('^(1/', '^(1/');
         } else if (fn === 'root(') {
           inputToken('root(', 'root(');
         } else if (fn === '10^(') {
@@ -879,9 +901,6 @@
     // Screen clickable angle indicator toggle
     var degInd = $('degIndicator');
     if (degInd) degInd.addEventListener('click', toggleAngleMode);
-
-    var btnPill = $('degModePill');
-    if (btnPill) btnPill.addEventListener('click', toggleAngleMode);
 
     // Audio click toggle
     var soundBtn = $('sciSoundToggle');

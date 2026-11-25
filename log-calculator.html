@@ -94,14 +94,14 @@
       </div>
     </div>
 
-    <div class="result-panel" id="resultPanel" style="margin-top:24px;">
-      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:12px; margin-bottom:16px;">
+    <div class="result-panel show" id="resultPanel" style="margin-top:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.2); padding-bottom:12px; margin-bottom:16px;">
         <h3 style="margin:0; font-size:1.15rem;">Logarithm Result</h3>
         <button type="button" class="btn btn-sm btn-outline" id="copyResultBtn" title="Copy result text">📋 Copy</button>
       </div>
-      <div class="result-main" id="resultMain" style="font-size:1.8rem; font-weight:800; color:var(--primary); text-align:center; padding:12px 0;">&mdash;</div>
+      <div class="result-main" id="resultMain" style="font-size:1.8rem; font-weight:800; text-align:center; padding:12px 0;">&mdash;</div>
       <div class="result-grid" id="resultGrid" style="margin-top:16px;"></div>
-      <div id="stepContainer" style="margin-top:20px; padding:16px; background:var(--bg-alt); border-radius:8px; border:1px solid var(--border); display:none;">
+      <div id="stepContainer" style="margin-top:20px; padding:16px; background:var(--card-bg); border-radius:8px; border:1px solid var(--border); display:none;">
         <h4 style="margin:0 0 10px; font-size:1rem; color:var(--primary);">Mathematical Breakdown</h4>
         <div id="stepContent" style="font-size:0.92rem; line-height:1.7;"></div>
       </div>
@@ -213,17 +213,19 @@
     var grid = "";
     var stepHtml = "";
 
+    function showLogErr(msg) {
+      document.getElementById("resultMain").innerHTML = msg ? '<span class="math-error-msg">⚠️ ' + msg + '</span>' : "\u2014";
+      document.getElementById("resultGrid").innerHTML = "";
+      document.getElementById("stepContainer").style.display = "none";
+    }
+
     if (mode === "log") {
       if (n <= 0) {
-        document.getElementById("resultMain").textContent = "Log undefined for x \u2264 0";
-        document.getElementById("resultGrid").innerHTML = "";
-        document.getElementById("stepContainer").style.display = "none";
+        showLogErr("Log undefined for x \u2264 0");
         return;
       }
       if (base <= 0 || Math.abs(base - 1) < 1e-12) {
-        document.getElementById("resultMain").textContent = "Base must be > 0 and \u2260 1";
-        document.getElementById("resultGrid").innerHTML = "";
-        document.getElementById("stepContainer").style.display = "none";
+        showLogErr("Base must be > 0 and \u2260 1");
         return;
       }
 
@@ -248,13 +250,15 @@
                  "<strong>Check:</strong> (" + baseName + ")<sup>" + MathCalc.fmt(r, 6) + "</sup> &asymp; <strong>" + n + "</strong>";
     } else {
       if (base <= 0 || Math.abs(base - 1) < 1e-12) {
-        document.getElementById("resultMain").textContent = "Base must be > 0 and \u2260 1";
-        document.getElementById("resultGrid").innerHTML = "";
-        document.getElementById("stepContainer").style.display = "none";
+        showLogErr("Base must be > 0 and \u2260 1");
         return;
       }
 
       var v = MathCalc.antiLog(n, base).value;
+      if (!isFinite(v) || isNaN(v)) {
+        showLogErr("Antilog result overflows numerical precision limit");
+        return;
+      }
       var baseName = sel === "e" ? "e" : (sel === "2" ? "2" : (sel === "10" ? "10" : MathCalc.fmt(base, 4)));
 
       document.getElementById("resultMain").textContent = MathCalc.fmt(v, 8);

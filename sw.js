@@ -1,10 +1,12 @@
 /* EMI Master Service Worker - Offline-first PWA */
-var CACHE_NAME = 'emimaster-v5';
+var CACHE_NAME = 'emimaster-v7';
 var OFFLINE_URL = 'index.html';
 
 var PRECACHE = [
   './',
   './index.html',
+  './emi-calculator-mortgage-android-app.html',
+  './hsc-guide-all-android-app.html',
   './css/style.css',
   './js/common.js',
   './js/currency.js',

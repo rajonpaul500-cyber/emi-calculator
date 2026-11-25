@@ -108,14 +108,14 @@
       </div>
     </div>
 
-    <div class="result-panel" id="resultPanel" style="margin-top:24px;">
-      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:12px; margin-bottom:16px;">
+    <div class="result-panel show" id="resultPanel" style="margin-top:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.2); padding-bottom:12px; margin-bottom:16px;">
         <h3 style="margin:0; font-size:1.15rem;">Matrix Solution</h3>
         <button type="button" class="btn btn-sm btn-outline" id="copyResultBtn" title="Copy result text">📋 Copy</button>
       </div>
       <div class="result-main" id="resultMain" style="text-align:center; padding:12px 0;">&mdash;</div>
       <div class="result-grid" id="resultGrid" style="margin-top:16px;"></div>
-      <div id="stepContainer" style="margin-top:20px; padding:16px; background:var(--bg-alt); border-radius:8px; border:1px solid var(--border); display:none;">
+      <div id="stepContainer" style="margin-top:20px; padding:16px; background:var(--card-bg); border-radius:8px; border:1px solid var(--border); display:none;">
         <h4 style="margin:0 0 10px; font-size:1rem; color:var(--primary);">Step-by-Step Matrix Derivation</h4>
         <div id="stepContent" style="font-size:0.92rem; line-height:1.7;"></div>
       </div>
@@ -205,14 +205,16 @@
 
   function buildMats() {
     var dim = parseInt(document.getElementById("dim").value, 10);
+    var defA = dim === 2 ? [1, 2, 3, 4] : [1, 2, 3, 0, 1, 4, 5, 6, 0];
+    var defB = dim === 2 ? [5, 6, 7, 8] : [2, 0, -1, 1, 3, 2, 0, -2, 1];
     var a = "", b = "";
     for (var i = 0; i < dim; i++) {
       a += '<div class="matrix-row" style="display:flex; gap:8px; justify-content:center;">';
       b += '<div class="matrix-row" style="display:flex; gap:8px; justify-content:center;">';
       for (var j = 0; j < dim; j++) {
-        var defaultVal = (i === j ? 1 : 0);
-        a += '<input type="number" class="ai" data-i="' + i + '" data-j="' + j + '" value="' + defaultVal + '" style="width:54px; text-align:center; padding:6px; font-weight:600;" step="any">';
-        b += '<input type="number" class="bi" data-i="' + i + '" data-j="' + j + '" value="' + defaultVal + '" style="width:54px; text-align:center; padding:6px; font-weight:600;" step="any">';
+        var idx = i * dim + j;
+        a += '<input type="number" class="ai" data-i="' + i + '" data-j="' + j + '" value="' + defA[idx] + '" style="width:54px; text-align:center; padding:6px; font-weight:600;" step="any">';
+        b += '<input type="number" class="bi" data-i="' + i + '" data-j="' + j + '" value="' + defB[idx] + '" style="width:54px; text-align:center; padding:6px; font-weight:600;" step="any">';
       }
       a += '</div>';
       b += '</div>';
@@ -253,11 +255,11 @@
   }
 
   function matHtml(m) {
-    return '<div style="display:inline-flex; align-items:center; border-left:3px solid var(--primary); border-right:3px solid var(--primary); border-radius:6px; padding:6px 12px; background:var(--card-bg);">' +
-           '<table style="border-collapse:collapse; margin:0;">' +
+    return '<div style="display:inline-flex; align-items:center; border-left:3px solid var(--primary); border-right:3px solid var(--primary); border-radius:6px; padding:6px 12px; background:var(--card-bg); color:var(--text);">' +
+           '<table style="border-collapse:collapse; margin:0; color:var(--text);">' +
            m.map(function (row) {
              return '<tr>' + row.map(function (v) {
-               return '<td style="padding:4px 8px; text-align:center; font-family:monospace; font-size:1.05rem; font-weight:700;">' + v + '</td>';
+               return '<td style="padding:4px 8px; text-align:center; font-family:monospace; font-size:1.05rem; font-weight:700; color:var(--text);">' + v + '</td>';
              }).join("") + '</tr>';
            }).join("") +
            '</table></div>';
@@ -315,10 +317,10 @@
       var targetName = (op === "detA") ? "A" : "B";
       var d = (inpt.dim === 2) ? MathCalc.matrixDet2(targetMat) : MathCalc.matrixDet3(targetMat);
 
-      document.getElementById("resultMain").innerHTML = "<div style='font-size:1.8rem; font-weight:800; color:var(--primary);'>det(" + targetName + ") = " + MathCalc.fmt(d, 6) + "</div>";
+      document.getElementById("resultMain").innerHTML = "<div style='font-size:1.8rem; font-weight:800; color:#ffffff;'>det(" + targetName + ") = " + MathCalc.fmt(d, 6) + "</div>";
       document.getElementById("resultGrid").innerHTML = item("Matrix", targetName) +
                                                        item("Determinant", MathCalc.fmt(d, 6)) +
-                                                       item("Invertibility", d !== 0 ? "<span style='color:var(--success); font-weight:600;'>Invertible (Non-singular)</span>" : "<span style='color:var(--danger); font-weight:600;'>Singular (Non-invertible)</span>");
+                                                       item("Invertibility", d !== 0 ? "<span style='color:#86efac; font-weight:600;'>Invertible (Non-singular)</span>" : "<span style='color:#fca5a5; font-weight:600;'>Singular (Non-invertible)</span>");
 
       if (inpt.dim === 2) {
         stepHtml = "<strong>1. 2&times;2 Determinant Formula:</strong><br>" +
@@ -343,7 +345,7 @@
       var tN = (op === "invA") ? "A" : "B";
       var invRes = (inpt.dim === 2) ? MathCalc.matrixInverse2(tM) : MathCalc.matrixInverse3(tM);
       if (invRes.error) {
-        document.getElementById("resultMain").innerHTML = "<div style='color:var(--danger); font-weight:700;'>" + invRes.error + "</div>";
+        document.getElementById("resultMain").innerHTML = '<div class="math-error-msg">' + invRes.error + '</div>';
         document.getElementById("resultGrid").innerHTML = item("Status", "Singular matrix cannot be inverted");
         document.getElementById("stepContainer").style.display = "none";
         return;
@@ -386,6 +388,9 @@
   document.getElementById("resetBtn").onclick = function () {
     document.getElementById("dim").value = "2";
     document.getElementById("op").value = "mul";
+    document.querySelectorAll("#presetChips .preset-chip").forEach(function (b, idx) {
+      b.classList.toggle("active", idx === 0);
+    });
     buildMats();
   };
 

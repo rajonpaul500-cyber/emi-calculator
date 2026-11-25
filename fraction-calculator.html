@@ -204,18 +204,18 @@
     </div>
 
     <!-- PRO RESULT PANEL -->
-    <div class="result-panel" id="resultPanel" style="margin-top:24px;">
-      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:12px; margin-bottom:16px;">
+    <div class="result-panel show" id="resultPanel" style="margin-top:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.2); padding-bottom:12px; margin-bottom:16px;">
         <h3 style="margin:0; font-size:1.15rem;">Fraction Result</h3>
         <button type="button" class="btn btn-sm btn-outline" id="copyResultBtn" title="Copy result text">📋 Copy</button>
       </div>
 
-      <div class="result-main" id="resultMain" style="font-size:1.8rem; font-weight:800; color:var(--primary); text-align:center; padding:12px 0;">&mdash;</div>
+      <div class="result-main" id="resultMain" style="font-size:1.8rem; font-weight:800; text-align:center; padding:12px 0;">&mdash;</div>
 
       <div class="result-grid" id="resultGrid" style="margin-top:16px;"></div>
 
       <!-- Step by Step Math Box -->
-      <div class="step-card" id="stepBox" style="margin-top:20px; background:var(--bg, #f8fafc); border:1px solid var(--border, #e2e8f0); border-radius:10px; padding:16px;">
+      <div class="step-card" id="stepBox" style="margin-top:20px; background:var(--card-bg, #ffffff); border:1px solid var(--border, #e2e8f0); border-radius:10px; padding:16px;">
         <div class="step-header" style="font-weight:700; color:var(--text); margin-bottom:8px; display:flex; align-items:center; gap:8px;">
           <span>📝</span> Step-by-Step Solution Breakdown:
         </div>
@@ -224,11 +224,11 @@
 
       <!-- Visual Fraction Bar -->
       <div id="visualBarBox" style="margin-top:20px;">
-        <div style="font-size:0.85rem; font-weight:700; color:var(--text-muted); margin-bottom:6px;">VISUAL PROPORTION BAR:</div>
-        <div id="visualBar" style="height:24px; background:#e2e8f0; border-radius:6px; overflow:hidden; display:flex;">
-          <div id="visualBarFill" style="background:linear-gradient(90deg, #2563eb, #3b82f6); height:100%; width:0%; transition:width 0.3s ease;"></div>
+        <div style="font-size:0.85rem; font-weight:700; color:rgba(255,255,255,0.9); margin-bottom:6px;">VISUAL PROPORTION BAR:</div>
+        <div id="visualBar" style="height:24px; background:rgba(255,255,255,0.2); border-radius:6px; overflow:hidden; display:flex;">
+          <div id="visualBarFill" style="background:linear-gradient(90deg, #60a5fa, #93c5fd); height:100%; width:0%; transition:width 0.3s ease;"></div>
         </div>
-        <div id="visualBarLabel" style="font-size:0.8rem; color:var(--text-muted); margin-top:4px; text-align:right;"></div>
+        <div id="visualBarLabel" style="font-size:0.8rem; color:rgba(255,255,255,0.85); margin-top:4px; text-align:right;"></div>
       </div>
     </div>
 
@@ -389,11 +389,18 @@
     var w = parseFloat(document.getElementById(wId).value) || 0;
     var n = parseFloat(document.getElementById(nId).value) || 0;
     var d = parseFloat(document.getElementById(dId).value);
-    if (isNaN(d) || d === 0) return null;
-    var sign = (w < 0 || n < 0) ? -1 : 1;
+    if (isNaN(d) || d === 0 || !isFinite(w) || !isFinite(n) || !isFinite(d)) return null;
+    if (d < 0) { d = -d; n = -n; }
+    var val = (w < 0 ? w - Math.abs(n) / d : (n < 0 && w === 0 ? n / d : w + n / d));
+    if (!Number.isInteger(w) || !Number.isInteger(n) || !Number.isInteger(d)) {
+      var frac = MathCalc.decimalToFraction(val, 1000000);
+      if (frac.error) return null;
+      return { whole: w, num: frac.num, origN: n, den: frac.den };
+    }
+    var sign = (w < 0 || (w === 0 && n < 0)) ? -1 : 1;
     var absW = Math.abs(w);
-    var absN = Math.abs(n);
-    var improperNum = sign * (absW * d + absN);
+    var absN = (w !== 0) ? Math.abs(n) : Math.abs(n);
+    var improperNum = (w < 0 && n < 0) ? -(absW * d + absN) : (w < 0 ? -(absW * d + n) : (w === 0 ? n : sign * (absW * d + absN)));
     return { whole: w, num: improperNum, origN: n, den: d };
   }
 
@@ -401,7 +408,7 @@
     var A = getMixedAsImproper("w1", "n1", "d1");
     var B = getMixedAsImproper("w2", "n2", "d2");
     if (!A || !B) {
-      showError("Denominators cannot be zero.");
+      showError("Denominators cannot be zero and inputs must be valid numbers.");
       return;
     }
 
@@ -414,7 +421,12 @@
     stepHtml += "Fraction 2: " + (B.whole !== 0 ? B.whole + " " : "") + B.origN + "/" + B.den + " = " + B.num + "/" + B.den + "<br><br>";
 
     if (op === "add" || op === "sub") {
-      var lcd = MathCalc.lcm(Math.abs(A.den), Math.abs(B.den));
+      var lcdObj = MathCalc.lcm(Math.abs(A.den), Math.abs(B.den));
+      if (lcdObj.error || !lcdObj.value) {
+        showError(lcdObj.error || "Could not compute LCD.");
+        return;
+      }
+      var lcd = lcdObj.value;
       var scaleA = lcd / A.den;
       var scaleB = lcd / B.den;
       var scaledNumA = A.num * scaleA;
@@ -448,7 +460,7 @@
     }
 
     var simp = MathCalc.simplifyFraction(rawNum, rawDen);
-    var g = MathCalc.gcd(Math.abs(rawNum), Math.abs(rawDen));
+    var g = MathCalc.gcd(Math.abs(rawNum), Math.abs(rawDen)) || 1;
     stepHtml += "<strong>" + (op === "mul" || op === "div" ? "3" : "4") + ". Simplify by GCD (" + g + "):</strong><br>";
     stepHtml += rawNum + "/" + rawDen + " ÷ " + g + "/" + g + " = <strong>" + simp.num + "/" + simp.den + "</strong>";
 
@@ -464,6 +476,11 @@
     if (isNaN(n) || isNaN(d) || d === 0) {
       showError("Please enter a valid numerator and non-zero denominator.");
       return;
+    }
+    if (!Number.isInteger(n) || !Number.isInteger(d)) {
+      var converted = MathCalc.decimalToFraction(n / d, 1000000);
+      if (converted.error) { showError(converted.error); return; }
+      n = converted.num; d = converted.den;
     }
     var g = MathCalc.gcd(Math.abs(n), Math.abs(d));
     var simp = MathCalc.simplifyFraction(n, d);
@@ -574,8 +591,9 @@
   }
 
   function updateVisualBar(val, label) {
-    var pct = Math.max(0, Math.min(100, (val % 1) * 100));
-    if (val > 0 && pct === 0 && val >= 1) pct = 100;
+    var fracPart = Math.abs(val) % 1;
+    var pct = Math.max(0, Math.min(100, fracPart * 100));
+    if (Math.abs(val) > 0 && pct === 0 && Math.abs(val) >= 1) pct = 100;
     var fill = document.getElementById("visualBarFill");
     var lbl = document.getElementById("visualBarLabel");
     if (fill) fill.style.width = pct + "%";
@@ -583,9 +601,13 @@
   }
 
   function showError(msg) {
-    document.getElementById("resultMain").innerHTML = '<span style="color:#dc2626; font-size:1.2rem;">⚠️ ' + msg + '</span>';
+    document.getElementById("resultMain").innerHTML = '<span class="math-error-msg">⚠️ ' + msg + '</span>';
     document.getElementById("resultGrid").innerHTML = "";
     document.getElementById("stepContent").innerHTML = "<em>" + msg + "</em>";
+    var fill = document.getElementById("visualBarFill");
+    var lbl = document.getElementById("visualBarLabel");
+    if (fill) fill.style.width = "0%";
+    if (lbl) lbl.textContent = "";
   }
 
   function calculateCurrentTab() {
@@ -609,11 +631,27 @@
     calcArithmetic();
   });
 
-  // Reactive inputs
-  document.querySelectorAll("input, select").forEach(function(el){
-    el.addEventListener("input", function(){
-      calculateCurrentTab();
-    });
+  // Reactive inputs scoped per card
+  ["w1","n1","d1","op","w2","n2","d2"].forEach(function(id){
+    var el = document.getElementById(id);
+    if (el) el.addEventListener("input", calcArithmetic);
+  });
+  ["sn","sd"].forEach(function(id){
+    var el = document.getElementById(id);
+    if (el) el.addEventListener("input", calcSimplify);
+  });
+  ["cn1","cd1","cn2","cd2"].forEach(function(id){
+    var el = document.getElementById(id);
+    if (el) el.addEventListener("input", calcCompare);
+  });
+  ["decVal","maxDenom"].forEach(function(id){
+    var el = document.getElementById(id);
+    if (el) el.addEventListener("input", calcD2F);
+    if (el) el.addEventListener("change", calcD2F);
+  });
+  ["f2dNum","f2dDen"].forEach(function(id){
+    var el = document.getElementById(id);
+    if (el) el.addEventListener("input", calcF2D);
   });
 
   // Copy result

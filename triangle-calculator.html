@@ -75,7 +75,7 @@
         <div class="result-item"><div class="label">Type</div><div class="value" id="typeOut">—</div></div>
       </div>
       <div style="margin-top:16px;text-align:center;">
-        <svg id="triSvg" viewBox="0 0 320 200" style="max-width:340px;width:100%;height:auto;background:var(--bg);border:1px solid var(--border);border-radius:10px;" aria-label="Triangle diagram"></svg>
+        <svg id="triSvg" viewBox="0 0 320 200" style="max-width:340px;width:100%;height:auto;background:var(--card-bg);color:var(--text);border:1px solid var(--border);border-radius:10px;" aria-label="Triangle diagram"></svg>
       </div>
     </div>
 
@@ -172,6 +172,13 @@
       calc();
     });
   });
+  function clearTriError(msg) {
+    document.getElementById("resultMain").innerHTML = '<div class="math-error-msg">' + msg + '</div>';
+    document.getElementById("angOut").textContent = "\u2014";
+    document.getElementById("perimOut").textContent = "\u2014";
+    document.getElementById("typeOut").textContent = "\u2014";
+    document.getElementById("triSvg").innerHTML = "";
+  }
   function calc() {
     var a = parseFloat(document.getElementById("sideA").value);
     var b = parseFloat(document.getElementById("sideB").value);
@@ -179,14 +186,16 @@
     if (mode === "sss") {
       c = parseFloat(document.getElementById("sideC").value);
       if (!(a > 0 && b > 0 && c > 0 && a + b > c && a + c > b && b + c > a)) {
-        document.getElementById("resultMain").textContent = "Invalid triangle inequality (sum of 2 sides must exceed 3rd)";
-        document.getElementById("triSvg").innerHTML = "";
+        clearTriError("Invalid triangle inequality (sum of 2 sides must exceed 3rd)");
         return;
       }
       Cdeg = Math.acos(Math.min(1, Math.max(-1, (a*a + b*b - c*c)/(2*a*b)))) * 180 / Math.PI;
     } else {
       Cdeg = parseFloat(document.getElementById("angC").value);
-      if (!(a > 0 && b > 0 && Cdeg > 0 && Cdeg < 180)) return;
+      if (!(a > 0 && b > 0 && Cdeg > 0 && Cdeg < 180)) {
+        clearTriError("Enter positive sides a, b and angle C between 0° and 180°");
+        return;
+      }
       c = Math.sqrt(a*a + b*b - 2*a*b*Math.cos(Cdeg * Math.PI / 180));
     }
     var Adeg = Math.acos(Math.min(1, Math.max(-1, (b*b + c*c - a*a)/(2*b*c)))) * 180 / Math.PI;
